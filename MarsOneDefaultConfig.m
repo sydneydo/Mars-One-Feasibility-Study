@@ -62,11 +62,11 @@ missionDurationInWeeks = ceil(missionDurationInHours/24/7);
 %% Initialize SimEnvironments
 Inflatable1 = SimEnvironmentImpl('Inflatable 1',70.3,5000000,0.265,0,0.734,0,0.001);     %Note volume input is in Liters
 % Inflatable2 = SimEnvironmentImpl('Inflatable 1',70.3,5000000,0.265,0,0.734,0,0.001);     
-LivingUnit1 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001);   % Note that here we assume that the internal volume of the Dragon modules sent to the surface is 25m^3
-% LivingUnit2 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001);
-LifeSupportUnit1 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001);
+LivingUnit1 = SimEnvironmentImpl('Living Unit 1',70.3,25000,0.265,0,0.734,0,0.001);   % Note that here we assume that the internal volume of the Dragon modules sent to the surface is 25m^3
+% LivingUnit2 = SimEnvironmentImpl('LivingUnit1',70.3,25000,0.265,0,0.734,0,0.001);
+LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',70.3,25000,0.265,0,0.734,0,0.001);
 % LifeSupportUnit2 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001);
-CargoUnit1 = SimEnvironmentImpl('CargoUnit1',70.3,25000,0.265,0,0.734,0,0.001);
+CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',70.3,25000,0.265,0,0.734,0,0.001);
 % CargoUnit2 = SimEnvironmentImpl('CargoUnit2',70.3,25000,0.265,0,0.734,0,0.001);
 
 
@@ -98,17 +98,26 @@ GreyWaterStore = StoreImpl('Grey H2O','Material',45.5,0);
 
 % Gas Stores
 
-H2Store = StoreImpl('H2 Store','Material',10000,0);     % H2 store for output of OGS
-CO2Store = StoreImpl('CO2 Store','Material',1000,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA
-MethaneStore = StoreImpl('CH4 Store','Material',1000,0);    % CH4 store for output of CRS (Sabatier)
-N2Store = StoreImpl('N2 Store','Material',10000,10000);
+H2Store = StoreImpl('H2 Store','Material',10000,0);     % H2 store for output of OGS - note that currently on the ISS, there is no H2 store, it is sent directly to the Sabatier reactor 
+% CO2Store = StoreImpl('CO2 Store','Material',1000,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA
+CO2Store = StoreImpl('CO2 Store','Material',19.8,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L)
+MethaneStore = StoreImpl('CH4 Store','Material',1000,0);    % CH4 store for output of CRS (Sabatier) - note CH4 is currently vented directly to space on ISS
+% Look at option of including a pyrolyzer?
+
+% N2 Store
+% Corresponds to 2x high pressure N2 tanks currently mounted on exterior of Quest airlock on ISS (each holds 91kg of N2)
+% This is subject to change based on requirements
+numberOfN2Tanks = 2;
+initialN2TankCapacityInKg = numberOfN2Tanks*91;
+n2MolarMass = 2*14.007; %g/mol;
+initialN2StoreMoles = initialN2TankCapacityInKg*1E3/n2MolarMass;
+N2Store = StoreImpl('N2 Store','Material',initialN2StoreMoles,initialN2StoreMoles);     
 
 % Power Stores
 MainPowerStore = StoreImpl('Power','Material',100000,100000);
-FanPowerStore = StoreImpl('Power','Material',100000,100000);
 
 % Waste Stores
-DryWasteStore = StoreImpl('Dry Waste','Material',1000000,0);
+DryWasteStore = StoreImpl('Dry Waste','Material',1000000,0);    % Currently waste is discarded via logistics resupply vehicles on ISS
 
 % Food Stores
 xmlFoodStoreLevel = 10000;
@@ -116,18 +125,6 @@ xmlFoodStoreCapacity = 10000;
 defaultFoodWaterContent = 5;
 initialfood = FoodMatter(Wheat,xmlFoodStoreLevel,defaultFoodWaterContent); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java
 FoodStore = FoodStoreImpl(xmlFoodStoreCapacity,initialfood);
-
-% Biomass Stores
-% Located within Inflatable Structure
-xml_inedibleFraction = 0.25;
-xml_edibleWaterContent = 5;
-xml_inedibleWaterContent = 5;
-initialBiomatter = [BioMatter(Wheat,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
-    BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
-    BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent)];
-% BiomassStore = BiomassStoreImpl(BioMatter(Wheat,0,0,0,0),100000);
-BiomassStore = BiomassStoreImpl(100000);
-% Set more crop type for FoodMatter somewhere later on
 
 %% Initialize CrewPersons
 % Assumed crew distribution across habitats
@@ -156,8 +153,8 @@ astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,1
 astro2 = CrewPersonImpl('Female 1',35,55,'Female',[crewSchedule{2,:}]);
 
 % Initialize consumer and producer definitions
-astro2.AirConsumerDefinition = AirConsumerDefinitionImpl(LifeSupportUnit1,0,0);
-astro2.AirProducerDefinition = AirProducerDefinitionImpl(LifeSupportUnit1,0,0);
+astro2.AirConsumerDefinition = AirConsumerDefinitionImpl(Inflatable1,0,0);
+astro2.AirProducerDefinition = AirProducerDefinitionImpl(Inflatable1,0,0);
 astro2.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
 astro2.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
 astro2.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
@@ -168,8 +165,8 @@ astro2.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,1
 astro3 = CrewPersonImpl('Male 2',35,72,'Male',[crewSchedule{3,:}]);
 
 % Initialize consumer and producer definitions
-astro3.AirConsumerDefinition = AirConsumerDefinitionImpl(labs,0,0);
-astro3.AirProducerDefinition = AirProducerDefinitionImpl(labs,0,0);
+astro3.AirConsumerDefinition = AirConsumerDefinitionImpl(LivingUnit1,0,0);
+astro3.AirProducerDefinition = AirProducerDefinitionImpl(LivingUnit1,0,0);
 astro3.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
 astro3.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
 astro3.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
@@ -180,16 +177,28 @@ astro3.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,1
 astro4 = CrewPersonImpl('Female 2',35,55,'Female',[crewSchedule{4,:}]);
 
 % Initialize consumer and producer definitions
-astro4.AirConsumerDefinition = AirConsumerDefinitionImpl(maint,0,0);
-astro4.AirProducerDefinition = AirProducerDefinitionImpl(maint,0,0);
+astro4.AirConsumerDefinition = AirConsumerDefinitionImpl(LifeSupportUnit1,0,0);
+astro4.AirProducerDefinition = AirProducerDefinitionImpl(LifeSupportUnit1,0,0);
 astro4.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
 astro4.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
 astro4.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
 astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
 astro4.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
+%% Biomass Stores
+% Located within Inflatable Structure
+xml_inedibleFraction = 0.25;
+xml_edibleWaterContent = 5;
+xml_inedibleWaterContent = 5;
+initialBiomatter = [BioMatter(Wheat,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
+    BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
+    BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent)];
+% BiomassStore = BiomassStoreImpl(BioMatter(Wheat,0,0,0,0),100000);
+BiomassStore = BiomassStoreImpl(100000);
+% Set more crop type for FoodMatter somewhere later on
 
 %% Initialize BiomassPS
+
 WheatShelf = ShelfImpl2(Wheat,25);
 DryBeanShelf = ShelfImpl2(DryBean,15);
 WhitePotatoShelf = ShelfImpl2(WhitePotato,10);
@@ -200,9 +209,9 @@ defaultrate = 1000;
 biomassSystem.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerStore,defaultrate,defaultrate);
 biomassSystem.PotableWaterConsumerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,defaultrate,defaultrate);
 biomassSystem.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,defaultrate,defaultrate);
-biomassSystem.AirConsumerDefinition = ResourceUseDefinitionImpl(plant,defaultrate,defaultrate);
-biomassSystem.AirProducerDefinition = ResourceUseDefinitionImpl(plant,defaultrate,defaultrate);
-% biomassSystem.DirtyWaterProducerDefinition(DirtyWaterStore,defaultrate,defaultrate);				
+biomassSystem.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,defaultrate,defaultrate);
+biomassSystem.AirProducerDefinition = ResourceUseDefinitionImpl(LivingUnit1,defaultrate,defaultrate);
+% biomassSystem.DirtyWaterProducerDefinition(DirtyWaterStore,defaultrate,defaultrate);      % Note that plant model does not consume dirty water! (Only grey and potable water - grey should be preferred!)			
 biomassSystem.BiomassProducerDefinition = ResourceUseDefinitionImpl(BiomassStore,10000,10000);
 				
 
@@ -239,71 +248,82 @@ FoodProcessor.WaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStor
 FoodProcessor.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,1000,1000);
 
 %% Initialize Dehumidifiers
-% Maintenance Dehumidifier
-maindehumidifier = DehumidifierImpl;
-maindehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(maint,1000,1000);
-maindehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
+% Insert CCAA within Inflatable, Living Unit, and Life Support Unit
+% Placement of CCAAs is based on modules with a large period of continuous
+% human presence (i.e. large sources of humidity condensate)
 
-% Labs Dehumidifier
-labsdehumidifier = DehumidifierImpl;
-labsdehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(labs,1000,1000);
-labsdehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
+% Inflatable Dehumidifier
+inflatableDehumidifier = DehumidifierImpl;
+inflatableDehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,1000,1000);
+inflatableDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
+
+% Living Unit/Airlock Dehumidifier
+livingUnitDehumidifier = DehumidifierImpl;
+livingUnitDehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,1000,1000);
+livingUnitDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
+
+% Life Support Unit Dehumidifier
+lifeSupportUnitDehumidifier = DehumidifierImpl;
+lifeSupportUnitDehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,1000,1000);
+lifeSupportUnitDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
 
 %% Initialize Fans
-% Crew to Maintenance Fan
-crew2mainfan = FanImpl;
-crew2mainfan.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,1000,1000);
-crew2mainfan.AirProducerDefinition = ResourceUseDefinitionImpl(maint,1000,1000);
-crew2mainfan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
-idealGasConstant = 8.314;
 
-%             pv = nRT
-%             n = PV/RT
-% Maintenance to Crew Fan
-main2crewfan = FanImpl;
-main2crewfan.AirConsumerDefinition = ResourceUseDefinitionImpl(maint,1000,1000);
-main2crewfan.AirProducerDefinition = ResourceUseDefinitionImpl(Inflatable1,1000,1000);
-main2crewfan.PowerConsumerDefinition = ResourceUseDefinitionImpl(FanPowerStore,50,50);
+% NB. Under normal power consumption conditions, the ISS IMV fan moves 
+% approx. 6791 moles of air every hour
+% As a result, we modify the max and desired molar flow rates to meet this
+% number
+% Desired is rounded up to 6800moles/hr, and the max corresponds to the max
+% volumetric flow rate of 4106L/min indicated within Section 2, Chapter
+% 3.2.6 of "Living Together In Space"
+% 4106L/min*60min/hr*70.3kPa/(8.314J/K/mol*296.15K) = 7034mol/hr (we round
+% this up to 7035mol/hr)
 
-% Crew to Galley Fan
-crew2galleyfan = FanImpl;
-crew2galleyfan.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,1000,1000);
-crew2galleyfan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,1000,1000);
-crew2galleyfan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,50,50);
+% Inflatable 1 to Living Unit Fan
+inflatable2LivingUnitFan = ISSFanImpl;
+inflatable2LivingUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,6800,7035);
+inflatable2LivingUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
+inflatable2LivingUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
 
-% Galley to Crew Fan
-galley2crewfan = FanImpl;
-galley2crewfan.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,1000,1000);
-galley2crewfan.AirProducerDefinition = ResourceUseDefinitionImpl(Inflatable1,1000,1000);
-galley2crewfan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,50,50);
+% Living Unit to Inflatable 1 Fan
+livingUnit2InflatableFan = ISSFanImpl;
+livingUnit2InflatableFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
+livingUnit2InflatableFan.AirProducerDefinition = ResourceUseDefinitionImpl(Inflatable1,6800,7035);
+livingUnit2InflatableFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
 
-% Labs to Galley Fan
-labs2galleyfan = FanImpl;
-labs2galleyfan.AirConsumerDefinition = ResourceUseDefinitionImpl(labs,1000,1000);
-labs2galleyfan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,1000,1000);
-labs2galleyfan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,50,50);
+% Living Unit to Life Support Unit Fan
+livingUnit2LifeSupportFan = ISSFanImpl;
+livingUnit2LifeSupportFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
+livingUnit2LifeSupportFan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
+livingUnit2LifeSupportFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
 
-% Galley to Labs Fan
-galley2labsfan = FanImpl;
-galley2labsfan.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,1000,1000);
-galley2labsfan.AirProducerDefinition = ResourceUseDefinitionImpl(labs,1000,1000);
-galley2labsfan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,50,50);
+% Life Support Unit to Living Unit Fan
+lifeSupport2LivingUnitFan = ISSFanImpl;
+lifeSupport2LivingUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
+lifeSupport2LivingUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
+lifeSupport2LivingUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+
+% Life Support Unit to Cargo Unit Fan
+lifeSupport2CargoUnitFan = ISSFanImpl;
+lifeSupport2CargoUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
+lifeSupport2CargoUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(CargoUnit1,6800,7035);
+lifeSupport2CargoUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+
+% Cargo Unit to Life Support Unit Fan
+cargoUnit2LifeSupportFan = ISSFanImpl;
+cargoUnit2LifeSupportFan.AirConsumerDefinition = ResourceUseDefinitionImpl(CargoUnit1,6800,7035);
+cargoUnit2LifeSupportFan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
+cargoUnit2LifeSupportFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+
 
 %% Initialize Air Processing Technologies
 
 % Initialize Main VCCR (Linear)
 mainvccr = VCCRLinearImpl;
-mainvccr.AirConsumerDefinition = ResourceUseDefinitionImpl(maint,10000,10000);
-mainvccr.AirProducerDefinition = ResourceUseDefinitionImpl(maint,10000,10000);
+mainvccr.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,10000,10000);
+mainvccr.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,10000,10000);
 mainvccr.CO2ProducerDefinition = ResourceUseDefinitionImpl(CO2Store,10000,10000);
 mainvccr.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,2000,2000);
-
-% Initialize Backup VCCR (Linear)
-backupvccr = VCCRLinearImpl;
-backupvccr.AirConsumerDefinition = ResourceUseDefinitionImpl(labs,10000,10000);
-backupvccr.AirProducerDefinition = ResourceUseDefinitionImpl(labs,10000,10000);
-backupvccr.CO2ProducerDefinition = ResourceUseDefinitionImpl(CO2Store,10000,10000);
-backupvccr.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,0,2000);
 
 % Initialize OGS
 ogs = OGSImpl;
@@ -408,6 +428,20 @@ for i = 1:simtime
         break
     end
 
+    % Leak Modules
+    Inflatable1.tick;
+    LivingUnit1.tick;
+    LifeSupportUnit1.tick;
+    CargoUnit1.tick;
+    
+    % Run Fans
+    inflatable2LivingUnitFan.tick;
+    livingUnit2InflatableFan.tick;
+    livingUnit2LifeSupportFan.tick;
+    lifeSupport2LivingUnitFan.tick;
+    lifeSupport2CargoUnitFan.tick;
+    cargoUnit2LifeSupportFan.tick;
+    
     % Record data
     powerlevel(i) = MainPowerStore.currentLevel; 
     H2level(i) = H2Store.currentLevel;
@@ -471,15 +505,10 @@ for i = 1:simtime
     maintVaporlevel(i) = maint.VaporStore.currentLevel;
     maintOtherlevel(i) = maint.OtherStore.currentLevel;
     
-    maindehumidifier.tick;
-    labsdehumidifier.tick;
+    inflatableDehumidifier.tick;
+    livingUnitDehumidifier.tick;
     
-    main2crewfan.tick;
-    crew2mainfan.tick;
-    crew2galleyfan.tick;
-    galley2crewfan.tick;
-    galley2labsfan.tick;
-    labs2galleyfan.tick;
+
     
 %     % Fans consume required air from source SimEnvironments
 %     crew2main = crew2mainfan.takeAir;
