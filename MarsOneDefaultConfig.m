@@ -50,7 +50,12 @@ clear all
 clc
 % close all
 
+tic
+
 %% Key Mission Parameters
+TotalAtmPressureTargeted = 70.3;        % targeted total atmospheric pressure, in kPa
+TotalPPO2Targeted = 0.265*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
+
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInHours = 19000;
@@ -60,7 +65,18 @@ missionDurationInWeeks = ceil(missionDurationInHours/24/7);
 [crewSchedule, missionEVAschedule,crewEVAScheduleLogical] = CrewScheduler(numberOfEVAdaysPerWeek,numberOfCrew,missionDurationInWeeks);
 
 %% Initialize SimEnvironments
-Inflatable1 = SimEnvironmentImpl('Inflatable 1',70.3,5000000,0.265,0,0.734,0,0.001);     %Note volume input is in Liters
+% Convert daily leakage rate to hourly leakage rate
+dailyLeakagePercentage = 0.05;      % Based on BVAD Table 4.1.1 for percentage of total gas mass lost per day 
+% Let H = hourLeakagePercentage and initial total moles of gas = n_init
+% Therefore we want:
+% n_init*(1-dailyLeakagePercentage/100) = n_init*(1-H/100)^24
+% Solving for H yields:
+% H = 100*(1-(1-dailyLeakagePercentage/100)^(1/24))
+
+% Using the above derived equation:
+hourlyLeakagePercentage = 100*(1-(1-dailyLeakagePercentage/100)^(1/24));
+
+Inflatable1 = SimEnvironmentImpl('Inflatable 1',70.3,5000000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);     %Note volume input is in Liters.
 % Inflatable2 = SimEnvironmentImpl('Inflatable 1',70.3,5000000,0.265,0,0.734,0,0.001);     
 LivingUnit1 = SimEnvironmentImpl('Living Unit 1',70.3,25000,0.265,0,0.734,0,0.001);   % Note that here we assume that the internal volume of the Dragon modules sent to the surface is 25m^3
 % LivingUnit2 = SimEnvironmentImpl('LivingUnit1',70.3,25000,0.265,0,0.734,0,0.001);
@@ -100,7 +116,7 @@ GreyWaterStore = StoreImpl('Grey H2O','Material',45.5,0);
 
 H2Store = StoreImpl('H2 Store','Material',10000,0);     % H2 store for output of OGS - note that currently on the ISS, there is no H2 store, it is sent directly to the Sabatier reactor 
 % CO2Store = StoreImpl('CO2 Store','Material',1000,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA
-CO2Store = StoreImpl('CO2 Store','Material',19.8,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L)
+CO2Store = StoreImpl('CO2 Store','Material',19.8,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L) - convert this to moles! - tank pressure is 827kPa (see spreadsheet)
 MethaneStore = StoreImpl('CH4 Store','Material',1000,0);    % CH4 store for output of CRS (Sabatier) - note CH4 is currently vented directly to space on ISS
 % Look at option of including a pyrolyzer?
 
@@ -185,6 +201,8 @@ astro4.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,10
 astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
 astro4.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
+toc
+
 %% Biomass Stores
 % Located within Inflatable Structure
 xml_inedibleFraction = 0.25;
@@ -267,7 +285,7 @@ lifeSupportUnitDehumidifier = DehumidifierImpl;
 lifeSupportUnitDehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,1000,1000);
 lifeSupportUnitDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
 
-%% Initialize Fans
+%% Initialize (Intermodule Ventilation) Fans
 
 % NB. Under normal power consumption conditions, the ISS IMV fan moves 
 % approx. 6791 moles of air every hour
@@ -315,15 +333,18 @@ cargoUnit2LifeSupportFan.AirConsumerDefinition = ResourceUseDefinitionImpl(Cargo
 cargoUnit2LifeSupportFan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
 cargoUnit2LifeSupportFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
 
+%% Initialize Injectors (Models ISS Pressure Control Assemblies)
+% Maintenance Oxygen Injector
+inflatableO2inj = ISSinjectorImpl('O2',TotalPPO2Targeted,O2Store,Inflatable1.O2Store);
+
+% Create separate class for overpressure venting - since this is a total
+% pressure thing - or combine species injectors into actual PCAs)
+
 
 %% Initialize Air Processing Technologies
 
 % Initialize Main VCCR (Linear)
-mainvccr = VCCRLinearImpl;
-mainvccr.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,10000,10000);
-mainvccr.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,10000,10000);
-mainvccr.CO2ProducerDefinition = ResourceUseDefinitionImpl(CO2Store,10000,10000);
-mainvccr.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,2000,2000);
+mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowerStore);
 
 % Initialize OGS
 ogs = OGSImpl;
@@ -340,12 +361,6 @@ crs.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,100,100);
 crs.PotableWaterProducerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,100,100);
 crs.MethaneProducerDefinition = ResourceUseDefinitionImpl(MethaneStore,100,100);
 
-%% Initialize Injectors (Framework BioModule within BioSim)
-% Maintenance Oxygen Injector
-maintO2inj = InjectorImpl;
-maintO2inj.ResourceConsumerDefinition = ResourceUseDefinitionImpl(O2Store,3.3,3.3);
-maintO2inj.ResourceProducerDefinition = ResourceUseDefinitionImpl(maint.O2Store,3.5,3.5);
-
 %% Initialize Water Processing Technologies
 
 % Initialize WaterRS (Linear)
@@ -361,10 +376,6 @@ waterRS.PotableWaterProducerDefinition = ResourceUseDefinitionImpl(PotableWaterS
 powerPS = PowerPSImpl('Nuclear',500000);
 powerPS.PowerProducerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1E6,1E6);
 powerPS.LightConsumerDefinition = Inflatable1;
-
-% Initialize Fan Battery Source
-fanpowerPS = PowerPSImpl('Nuclear',500);        % Default upperPowerGeneration value is set to 500;
-fanpowerPS.PowerProducerDefinition = ResourceUseDefinitionImpl(FanPowerStore,1E3,1E3);
 
 
 %% Time Loop
@@ -470,7 +481,7 @@ for i = 1:simtime
     ogs.tick;
     crs.tick;
     
-    maintO2inj.tick;
+    inflatableO2inj.tick;
     
     waterRS.tick;
     fanpowerPS.tick;

@@ -17,7 +17,7 @@ classdef SimEnvironmentImpl < handle
         volume                  % in liters
         temperature = 23        % in Celsius
         maxlumens = 50000       % default value declared in Environment.xsd schema file - used for generating solar power
-        leakPercentage = 0;     % 0.05/24 nominal value, according to Table 4.1.1 of BVAD
+        leakagePercentage = 0;     % 0.05/24 nominal value, according to Table 4.1.1 of BVAD
     end
 
     properties (Dependent = true, SetAccess = private)
@@ -56,38 +56,42 @@ classdef SimEnvironmentImpl < handle
     end
     
     methods
-        function obj = SimEnvironmentImpl(name,pressure,volume,o2Percentage,co2Percentage,nitrogenPercentage,waterPercentage,otherPercentage)
-            obj.name = name;
-%             obj.pressure = pressure;
-            obj.volume = volume;        % this is input in Liters
-            obj.O2Store = StoreImpl('O2','Environmental');
-            obj.CO2Store = StoreImpl('CO2','Environmental');
-            obj.NitrogenStore = StoreImpl('N2','Environmental');
-            obj.VaporStore = StoreImpl('H2O Vapor','Environmental');
-            obj.OtherStore = StoreImpl('Other','Environmental');
+        function obj = SimEnvironmentImpl(name,pressure,volume,o2Percentage,co2Percentage,nitrogenPercentage,waterPercentage,otherPercentage,leakPercentage)
             
-            obj.O2Store.currentLevel = CalculateMoles(obj,o2Percentage, pressure, volume);
-            obj.CO2Store.currentLevel = CalculateMoles(obj,co2Percentage, pressure, volume);
-            obj.NitrogenStore.currentLevel = CalculateMoles(obj,nitrogenPercentage, pressure, volume);
-            obj.VaporStore.currentLevel = CalculateMoles(obj,waterPercentage, pressure, volume);
-            obj.OtherStore.currentLevel = CalculateMoles(obj,otherPercentage, pressure, volume);
+            if nargin > 0
+                
+                if nargin == 9
+                    obj.leakagePercentage = leakPercentage;
+                end
+                
+                obj.name = name;
+                %             obj.pressure = pressure;
+                obj.volume = volume;        % this is input in Liters
+                obj.O2Store = StoreImpl('O2','Environmental');
+                obj.CO2Store = StoreImpl('CO2','Environmental');
+                obj.NitrogenStore = StoreImpl('N2','Environmental');
+                obj.VaporStore = StoreImpl('H2O Vapor','Environmental');
+                obj.OtherStore = StoreImpl('Other','Environmental');
+                
+                obj.O2Store.currentLevel = CalculateMoles(obj,o2Percentage, pressure, volume);
+                obj.CO2Store.currentLevel = CalculateMoles(obj,co2Percentage, pressure, volume);
+                obj.NitrogenStore.currentLevel = CalculateMoles(obj,nitrogenPercentage, pressure, volume);
+                obj.VaporStore.currentLevel = CalculateMoles(obj,waterPercentage, pressure, volume);
+                obj.OtherStore.currentLevel = CalculateMoles(obj,otherPercentage, pressure, volume);
+                
+                % Set current capacities of StoreImpl objects to equal their
+                % current levels - i.e. can't take more from store than what's
+                % already there, but you can add more than what's there
+                % Enforce this constraint for every time step
+                obj.O2Store.currentCapacity = obj.O2Store.currentLevel;
+                obj.CO2Store.currentCapacity = obj.CO2Store.currentLevel;
+                obj.NitrogenStore.currentCapacity = obj.NitrogenStore.currentLevel;
+                obj.VaporStore.currentCapacity = obj.VaporStore.currentLevel;
+                obj.OtherStore.currentCapacity = obj.OtherStore.currentLevel;
             
-            % Set current capacities of StoreImpl objects to equal their
-            % current levels - i.e. can't take more from store than what's
-            % already there, but you can add more than what's there
-            % Enforce this constraint for every time step
-            obj.O2Store.currentCapacity = obj.O2Store.currentLevel;
-            obj.CO2Store.currentCapacity = obj.CO2Store.currentLevel;
-            obj.NitrogenStore.currentCapacity = obj.NitrogenStore.currentLevel;
-            obj.VaporStore.currentCapacity = obj.VaporStore.currentLevel;
-            obj.OtherStore.currentCapacity = obj.OtherStore.currentLevel;
             
-%             % Store constituent levels in air field
-%             obj.Air.O2Level = obj.O2Store.currentLevel;
-%             obj.Air.CO2Level = obj.CO2Store.currentLevel;
-%             obj.Air.NitrogenLevel = obj.NitrogenStore.currentLevel;
-%             obj.Air.VaporLevel = obj.VaporStore.currentLevel;
-%             obj.Air.OtherLevel = obj.OtherStore.currentLevel;
+            end
+
  
         end
         
@@ -152,18 +156,18 @@ classdef SimEnvironmentImpl < handle
         end
         
         % Set Leakage Percentage
-        function set.leakPercentage(obj,inputPercentage)
-            obj.leakPercentage = inputPercentage;
+        function set.leakagePercentage(obj,inputPercentage)
+            obj.leakagePercentage = inputPercentage;
         end
         
         %% PerformLeak
         function performLeak(obj)
             % Based on a leakage percentage
-            obj.O2Store.take(obj.O2Store.currentLevel*obj.leakPercentage/100);
-            obj.CO2Store.take(obj.CO2Store.currentLevel*obj.leakPercentage/100);
-            obj.NitrogenStore.take(obj.NitrogenStore.currentLevel*obj.leakPercentage/100);
-            obj.VaporStore.take(obj.VaporStore.currentLevel*obj.leakPercentage/100);
-            obj.OtherStore.take(obj.OtherStore.currentLevel*obj.leakPercentage/100);
+            obj.O2Store.take(obj.O2Store.currentLevel*obj.leakagePercentage/100);
+            obj.CO2Store.take(obj.CO2Store.currentLevel*obj.leakagePercentage/100);
+            obj.NitrogenStore.take(obj.NitrogenStore.currentLevel*obj.leakagePercentage/100);
+            obj.VaporStore.take(obj.VaporStore.currentLevel*obj.leakagePercentage/100);
+            obj.OtherStore.take(obj.OtherStore.currentLevel*obj.leakagePercentage/100);
         end
         
     end
