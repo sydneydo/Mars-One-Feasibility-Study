@@ -104,7 +104,8 @@ classdef CrewPersonImpl < handle
                 for i = 1:length(schedule)
                     schedule(i).ID = i;
                 end
-                obj.Schedule = schedule;               
+                obj.Schedule = schedule;  
+                obj.CurrentActivity = schedule(1);
                 
             end
             % Initialize Physiological Buffers

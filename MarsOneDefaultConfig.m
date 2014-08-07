@@ -54,7 +54,8 @@ tic
 
 %% Key Mission Parameters
 TotalAtmPressureTargeted = 70.3;        % targeted total atmospheric pressure, in kPa
-TotalPPO2Targeted = 0.265*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
+TargetO2MolarFraction = 0.265; 
+TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
 
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
@@ -76,14 +77,14 @@ dailyLeakagePercentage = 0.05;      % Based on BVAD Table 4.1.1 for percentage o
 % Using the above derived equation:
 hourlyLeakagePercentage = 100*(1-(1-dailyLeakagePercentage/100)^(1/24));
 
-Inflatable1 = SimEnvironmentImpl('Inflatable 1',70.3,5000000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);     %Note volume input is in Liters.
-% Inflatable2 = SimEnvironmentImpl('Inflatable 1',70.3,5000000,0.265,0,0.734,0,0.001);     
-LivingUnit1 = SimEnvironmentImpl('Living Unit 1',70.3,25000,0.265,0,0.734,0,0.001);   % Note that here we assume that the internal volume of the Dragon modules sent to the surface is 25m^3
-% LivingUnit2 = SimEnvironmentImpl('LivingUnit1',70.3,25000,0.265,0,0.734,0,0.001);
-LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',70.3,25000,0.265,0,0.734,0,0.001);
-% LifeSupportUnit2 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001);
-CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',70.3,25000,0.265,0,0.734,0,0.001);
-% CargoUnit2 = SimEnvironmentImpl('CargoUnit2',70.3,25000,0.265,0,0.734,0,0.001);
+Inflatable1 = SimEnvironmentImpl('Inflatable 1',70.3,500000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);     %Note volume input is in Liters.
+% Inflatable2 = SimEnvironmentImpl('Inflatable 1',70.3,500000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);     
+LivingUnit1 = SimEnvironmentImpl('Living Unit 1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);   % Note that here we assume that the internal volume of the Dragon modules sent to the surface is 25m^3
+% LivingUnit2 = SimEnvironmentImpl('LivingUnit1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
+LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
+% LifeSupportUnit2 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
+CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
+% CargoUnit2 = SimEnvironmentImpl('CargoUnit2',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
 
 
 %% Initialize Stores
@@ -335,7 +336,7 @@ cargoUnit2LifeSupportFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(Mai
 
 %% Initialize Injectors (Models ISS Pressure Control Assemblies)
 % Maintenance Oxygen Injector
-inflatableO2inj = ISSinjectorImpl('O2',TotalPPO2Targeted,O2Store,Inflatable1.O2Store);
+inflatableO2inj = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,Inflatable1);
 
 % Create separate class for overpressure venting - since this is a total
 % pressure thing - or combine species injectors into actual PCAs)

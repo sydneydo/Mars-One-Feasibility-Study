@@ -70,7 +70,7 @@ classdef ISSVCCRLinearImpl
                 obj.CDRA_Avg_Power_Consumption = averageCDRAPowerConsumption;
                 obj.CDRA_Max_Power_Consumption = maxCDRAPowerConsumption;
                 
-                obj.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerSource,maxCDRAPowerConsumption,averageCDRAPowerConsumption);
+                obj.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerSource,averageCDRAPowerConsumption,maxCDRAPowerConsumption);
                 
                 % Initialize Nominal and Maximum Airflow Rates through CDRA
                 nominalCDRAairflowRate = 95*453.592/(12.011+2*15.999);     % in mol/hr (converted from 95lb/hr)
@@ -78,8 +78,8 @@ classdef ISSVCCRLinearImpl
                 obj.CDRA_Nominal_Airflow_Rate = nominalCDRAairflowRate;
                 obj.CDRA_Max_Airflow_Rate = maxCDRAflowRate;
                 
-                obj.AirConsumerDefinition = ResourceUseDefinitionImpl(AirInput,maxCDRAflowRate,nominalCDRAairflowRate);
-                obj.AirProducerDefinition = ResourceUseDefinitionImpl(AirOutput,maxCDRAflowRate,nominalCDRAairflowRate);
+                obj.AirConsumerDefinition = ResourceUseDefinitionImpl(AirInput,nominalCDRAairflowRate,maxCDRAflowRate);
+                obj.AirProducerDefinition = ResourceUseDefinitionImpl(AirOutput,nominalCDRAairflowRate,maxCDRAflowRate);
                 
                 % Initialize Nominal and Maximum CO2 Removal Rates (based on
                 % adsoprtion capacity of zeolite adsorbents)
@@ -88,7 +88,7 @@ classdef ISSVCCRLinearImpl
                 obj.CDRA_Nominal_CO2_Removal_Rate = nominalCDRAco2RemovalRate;
                 obj.CDRA_Max_CO2_Removal_Rate = maxCDRAco2RemovalRate;
                 
-                obj.CO2ProducerDefinition = ResourceUseDefinitionImpl(CO2Output,maxCDRAco2RemovalRate,nominalCDRAco2RemovalRate);
+                obj.CO2ProducerDefinition = ResourceUseDefinitionImpl(CO2Output,nominalCDRAco2RemovalRate,maxCDRAco2RemovalRate);
             
             end
         end
