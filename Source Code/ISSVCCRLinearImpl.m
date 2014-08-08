@@ -83,7 +83,7 @@ classdef ISSVCCRLinearImpl
                 
                 % Initialize Nominal and Maximum CO2 Removal Rates (based on
                 % adsoprtion capacity of zeolite adsorbents)
-                nominalCDRAco2RemovalRate = 0.58*453.592/(12.011+2*15.999);     % (0.58lb/hr) = 6.3 human equivalents
+                nominalCDRAco2RemovalRate = 0.58*453.592/(12.011+2*15.999);     % in moles/hr (converted from 0.58lb/hr) = 6.3 human equivalents
                 maxCDRAco2RemovalRate = 8/6.3*nominalCDRAco2RemovalRate;        % 8 human equivalents
                 obj.CDRA_Nominal_CO2_Removal_Rate = nominalCDRAco2RemovalRate;
                 obj.CDRA_Max_CO2_Removal_Rate = maxCDRAco2RemovalRate;
@@ -105,11 +105,14 @@ classdef ISSVCCRLinearImpl
            
            %gatherCO2(obj);
                       
-           % Moles of CO2 Removed is tuned to be a
+           % Size of air input sample is tuned to be a
            % linear equation between the nominal and maximum power
            % consumptions and air flow rates
-%            molesAirNeeded = (obj.CDRA_Max_Airflow_Rate-obj.CDRA_Nominal_Airflow_Rate)/(obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*(currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_Airflow_Rate;
+           molesAirNeeded = (obj.CDRA_Max_Airflow_Rate-obj.CDRA_Nominal_Airflow_Rate)/(obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*(currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_Airflow_Rate;
            
+           % Similarly CO2 removal rate is tuned to power input (maps to
+           % more power sent to heaters for quicker desorption --> leads to
+           % fast adsorption/desorption cycles
            co2RemovalRate = (obj.CDRA_Max_CO2_Removal_Rate-obj.CDRA_Nominal_CO2_Removal_Rate)/(obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*(currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_CO2_Removal_Rate;  % in mol/hr
            
            % Define molar percentages internally to avoid errors from

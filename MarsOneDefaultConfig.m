@@ -54,6 +54,7 @@ tic
 
 %% Key Mission Parameters
 TotalAtmPressureTargeted = 70.3;        % targeted total atmospheric pressure, in kPa
+O2FractionHypoxicLimit = 0.23;          % lower bound for a 70.3kPa atm based on EAWG Fig 4.1.1 and Advanced Life Support Requirements Document Fig 4-3
 TargetO2MolarFraction = 0.265; 
 TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
 
@@ -151,7 +152,7 @@ FoodStore = FoodStoreImpl(xmlFoodStoreCapacity,initialfood);
 
 
 %% Crew in Crew Quarters (crew)
-astro1 = CrewPersonImpl('Male 1',35,75,'Male',[crewSchedule{1,:}]);
+astro1 = CrewPersonImpl('Male 1',35,75,'Male',[crewSchedule{1,:}],O2FractionHypoxicLimit);
 % You can automate this using arrayfunc (see CrewScheduler.m for an example
 % use)
 % you might want to clear crewSchedule after initializing all crewpersons
@@ -165,6 +166,8 @@ astro1.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,
 astro1.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
 astro1.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
 astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+astro1.O2LowRatio
+
 
 %% Crew in Galley Module (galley)
 astro2 = CrewPersonImpl('Female 1',35,55,'Female',[crewSchedule{2,:}]);
@@ -348,11 +351,8 @@ inflatableO2inj = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction
 mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowerStore);
 
 % Initialize OGS
-ogs = OGSImpl;
-ogs.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
-ogs.PotableWaterConsumerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,10,10);
-ogs.O2ProducerDefinition = ResourceUseDefinitionImpl(O2Store,1000,1000);
-ogs.H2ProducerDefinition = ResourceUseDefinitionImpl(H2Store,1000,1000);
+ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LivingUnit,PotableWaterStore,MainPowerStore,H2Store);
+
 
 % Initialize CRS (Sabatier Reactor)
 crs = CRSImpl;

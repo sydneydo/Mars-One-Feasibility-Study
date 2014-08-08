@@ -13,8 +13,11 @@ classdef ResourceUseDefinitionImpl < handle
         function obj = ResourceUseDefinitionImpl(store,desiredFlowRate,maxFlowRate)
             if nargin > 0  
                 obj.ResourceStore = store;
-                obj.DesiredFlowRate = desiredFlowRate;
-                obj.MaxFlowRate = maxFlowRate;
+                
+                if nargin > 1
+                    obj.DesiredFlowRate = desiredFlowRate;
+                    obj.MaxFlowRate = maxFlowRate;
+                end
             end
         end
     end

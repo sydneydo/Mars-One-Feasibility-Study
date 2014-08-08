@@ -62,18 +62,19 @@ classdef CrewPersonImpl < handle
         waterRecoveryRate = 0.01
         calorieTillDead = 180000
         calorieRecoveryRate = 0.0001
-        CO2HighRatio = 0.06             % high CO2 molar percentage threshold
+        CO2HighLimit = 0.482633011      % CO2 partial pressure limit in kPa, converted from 0.07psia (According to Table 6.2-6, HIDH)
         CO2HighTillDead = 4
         CO2HighRecoveryRate = 0.005
         O2HighTillDead = 24             % hours exposed at high O2 levels (with fire risk) until dead
         O2HighRecoveryRate = 0.01
-        O2LowRatio = 0.1                % low O2 molar percentage threshold
-        O2LowTillDead = 2
+        O2LowRatio = 0.1                % low O2 molar fraction threshold
+        O2LowTillDead = 2               % Hours spent in a low O2 level until death occurs (corresponds to amount of internal buffer that the crew has)
         O2LowRecoveryRate = 0.01
         leisureTillBurnout = 168        % in hours
         leisureRecoveryRate = 90
         awakeTillExhaustion = 120
         sleepRecoveryRate = 120         % hours of sleeplessness until crew death
+        idealGasConstant = 8.314;        % J/K/mol
     end
     
     properties (SetAccess = private)
@@ -83,23 +84,17 @@ classdef CrewPersonImpl < handle
 
     methods
         %% Constructor
-        function obj = CrewPersonImpl(name,age,weight,sex,schedule)
-            if nargin == 4
-                obj.Name = name;
-                obj.Age = age;
-                obj.Weight = weight;
-                if ~(strcmpi(sex,'Male') || strcmpi(sex,'Female'))
-                    error('CrewPersonImpl gender must be set to either "Male" or "Female"')
-                end
-                obj.Gender = sex;
-            elseif nargin == 5
-                obj.Name = name;
-                obj.Age = age;
-                obj.Weight = weight;
-                if ~(strcmpi(sex,'Male') || strcmpi(sex,'Female'))
-                    error('CrewPersonImpl gender must be set to either "Male" or "Female"')
-                end
-                obj.Gender = sex;
+        function obj = CrewPersonImpl(name,age,weight,sex,schedule,O2fractionHypoxicLimit)
+            
+            obj.Name = name;
+            obj.Age = age;
+            obj.Weight = weight;
+            if ~(strcmpi(sex,'Male') || strcmpi(sex,'Female'))
+                error('CrewPersonImpl gender must be set to either "Male" or "Female"')
+            end
+            obj.Gender = sex;
+            
+            if nargin > 4
                 % Add ID numbers to schedule
                 for i = 1:length(schedule)
                     schedule(i).ID = i;
@@ -108,11 +103,16 @@ classdef CrewPersonImpl < handle
                 obj.CurrentActivity = schedule(1);
                 
             end
+            
+            if nargin > 5
+                obj.O2LowRatio = O2fractionHypoxicLimit;        % Change default value for O2fraction Hypoxic limit (in the future, we can implement an equation that takes the O2% from the AirConsumerDefinition to calculate this
+            end
+                
             % Initialize Physiological Buffers
             obj.consumedWaterBuffer = StoreImpl('Consumed Water Buffer','Material',obj.waterTillDead,obj.waterTillDead);
             obj.consumedCaloriesBuffer = StoreImpl('Consumed Calories Buffer','Material',obj.calorieTillDead,obj.calorieTillDead);
-            obj.consumedCO2Buffer = StoreImpl('Consumed CO2 Buffer','Material',obj.CO2HighTillDead*obj.CO2HighRatio...
-                ,obj.CO2HighTillDead*obj.CO2HighRatio);
+            obj.consumedCO2Buffer = StoreImpl('Consumed CO2 Buffer','Material',obj.CO2HighTillDead*obj.CO2HighLimit...
+                ,obj.CO2HighTillDead*obj.CO2HighLimit);
             obj.consumedLowOxygenBuffer = StoreImpl('Consumed Low O2 Buffer','Material',obj.O2LowTillDead*obj.O2LowRatio...
                 ,obj.O2LowTillDead*obj.O2LowRatio);
             obj.highOxygenBuffer = StoreImpl('High O2 Buffer','Material',obj.O2HighTillDead,obj.O2HighTillDead);
@@ -289,10 +289,15 @@ classdef CrewPersonImpl < handle
                 b = 5.64E-7;
                 resultinLiters = (a + b*heartRate^3) * 60;  %in L/hr    Correct version
 %                 resultinLiters = a + b*heartRate^3 * 60;  %in L/hr    INCORRECT version currently implemented within BioSim
-                molarVolume = 22.4;        % in L/mol of air - value based from: http://en.wikipedia.org/wiki/Molar_volume
+%                 molarVolume = 22.4;        % in L/mol of air - value based from: http://en.wikipedia.org/wiki/Molar_volume
                 %% TO DO: implement more accurate version of this based on partial pressures within SimEnvironment
-                resultinMoles = resultinLiters / molarVolume;  % this is  the number of moles of O2 required per hour
-                O2needed = resultinMoles;
+%                 resultinMoles = resultinLiters / molarVolume;  % this is  the number of moles of O2 required per hour
+                
+                O2needed = resultinLiters*obj.AirConsumerDefinition.ConsumptionStore.pressure*...
+                    obj.AirConsumerDefinition.ConsumptionStore.O2Percentage/...
+                    (obj.idealGasConstant*obj.AirConsumerDefinition.ConsumptionStore.temperature+273.15);   % O2 needed in moles
+                
+%                 O2needed = resultinMoles;
             end
         end
                 
@@ -392,9 +397,9 @@ classdef CrewPersonImpl < handle
             end
             
             % CO2 Poisoning Check
-            currentCO2Ratio = obj.AirConsumerDefinition.ConsumptionStore.CO2Percentage;
-            if currentCO2Ratio > obj.CO2HighRatio
-                obj.consumedCO2Buffer.take(currentCO2Ratio - obj.CO2HighRatio);
+            currentPPCO2 = obj.AirConsumerDefinition.ConsumptionStore.pressure*obj.AirConsumerDefinition.ConsumptionStore.CO2Percentage;
+            if currentPPCO2 > obj.CO2HighLimit
+                obj.consumedCO2Buffer.take(currentPPCO2 - obj.CO2HighLimit);
                 obj.poisoned = 1;
                 disp([obj.Name,' is currently experiencing CO2 poisoning on tick: ', num2str(obj.CurrentTick)])
             else

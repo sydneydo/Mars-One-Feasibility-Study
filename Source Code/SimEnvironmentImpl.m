@@ -35,7 +35,7 @@ classdef SimEnvironmentImpl < handle
     properties (SetAccess = private)
 %         leakRate = 0;   % mol/hr
         
-        DangerousOxygenThreshold = 1;   % threshold at which O2 molar fraction imposes a danger (fire hazard) - fix this later!
+        DangerousOxygenThreshold = 0.3;   % threshold at which O2 molar fraction imposes a danger (fire hazard) - fix this later! (changed from 1 to 0.3 on 8/7/14 - 30% corresponds to EAWG report - Figure 4.1-1 - "Lange's Flammability Limit")
     end
     
     properties
