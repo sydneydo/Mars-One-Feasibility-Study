@@ -275,7 +275,7 @@ FoodProcessor.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteSto
 % human presence (i.e. large sources of humidity condensate)
 
 % Inflatable Dehumidifier
-inflatableDehumidifier = DehumidifierImpl;
+inflatableDehumidifier = ISSDehumidifierImpl(Inflatable1,DirtyWaterStore,MainPowerStore);
 inflatableDehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,1000,1000);
 inflatableDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
 

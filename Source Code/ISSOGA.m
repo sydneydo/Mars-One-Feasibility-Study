@@ -1,4 +1,4 @@
-classdef ISSOGA
+classdef ISSOGA < handle
     %ISSOGA Simple Implementation of an oxygen generation system
     %   (Using electrolysis - assuming 100% conversion efficiency)
     %   By: Sydney Do (sydneydo@mit.edu)
@@ -78,6 +78,12 @@ classdef ISSOGA
 %   risked state (30%O2) (and forcing more gases to be expelled and vented
 %   by the PCA to control for this)
 
+%   We assume that the OGA is nominally off until it is sensed that O2 is
+%   needed. The appropriate setting is then automatically made based on a
+%   measured O2 deficit
+%   The practical feasibility of this is based on the fact that the OGA
+%   operates in day/night cycles (ie. it switches on and off regularly)
+
     properties
 %         ProductionRate = 1;         % BioSim has a ProductionRate value
 %         which is a multiplier on the amount of O2 generated. This is not
@@ -92,10 +98,11 @@ classdef ISSOGA
         PotableWaterConsumerDefinition
         O2ProducerDefinition
         H2ProducerDefinition
+        Error = 0
     end
     
     properties (SetAccess = private)
-        OGA_ProductionRateSettings = 2.3*(1:4)/24 * 1e3 / (2*15.999)        % in mol/hr (converted from 2.3*(1:4) kg O2/day)
+        OGA_ProductionRateSettings = 2.3*(0:4)/24 * 1e3 / (2*15.999)        % in mol/hr (converted from 2.3*(1:4) kg O2/day)
         idealGasConstant = 8.314;        % J/K/mol
         OGA_Max_PowerConsumption = 2971                         % Watts
         OGA_Min_PowerConsumption = 469                          % Watts
@@ -129,91 +136,112 @@ classdef ISSOGA
         %% tick
         function molesOfO2Produced = tick(obj)
             
-            % Determine production rate based on cabin measurements
-            % Assume some form of cabin sensing that informs the production
-            % of O2 from water
-            % Currently, it appears that the OGA is commanded from the
-            % ground (based on discussion in: "International Space Station United States Orbital Segment
-            % Oxygen Generation System On-orbit Operational Experience" SAE 2008-01-1962
+            % Only run if there is no system error
+            if obj.Error == 0
             
-            % We will assume ideal control - we need information on the
-            % cabin atmospheric composition
-            
-            % Note: tick the OGA before the PCA to minimize expenditure of
-            % gaseous reserves
-            
-            % OGA runs continuously until powered off (since there is a
-            % warm up time requirement)
-                       
-            
-            % Default setting for O2 production percentage is 25% (Setting 1)
-            obj.CommandedO2ProductionSetting = obj.OGA_ProductionRateSettings(1);
-            
-            % Change O2 production rate based on cabin ppO2 need (we ignore
-            % the bounding box here as the PCA's job is to take care of
-            % this)
-            if (obj.Environment.pressure*obj.Environment.O2Percentage) < obj.TargetO2PartialPressure     % in kPa
-                currentTargetO2Moles = obj.TargetO2PartialPressure * obj.Environment.volume / (obj.idealGasConstant*(obj.Environment.temperature+273.15));      % Number of moles corresponding to desired ppO2
-                makeupO2MolesRequired = currentTargetO2Moles - obj.Environment.O2Store.currentLevel;       % Determine makeup O2 required (in moles)
+                % Determine production rate based on cabin measurements
+                % Assume some form of cabin sensing that informs the production
+                % of O2 from water
+                % Currently, it appears that the OGA is commanded from the
+                % ground (based on discussion in: "International Space Station United States Orbital Segment
+                % Oxygen Generation System On-orbit Operational Experience" SAE 2008-01-1962
                 
-                % Set commanded O2 production to the minimum setting value
-                % just above current the O2 mole deficit. The wrapping min
-                % command is for scenarios where the makeupO2MolesRequired
-                % is greater than the maximum production rate of O2
-                % possible by the OGA (i.e. in this case, the OGA is set to
-                % the maximum possible O2 production rate)
-                % (Note that this law might change when multiple modules are connected to each other)
-                obj.CommandedO2ProductionSetting = min([min(obj.OGA_ProductionRateSettings(obj.OGA_ProductionRateSettings>=makeupO2MolesRequired)),obj.OGA_ProductionRateSettings(4)]);
+                % We will assume ideal control - we need information on the
+                % cabin atmospheric composition
+                
+                % Note: tick the OGA before the PCA to minimize expenditure of
+                % gaseous reserves
+                
+                % OGA runs continuously until powered off (since there is a
+                % warm up time requirement)
+                
+                
+                % Default setting for O2 production percentage is 0% (Setting 1)
+                obj.CommandedO2ProductionSetting = obj.OGA_ProductionRateSettings(1);
+                
+                % Change O2 production rate based on cabin ppO2 need (we ignore
+                % the bounding box here as the PCA's job is to take care of
+                % this)
+                if obj.Environment.O2Percentage < obj.TargetO2MolarFraction %(obj.Environment.pressure*obj.Environment.O2Percentage) < obj.TargetO2PartialPressure     % in kPa
+                    
+                    % We calculate makeupO2MolesRequired by solving for:
+                    % obj.TargetO2MolarFraction = (makeupO2MolesRequired + currentO2moles) / (makeupO2MolesRequired + currentTotalMoles)
+                    makeupO2MolesRequired = (obj.TargetO2MolarFraction*obj.Environment.totalMoles-obj.Environment.O2Store.currentLevel)/...
+                        (1-obj.TargetO2MolarFraction);
+                    
+                    % Set commanded O2 production to the minimum setting value
+                    % just above current the O2 mole deficit. The wrapping min
+                    % command is for scenarios where the makeupO2MolesRequired
+                    % is greater than the maximum production rate of O2
+                    % possible by the OGA (i.e. in this case, the OGA is set to
+                    % the maximum possible O2 production rate)
+                    % (Note that this law might change when multiple modules are connected to each other)
+                    obj.CommandedO2ProductionSetting = min([min(obj.OGA_ProductionRateSettings(obj.OGA_ProductionRateSettings>=makeupO2MolesRequired)),obj.OGA_ProductionRateSettings(4)]);
+                end
+                
+                
+                % gatherPower()
+                % Power to consume is determined by a linear law connecting the
+                % two operating points listed in the notes section above. These
+                % are listed again below:
+                
+                %   For the OGA implementation, we will use 9.2kg/24hr O2 production rate
+                %   at 2971W as the maximum operating point
+                %   The minimum operating point will be 0kg/hr O2 production at 469W
+                %   (the standby mode described above)
+                powerToConsume = (obj.OGA_Max_PowerConsumption - obj.OGA_Min_PowerConsumption)/obj.OGA_ProductionRateSettings(4)...
+                    *(obj.CommandedO2ProductionSetting) + obj.OGA_Min_PowerConsumption;
+                
+                currentPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(powerToConsume,obj.PowerConsumerDefinition);     % Take power from power source
+                
+                % Error for if there is inadequate power to operate
+                if currentPowerConsumed < powerToConsume
+                    % return power to power store
+                    obj.PowerConsumerDefinition.ResourceStore.add(currentPowerConsumed);
+                    disp('OGA shut down due to inadequate power input')
+                    obj.Error = 1;
+                    molesOfO2Produced = 0;  % nothing produced by OGA
+                    return
+                end
+                
+                % Calculate O2 produced as a function of power that is actually
+                % consumed (max function to ensure value is always positive)
+                o2MolesProduced = max([obj.OGA_ProductionRateSettings(4)/(obj.OGA_Max_PowerConsumption - obj.OGA_Min_PowerConsumption)*...
+                    (currentPowerConsumed-obj.OGA_Min_PowerConsumption),0]);
+                
+                % Determine water desired to be consumed based on
+                % stoichiometry (assuming 100% efficient electrolysis  -
+                % rationale for this assumption is discussed in "My Notes")
+                % 2H2O --> 2H2 + O2
+                
+                % Water
+                molesOfWaterRequired = 2*o2MolesProduced;
+                litersOfWaterRequired = molesOfWaterRequired*18.01524/1000;   %1000g/liter, 18.01524g/mole
+                litersOfH2OConsumed = obj.PotableWaterConsumerDefinition.ResourceStore.take(litersOfWaterRequired);     % Take H2O from potable water store (in liters)
+                
+                % Since it is possible for currentH2OConsumed to not correspond
+                % to o2MolesProduced (due to an emptying store), we go through
+                % stoichiometry again to determine the O2 and H2 moles actually
+                % produced
+                
+                % pushGasses()
+                % Follows stoichiometric ratio: 2H2O --> 2H2 + O2
+                molesOfH2OConsumed = (litersOfH2OConsumed * 1000) / 18.01524; %1000g/liter, 18.01524g/mole
+                %             currentO2Produced = molesOfWater/2;
+                %             currentH2Produced = molesOfWater;
+                
+                % Push to Stores (note that capacity in these stores is
+                % measures in moles)
+                molesOfO2Produced = obj.O2ProducerDefinition.ResourceStore.add(molesOfH2OConsumed/2,obj.O2ProducerDefinition);
+                obj.H2ProducerDefinition.ResourceStore.add(molesOfH2OConsumed,obj.H2ProducerDefinition);
+            
+            else
+                % There is an error in the OGS - no O2 is produced and we
+                % skip the tick function
+                molesOfO2Produced = 0;
+                return
+                
             end
-            
-            
-            % gatherPower()
-            % Power to consume is determined by a linear law connecting the
-            % two operating points listed in the notes section above. These
-            % are listed again below:
-            
-            %   For the OGA implementation, we will use 9.2kg/24hr O2 production rate
-            %   at 2971W as the maximum operating point
-            %   The minimum operating point will be 0kg/hr O2 production at 469W
-            %   (the standby mode described above)
-            powerToConsume = (obj.OGA_Max_PowerConsumption - obj.OGA_Min_PowerConsumption)/obj.OGA_ProductionRateSettings(4)...
-                *(obj.CommandedO2ProductionSetting) + obj.OGA_Min_PowerConsumption;
-            
-            currentPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(powerToConsume,obj.PowerConsumerDefinition);     % Take power from power source
-            
-            % Calculate O2 produced as a function of power that is actually
-            % consumed
-            o2MolesProduced = obj.OGA_ProductionRateSettings(4)/(obj.OGA_Max_PowerConsumption - obj.OGA_Min_PowerConsumption)*...
-                (currentPowerConsumed-obj.OGA_Min_PowerConsumption);
-            
-            % Determine water desired to be consumed based on
-            % stoichiometry (assuming 100% efficient electrolysis  -
-            % rationale for this assumption is discussed in "My Notes")
-            % 2H2O --> 2H2 + O2
-            
-            % Water
-            molesOfWaterRequired = 2*o2MolesProduced;
-            litersOfWaterRequired = molesOfWaterRequired*18.01524/1000;   %1000g/liter, 18.01524g/mole
-            litersOfH2OConsumed = obj.PotableWaterConsumerDefinition.ResourceStore.take(litersOfWaterRequired);     % Take H2O from potable water store (in liters)
-            
-            % Since it is possible for currentH2OConsumed to not correspond
-            % to o2MolesProduced (due to an emptying store), we go through
-            % stoichiometry again to determine the O2 and H2 moles actually
-            % produced
-            
-            % pushGasses()
-            % Follows stoichiometric ratio: 2H2O --> 2H2 + O2
-            molesOfH2OConsumed = (litersOfH2OConsumed * 1000) / 18.01524; %1000g/liter, 18.01524g/mole
-%             currentO2Produced = molesOfWater/2;
-%             currentH2Produced = molesOfWater;
-            
-            molesOfO2Produced = molesOfH2OConsumed/2;
-
-            % Push to Stores (note that capacity in these stores is
-            % measures in moles)
-            obj.O2ProducerDefinition.ResourceStore.add(molesOfO2Produced,obj.O2ProducerDefinition);
-            obj.H2ProducerDefinition.ResourceStore.add(molesOfH2OConsumed,obj.H2ProducerDefinition);
-            
         end
     end
     

@@ -2,7 +2,9 @@
  
 clear all
 clc
- 
+
+tic
+
 %% Key Mission Parameters
 TotalAtmPressureTargeted = 70.3;        % targeted total atmospheric pressure, in kPa
 TargetO2MolarFraction = 0.265; 
@@ -98,6 +100,16 @@ mainvccr = ISSVCCRLinearImpl(Inflatable1,Inflatable1,CO2Store,MainPowerStore);
 % Initialize OGS
 ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,Inflatable1,PotableWaterStore,MainPowerStore,H2Store);
 
+% Initialize CCAA CHX
+inflatableCCAA = ISSDehumidifierImpl(Inflatable1,DirtyWaterStore,MainPowerStore);
+
+%% Initialize Power Production Systems
+% We assume basically unlimited power here
+% Initialize General Power Producer
+powerPS = PowerPSImpl('Nuclear',500000);
+powerPS.PowerProducerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1E6,1E6);
+powerPS.LightConsumerDefinition = Inflatable1;
+
 %% Crew in Crew Quarters (crew)
 astro1 = CrewPersonImpl('Male 1',35,75,'Male',[crewSchedule{1,:}],O2FractionHypoxicLimit);
 % You can automate this using arrayfunc (see CrewScheduler.m for an example
@@ -116,7 +128,7 @@ astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,1
 
 %% Run Time Loop
 
-timesteps = 48;
+timesteps = 75000;
  
 totalmoles = zeros(1,timesteps);
 totalpressure = zeros(1,timesteps);
@@ -127,9 +139,14 @@ vapormoles = zeros(1,timesteps);
 othermoles = zeros(1,timesteps);
 o2percentage = zeros(1,timesteps);
 PCAaction = zeros(4,timesteps);
+ogsoutput = zeros(1,timesteps);
+CCAAoutput = zeros(1,timesteps);
 
 o2storelevel = zeros(1,timesteps);
 co2storelevel = zeros(1,timesteps);
+n2storelevel = zeros(1,timesteps);
+potablewaterstorelevel = zeros(1,timesteps);
+dirtywaterstorelevel = zeros(1,timesteps);
 
 PCAaction(:,1) = zeros(4,1);
 
@@ -151,12 +168,25 @@ for i = 1:timesteps
     
     o2storelevel(i) = O2Store.currentLevel;
     co2storelevel(i) = CO2Store.currentLevel;
+    n2storelevel(i) = N2Store.currentLevel;
+    potablewaterstorelevel(i) = PotableWaterStore.currentLevel;
+    dirtywaterstorelevel(i) = DirtyWaterStore.currentLevel;
     
-%     Inflatable1.tick;
-%     PCAaction(:,i+1) = inflatableO2inj.tick(PCAaction(:,i));
+    Inflatable1.tick;
+
+    ogsoutput(i) = ogs.tick;
+
+    PCAaction(:,i+1) = inflatableO2inj.tick(PCAaction(:,i));
     
-%     mainvccr.tick;
+    CCAAoutput(i) = inflatableCCAA.tick;
+    
+    powerPS.tick;
+    
+    mainvccr.tick;
     
     astro1.tick;
 end
 
+beep
+
+toc

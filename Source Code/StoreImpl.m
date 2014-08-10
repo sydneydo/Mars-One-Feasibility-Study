@@ -82,6 +82,7 @@ classdef StoreImpl < handle
             if nargin == 2 % should correspond to an Environmental type of Store
             
                 if amountRequested < 0;
+                    actuallyAdded = 0;
                     return
                     % If an environmental store, modify store capacity to
                     % contain what is required
@@ -122,6 +123,7 @@ classdef StoreImpl < handle
                     resourceManagementDefinition.DesiredFlowRate]);
                 
                 if amountToAddFinal < 0;
+                    actuallyAdded = 0;
                     return
                 elseif strcmpi(obj.type,'Environmental')
                     % Add to store and update store capacity
@@ -154,6 +156,7 @@ classdef StoreImpl < handle
             if nargin == 2 % should correspond to an Environmental type of Store
                 
                 if amountToTake < 0;
+                    amountRetrieved = 0;
                     return
                 % if asking to take more than exists, empty store
                 % at the moment, we don't track the deficit between how much is
@@ -194,6 +197,7 @@ classdef StoreImpl < handle
                     resourceManagementDefinition.DesiredFlowRate]);
                 
                 if amountToTakeFinal < 0;
+                    amountRetrieved = 0;
                     return
                     
                 % if asking to take more than exists, empty store

@@ -1,4 +1,4 @@
-classdef OGSImpl
+classdef OGSImpl < handle
     %OGSImpl Simple Implementation of an oxygen generation system
     %   (Using electrolysis - assuming 100% conversion efficiency)
     %   By: Sydney Do (sydneydo@mit.edu)

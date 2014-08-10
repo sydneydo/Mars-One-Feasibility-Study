@@ -379,7 +379,7 @@ classdef CrewPersonImpl < handle
             currentO2Ratio = obj.AirConsumerDefinition.ConsumptionStore.O2Store.currentLevel/...
                 obj.AirConsumerDefinition.ConsumptionStore.totalMoles;
             if currentO2Ratio < obj.O2LowRatio
-                obj.consumedLowOxygenBuffer.take(obj.O2LowRatio-currentO2Ratio);
+                obj.consumedLowOxygenBuffer.take(1);%obj.O2LowRatio-currentO2Ratio);    % Take an hour of survival time away from crewperson
                 obj.suffocating = 1;
                 disp([obj.Name,' is currently suffocating on tick: ', num2str(obj.CurrentTick)])
             else
@@ -388,8 +388,8 @@ classdef CrewPersonImpl < handle
             
             % Fire Hazard and Hyperoxia Check
             if currentO2Ratio > obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold
-                obj.highOxygenBuffer.take(currentO2Ratio-...
-                    obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold);       % Remove time in hyperoxic state from buffer
+                obj.highOxygenBuffer.take(1);%currentO2Ratio-...        % Take one hour away from buffer
+%                     obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold);       % Remove time in hyperoxic state from buffer
                 obj.fireRisked = 1;
                 disp([obj.Name,' is currently in a fire risked state on tick: ', num2str(obj.CurrentTick)])
             else
