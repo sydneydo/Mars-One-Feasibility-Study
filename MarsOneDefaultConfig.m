@@ -107,7 +107,7 @@ O2Store = StoreImpl('O2 Store','Material',initialO2StoreMoles,initialO2StoreMole
 % water)
 
 % Dirty water corresponds to Humidity Condensate and Urine 
-DirtyWaterStore = StoreImpl('Dirty H2O','Material',100,0);        % Corresponds to the WPA waste water tank
+DirtyWaterStore = StoreImpl('Dirty H2O','Material',100/2.2,0);        % Corresponds to the WPA waste water tank
 
 GreyWaterStore = StoreImpl('Grey H2O','Material',45.5,0);
 % Note that WPA waste water tank has a 100lb capacity, but is nominally
