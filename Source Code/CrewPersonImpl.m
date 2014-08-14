@@ -29,6 +29,7 @@ classdef CrewPersonImpl < handle
         consumedCO2Buffer
         consumedLowOxygenBuffer
         highOxygenBuffer
+        lowTotalPressureBuffer
         sleepBuffer
         leisureBuffer
     end
@@ -55,6 +56,7 @@ classdef CrewPersonImpl < handle
         starving = 0
         suffocating = 0
         poisoned = 0
+        totalpressureRisked = 0
         fireRisked = 0
         
         % Properties Corresponding to Physiological Buffers
@@ -67,9 +69,11 @@ classdef CrewPersonImpl < handle
         CO2HighRecoveryRate = 0.005
         O2HighTillDead = 24             % hours exposed at high O2 levels (with fire risk) until dead
         O2HighRecoveryRate = 0.01
-        O2LowRatio = 0.1                % low O2 molar fraction threshold
+        O2LowPartialPressure = 15.168             % kPa, absolute minimum ppO2 that a person should be exposed to - REF- HIDH  pg 324, Table 6.2-5
         O2LowTillDead = 2               % Hours spent in a low O2 level until death occurs (corresponds to amount of internal buffer that the crew has)
         O2LowRecoveryRate = 0.01
+        TotalPressureLowLimit = 20.6842719      % Corresponds to 3psi - the absolute lowest total pressure that a cabin can go to (REF: HIDH, pg 319, Table 6.2-3)
+        TotalPressureLowTillDead = 1            % Hours spent in a low total pressure condition until death occurs
         leisureTillBurnout = 168        % in hours
         leisureRecoveryRate = 90
         awakeTillExhaustion = 120
@@ -84,7 +88,7 @@ classdef CrewPersonImpl < handle
 
     methods
         %% Constructor
-        function obj = CrewPersonImpl(name,age,weight,sex,schedule,O2fractionHypoxicLimit)
+        function obj = CrewPersonImpl(name,age,weight,sex,schedule)
             
             obj.Name = name;
             obj.Age = age;
@@ -104,18 +108,18 @@ classdef CrewPersonImpl < handle
                 
             end
             
-            if nargin > 5
-                obj.O2LowRatio = O2fractionHypoxicLimit;        % Change default value for O2fraction Hypoxic limit (in the future, we can implement an equation that takes the O2% from the AirConsumerDefinition to calculate this
-            end
+%             if nargin > 5
+%                 obj.O2LowRatio = O2fractionHypoxicLimit;        % Change default value for O2fraction Hypoxic limit (in the future, we can implement an equation that takes the O2% from the AirConsumerDefinition to calculate this
+%             end
                 
             % Initialize Physiological Buffers
             obj.consumedWaterBuffer = StoreImpl('Consumed Water Buffer','Material',obj.waterTillDead,obj.waterTillDead);
             obj.consumedCaloriesBuffer = StoreImpl('Consumed Calories Buffer','Material',obj.calorieTillDead,obj.calorieTillDead);
             obj.consumedCO2Buffer = StoreImpl('Consumed CO2 Buffer','Material',obj.CO2HighTillDead*obj.CO2HighLimit...
                 ,obj.CO2HighTillDead*obj.CO2HighLimit);
-            obj.consumedLowOxygenBuffer = StoreImpl('Consumed Low O2 Buffer','Material',obj.O2LowTillDead*obj.O2LowRatio...
-                ,obj.O2LowTillDead*obj.O2LowRatio);
+            obj.consumedLowOxygenBuffer = StoreImpl('Consumed Low O2 Buffer','Material',obj.O2LowTillDead,obj.O2LowTillDead);
             obj.highOxygenBuffer = StoreImpl('High O2 Buffer','Material',obj.O2HighTillDead,obj.O2HighTillDead);
+            obj.lowTotalPressureBuffer = StoreImpl('Low Total Pressure Buffer','Material',obj.TotalPressureLowTillDead,obj.TotalPressureLowTillDead);
             obj.sleepBuffer = StoreImpl('Sleep Buffer','Material',obj.awakeTillExhaustion,obj.awakeTillExhaustion);
             obj.leisureBuffer = StoreImpl('Leisure Buffer','Material',obj.leisureTillBurnout,obj.leisureTillBurnout);
         end
@@ -376,9 +380,8 @@ classdef CrewPersonImpl < handle
             end            
             
             % Inhaled O2 Ratio (hypoxia check)
-            currentO2Ratio = obj.AirConsumerDefinition.ConsumptionStore.O2Store.currentLevel/...
-                obj.AirConsumerDefinition.ConsumptionStore.totalMoles;
-            if currentO2Ratio < obj.O2LowRatio
+            currentPPO2 = obj.AirConsumerDefinition.ConsumptionStore.O2Percentage*obj.AirConsumerDefinition.ConsumptionStore.pressure;
+            if currentPPO2 < obj.O2LowPartialPressure
                 obj.consumedLowOxygenBuffer.take(1);%obj.O2LowRatio-currentO2Ratio);    % Take an hour of survival time away from crewperson
                 obj.suffocating = 1;
                 disp([obj.Name,' is currently suffocating on tick: ', num2str(obj.CurrentTick)])
@@ -387,13 +390,22 @@ classdef CrewPersonImpl < handle
             end
             
             % Fire Hazard and Hyperoxia Check
-            if currentO2Ratio > obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold
+            if obj.AirConsumerDefinition.ConsumptionStore.O2Percentage > obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold
                 obj.highOxygenBuffer.take(1);%currentO2Ratio-...        % Take one hour away from buffer
 %                     obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold);       % Remove time in hyperoxic state from buffer
                 obj.fireRisked = 1;
                 disp([obj.Name,' is currently in a fire risked state on tick: ', num2str(obj.CurrentTick)])
             else
                 obj.fireRisked = 0;
+            end
+            
+            % Total Pressure Check
+            if obj.AirConsumerDefinition.ConsumptionStore.pressure < obj.TotalPressureLowLimit
+                obj.lowTotalPressureBuffer.take(1); % Take one hour away from buffer
+                obj.totalpressureRisked = 1;
+                disp([obj.Name,' is currently in a low total ambient pressure risked state on tick: ', num2str(obj.CurrentTick)])
+            else
+                obj.totalpressureRisked = 0;
             end
             
             % CO2 Poisoning Check
@@ -419,6 +431,7 @@ classdef CrewPersonImpl < handle
             waterRiskReturn = obj.calculateRisk(obj.consumedWaterBuffer);
             oxygenLowRiskReturn = obj.calculateRisk(obj.consumedLowOxygenBuffer);
             oxygenHighRiskReturn = obj.calculateRisk(obj.highOxygenBuffer);
+            totalpressureLowRiskReturn = obj.calculateRisk(obj.lowTotalPressureBuffer);
             CO2RiskReturn = obj.calculateRisk(obj.consumedCO2Buffer);
             sleepRiskReturn = obj.calculateRisk(obj.sleepBuffer);
             
@@ -441,6 +454,11 @@ classdef CrewPersonImpl < handle
             elseif oxygenHighRiskReturn > randomNumber
                 disp([obj.Name,' has died from oxygen flammability on tick: ', num2str(obj.CurrentTick),...
                     ' with a risk value of: ', num2str(oxygenHighRiskReturn)])
+                kill(obj)
+            % Check for risk due to low total ambient pressure
+            elseif totalpressureLowRiskReturn > randomNumber
+                disp([obj.Name,' has died from low total ambient pressure exposure on tick: ', num2str(obj.CurrentTick),...
+                    ' with a risk value of: ', num2str(totalpressureLowRiskReturn)])
                 kill(obj)
             % Check for risk due to CO2 poisoning
             elseif CO2RiskReturn > randomNumber

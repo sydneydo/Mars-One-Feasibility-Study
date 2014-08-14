@@ -107,7 +107,7 @@ O2Store = StoreImpl('O2 Store','Material',initialO2StoreMoles,initialO2StoreMole
 % water)
 
 % Dirty water corresponds to Humidity Condensate and Urine 
-DirtyWaterStore = StoreImpl('Dirty H2O','Material',100/2.2,0);        % Corresponds to the WPA waste water tank
+DirtyWaterStore = StoreImpl('Dirty H2O','Material',18/2.2*1.1,0);        % Corresponds to the UPA waste water tank - 18lb capacity (we increase volume by 10% to avoid loss of dirty water when running UPA in batch mode)
 
 GreyWaterStore = StoreImpl('Grey H2O','Material',45.5,0);
 % Note that WPA waste water tank has a 100lb capacity, but is nominally
@@ -118,7 +118,31 @@ GreyWaterStore = StoreImpl('Grey H2O','Material',45.5,0);
 
 H2Store = StoreImpl('H2 Store','Material',10000,0);     % H2 store for output of OGS - note that currently on the ISS, there is no H2 store, it is sent directly to the Sabatier reactor 
 % CO2Store = StoreImpl('CO2 Store','Material',1000,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA
-CO2Store = StoreImpl('CO2 Store','Material',19.8,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L) - convert this to moles! - tank pressure is 827kPa (see spreadsheet)
+
+% From: "Analyses of the Integration of Carbon Dioxide Removal Assembly, Compressor, Accumulator 
+% and Sabatier Carbon Dioxide Reduction Assembly" SAE 2004-01-2496
+% "CO2 accumulator – The accumulator volume was set at 0.7 ft3, based on an assessment of available 
+% space within the OGA rack where the CRA will reside. Mass balance of CO2 pumped in from the 
+% compressor and CO2 fed to the Sabatier CO2 reduction system is used to calculate the CO2 pressure. 
+% Currently the operating pressure has been set to 20 – 130 psia."
+
+% From SAE 2004-01-2496, on CDRA bed heaters - informs temp of CO2 sent to
+% accumulator
+% "During the first 10 min of the heat cycle, ullage air is pumped out back to the cabin. After this time, the bed is
+% heated to approximately 250 °F and is exposed to space vacuum for desorption of the bed."
+% ...
+% "The heaters were OFF during the “night time”, or when the desorb bed temperature reached its set point
+% of 400 ºF, or when it was an adsorb cycle."
+
+% (Ref: Functional Performance of an Enabling Atmosphere Revitalization Subsystem Architecture for Deep Space Exploration Missions (AIAA 2013-3421)
+% Quote: “Because the commercial compressor discharge pressure was 414 kPa compared to the flight CO2 Reduction Assembly (CRA)
+% compressor’s 827 kPa, the accumulator volume was increased from 19.8 liters to 48.1 liters”
+
+CO2StoreTemp = 5/9*(400-32)+273.15;        % Converted to Kelvin from 400F, here we assume isothermal compression by the compressor
+CO2accumulatorVolumeInLiters = 19.8;
+CO2AccumulatorMaxPressureInKPa = 827;                  % note that 827kPa corresponds to ~120psi
+molesInCO2Store = CO2AccumulatorMaxPressureInKPa*CO2accumulatorVolumeInLiters/8.314/CO2StoreTemp;
+CO2Store = StoreImpl('CO2 Store','Material',molesInCO2Store,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L) - convert this to moles! - tank pressure is 827kPa (see spreadsheet)
 MethaneStore = StoreImpl('CH4 Store','Material',1000,0);    % CH4 store for output of CRS (Sabatier) - note CH4 is currently vented directly to space on ISS
 % Look at option of including a pyrolyzer?
 
@@ -152,7 +176,7 @@ FoodStore = FoodStoreImpl(xmlFoodStoreCapacity,initialfood);
 
 
 %% Crew in Crew Quarters (crew)
-astro1 = CrewPersonImpl('Male 1',35,75,'Male',[crewSchedule{1,:}],O2FractionHypoxicLimit);
+astro1 = CrewPersonImpl('Male 1',35,75,'Male',[crewSchedule{1,:}]);%,O2FractionHypoxicLimit);
 % You can automate this using arrayfunc (see CrewScheduler.m for an example
 % use)
 % you might want to clear crewSchedule after initializing all crewpersons
@@ -353,23 +377,17 @@ mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowe
 % Initialize OGS
 ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LivingUnit,PotableWaterStore,MainPowerStore,H2Store);
 
-
 % Initialize CRS (Sabatier Reactor)
-crs = CRSImpl;
-crs.CO2ConsumerDefinition = ResourceUseDefinitionImpl(CO2Store,100,100);
-crs.H2ConsumerDefinition = ResourceUseDefinitionImpl(H2Store,100,100);
-crs.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,100,100);
-crs.PotableWaterProducerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,100,100);
-crs.MethaneProducerDefinition = ResourceUseDefinitionImpl(MethaneStore,100,100);
+crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
 
 %% Initialize Water Processing Technologies
 
 % Initialize WaterRS (Linear)
-waterRS = WaterRSLinearImpl;
-waterRS.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,10,10);
-waterRS.DirtyWaterConsumerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,10,10);
-waterRS.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
-waterRS.PotableWaterProducerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,1000,1000);
+waterRS = ISSWaterRSLinearImpl(DirtyWaterStore,GreyWaterStore,GreyWaterStore,DryWasteStore,PotableWaterStore,MainPowerStore);
+% waterRS.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,10,10);
+% waterRS.DirtyWaterConsumerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,10,10);
+% waterRS.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
+% waterRS.PotableWaterProducerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,1000,1000);
 
 %% Initialize Power Production Systems
 

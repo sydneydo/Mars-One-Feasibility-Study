@@ -51,20 +51,24 @@ O2Store = StoreImpl('O2 Store','Material',initialO2StoreMoles,initialO2StoreMole
 % water)
 
 % Dirty water corresponds to Humidity Condensate and Urine 
-DirtyWaterStore = StoreImpl('Dirty H2O','Material',100,0);        % Corresponds to the WPA waste water tank
+DirtyWaterStore = StoreImpl('Dirty H2O','Material',18/2.2*1.1,0);        % Corresponds to the UPA waste water tank - 18lb capacity (we increase volume by 10% to avoid loss of dirty water when running UPA in batch mode)
 
 % Grey water corresponds to wash water - it is included for the purposes of
 % modeling a biological water processor
-GreyWaterStore = StoreImpl('Grey H2O','Material',45.5,0);
+GreyWaterStore = StoreImpl('Grey H2O','Material',100/2.2,0);
 % Note that WPA waste water tank has a 100lb capacity, but is nominally
 % operated at 65lb capacity
 % Lab Condensate tank has a working capacity of 45.5L
 
 % Gas Stores
 
-H2Store = StoreImpl('H2 Store','Material',10000,0);     % H2 store for output of OGS - note that currently on the ISS, there is no H2 store, it is sent directly to the Sabatier reactor 
-% CO2Store = StoreImpl('CO2 Store','Material',1000,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA
-CO2Store = StoreImpl('CO2 Store','Material',19.8,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L) - convert this to moles! - tank pressure is 827kPa (see spreadsheet)
+H2Store = StoreImpl('H2 Store','Material',1000,0);     % H2 store for output of OGS - note that currently on the ISS, there is no H2 store, it is sent directly to the Sabatier reactor 
+
+CO2StoreTemp = 5/9*(65-32)+273.15;        % Converted to Kelvin from 400F, here we assume isothermal compression by the compressor
+CO2accumulatorVolumeInLiters = 19.8;
+CO2AccumulatorMaxPressureInKPa = 827;                  % note that 827kPa corresponds to ~120psi
+molesInCO2Store = CO2AccumulatorMaxPressureInKPa*CO2accumulatorVolumeInLiters/8.314/CO2StoreTemp;
+CO2Store = StoreImpl('CO2 Store','Material',molesInCO2Store*1.1,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L) (we increase volume by 10% to avoid loss of CO2 when running CRS in batch mode)
 MethaneStore = StoreImpl('CH4 Store','Material',1000,0);    % CH4 store for output of CRS (Sabatier) - note CH4 is currently vented directly to space on ISS
 % Look at option of including a pyrolyzer?
 
@@ -105,6 +109,12 @@ ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,Inflatable1,PotableW
 % Initialize CCAA CHX
 inflatableCCAA = ISSDehumidifierImpl(Inflatable1,DirtyWaterStore,MainPowerStore);
 
+% Initialize CRS (Sabatier Reactor)
+crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
+
+%% Initialize WRS
+waterRS = ISSWaterRSLinearImpl(DirtyWaterStore,GreyWaterStore,GreyWaterStore,DryWasteStore,PotableWaterStore,MainPowerStore);
+
 %% Initialize Power Production Systems
 % We assume basically unlimited power here
 % Initialize General Power Producer
@@ -113,7 +123,7 @@ powerPS.PowerProducerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1E6,1
 powerPS.LightConsumerDefinition = Inflatable1;
 
 %% Crew in Crew Quarters (crew)
-astro1 = CrewPersonImpl('Male 1',35,75,'Male',[crewSchedule{1,:}],O2FractionHypoxicLimit);
+astro1 = CrewPersonImpl('Male 1',35,75,'Male',[crewSchedule{1,:}]);%,O2FractionHypoxicLimit);
 % You can automate this using arrayfunc (see CrewScheduler.m for an example
 % use)
 % you might want to clear crewSchedule after initializing all crewpersons
@@ -130,7 +140,7 @@ astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,1
 
 %% Run Time Loop
 
-timesteps = 75000;
+timesteps = 150;
  
 totalmoles = zeros(1,timesteps);
 totalpressure = zeros(1,timesteps);
@@ -147,15 +157,20 @@ CCAAoutput = zeros(1,timesteps);
 o2storelevel = zeros(1,timesteps);
 co2storelevel = zeros(1,timesteps);
 n2storelevel = zeros(1,timesteps);
+h2storelevel = zeros(1,timesteps);
 potablewaterstorelevel = zeros(1,timesteps);
 dirtywaterstorelevel = zeros(1,timesteps);
-
+greywaterstorelevel = zeros(1,timesteps);
+ch4storelevel = zeros(1,timesteps);
+drywastestorelevel = zeros(1,timesteps);
+co2accumulatorlevel = zeros(1,timesteps);
 PCAaction(:,1) = zeros(4,1);
 
-
+h = waitbar(0,'Please wait...');
 for i = 1:timesteps
     
     if astro1.alive == 0 %|| astro2.alive == 0 || astro3.alive == 0 || astro4.alive == 0
+        close(h)
         break
     end
     
@@ -171,8 +186,12 @@ for i = 1:timesteps
     o2storelevel(i) = O2Store.currentLevel;
     co2storelevel(i) = CO2Store.currentLevel;
     n2storelevel(i) = N2Store.currentLevel;
+    h2storelevel(i) = H2Store.currentLevel;
+    ch4storelevel(i) = MethaneStore.currentLevel;
     potablewaterstorelevel(i) = PotableWaterStore.currentLevel;
     dirtywaterstorelevel(i) = DirtyWaterStore.currentLevel;
+    greywaterstorelevel(i) = GreyWaterStore.currentLevel;
+    drywastestorelevel(i) = DryWasteStore.currentLevel;
     
     Inflatable1.tick;
 
@@ -184,11 +203,19 @@ for i = 1:timesteps
     
     powerPS.tick;
     
-    mainvccr.tick;
-    
     astro1.tick;
+    
+    mainvccr.tick;
+    crs.tick;    
+    
+    co2accumulatorlevel(i) = crs.CO2Accumulator.currentLevel;
+%     waterRS.tick;
+    
+    waitbar(i / timesteps)
 end
 
 beep
 
 toc
+
+close(h)

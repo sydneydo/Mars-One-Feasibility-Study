@@ -192,7 +192,14 @@ classdef ISSinjectorImpl < handle
                         currentTargetO2Moles = obj.TargetO2PartialPressure * obj.Environment.volume / (obj.idealGasConstant*(obj.Environment.temperature+273.15));      % Number of moles corresponding to desired ppO2
                         makeupO2MolesRequired = currentTargetO2Moles - obj.Environment.O2Store.currentLevel;       % Determine makeup O2 required (in moles)
                         makeupO2taken = obj.O2Source.ResourceStore.take(makeupO2MolesRequired,obj.O2Source);     % Take required makeup O2 amount from O2 Source
-                                                
+                        
+                        %                     % Error Check
+%                     if makeupO2taken < makeupO2MolesRequired
+%                         disp('Insufficient O2 available to perform pressure control action. ppO2 is below safe threshold')
+%                         obj.Error = 1;
+%                         return
+%                     end
+                        
                         obj.Environment.O2Store.add(makeupO2taken);         % add take makeup O2 to environment
                     end
                 end
@@ -202,13 +209,6 @@ classdef ISSinjectorImpl < handle
                     currentTargetO2Moles = obj.TargetO2PartialPressure * obj.Environment.volume / (obj.idealGasConstant*(obj.Environment.temperature+273.15));      % Number of moles corresponding to desired ppO2
                     makeupO2MolesRequired = currentTargetO2Moles - obj.Environment.O2Store.currentLevel;       % Determine makeup O2 required (in moles)
                     makeupO2taken = obj.O2Source.ResourceStore.take(makeupO2MolesRequired,obj.O2Source);     % Take required makeup O2 amount from O2 Source
-                    
-                    % Error Check
-                    if makeupO2taken < makeupO2MolesRequired
-                        disp('Insufficient O2 available to perform pressure control action. ppO2 is below safe threshold')
-                        obj.Error = 1;
-                        return
-                    end
                     
                     obj.Environment.O2Store.add(makeupO2taken);         % add take makeup O2 to environment
                     
@@ -240,11 +240,11 @@ classdef ISSinjectorImpl < handle
                     makeupN2MolesRequired = targetTotalMoles - obj.Environment.totalMoles;       % Determine makeup N2 required (in moles)
                     makeupN2taken = obj.N2Source.ResourceStore.take(makeupN2MolesRequired,obj.N2Source);     % Take required makeup N2 amount from N2 Source
                     
-                    if makeupN2taken < makeupN2MolesRequired
-                        disp('Insufficient N2 available to perform pressure control action. Module is in an underpressure condition')
-                        obj.Error = 1;
-                        return
-                    end
+%                     if makeupN2taken < makeupN2MolesRequired
+%                         disp('Insufficient N2 available to perform pressure control action. Module is in an underpressure condition')
+%                         obj.Error = 1;
+%                         return
+%                     end
                     
                     obj.Environment.NitrogenStore.add(makeupN2taken);         % add take makeup N2 to environment
                     

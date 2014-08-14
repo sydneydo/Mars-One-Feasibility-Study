@@ -170,7 +170,7 @@ classdef ISSOGA < handle
                         (1-obj.TargetO2MolarFraction);
                     
                     % Set commanded O2 production to the minimum setting value
-                    % just above current the O2 mole deficit. The wrapping min
+                    % just above current O2 mole deficit. The wrapping min
                     % command is for scenarios where the makeupO2MolesRequired
                     % is greater than the maximum production rate of O2
                     % possible by the OGA (i.e. in this case, the OGA is set to
