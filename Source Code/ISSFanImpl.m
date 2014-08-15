@@ -1,4 +1,4 @@
-classdef ISSFanImpl
+classdef ISSFanImpl < handle
     %Fan Summary of this class goes here
     %   Implementation of the ISS Intermodule Ventilation (IMV) Fan
     %   The fan moves moles of air from one environment to another
@@ -42,7 +42,7 @@ classdef ISSFanImpl
         function tick(obj)
             % The code written below follows the FanImpl.getAndPushAir method 
             currentPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(obj.PowerConsumerDefinition.MaxFlowRate,obj.PowerConsumerDefinition);     % Take power
-            currentMolesOfAirConsumed = obj.calculateAirToConsume(currentPowerConsumed);        % in moles
+            currentMolesOfAirConsumed = calculateAirToConsume(obj,currentPowerConsumed);        % in moles
             AirToTake = min([currentMolesOfAirConsumed,obj.AirConsumerDefinition.DesiredFlowRate,obj.AirConsumerDefinition.MaxFlowRate]);
                         
             % Define molar percentages internally to avoid errors from
@@ -80,7 +80,7 @@ classdef ISSFanImpl
         % We rewrite this function to correspond to the ISS Intermodule
         % Ventilation Fans to produce a nominal flowrate of 3964L/min
         % at 55W continuous power consumption
-        function airMolesConsumed = calculateAirToConsume(powerConsumed)
+        function airMolesConsumed = calculateAirToConsume(obj,powerConsumed)
 %             airMolesConsumed = 4*powerConsumed;       % Original
             
 %             cabinPressure = obj.AirConsumerDefinition.ResourceStore.pressure;        % in kPa

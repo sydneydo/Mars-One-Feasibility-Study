@@ -62,13 +62,13 @@ GreyWaterStore = StoreImpl('Grey H2O','Material',100/2.2,0);
 
 % Gas Stores
 
-H2Store = StoreImpl('H2 Store','Material',1000,0);     % H2 store for output of OGS - note that currently on the ISS, there is no H2 store, it is sent directly to the Sabatier reactor 
+H2Store = StoreImpl('H2 Store','Environmental');     % H2 store for output of OGS - note that currently on the ISS, there is no H2 store, it is sent directly to the Sabatier reactor 
 
 CO2StoreTemp = 5/9*(65-32)+273.15;        % Converted to Kelvin from 400F, here we assume isothermal compression by the compressor
 CO2accumulatorVolumeInLiters = 19.8;
 CO2AccumulatorMaxPressureInKPa = 827;                  % note that 827kPa corresponds to ~120psi
 molesInCO2Store = CO2AccumulatorMaxPressureInKPa*CO2accumulatorVolumeInLiters/8.314/CO2StoreTemp;
-CO2Store = StoreImpl('CO2 Store','Material',molesInCO2Store*1.1,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L) (we increase volume by 10% to avoid loss of CO2 when running CRS in batch mode)
+CO2Store = StoreImpl('CO2 Store','Environmental');%,molesInCO2Store*1.1,0);    % CO2 store for VCCR - this represents the space between the VCCR desorbing beds and the CO2 accumulator. - refer to accumulator attached to CDRA (volume of 19.8L) (we increase volume by 10% to avoid loss of CO2 when running CRS in batch mode)
 MethaneStore = StoreImpl('CH4 Store','Material',1000,0);    % CH4 store for output of CRS (Sabatier) - note CH4 is currently vented directly to space on ISS
 % Look at option of including a pyrolyzer?
 
@@ -140,7 +140,7 @@ astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,1
 
 %% Run Time Loop
 
-timesteps = 150;
+timesteps = 19000;
  
 totalmoles = zeros(1,timesteps);
 totalpressure = zeros(1,timesteps);
@@ -150,7 +150,7 @@ n2moles = zeros(1,timesteps);
 vapormoles = zeros(1,timesteps);
 othermoles = zeros(1,timesteps);
 o2percentage = zeros(1,timesteps);
-PCAaction = zeros(4,timesteps);
+PCAaction = zeros(4,timesteps+1);
 ogsoutput = zeros(1,timesteps);
 CCAAoutput = zeros(1,timesteps);
 
@@ -164,6 +164,8 @@ greywaterstorelevel = zeros(1,timesteps);
 ch4storelevel = zeros(1,timesteps);
 drywastestorelevel = zeros(1,timesteps);
 co2accumulatorlevel = zeros(1,timesteps);
+crsH2OProduced = zeros(1,timesteps);
+crsCompressorOperation = zeros(2,timesteps);
 PCAaction(:,1) = zeros(4,1);
 
 h = waitbar(0,'Please wait...');
@@ -206,10 +208,11 @@ for i = 1:timesteps
     astro1.tick;
     
     mainvccr.tick;
-    crs.tick;    
+    crsH2OProduced(i) = crs.tick;
+    crsCompressorOperation(:,i) = crs.CompressorOperation;
     
     co2accumulatorlevel(i) = crs.CO2Accumulator.currentLevel;
-%     waterRS.tick;
+    waterRS.tick;
     
     waitbar(i / timesteps)
 end

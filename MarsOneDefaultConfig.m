@@ -1,7 +1,7 @@
 %%  Mars One Default Simulation Case
 %   By: Sydney Do (sydneydo@mit.edu)
 %   Date Created: 6/28/2014
-%   Last Updated: 6/28/2014
+%   Last Updated: 8/14/2014
 %
 %   Code to simulate the baseline architecture of the Mars One Mission
 %   Errors within BioSim code have been removed from the class files
@@ -109,7 +109,9 @@ O2Store = StoreImpl('O2 Store','Material',initialO2StoreMoles,initialO2StoreMole
 % Dirty water corresponds to Humidity Condensate and Urine 
 DirtyWaterStore = StoreImpl('Dirty H2O','Material',18/2.2*1.1,0);        % Corresponds to the UPA waste water tank - 18lb capacity (we increase volume by 10% to avoid loss of dirty water when running UPA in batch mode)
 
-GreyWaterStore = StoreImpl('Grey H2O','Material',45.5,0);
+% Grey water corresponds to wash water - it is included for the purposes of
+% modeling a biological water processor
+GreyWaterStore = StoreImpl('Grey H2O','Material',100/2.2,0);
 % Note that WPA waste water tank has a 100lb capacity, but is nominally
 % operated at 65lb capacity
 % Lab Condensate tank has a working capacity of 45.5L
@@ -138,12 +140,12 @@ H2Store = StoreImpl('H2 Store','Material',10000,0);     % H2 store for output of
 % Quote: “Because the commercial compressor discharge pressure was 414 kPa compared to the flight CO2 Reduction Assembly (CRA)
 % compressor’s 827 kPa, the accumulator volume was increased from 19.8 liters to 48.1 liters”
 
-CO2StoreTemp = 5/9*(400-32)+273.15;        % Converted to Kelvin from 400F, here we assume isothermal compression by the compressor
-CO2accumulatorVolumeInLiters = 19.8;
-CO2AccumulatorMaxPressureInKPa = 827;                  % note that 827kPa corresponds to ~120psi
-molesInCO2Store = CO2AccumulatorMaxPressureInKPa*CO2accumulatorVolumeInLiters/8.314/CO2StoreTemp;
-CO2Store = StoreImpl('CO2 Store','Material',molesInCO2Store,0);    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L) - convert this to moles! - tank pressure is 827kPa (see spreadsheet)
-MethaneStore = StoreImpl('CH4 Store','Material',1000,0);    % CH4 store for output of CRS (Sabatier) - note CH4 is currently vented directly to space on ISS
+% CO2StoreTemp = 5/9*(400-32)+273.15;        % Converted to Kelvin from 400F, here we assume isothermal compression by the compressor
+% CO2accumulatorVolumeInLiters = 19.8;
+% CO2AccumulatorMaxPressureInKPa = 827;                  % note that 827kPa corresponds to ~120psi
+% molesInCO2Store = CO2AccumulatorMaxPressureInKPa*CO2accumulatorVolumeInLiters/8.314/CO2StoreTemp;
+CO2Store = StoreImpl('CO2 Store','Environmental');    % CO2 store for VCCR - refer to accumulator attached to CDRA (volume of 19.8L) - convert this to moles! - tank pressure is 827kPa (see spreadsheet)
+MethaneStore = StoreImpl('CH4 Store','Environmental');    % CH4 store for output of CRS (Sabatier) - note CH4 is currently vented directly to space on ISS
 % Look at option of including a pyrolyzer?
 
 % N2 Store
@@ -190,7 +192,6 @@ astro1.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,
 astro1.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
 astro1.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
 astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
-astro1.O2LowRatio
 
 
 %% Crew in Galley Module (galley)
@@ -229,16 +230,15 @@ astro4.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,10
 astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
 astro4.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
-toc
 
 %% Biomass Stores
 % Located within Inflatable Structure
-xml_inedibleFraction = 0.25;
-xml_edibleWaterContent = 5;
-xml_inedibleWaterContent = 5;
-initialBiomatter = [BioMatter(Wheat,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
-    BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
-    BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent)];
+% xml_inedibleFraction = 0.25;
+% xml_edibleWaterContent = 5;
+% xml_inedibleWaterContent = 5;
+% initialBiomatter = [BioMatter(Wheat,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
+%     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
+%     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent)];
 % BiomassStore = BiomassStoreImpl(BioMatter(Wheat,0,0,0,0),100000);
 BiomassStore = BiomassStoreImpl(100000);
 % Set more crop type for FoodMatter somewhere later on
@@ -252,7 +252,7 @@ biomassSystem = BiomassPSImpl([WheatShelf,DryBeanShelf,WhitePotatoShelf]);
 numberOfShelves = 3;
 defaultrate = 1000;
 
-biomassSystem.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerStore,defaultrate,defaultrate);
+biomassSystem.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,defaultrate,defaultrate);
 biomassSystem.PotableWaterConsumerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,defaultrate,defaultrate);
 biomassSystem.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,defaultrate,defaultrate);
 biomassSystem.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,defaultrate,defaultrate);
@@ -261,57 +261,37 @@ biomassSystem.AirProducerDefinition = ResourceUseDefinitionImpl(LivingUnit1,defa
 biomassSystem.BiomassProducerDefinition = ResourceUseDefinitionImpl(BiomassStore,10000,10000);
 				
 
-WheatShelf.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+WheatShelf.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 WheatShelf.PotableWaterConsumerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 WheatShelf.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
-WheatShelf.AirConsumerDefinition = ResourceUseDefinitionImpl(plant,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
-WheatShelf.AirProducerDefinition = ResourceUseDefinitionImpl(plant,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+WheatShelf.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+WheatShelf.AirProducerDefinition = ResourceUseDefinitionImpl(Inflatable1,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 % WheatShelf.DirtyWaterProducerDefinition(DirtyWaterStore,defaultrate,defaultrate);				
 WheatShelf.BiomassProducerDefinition = ResourceUseDefinitionImpl(BiomassStore,10000/numberOfShelves,10000/numberOfShelves);				
 
-DryBeanShelf.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+DryBeanShelf.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 DryBeanShelf.PotableWaterConsumerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 DryBeanShelf.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
-DryBeanShelf.AirConsumerDefinition = ResourceUseDefinitionImpl(plant,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
-DryBeanShelf.AirProducerDefinition = ResourceUseDefinitionImpl(plant,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+DryBeanShelf.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+DryBeanShelf.AirProducerDefinition = ResourceUseDefinitionImpl(Inflatable1,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 % DryBeanShelf.DirtyWaterProducerDefinition(DirtyWaterStore,defaultrate,defaultrate);				
 DryBeanShelf.BiomassProducerDefinition = ResourceUseDefinitionImpl(BiomassStore,10000/numberOfShelves,10000/numberOfShelves);
 
-WhitePotatoShelf.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+WhitePotatoShelf.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 WhitePotatoShelf.PotableWaterConsumerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 WhitePotatoShelf.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
-WhitePotatoShelf.AirConsumerDefinition = ResourceUseDefinitionImpl(plant,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
-WhitePotatoShelf.AirProducerDefinition = ResourceUseDefinitionImpl(plant,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+WhitePotatoShelf.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
+WhitePotatoShelf.AirProducerDefinition = ResourceUseDefinitionImpl(Inflatable1,defaultrate/numberOfShelves,defaultrate/numberOfShelves);
 % WhitePotatoShelf.DirtyWaterProducerDefinition(DirtyWaterStore,defaultrate,defaultrate);				
 WhitePotatoShelf.BiomassProducerDefinition = ResourceUseDefinitionImpl(BiomassStore,10000/numberOfShelves,10000/numberOfShelves);
 
 %% Initialize FoodProcessor
 FoodProcessor = FoodProcessorImpl;
 FoodProcessor.BiomassConsumerDefinition = ResourceUseDefinitionImpl(BiomassStore,1000,1000);
-FoodProcessor.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerStore,1000,1000);
+FoodProcessor.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
 FoodProcessor.FoodProducerDefinition = ResourceUseDefinitionImpl(FoodStore,1000,1000);
 FoodProcessor.WaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
 FoodProcessor.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,1000,1000);
-
-%% Initialize Dehumidifiers
-% Insert CCAA within Inflatable, Living Unit, and Life Support Unit
-% Placement of CCAAs is based on modules with a large period of continuous
-% human presence (i.e. large sources of humidity condensate)
-
-% Inflatable Dehumidifier
-inflatableDehumidifier = ISSDehumidifierImpl(Inflatable1,DirtyWaterStore,MainPowerStore);
-inflatableDehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,1000,1000);
-inflatableDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
-
-% Living Unit/Airlock Dehumidifier
-livingUnitDehumidifier = DehumidifierImpl;
-livingUnitDehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,1000,1000);
-livingUnitDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
-
-% Life Support Unit Dehumidifier
-lifeSupportUnitDehumidifier = DehumidifierImpl;
-lifeSupportUnitDehumidifier.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,1000,1000);
-lifeSupportUnitDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,1000,1000);
 
 %% Initialize (Intermodule Ventilation) Fans
 
@@ -326,48 +306,72 @@ lifeSupportUnitDehumidifier.DirtyWaterProducerDefinition = ResourceUseDefinition
 % this up to 7035mol/hr)
 
 % Inflatable 1 to Living Unit Fan
-inflatable2LivingUnitFan = ISSFanImpl;
-inflatable2LivingUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,6800,7035);
-inflatable2LivingUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
-inflatable2LivingUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+% inflatable2LivingUnitFan = ISSFanImpl;
+% inflatable2LivingUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(Inflatable1,6800,7035);
+% inflatable2LivingUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
+% inflatable2LivingUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+
+inflatable2LivingUnitFan = ISSFanImpl2(Inflatable1,LivingUnit1,MainPowerStore);
 
 % Living Unit to Inflatable 1 Fan
-livingUnit2InflatableFan = ISSFanImpl;
-livingUnit2InflatableFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
-livingUnit2InflatableFan.AirProducerDefinition = ResourceUseDefinitionImpl(Inflatable1,6800,7035);
-livingUnit2InflatableFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+% livingUnit2InflatableFan = ISSFanImpl;
+% livingUnit2InflatableFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
+% livingUnit2InflatableFan.AirProducerDefinition = ResourceUseDefinitionImpl(Inflatable1,6800,7035);
+% livingUnit2InflatableFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
 
 % Living Unit to Life Support Unit Fan
-livingUnit2LifeSupportFan = ISSFanImpl;
-livingUnit2LifeSupportFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
-livingUnit2LifeSupportFan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
-livingUnit2LifeSupportFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+% livingUnit2LifeSupportFan = ISSFanImpl;
+% livingUnit2LifeSupportFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
+% livingUnit2LifeSupportFan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
+% livingUnit2LifeSupportFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+% 
+% % Life Support Unit to Living Unit Fan
+% lifeSupport2LivingUnitFan = ISSFanImpl;
+% lifeSupport2LivingUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
+% lifeSupport2LivingUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
+% lifeSupport2LivingUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
 
-% Life Support Unit to Living Unit Fan
-lifeSupport2LivingUnitFan = ISSFanImpl;
-lifeSupport2LivingUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
-lifeSupport2LivingUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(LivingUnit1,6800,7035);
-lifeSupport2LivingUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+livingUnit2LifeSupportFan = ISSFanImpl2(LivingUnit1,LifeSupportUnit1,MainPowerStore);
 
 % Life Support Unit to Cargo Unit Fan
-lifeSupport2CargoUnitFan = ISSFanImpl;
-lifeSupport2CargoUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
-lifeSupport2CargoUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(CargoUnit1,6800,7035);
-lifeSupport2CargoUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+% lifeSupport2CargoUnitFan = ISSFanImpl;
+% lifeSupport2CargoUnitFan.AirConsumerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
+% lifeSupport2CargoUnitFan.AirProducerDefinition = ResourceUseDefinitionImpl(CargoUnit1,6800,7035);
+% lifeSupport2CargoUnitFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+% 
+% % Cargo Unit to Life Support Unit Fan
+% cargoUnit2LifeSupportFan = ISSFanImpl;
+% cargoUnit2LifeSupportFan.AirConsumerDefinition = ResourceUseDefinitionImpl(CargoUnit1,6800,7035);
+% cargoUnit2LifeSupportFan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
+% cargoUnit2LifeSupportFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
 
-% Cargo Unit to Life Support Unit Fan
-cargoUnit2LifeSupportFan = ISSFanImpl;
-cargoUnit2LifeSupportFan.AirConsumerDefinition = ResourceUseDefinitionImpl(CargoUnit1,6800,7035);
-cargoUnit2LifeSupportFan.AirProducerDefinition = ResourceUseDefinitionImpl(LifeSupportUnit1,6800,7035);
-cargoUnit2LifeSupportFan.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,55,55);     % Intermodule Ventilation Fan consumes 55W continuous according to Chapter 2, Section 3.2.6, Living Together in Space...
+lifeSupport2CargoUnitFan = ISSFanImpl2(LifeSupportUnit1,CargoUnit1,MainPowerStore);
 
 %% Initialize Injectors (Models ISS Pressure Control Assemblies)
-% Maintenance Oxygen Injector
-inflatableO2inj = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,Inflatable1);
+% See accompanying word doc for rationale behind PCA locations
 
-% Create separate class for overpressure venting - since this is a total
-% pressure thing - or combine species injectors into actual PCAs)
+% Inflatable PCA
+inflatablePCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,Inflatable1);
 
+% Living Unit PCA
+livingUnitPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,LivingUnit1);
+
+% Living Unit PCA
+lifeSupportUnitPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,LifeSupportUnit1);
+
+%% Initialize Temperature and Humidity Control (THC) Technologies
+% Insert CCAA within Inflatable, Living Unit, and Life Support Unit
+% Placement of CCAAs is based on modules with a large period of continuous
+% human presence (i.e. large sources of humidity condensate)
+
+% Inflatable CCAA
+inflatableCCAA = ISSDehumidifierImpl(Inflatable1,DirtyWaterStore,MainPowerStore);
+
+% Living Unit/Airlock CCAA
+livingUnitCCAA = ISSDehumidifierImpl(LivingUnit1,DirtyWaterStore,MainPowerStore);
+
+% Life Support Unit CCAA
+lifeSupportUnitCCAA = ISSDehumidifierImpl(LifeSupportUnit1,DirtyWaterStore,MainPowerStore);
 
 %% Initialize Air Processing Technologies
 
@@ -375,7 +379,7 @@ inflatableO2inj = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction
 mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowerStore);
 
 % Initialize OGS
-ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LivingUnit,PotableWaterStore,MainPowerStore,H2Store);
+ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LifeSupportUnit1,PotableWaterStore,MainPowerStore,H2Store);
 
 % Initialize CRS (Sabatier Reactor)
 crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
@@ -384,80 +388,144 @@ crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
 
 % Initialize WaterRS (Linear)
 waterRS = ISSWaterRSLinearImpl(DirtyWaterStore,GreyWaterStore,GreyWaterStore,DryWasteStore,PotableWaterStore,MainPowerStore);
-% waterRS.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,10,10);
-% waterRS.DirtyWaterConsumerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,10,10);
-% waterRS.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
-% waterRS.PotableWaterProducerDefinition = ResourceUseDefinitionImpl(PotableWaterStore,1000,1000);
+
 
 %% Initialize Power Production Systems
-
+% We assume basically unlimited power here
 % Initialize General Power Producer
 powerPS = PowerPSImpl('Nuclear',500000);
 powerPS.PowerProducerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1E6,1E6);
 powerPS.LightConsumerDefinition = Inflatable1;
 
-
 %% Time Loop
-% tic
 
-simtime = 19000;
+simtime = 100;
+t = 1:simtime;
 
-H2level = zeros(1,simtime);
-CH4level = zeros(1,simtime);
-intensity = zeros(1,simtime);
-H2Ostorelevel = zeros(1,simtime);
-DirtyH2Ostorelevel = zeros(1,simtime);
-GreyH2Ostorelevel = zeros(1,simtime);
-FoodStoreLevel = zeros(1,simtime);
-DryWasteStoreLevel = zeros(1,simtime);
-CO2conc = zeros(1,simtime);
-O2conc = zeros(1,simtime);
-vaporconc = zeros(1,simtime);
-CO2storelevel = zeros(1,simtime);
-CH4Storelevel = zeros(1,simtime);
+o2storelevel = zeros(1,simtime);
+co2storelevel = zeros(1,simtime);
+n2storelevel = zeros(1,simtime);
+h2storelevel = zeros(1,simtime);
+ch4storelevel = zeros(1,simtime);
+potablewaterstorelevel = zeros(1,simtime);
+dirtywaterstorelevel = zeros(1,simtime);
+greywaterstorelevel = zeros(1,simtime);
+drywastestorelevel = zeros(1,simtime);
+foodstorelevel = zeros(1,simtime);
 powerlevel = zeros(1,simtime);
-pres = zeros(1,simtime);
-N2crewStore = zeros(1,simtime);
-N2galleyStore = zeros(1,simtime);
-N2labsStore = zeros(1,simtime);
-N2maintStore = zeros(1,simtime);
-O2Storelevel = zeros(1,simtime);
 
-crewO2level = zeros(1,simtime);
-crewCO2level = zeros(1,simtime);
-crewN2level = zeros(1,simtime);
-crewVaporlevel = zeros(1,simtime);
-crewOtherlevel = zeros(1,simtime);
+inflatablePressure = zeros(1,simtime);
+inflatableO2level = zeros(1,simtime);
+inflatableCO2level = zeros(1,simtime);
+inflatableN2level = zeros(1,simtime);
+inflatableVaporlevel = zeros(1,simtime);
+inflatableOtherlevel = zeros(1,simtime);
+inflatableTotalMoles = zeros(1,simtime);
 
-maintO2level = zeros(1,simtime);
-maintCO2level = zeros(1,simtime);
-maintN2level = zeros(1,simtime);
-maintVaporlevel = zeros(1,simtime);
-maintOtherlevel = zeros(1,simtime);
+livingUnitPressure = zeros(1,simtime);
+livingUnitO2level = zeros(1,simtime);
+livingUnitCO2level = zeros(1,simtime);
+livingUnitN2level = zeros(1,simtime);
+livingUnitVaporlevel = zeros(1,simtime);
+livingUnitOtherlevel = zeros(1,simtime);
+livingUnitTotalMoles = zeros(1,simtime);
 
-labsO2level = zeros(1,simtime);
-labsCO2level = zeros(1,simtime);
-labsN2level = zeros(1,simtime);
-labsVaporlevel = zeros(1,simtime);
-labsOtherlevel = zeros(1,simtime);
+lifeSupportUnitPressure = zeros(1,simtime);
+lifeSupportUnitO2level = zeros(1,simtime);
+lifeSupportUnitCO2level = zeros(1,simtime);
+lifeSupportUnitN2level = zeros(1,simtime);
+lifeSupportUnitVaporlevel = zeros(1,simtime);
+lifeSupportUnitOtherlevel = zeros(1,simtime);
+lifeSupportUnitTotalMoles = zeros(1,simtime);
 
-galleyO2level = zeros(1,simtime);
-galleyCO2level = zeros(1,simtime);
-galleyN2level = zeros(1,simtime);
-galleyVaporlevel = zeros(1,simtime);
-galleyOtherlevel = zeros(1,simtime);
+cargoUnitPressure = zeros(1,simtime);
+cargoUnitO2level = zeros(1,simtime);
+cargoUnitCO2level = zeros(1,simtime);
+cargoUnitN2level = zeros(1,simtime);
+cargoUnitVaporlevel = zeros(1,simtime);
+cargoUnitOtherlevel = zeros(1,simtime);
+CargoUnitTotalMoles = zeros(1,simtime);
 
-CO2Storelevel = zeros(1,simtime);
-consumedWaterBuffer = zeros(1,simtime);
+ogsoutput = zeros(1,simtime);
+inflatablePCAaction = zeros(4,simtime+1);
+livingUnitPCAaction = zeros(4,simtime+1);
+lifeSupportUnitPCAaction = zeros(4,simtime+1);
+inflatableCCAAoutput = zeros(1,simtime);
+livingUnitCCAAoutput = zeros(1,simtime);
+lifeSupportUnitCCAAoutput = zeros(1,simtime);
+
+crsH2OProduced = zeros(1,simtime);
+crsCompressorOperation = zeros(2,simtime);
+co2accumulatorlevel = zeros(1,simtime);
+co2removed = zeros(1,simtime);
 
 h = waitbar(0,'Please wait...');
+
+toc
+
+%% Time Loop
+
 tic
+
 for i = 1:simtime
         
     if astro1.alive == 0 || astro2.alive == 0 || astro3.alive == 0 || astro4.alive == 0
+        close(h)
         break
     end
 
+    %% Record Data
+    % Resource Stores
+    o2storelevel(i) = O2Store.currentLevel;
+    co2storelevel(i) = CO2Store.currentLevel;
+    n2storelevel(i) = N2Store.currentLevel;
+    h2storelevel(i) = H2Store.currentLevel;
+    ch4storelevel(i) = MethaneStore.currentLevel;
+    potablewaterstorelevel(i) = PotableWaterStore.currentLevel;
+    dirtywaterstorelevel(i) = DirtyWaterStore.currentLevel;
+    greywaterstorelevel(i) = GreyWaterStore.currentLevel;
+    drywastestorelevel(i) = DryWasteStore.currentLevel;
+    foodstorelevel(i) = FoodStore.currentLevel;
+    powerlevel(i) = MainPowerStore.currentLevel;
+    
+    % Record Inflatable Unit Atmosphere
+    inflatablePressure(i) = Inflatable1.pressure;
+    inflatableO2level(i) = Inflatable1.O2Store.currentLevel;
+    inflatableCO2level(i) = Inflatable1.CO2Store.currentLevel;
+    inflatableN2level(i) = Inflatable1.NitrogenStore.currentLevel;
+    inflatableVaporlevel(i) = Inflatable1.VaporStore.currentLevel;
+    inflatableOtherlevel(i) = Inflatable1.OtherStore.currentLevel;
+    inflatableTotalMoles(i) = Inflatable1.totalMoles;
+    
+    % Record Living Unit Atmosphere
+    livingUnitPressure(i) = LivingUnit1.pressure;
+    livingUnitO2level(i) = LivingUnit1.O2Store.currentLevel;
+    livingUnitCO2level(i) = LivingUnit1.CO2Store.currentLevel;
+    livingUnitN2level(i) = LivingUnit1.NitrogenStore.currentLevel;
+    livingUnitVaporlevel(i) = LivingUnit1.VaporStore.currentLevel;
+    livingUnitOtherlevel(i) = LivingUnit1.OtherStore.currentLevel;
+    livingUnitTotalMoles(i) = LivingUnit1.totalMoles;
+    
+    % Record Life Support Unit Atmosphere
+    lifeSupportUnitPressure(i) = LifeSupportUnit1.pressure;
+    lifeSupportUnitO2level(i) = LifeSupportUnit1.O2Store.currentLevel;
+    lifeSupportUnitCO2level(i) = LifeSupportUnit1.CO2Store.currentLevel;
+    lifeSupportUnitN2level(i) = LifeSupportUnit1.NitrogenStore.currentLevel;
+    lifeSupportUnitVaporlevel(i) = LifeSupportUnit1.VaporStore.currentLevel;
+    lifeSupportUnitOtherlevel(i) = LifeSupportUnit1.OtherStore.currentLevel;
+    lifeSupportUnitTotalMoles(i) = LifeSupportUnit1.totalMoles;
+    
+    % Record Cargo Unit Atmosphere
+    cargoUnitPressure(i) = CargoUnit1.pressure;
+    cargoUnitO2level(i) = CargoUnit1.O2Store.currentLevel;
+    cargoUnitCO2level(i) = CargoUnit1.CO2Store.currentLevel;
+    cargoUnitN2level(i) = CargoUnit1.NitrogenStore.currentLevel;
+    cargoUnitVaporlevel(i) = CargoUnit1.VaporStore.currentLevel;
+    cargoUnitOtherlevel(i) = CargoUnit1.OtherStore.currentLevel;
+    CargoUnitTotalMoles(i) = CargoUnit1.totalMoles;
+    
+    %% Tick Modules
+    
     % Leak Modules
     Inflatable1.tick;
     LivingUnit1.tick;
@@ -466,92 +534,42 @@ for i = 1:simtime
     
     % Run Fans
     inflatable2LivingUnitFan.tick;
-    livingUnit2InflatableFan.tick;
     livingUnit2LifeSupportFan.tick;
-    lifeSupport2LivingUnitFan.tick;
     lifeSupport2CargoUnitFan.tick;
-    cargoUnit2LifeSupportFan.tick;
+%     cargoUnit2LifeSupportFan.tick;
+%     lifeSupport2LivingUnitFan.tick;
+%     livingUnit2InflatableFan.tick;   
     
-    % Record data
-    powerlevel(i) = MainPowerStore.currentLevel; 
-    H2level(i) = H2Store.currentLevel;
-    H2Ostorelevel(i) = PotableWaterStore.currentLevel;
-    CO2Storelevel(i) = CO2Store.currentLevel;
-    CH4Storelevel(i) = MethaneStore.currentLevel;
-    O2Storelevel(i) = O2Store.currentLevel;
-    DirtyH2Ostorelevel(i) = DirtyWaterStore.currentLevel;
-    GreyH2Ostorelevel(i) = GreyWaterStore.currentLevel;
-    FoodStoreLevel(i) = FoodStore.currentLevel;
-    DryWasteStoreLevel(i) = DryWasteStore.currentLevel;
-    
-%     % Fans consume required air from source SimEnvironments
-%     air2main(i) = crew2mainfan.takeAir;
-%     air2crew(i) = main2crewfan.takeAir;
-%     
-%     % Fans send required air to destination SimEnvironments
-%     crew2mainfan.sendAir(air2main(i));
-%     main2crewfan.sendAir(air2crew(i));
-    
-    % These ticks are ordered in the same manner as the default BioSim
-    % configuration (see BioSIm Inputs and Outputs document)
-    mainvccr.tick;
-    backupvccr.tick;
-    
-    ogs.tick;
-    crs.tick;
-    
-    inflatableO2inj.tick;
-    
-    waterRS.tick;
-    fanpowerPS.tick;
+    % Run Power Supply
     powerPS.tick; 
     
-    CO2conc(i) = Inflatable1.CO2Percentage;
-    astro1.tick;
-    crewO2level(i) = Inflatable1.O2Store.currentLevel;
-    crewCO2level(i) = Inflatable1.CO2Store.currentLevel;
-    crewN2level(i) = Inflatable1.NitrogenStore.currentLevel;
-    crewVaporlevel(i) = Inflatable1.VaporStore.currentLevel;
-    crewOtherlevel(i) = Inflatable1.OtherStore.currentLevel;
+    % Run ECLSS Hardware       
+    ogsoutput(i) = ogs.tick;
     
-    astro2.tick;
-    galleyO2level(i) = LifeSupportUnit1.O2Store.currentLevel;
-    galleyCO2level(i) = LifeSupportUnit1.CO2Store.currentLevel;
-    galleyN2level(i) = LifeSupportUnit1.NitrogenStore.currentLevel;
-    galleyVaporlevel(i) = LifeSupportUnit1.VaporStore.currentLevel;
-    galleyOtherlevel(i) = LifeSupportUnit1.OtherStore.currentLevel;
-    
-    astro3.tick;
-    labsO2level(i) = labs.O2Store.currentLevel;
-    labsCO2level(i) = labs.CO2Store.currentLevel;
-    labsN2level(i) = labs.NitrogenStore.currentLevel;
-    labsVaporlevel(i) = labs.VaporStore.currentLevel;
-    labsOtherlevel(i) = labs.OtherStore.currentLevel;
-    
-    astro4.tick;
-    maintO2level(i) = maint.O2Store.currentLevel;
-    maintCO2level(i) = maint.CO2Store.currentLevel;
-    maintN2level(i) = maint.NitrogenStore.currentLevel;
-    maintVaporlevel(i) = maint.VaporStore.currentLevel;
-    maintOtherlevel(i) = maint.OtherStore.currentLevel;
-    
-    inflatableDehumidifier.tick;
-    livingUnitDehumidifier.tick;
-    
+    % Pressure Control Assemblies
+    inflatablePCAaction(:,i+1) = inflatablePCA.tick(inflatablePCAaction(:,i));
+    livingUnitPCAaction(:,i+1) = livingUnitPCA.tick(livingUnitPCAaction(:,i));
+    lifeSupportUnitPCAaction(:,i+1) = lifeSupportUnitPCA.tick(lifeSupportUnitPCAaction(:,i));
 
+    % Common Cabin Air Assemblies
+    inflatableCCAAoutput(i) = inflatableCCAA.tick;
+    livingUnitCCAAoutput(i) = livingUnitCCAA.tick;
+    lifeSupportUnitCCAAoutput(i) = lifeSupportUnitCCAA.tick;
     
-%     % Fans consume required air from source SimEnvironments
-%     crew2main = crew2mainfan.takeAir;
-%     main2crew = main2crewfan.takeAir;
-%     crew2galley = crew2galleyfan.takeAir;
-%     galley2crew = galley2crewfan.takeAir;
-% 
-%     % Fans send required air to destination SimEnvironments
-%     crew2mainfan.sendAir(crew2main);
-%     main2crewfan.sendAir(main2crew);
-%     crew2galleyfan.sendAir(crew2galley);
-%     galley2crewfan.sendAir(galley2crew);
+    % Run Waste Processing ECLSS Hardware
+    co2removed(i) = mainvccr.tick;
+    crsH2OProduced(i) = crs.tick;
+    crsCompressorOperation(:,i) = crs.CompressorOperation;
+    co2accumulatorlevel(i) = crs.CO2Accumulator.currentLevel;
+    waterRS.tick;
     
+    % Tick Crew
+    astro1.tick;
+    astro2.tick;  
+    astro3.tick;
+    astro4.tick;
+    
+    % Tick Waitbar  
     waitbar(i/simtime);
 
 end
@@ -562,72 +580,72 @@ beep
 
 close(h)
 
-% % Random plot commande used in code validation exercise
-% figure, 
-% subplot(2,2,1), plot(t2,crew_N2EnvLevel(t2),'LineWidth',2), title('Crew Quarters Environmental N2 Level'), grid on
-% subplot(2,2,2), plot(t2,galley_N2EnvLevel(t2),'LineWidth',2), title('Galley Environmental N2 Level'), grid on
-% subplot(2,2,3), plot(t2,labs_N2EnvLevel(t2),'LineWidth',2), title('Labs Environmental N2 Level'), grid on
-% subplot(2,2,4), plot(t2,maint_N2EnvLevel(t2),'LineWidth',2), title('Maintenance Environmental N2 Level'), grid on
-
-% Environmental N2 Store plots
+%% Random plot commande used in code validation exercise
 figure, 
-subplot(2,2,1), plot(1:simtime,crewN2level,'LineWidth',2), title('Crew Quarters Environmental N2 Level'), grid on
-subplot(2,2,2), plot(1:simtime,galleyN2level,'LineWidth',2), title('Galley Environmental N2 Level'), grid on
-subplot(2,2,3), plot(1:simtime,labsN2level,'LineWidth',2), title('Labs Environmental N2 Level'), grid on
-subplot(2,2,4), plot(1:simtime,maintN2level,'LineWidth',2), title('Maintenance Environmental N2 Level'), grid on
+subplot(2,2,1), plot(t,inflatableO2level,t,inflatableCO2level,t,inflatableN2level,t,inflatableVaporlevel,t,inflatableOtherlevel,'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on
+subplot(2,2,2), plot(t,livingUnitO2level,t,livingUnitCO2level,t,livingUnitN2level,t,livingUnitVaporlevel,t,livingUnitOtherlevel,'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on
+subplot(2,2,3), plot(t,lifeSupportUnitO2level,t,lifeSupportUnitCO2level,t,lifeSupportUnitN2level,t,lifeSupportUnitVaporlevel,t,lifeSupportUnitOtherlevel,'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on
+subplot(2,2,4), plot(t,cargoUnitO2level,t,cargoUnitCO2level,t,cargoUnitN2level,t,cargoUnitVaporlevel,t,cargoUnitOtherlevel,'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on
 
-i = i-1;
-figure, plot(1:(i-1),crewO2level(1:(i-1)),1:(i-1),crewCO2level(1:(i-1)),...
-    1:(i-1),crewN2level(1:(i-1)),1:(i-1),crewOtherlevel(1:(i-1)),1:(i-1),crewVaporlevel(1:(i-1)),'LineWidth',2),...
-   legend('O_2','CO_2','N_2','Other','Vapor'), grid on
-title('MATLAB Crew Quarters')
-
-figure, plot(1:(i-1),maintO2level(1:(i-1)),1:(i-1),maintCO2level(1:(i-1)),...
-    1:(i-1),maintN2level(1:(i-1)),1:(i-1),maintOtherlevel(1:(i-1)),1:(i-1),maintVaporlevel(1:(i-1)),'LineWidth',2),...
-   legend('O_2','CO_2','N_2','Other','Vapor'), grid on
-title('MATLAB Maintenance Module')
-
-figure, plot(1:(i-1),labsO2level(1:(i-1)),1:(i-1),labsCO2level(1:(i-1)),...
-    1:(i-1),labsN2level(1:(i-1)),1:(i-1),labsOtherlevel(1:(i-1)),1:(i-1),labsVaporlevel(1:(i-1)),'LineWidth',2),...
-   legend('O_2','CO_2','N_2','Other','Vapor'), grid on
-title('MATLAB Labs Module')
-
-figure, plot(1:(i-1),galleyO2level(1:(i-1)),1:(i-1),galleyCO2level(1:(i-1)),...
-    1:(i-1),galleyN2level(1:(i-1)),1:(i-1),galleyOtherlevel(1:(i-1)),1:(i-1),galleyVaporlevel(1:(i-1)),'LineWidth',2),...
-   legend('O_2','CO_2','N_2','Other','Vapor'), grid on
-title('MATLAB Galley Module')
-
-figure, plot(maintN2level,'LineWidth',2),grid on
-
-figure, plot(1:length(crewO2level),crewO2level), grid on
-figure, plot(1:length(N2level),N2level), grid on
-figure, plot(1:length(crewCO2level),crewCO2level), grid on
-figure, plot(1:(i-1),H2level(1:(i-1)),'LineWidth',2), title('MATLAB H_2 Store'), grid on
-% figure, plot(1:length(H2level),H2level), grid on
-figure, plot(1:length(CH4level),CH4level), grid on
-figure, plot(1:length(crewVaporlevel),crewVaporlevel,'LineWidth',2), grid on, title('MATLAB Crew Quarters Vapor Level')
-figure, plot(1:(i-1),maintVaporlevel(1:(i-1)),'LineWidth',2), grid on, title('MATLAB Maintenance Vapor Level')
-figure, plot(1:(i-1),H2Ostorelevel(1:(i-1)),'LineWidth',2), title('MATLAB Potable Water Store'), grid on
-figure, plot(1:(i-1),DirtyH2Ostorelevel(1:(i-1)),'LineWidth',2), title('MATLAB Dirty Water Store'), grid on
-% figure, plot(1:length(DirtyH2Ostorelevel),DirtyH2Ostorelevel), grid on
-% figure, plot(1:length(FoodStoreLevel),FoodStoreLevel), grid on
-% figure, plot(1:length(DryWasteStoreLevel),DryWasteStoreLevel), grid on
-figure, plot(1:(i-1),DryWasteStoreLevel(1:(i-1)),'LineWidth',2), title('MATLAB Dry Waste Store'), grid on
-figure, plot(1:(i-1),GreyH2Ostorelevel(1:(i-1)),'LineWidth',2), title('MATLAB Grey Water Store'), grid on
-figure, plot(1:(i-1),O2Storelevel(1:(i-1)),'LineWidth',2), title('MATLAB O_2 Store'), grid on
-figure, plot(1:(i-1),CH4Storelevel(1:(i-1)),'LineWidth',2), title('MATLAB Methane Store'), grid on
-figure, plot(1:(i-1),consumedWaterBuffer(1:(i-1)),'LineWidth',2), title('MATLAB Consumed Water Buffer'), grid on
-% figure, plot(1:length(GreyH2Ostorelevel),GreyH2Ostorelevel), grid on
-figure, plot(1:(i-1),FoodStoreLevel(1:(i-1)),'LineWidth',2), title('MATLAB Food Store'), grid on
-figure, plot(1:length(CO2conc),CO2conc), grid on
-figure, plot(1:length(O2conc),O2conc), grid on
-figure, plot(1:length(vaporconc),vaporconc), grid on
-figure, plot(1:length(CO2concMain),CO2concMain), grid on
-figure, plot(1:length(O2concMain),O2concMain), grid on
-figure, plot(1:length(O2levelMain),O2levelMain), grid on
-figure, plot(1:length(pres),pres), grid on
-figure, plot(1:length(CO2storelevel),CO2storelevel), grid on
-figure, plot(1:length(powerlevel),powerlevel), grid on
-% figure, plot(1:length(CO2Storelevel),CO2Storelevel), grid on
-figure, plot(1:(i-1),CO2Storelevel(1:(i-1)),'LineWidth',2), title('MATLAB CO_2 Store'), grid on
-figure, plot(1:length(intensity),intensity)
+% % Environmental N2 Store plots
+% figure, 
+% subplot(2,2,1), plot(1:simtime,crewN2level,'LineWidth',2), title('Crew Quarters Environmental N2 Level'), grid on
+% subplot(2,2,2), plot(1:simtime,lifeSupportUnitN2level,'LineWidth',2), title('Galley Environmental N2 Level'), grid on
+% subplot(2,2,3), plot(1:simtime,labsN2level,'LineWidth',2), title('Labs Environmental N2 Level'), grid on
+% subplot(2,2,4), plot(1:simtime,maintN2level,'LineWidth',2), title('Maintenance Environmental N2 Level'), grid on
+% 
+% i = i-1;
+% figure, plot(1:(i-1),crewO2level(1:(i-1)),1:(i-1),crewCO2level(1:(i-1)),...
+%     1:(i-1),crewN2level(1:(i-1)),1:(i-1),crewOtherlevel(1:(i-1)),1:(i-1),crewVaporlevel(1:(i-1)),'LineWidth',2),...
+%    legend('O_2','CO_2','N_2','Other','Vapor'), grid on
+% title('MATLAB Crew Quarters')
+% 
+% figure, plot(1:(i-1),maintO2level(1:(i-1)),1:(i-1),maintCO2level(1:(i-1)),...
+%     1:(i-1),maintN2level(1:(i-1)),1:(i-1),maintOtherlevel(1:(i-1)),1:(i-1),maintVaporlevel(1:(i-1)),'LineWidth',2),...
+%    legend('O_2','CO_2','N_2','Other','Vapor'), grid on
+% title('MATLAB Maintenance Module')
+% 
+% figure, plot(1:(i-1),labsO2level(1:(i-1)),1:(i-1),labsCO2level(1:(i-1)),...
+%     1:(i-1),labsN2level(1:(i-1)),1:(i-1),labsOtherlevel(1:(i-1)),1:(i-1),labsVaporlevel(1:(i-1)),'LineWidth',2),...
+%    legend('O_2','CO_2','N_2','Other','Vapor'), grid on
+% title('MATLAB Labs Module')
+% 
+% figure, plot(1:(i-1),galleyO2level(1:(i-1)),1:(i-1),galleyCO2level(1:(i-1)),...
+%     1:(i-1),lifeSupportUnitN2level(1:(i-1)),1:(i-1),lifeSupportUnitOtherlevel(1:(i-1)),1:(i-1),lifeSupportUnitVaporlevel(1:(i-1)),'LineWidth',2),...
+%    legend('O_2','CO_2','N_2','Other','Vapor'), grid on
+% title('MATLAB Galley Module')
+% 
+% figure, plot(maintN2level,'LineWidth',2),grid on
+% 
+% figure, plot(1:length(crewO2level),crewO2level), grid on
+% figure, plot(1:length(N2level),N2level), grid on
+% figure, plot(1:length(crewCO2level),crewCO2level), grid on
+% figure, plot(1:(i-1),H2level(1:(i-1)),'LineWidth',2), title('MATLAB H_2 Store'), grid on
+% % figure, plot(1:length(H2level),H2level), grid on
+% figure, plot(1:length(CH4level),CH4level), grid on
+% figure, plot(1:length(crewVaporlevel),crewVaporlevel,'LineWidth',2), grid on, title('MATLAB Crew Quarters Vapor Level')
+% figure, plot(1:(i-1),maintVaporlevel(1:(i-1)),'LineWidth',2), grid on, title('MATLAB Maintenance Vapor Level')
+% figure, plot(1:(i-1),H2Ostorelevel(1:(i-1)),'LineWidth',2), title('MATLAB Potable Water Store'), grid on
+% figure, plot(1:(i-1),DirtyH2Ostorelevel(1:(i-1)),'LineWidth',2), title('MATLAB Dirty Water Store'), grid on
+% % figure, plot(1:length(DirtyH2Ostorelevel),DirtyH2Ostorelevel), grid on
+% % figure, plot(1:length(FoodStoreLevel),FoodStoreLevel), grid on
+% % figure, plot(1:length(DryWasteStoreLevel),DryWasteStoreLevel), grid on
+% figure, plot(1:(i-1),DryWasteStoreLevel(1:(i-1)),'LineWidth',2), title('MATLAB Dry Waste Store'), grid on
+% figure, plot(1:(i-1),GreyH2Ostorelevel(1:(i-1)),'LineWidth',2), title('MATLAB Grey Water Store'), grid on
+% figure, plot(1:(i-1),O2Storelevel(1:(i-1)),'LineWidth',2), title('MATLAB O_2 Store'), grid on
+% figure, plot(1:(i-1),CH4Storelevel(1:(i-1)),'LineWidth',2), title('MATLAB Methane Store'), grid on
+% figure, plot(1:(i-1),consumedWaterBuffer(1:(i-1)),'LineWidth',2), title('MATLAB Consumed Water Buffer'), grid on
+% % figure, plot(1:length(GreyH2Ostorelevel),GreyH2Ostorelevel), grid on
+% figure, plot(1:(i-1),FoodStoreLevel(1:(i-1)),'LineWidth',2), title('MATLAB Food Store'), grid on
+% figure, plot(1:length(CO2conc),CO2conc), grid on
+% figure, plot(1:length(O2conc),O2conc), grid on
+% figure, plot(1:length(vaporconc),vaporconc), grid on
+% figure, plot(1:length(CO2concMain),CO2concMain), grid on
+% figure, plot(1:length(O2concMain),O2concMain), grid on
+% figure, plot(1:length(O2levelMain),O2levelMain), grid on
+% figure, plot(1:length(pres),pres), grid on
+% figure, plot(1:length(CO2storelevel),CO2storelevel), grid on
+% figure, plot(1:length(powerlevel),powerlevel), grid on
+% % figure, plot(1:length(CO2Storelevel),CO2Storelevel), grid on
+% figure, plot(1:(i-1),CO2Storelevel(1:(i-1)),'LineWidth',2), title('MATLAB CO_2 Store'), grid on
+% figure, plot(1:length(intensity),intensity)

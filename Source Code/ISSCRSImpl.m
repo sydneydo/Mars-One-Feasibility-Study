@@ -123,6 +123,7 @@ classdef ISSCRSImpl < handle
         CO2Vented = 0
 %         CH4Vented = 0
         WaterVaporVented = 0
+        CompressorOperation = zeros(2,1)
     end
     
     properties (Access = private)
@@ -157,6 +158,8 @@ classdef ISSCRSImpl < handle
         %% tick
         function currentH2OProduced = tick(obj)
             
+            obj.CompressorOperation = zeros(2,1);  % Add flag to denote operation of compressor (most power intensive operation within CRS)
+            currentH2OProduced = 0;
             
             % Only run if there is no system error
             if obj.CompressorError == 0 && obj.ReactorError == 0 && obj.SeparatorError == 0
@@ -169,10 +172,13 @@ classdef ISSCRSImpl < handle
                 
                 if obj.CO2ConsumerDefinition.ResourceStore.currentLevel >= obj.CO2Accumulator.currentCapacity && ... %obj.CO2Accumulator.currentLevel == 0
                         obj.CO2Accumulator.currentLevel*obj.idealGasConstant*obj.CO2AccumulatorStorageTemp/obj.CO2accumulatorVolumeInLiters < obj.CompressorLowerRechargePressure  % Accumulator pressure is < 25psi
-                    
-                    disp('fill')
+
                     % Run Compressor
                     compressorPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(obj.CO2CompressorPower);
+                    
+                    % Add flag to denote compressor operation to fill
+                    % accumulator due to low pressure within accumulator
+                    obj.CompressorOperation(1) = 1;
                     
                     if compressorPowerConsumed < obj.CO2CompressorPower
                         disp('No CO2 delivered to CRA due to insufficient power input to CO2 Compressor')
@@ -225,9 +231,7 @@ classdef ISSCRSImpl < handle
                     
                     % If insufficient CO2, refill CO2 accumulator and repeat
                     if CO2MolestoReact < (1/obj.ReactionH2CO2ratio*H2MolestoReact)
-                        
-                        disp('Check')
-                        
+                                                
                         % Return CO2MolestoReact back to CO2Accumulator
                         obj.CO2Accumulator.add(CO2MolestoReact);
                         
@@ -235,6 +239,11 @@ classdef ISSCRSImpl < handle
                         % CO2 accumulator pressure < 25psi (which is what is
                         % actually the case based on compressor operating rules - REF: SAE2004-01-2496)
                         compressorPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(obj.CO2CompressorPower);
+                        
+                        % Add flag to denote compressor operation to
+                        % retrieve CO2 due to insufficient CO2 for Sabatier
+                        % Reaction
+                        obj.CompressorOperation(2) = 1;
                         
                         if compressorPowerConsumed < obj.CO2CompressorPower
                             disp('No CO2 delivered to CRA due to insufficient power input to CO2 Compressor')
@@ -268,7 +277,7 @@ classdef ISSCRSImpl < handle
                     end
                     
                     % Send produced H2O to grey water store
-                    currentH2OProduced = obj.GreyWaterProducerDefinition.ResourceStore.add(H2MolestoReact/2 * obj.ReactorWaterConversionEfficiency);
+                    currentH2OProduced = obj.GreyWaterProducerDefinition.ResourceStore.add(H2MolestoReact/2 * obj.ReactorWaterConversionEfficiency *(2*1.008+15.999)/1000); % Convert from moles to liters
                     
                     % Vent undesired products
                     obj.WaterVaporVented = obj.WaterVaporVented + H2MolestoReact/2 * (1-obj.ReactorWaterConversionEfficiency);
