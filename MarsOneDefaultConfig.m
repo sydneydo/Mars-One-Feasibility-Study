@@ -58,14 +58,6 @@ O2FractionHypoxicLimit = 0.23;          % lower bound for a 70.3kPa atm based on
 TargetO2MolarFraction = 0.265; 
 TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
 
-numberOfEVAdaysPerWeek = 5;
-numberOfCrew = 4;
-missionDurationInHours = 19000;
-missionDurationInWeeks = ceil(missionDurationInHours/24/7);
-
-% Auto-Generate Crew Schedule
-[crewSchedule, missionEVAschedule,crewEVAScheduleLogical] = CrewScheduler(numberOfEVAdaysPerWeek,numberOfCrew,missionDurationInWeeks);
-
 %% Initialize SimEnvironments
 % Convert daily leakage rate to hourly leakage rate
 dailyLeakagePercentage = 0.05;      % Based on BVAD Table 4.1.1 for percentage of total gas mass lost per day 
@@ -86,6 +78,30 @@ LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',70.3,25000,0.265,0,0
 % LifeSupportUnit2 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
 CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
 % CargoUnit2 = SimEnvironmentImpl('CargoUnit2',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
+
+%% Initialize Key Activity Parameters
+numberOfEVAdaysPerWeek = 5;
+numberOfCrew = 4;
+missionDurationInHours = 19000;
+missionDurationInWeeks = ceil(missionDurationInHours/24/7);
+
+% Baseline Activities and Location Mappings
+lengthOfExercise = 2;                       % Number of hours spent on exercise activity
+
+% Generate distribution of habitation options from which IVA activities
+% will take place
+HabDistribution = [repmat(Inflatable1,1,2),repmat(LivingUnit1,1,2),repmat(LifeSupportUnit1,1,2),CargoUnit1];
+
+IVAhour = ActivityImpl('IVA',2,1,HabDistribution);          % One hour of IVA time (corresponds to generic IVA activity)
+Sleep = ActivityImpl('Sleep',0,8,Inflatable1);          % Sleep period
+Exercise = ActivityImpl('Exercise',5,lengthOfExercise,Inflatable1);    % Exercise period
+EVA = ActivityImpl('EVA',4,8,Inflatable1);              % EVA - fixed length of 8 hours
+
+% Vector of baselin activities:
+ActivityList = [IVAhour,Sleep,Exercise,EVA];
+
+% Auto-Generate Crew Schedule
+[crewSchedule, missionEVAschedule,crewEVAScheduleLogical] = CrewScheduler(numberOfEVAdaysPerWeek,numberOfCrew,missionDurationInWeeks,ActivityList);
 
 
 %% Initialize Stores
@@ -471,7 +487,7 @@ for i = 1:simtime
         
     if astro1.alive == 0 || astro2.alive == 0 || astro3.alive == 0 || astro4.alive == 0
         close(h)
-        break
+        return
     end
 
     %% Record Data

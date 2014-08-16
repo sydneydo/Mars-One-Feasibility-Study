@@ -7,16 +7,20 @@ classdef ActivityImpl %< handle
     properties
         ID
         Name
+        Location
         Intensity
         Duration
     end
     
     methods
-        function obj = ActivityImpl(name,intensity,duration)
+        function obj = ActivityImpl(name,intensity,duration,location)
             if nargin > 0
                 obj.Name = name;
                 obj.Intensity = intensity;
                 obj.Duration = duration;
+                if nargin == 4
+                    obj.Location = location;
+                end                
             end
         end
     end

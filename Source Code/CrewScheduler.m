@@ -1,4 +1,4 @@
-function [crewSchedule, missionEVAschedule,crewEVAScheduleLogical] = CrewScheduler(numberOfEVAdaysPerWeek,numberOfCrew,missionDurationInWeeks)
+function [crewSchedule, missionEVAschedule,crewEVAScheduleLogical] = CrewScheduler(numberOfEVAdaysPerWeek,numberOfCrew,missionDurationInWeeks,activityList)
 %CrewScheduler Summary of this function goes here
 %   Output data structure is a matrix with each row corresponding to the
 %   schedule of each crew person for one week
@@ -25,22 +25,22 @@ function [crewSchedule, missionEVAschedule,crewEVAScheduleLogical] = CrewSchedul
 % operations (those that occur in batch mode rather than continuous mode)
 
 %% EVA Options (According to BVAD)
-% Because the gravity on Mars is about twice that of Luna and about a third 
-% of that on Earth, the overall mass of a Mars spacesuit is extremely 
-% critical. A likely mission design to mitigate this problem is to reduce 
-% the standard EVA duration to 4 hours and plan to recharge the spacesuit 
-% consumables at midday. Thus, to maintain the same time outside the vehicle 
-% during exploration, two 4-hour, or “half-day,” EVA sorties per workday 
-% could replace the more traditional 8-hour EVA sortie. Assuming five 
-% workdays per week allows 520 half-day EVA sorties of two crewmembers per 
-% year without any allowance for holidays. This is also the expected number 
-% of airlock cycles per year. Each EVA sortie normally requires at least 
+% Because the gravity on Mars is about twice that of Luna and about a third
+% of that on Earth, the overall mass of a Mars spacesuit is extremely
+% critical. A likely mission design to mitigate this problem is to reduce
+% the standard EVA duration to 4 hours and plan to recharge the spacesuit
+% consumables at midday. Thus, to maintain the same time outside the vehicle
+% during exploration, two 4-hour, or “half-day,” EVA sorties per workday
+% could replace the more traditional 8-hour EVA sortie. Assuming five
+% workdays per week allows 520 half-day EVA sorties of two crewmembers per
+% year without any allowance for holidays. This is also the expected number
+% of airlock cycles per year. Each EVA sortie normally requires at least
 % two crewmembers outside.
 
 %% Assumptions
 %   *Minimum number of crew required for EVAs to occur is 3 (two on EVA and
 %   one within vehicle) (REF: EAWG Report)
-%   *Only two crew members are on EVA at any one time (regardless of the 
+%   *Only two crew members are on EVA at any one time (regardless of the
 %   crew size)
 %   *No EVAs on weekends (ie. maximum number of EVAs per week is 5) (REF:
 %   BVAD - see above)
@@ -72,6 +72,8 @@ numberOfWorkDaysPerWeek = 5;
 % (Each row corresponds to a week)
 workingDays = zeros(missionDurationInWeeks,numberOfWorkDaysPerWeek);
 
+%% TO DO: Put in conditional statement for if numberOfEVAdaysPerWeek = 0
+% if numberOfEVAdaysPerWeek > 0
 
 % Randomly select days of the week that EVAs will occur for all weeks
 % within the mission duration
@@ -122,15 +124,44 @@ crewEVAScheduleLogical = logical(crewEVAScheduleBinary);      % Make binary arra
 
 % Note that the current timestep in our model is in hours
 
-lengthOfExercise = 2;                       % Number of hours spent on exercise activity
+%% Unpack activityList
 
-IVAhour = ActivityImpl('IVA',2,1);          % One hour of IVA time (corresponds to generic IVA activity)
-Sleep = ActivityImpl('Sleep',0,8);          % Sleep period
-Exercise = ActivityImpl('Exercise',5,lengthOfExercise);    % Exercise period
-EVA = ActivityImpl('EVA',4,8);              % EVA - fixed length of 8 hours
+% lengthOfExercise = 2;                       % Number of hours spent on exercise activity
+%
+% IVAhour = ActivityImpl('IVA',2,1);          % One hour of IVA time (corresponds to generic IVA activity)
+% Sleep = ActivityImpl('Sleep',0,8);          % Sleep period
+% Exercise = ActivityImpl('Exercise',5,lengthOfExercise);    % Exercise period
+% EVA = ActivityImpl('EVA',4,8);              % EVA - fixed length of 8 hours
+
+[activityNames,activityIndices] = unique({activityList.Name});
+
+% Search for EVA activity
+if sum(strcmpi(activityNames,'EVA')) == 1 % If EVA is the name of a unique activity
+    EVA = activityList(activityIndices(strcmpi(activityNames,'EVA')));
+end
+
+% Search for Sleep activity
+if sum(strcmpi(activityNames,'Sleep')) == 1 % If EVA is the name of a unique activity
+    Sleep = activityList(activityIndices(strcmpi(activityNames,'Sleep')));
+end
+
+% Search for IVA activity
+if sum(strcmpi(activityNames,'IVA')) == 1 % If EVA is the name of a unique activity
+    IVA = activityList(activityIndices(strcmpi(activityNames,'IVA')));
+    if IVA.Duration == 1
+        IVAhour = IVA;
+    end
+end
+
+% Search for Exercise activity
+if sum(strcmpi(activityNames,'Exercise')) == 1 % If EVA is the name of a unique activity
+    Exercise = activityList(activityIndices(strcmpi(activityNames,'Exercise')));
+end
 
 % Define EVA-day activity schedule
 EVAday = [Sleep,repmat(IVAhour,1,3),EVA,repmat(IVAhour,1,5)];
+
+lengthOfExercise = Exercise.Duration;       % Extract length of exercise from Exercise activity
 
 % Randomly assign hours in daily morning shift before exercise is performed
 % (assuming all mission days are IVA-days for the moment)
@@ -151,7 +182,7 @@ exerciseDistribution = histc(hoursInDailyMorningShift,exerciseHourVector);      
 % Move through each identified crew day and modify the crew schedule so
 % that there is no longer an exercise conflict
 for i = 1:length(rowIndex)
-
+    
     % Find index of identified value within hoursInDailyMorningShift to
     % place (select the first one)
     replacedIndex = find(hoursInDailyMorningShift(:,colIndex(i))==exerciseHourVector(rowIndex(i)));
@@ -159,7 +190,7 @@ for i = 1:length(rowIndex)
     % For each element to replace (corresponding to the total number of
     % elements - maxNumberOfPeopleExercising
     for j = 1:(exerciseDistribution(rowIndex(i),colIndex(i))-maxNumberOfPeopleExercising)
-
+        
         % Search for elements with zero within column index (this enforces
         % the selected alternative to correspond to that most
         % under-utilized)
@@ -168,7 +199,7 @@ for i = 1:length(rowIndex)
         % Replace identified crew schedule with alternative schedule indicated
         % by minValIndex
         hoursInDailyMorningShift(replacedIndex(j),colIndex(i)) = exerciseHourVector(minValIndex(1));
-    
+        
         % Update exerciseDistribution matrix for next element to be sorted
         % through
         exerciseDistribution(:,colIndex(i)) = histc(hoursInDailyMorningShift(:,colIndex(i)),exerciseHourVector);
@@ -187,6 +218,27 @@ crewSchedule(crewEVAScheduleLogical) = {EVAday};
 
 % Note command to use in main file to load into CrewPersonImpl is:
 % [crewSchedule{i,:}]
+
+% Check to see if any of the base activities have vectors as the input of
+% the location, and randomly select one element of the vector as the
+% location of the activity
+%% Search for activities with a vector of SimEnvironments as their location and randomly select locations for them
+
+% For each element within crewSchedule (corresponds to each mission day for
+% each crew member)
+for i = 1:length(crewSchedule(:))
+    
+    % For each activity within each crew-day
+    for j = 1:length(crewSchedule{i})
+        
+        % If number of locations assigned is > 1 randomly select one
+        if length(crewSchedule{i}(j).Location) > 1
+            crewSchedule{i}(j).Location = crewSchedule{i}(j).Location(randi(length(crewSchedule{i}(j).Location)));
+        end
+        
+    end
+    
+end
 
 end
 
