@@ -2,7 +2,10 @@ classdef SimEnvironmentImpl < handle
     %SimEnvironmentImpl Summary of this class goes here
     %   By: Sydney Do (sydneydo@mit.edu)
     %   Revision History
-    %   Last Updated: 5/15/2014
+    %   Last Updated: 8/16/2014
+    %   8/16/2014: Modified to contain food, water, and waste stores for
+    %   inhabitants to consume from when they are located within this
+    %   environment
     %   5/15/2014: Added performLeak method and revised update of tick
     %   4/21/2014: Added tick method
 
@@ -46,6 +49,11 @@ classdef SimEnvironmentImpl < handle
         VaporStore% = StoreImpl('H2O Vapor','Environmental')
         OtherStore% = StoreImpl('Other','Environmental')      % Represents trace contaminants   
 %         Air = Atmosphere
+        PotableWaterStore
+        GreyWaterStore
+        DirtyWaterStore
+        DryWasteStore
+        FoodStore
     end
     
     properties (Access = private)
@@ -56,13 +64,10 @@ classdef SimEnvironmentImpl < handle
     end
     
     methods
-        function obj = SimEnvironmentImpl(name,pressure,volume,o2Percentage,co2Percentage,nitrogenPercentage,waterPercentage,otherPercentage,leakPercentage)
+        function obj = SimEnvironmentImpl(name,pressure,volume,o2Percentage,co2Percentage,nitrogenPercentage,waterPercentage,...
+                otherPercentage,leakPercentage,potablewaterstore,greywaterstore,dirtywaterstore,drywastestore,foodstore)
             
             if nargin > 0
-                
-                if nargin == 9
-                    obj.leakagePercentage = leakPercentage;
-                end
                 
                 obj.name = name;
                 %             obj.pressure = pressure;
@@ -89,6 +94,29 @@ classdef SimEnvironmentImpl < handle
                 obj.VaporStore.currentCapacity = obj.VaporStore.currentLevel;
                 obj.OtherStore.currentCapacity = obj.OtherStore.currentLevel;
             
+                if nargin > 8
+                    obj.leakagePercentage = leakPercentage;
+                end
+                
+                if nargin > 9
+                    % Check for correct input class for water, food, and waste
+                    % stores
+                    if ~strcmpi(class(potablewaterstore),'StoreImpl') || ...
+                            ~strcmpi(class(greywaterstore),'StoreImpl') || ...
+                            ~strcmpi(class(dirtywaterstore),'StoreImpl') || ...
+                            ~strcmpi(class(drywastestore),'StoreImpl')                       
+                        error('Tenth to Thirteenth inputs to SimEnvironmentImpl must be of class "StoreImpl"');
+                    elseif ~strcmpi(class(foodstore),'FoodStoreImpl')
+                        error('Fourteenth input to SimEnvironmentImpl must be of class "FoodStoreImpl"');
+                    end
+                    
+                    obj.PotableWaterStore = potablewaterstore;
+                    obj.GreyWaterStore = greywaterstore;
+                    obj.DirtyWaterStore = dirtywaterstore;
+                    obj.DryWasteStore = drywastestore;
+                    obj.FoodStore = foodstore;
+                    
+                end
             
             end
 
