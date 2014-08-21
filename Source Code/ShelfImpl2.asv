@@ -310,7 +310,7 @@ classdef ShelfImpl2 < handle
             % Faster Implementation of Above Lines
             obj.totalCO2MolesConsumed = obj.totalCO2MolesConsumed + (mod(obj.Age,24)==0)*dailyCarbonGain/24;
             
-            cropGrowthRate = molecularWeightOfCarbon*(dailyCarbonGain/obj.Crop.BCF);        % carbon use in grams/m^2/day, BCF = biomass carbon fraction (ref BVAD and "Crop Models for Varying Environmental Conditions")
+            cropGrowthRate = molecularWeightOfCarbon*(dailyCarbonGain/obj.Crop.BCF);        % carbon use in grams/m^2/day, BCF = biomass carbon fraction (ref BVAD and "Crop Models for Varying Environmental Conditions"), this is the fraction of the Biomass that is made up of carbon
             
             obj.CropGrowthRate = cropGrowthRate;
             

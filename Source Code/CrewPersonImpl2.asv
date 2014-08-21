@@ -344,7 +344,7 @@ classdef CrewPersonImpl2 < handle
                         kJneeded = 50*obj.Weight + 6066.7*activityCoefficient;	% Correct version from SAE paper
                     end
                 end
-                caloriesNeeded = kJneeded/24/4.184;   % Convert from kJ/person/day to calories/person/hour (a more accurate conversion factor would be 4.184) (actually this should be in kcal)
+                caloriesNeeded = kJneeded/24/4.18;   % Convert from kJ/person/day to calories/person/hour (a more accurate conversion factor would be 4.184) (actually this should be in kcal)
             end          
            
         end

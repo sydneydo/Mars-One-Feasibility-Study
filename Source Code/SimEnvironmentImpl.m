@@ -143,7 +143,7 @@ classdef SimEnvironmentImpl < handle
         
         % Calculates relative humidity within SimEnvironment
         function relativeHumidity = get.RelativeHumidity(obj)
-            saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+273.15));      % Is there a unit conversion issue here?
+            saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
             VaporPartialPressure = obj.VaporPercentage*obj.pressure;
             relativeHumidity = VaporPartialPressure/saturatedVaporPressure;
         end
