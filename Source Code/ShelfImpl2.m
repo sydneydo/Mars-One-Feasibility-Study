@@ -13,6 +13,8 @@ classdef ShelfImpl2 < handle
     properties
         CropName
         Crop
+        CropCycleStartTime = 0
+        tickcount = 0       % System level tick
         DailyCanopyTranspirationRate
         WaterFraction
         DailyCarbonGain
@@ -98,7 +100,7 @@ classdef ShelfImpl2 < handle
     
     methods
         %% Constructor
-        function obj = ShelfImpl2(cropType,cropArea)
+        function obj = ShelfImpl2(cropType,cropArea,Environment,GreyWaterSource,PotableWaterSource,PowerSource,BiomassOutput,growthStartTime)
             
             if nargin > 0
                 % Shelf specific initialization
@@ -127,23 +129,41 @@ classdef ShelfImpl2 < handle
                 if ~(strcmpi(cropType.Type,'Legume'))
                     obj.carbonUseEfficiency24 = cropType.CarbonUseEfficiency24;     % Initialize here for all plant types. This changes within the growBiomass method if the plant is of type "Legume"
                 end
+                
+                % Initialize consumer/producer relationships
+                defaultLimitingFlowRate = 1000;     % Arbitrarily set - informed by BioSim value for the PlantImpl class
+                obj.AirConsumerDefinition = ResourceUseDefinitionImpl(Environment);
+                obj.AirProducerDefinition = ResourceUseDefinitionImpl(Environment);
+                obj.GreyWaterConsumerDefinition = ResourceUseDefinitionImpl(GreyWaterSource,defaultLimitingFlowRate,defaultLimitingFlowRate);
+                obj.PotableWaterConsumerDefinition = ResourceUseDefinitionImpl(PotableWaterSource,defaultLimitingFlowRate,defaultLimitingFlowRate);
+                obj.PowerConsumerDefinition = ResourceUseDefinitionImpl(PowerSource,defaultLimitingFlowRate,defaultLimitingFlowRate);
+                obj.BiomassProducerDefinition = ResourceUseDefinitionImpl(BiomassOutput);
+                
+                if nargin > 7
+                    obj.CropCycleStartTime = growthStartTime;
+                end
             end
         end
         
         %% Tick
         function obj = tick(obj)
-            % ShelfImpl.tick
-            tryHarvesting(obj);
-            gatherPower(obj);
-            gatherWater(obj);
-            lightPlants(obj);
             
-            % PlantImpl.tick
-            obj.Age = obj.Age+1;        % ticking forward (in hours)
-            if obj.hasDied == 0
-                growBiomass(obj);
-                obj.TotalWaterNeeded = obj.TotalWaterNeeded + obj.WaterNeeded;
-                obj.AverageWaterNeeded = obj.TotalWaterNeeded/obj.Age;
+            obj.tickcount = obj.tickcount + 1;  % Update tick
+            
+            if obj.tickcount >= obj.CropCycleStartTime
+                % ShelfImpl.tick
+                tryHarvesting(obj);
+                gatherPower(obj);
+                gatherWater(obj);
+                lightPlants(obj);
+                
+                % PlantImpl.tick
+                obj.Age = obj.Age+1;        % ticking forward (in hours)
+                if obj.hasDied == 0
+                    growBiomass(obj);
+                    obj.TotalWaterNeeded = obj.TotalWaterNeeded + obj.WaterNeeded;
+                    obj.AverageWaterNeeded = obj.TotalWaterNeeded/obj.Age;
+                end
             end
         end
                
@@ -157,7 +177,7 @@ classdef ShelfImpl2 < handle
                 inedibleFraction = 1 - obj.CurrentEdibleWetBiomass/obj.CurrentTotalWetBiomass;
                 biomassProduced = BioMatter(obj.Crop,obj.CurrentTotalWetBiomass,inedibleFraction,...
                     obj.CurrentWaterInsideEdibleBiomass,obj.CurrentWaterInsideInedibleBiomass);     % Harvest crop
-                obj.BiomassProducerDefinition.ResourceStore.add(biomassProduced,obj.BiomassProducerDefinition); % send to biomass store - note that the upper bound from the max and desired flow arets should be divided by the number of shelves (pushFractionalResources)
+                obj.BiomassProducerDefinition.ResourceStore.add(biomassProduced); % send to biomass store - note that the upper bound from the max and desired flow arets should be divided by the number of shelves (pushFractionalResources)
                 reset(obj);         % reset plant
             end
         
@@ -334,7 +354,7 @@ classdef ShelfImpl2 < handle
             % Determine amount of water inside edible biomass given total
             % available biomass and water fraction within crop
             obj.CurrentWaterInsideEdibleBiomass = obj.CurrentEdibleDryBiomass*...
-                obj.Crop.EdibleFreshBasisWaterContent / (1-obj.Crop.EdibleFreshBasisWaterContent);
+                obj.Crop.EdibleFreshBasisWaterContent / (1-obj.Crop.EdibleFreshBasisWaterContent);  % in kg
             
             % Update current edible wet biomass (= dry biomass + its water
             % content)

@@ -6,10 +6,10 @@ classdef DryBean < handle%PlantImpl
         Name = 'Dry Bean'
         Type = 'Legume'
         taInitialValue = 1200
-        initialPPFValue = 555.55       % per m^2 of crop area
-        initialCO2Value = 1200
+        initialPPFValue = 600 %555.55       % per m^2 of crop area - adjusted from BioSim value to that listed in Table 1 of "Crop Models for Varying Envrionmental Conditions"
+        initialCO2Value = 1200                % micromoles of CO2/moles of atmosphere
 %         CarbonUseEfficiency24 = 0.64
-        BCF = 0.46
+        BCF = 0.45 %0.46 - Updated from BioSim value according to BVAD Table 4.2.29
         CUEmax = 0.65
         CUEmin = 0.5
         Photoperiod = 18
@@ -18,15 +18,15 @@ classdef DryBean < handle%PlantImpl
         N = 2
         CQYMin = 0.02;
         TimeAtCanopySenescence = 42
-        TimeAtCropMaturity = 85
+        TimeAtCropMaturity = 63 %85 - Updated from BioSim value according to BVAD Table 4.2.28
         OPF = 1.1;
-        FractionOfEdibleBiomass = 0.4
+        FractionOfEdibleBiomass = 0.97 %0.4 - Updated from BioSim value according to BVAD Table 4.2.28
         CaloriesPerKilogram = 3490;
         EdibleFreshBasisWaterContent = 0.1
         InedibleFreshBasisWaterContent = 0.9
         CanopyClosureConstants %= [95488,1068.6,zeros(1,4),15.977,zeros(1,3),0.3419,0.00019733,zeros(1,3),-0.00019076,zeros(1,9)]
         CanopyQuantumYieldConstants
-
+        LightCycleTemperature = 26      % in Celsius
     end
     
     methods
@@ -44,23 +44,23 @@ classdef DryBean < handle%PlantImpl
             
             % Initialize Canopy Closure Constants
             canopyClosureConstants = zeros(1,25);
-            canopyClosureConstants(1) = 290410;
-            canopyClosureConstants(2) = 1559.4;
+            canopyClosureConstants(1) = 2.9041E5;
+            canopyClosureConstants(2) = 1.5594E3;
             canopyClosureConstants(7) = 15.840;
-            canopyClosureConstants(12) = .0061120;
-            canopyClosureConstants(18) = -0.0000000037409;
-            canopyClosureConstants(25) = .00000000000000000096484;
+            canopyClosureConstants(12) = 6.1120E-3;
+            canopyClosureConstants(18) = -3.7409E-9;
+            canopyClosureConstants(25) = 9.6484E-19;
             
             obj.CanopyClosureConstants = canopyClosureConstants;
             
             % Initialize Canopy Quantum Yield Constants
             canopyQYConstants = zeros(1,25);
-            canopyQYConstants(7) = 0.04191;
-            canopyQYConstants(8) = 0.000053852;
-            canopyQYConstants(9) = -0.000000021275;
-            canopyQYConstants(12) = -0.00001238;
-            canopyQYConstants(18) = -0.00000000001544;
-            canopyQYConstants(19) = 0.000000000000006469;
+            canopyQYConstants(7) = 4.191E-2;
+            canopyQYConstants(8) = 5.3852E-5;
+            canopyQYConstants(9) = -2.1275E-8;
+            canopyQYConstants(12) = -1.238E-5;
+            canopyQYConstants(18) = -1.544E-11;
+            canopyQYConstants(19) = 6.469E-15;
             
             obj.CanopyQuantumYieldConstants = canopyQYConstants;
 %             % Construct Parent Class

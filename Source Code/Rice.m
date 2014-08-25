@@ -6,24 +6,25 @@ classdef Rice < handle
         Name = 'Rice'
         Type = 'Erectophile'
         taInitialValue = 1200
-        initialPPFValue = 763.89       % per m^2 of crop area
-        initialCO2Value = 1200
+        initialPPFValue = 1200 %763.89       % per m^2 of crop area - adjusted from BioSim value to that listed in Table 1 of "Crop Models for Varying Envrionmental Conditions"
+        initialCO2Value = 1200                % micromoles of CO2/moles of atmosphere
         CarbonUseEfficiency24 = 0.64
-        BCF = 0.45
+        BCF = 0.44 %0.45 - Updated from BioSim value according to BVAD Table 4.2.29
         Photoperiod = 12                % days
         NominalPhotoperiod = 12         % days
         TimeAtOrganFormation = 57       % days
         N = 1.5
         CQYMin = 0.01;
         TimeAtCanopySenescence = 61     % days
-        TimeAtCropMaturity = 85         % days
+        TimeAtCropMaturity = 88 %85         % days - Updated from BioSim value according to BVAD Table 4.2.28
         OPF = 1.08;
-        FractionOfEdibleBiomass = 0.3
+        FractionOfEdibleBiomass = 0.98 %0.3 - Updated from BioSim value according to BVAD Table 4.2.28
         CaloriesPerKilogram = 3630;
         EdibleFreshBasisWaterContent = 0.12
         InedibleFreshBasisWaterContent = 0.9
         CanopyClosureConstants
         CanopyQuantumYieldConstants
+        LightCycleTemperature = 29      % in Celsius
 
     end
     
@@ -33,25 +34,25 @@ classdef Rice < handle
             
             % Initialize Canopy Closure Constants
             canopyClosureConstants = zeros(1,25);
-            canopyClosureConstants(1) = 6591400;
-            canopyClosureConstants(2) = 25776;
-            canopyClosureConstants(4) = 0.0064532;
-            canopyClosureConstants(6) = -3748;
+            canopyClosureConstants(1) = 6.5914E6;
+            canopyClosureConstants(2) = 2.5776E4;
+            canopyClosureConstants(4) = 6.4532E-3;
+            canopyClosureConstants(6) = -3.748E3;
             canopyClosureConstants(8) = -0.043378;
-            canopyClosureConstants(13) = 0.00004562;
-            canopyClosureConstants(17) = 0.0000045207;
-            canopyClosureConstants(18) = -0.000000014936;
+            canopyClosureConstants(13) = 4.562E-5;
+            canopyClosureConstants(17) = 4.5207E-6;
+            canopyClosureConstants(18) = -1.4936E-8;
             
             obj.CanopyClosureConstants = canopyClosureConstants;
             
             % Initialize Canopy Quantum Yield Constants
             canopyQYConstants = zeros(1,25);
-            canopyQYConstants(7) = 0.036186;
-            canopyQYConstants(8) = 0.000061457;
-            canopyQYConstants(9) = -0.000000024322;
-            canopyQYConstants(13) = -0.0000000091477;
-            canopyQYConstants(14) = 0.000000000003889;
-            canopyQYConstants(17) = -0.0000000026712;
+            canopyQYConstants(7) = 3.6186E-2;
+            canopyQYConstants(8) = 6.1457E-5;
+            canopyQYConstants(9) = -2.4322E-8;
+            canopyQYConstants(13) = -9.1477E-9;
+            canopyQYConstants(14) = 3.889E-12;
+            canopyQYConstants(17) = -2.6712E-9;
             
             obj.CanopyQuantumYieldConstants = canopyQYConstants;
 

@@ -22,7 +22,7 @@ classdef FoodProcessorImpl < handle
     end
     
     properties (Access = private)
-        biomassNeeded = 200         % (according to BioSim code comments) - During any given tick, this much biomass is needed for the food processor to run optimally - currently the this falg has no real influence on the performance of the Food Processor
+        biomassNeeded = 200         % (according to BioSim code comments) - During any given tick, this much biomass is needed for the food processor to run optimally - currently this flag has no real influence on the performance of the Food Processor
         powerNeeded = 100;          % (according to BioSim code comments) - During any given tick, this much power is needed for the food processor to run at all
         ProductionRate = 1
     end
@@ -50,7 +50,7 @@ classdef FoodProcessorImpl < handle
            %% gatherPower
            obj.currentPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(obj.powerNeeded,obj.PowerConsumerDefinition);     % Take power
            % Could probably save power use by putting a controller on when
-           % food processor is turned on - since it current consumed power
+           % food processor is turned on - since it currently consumes power
            % every tick
            
            % if has enough power
@@ -103,7 +103,7 @@ classdef FoodProcessorImpl < handle
                 
                % Send water to water store (potentially the store that is
                % the input to the WaterRS?
-               obj.WaterProducerDefinition.ResourceStore.add(currentWaterProduced,obj.WaterProducerDefinition);
+               obj.WaterProducerDefinition.ResourceStore.add(currentWaterProduced,obj.WaterProducerDefinition);     % Note that water here is in kg (from BioMatter defn)
                
            end
            

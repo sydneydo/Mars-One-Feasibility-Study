@@ -65,8 +65,17 @@ classdef BiomassStoreImpl < handle
             % The aggregate amount of mass taken from the store is tracked 
             % in the collectedMass variable. These are initialized as follows:
             collectedMass = 0;
-            itemsToTake = [];       % Vector containing biomatter items to return to consumer (used for store updating)
-            itemsToDelete = [];     % Vector containing indexes of biomatter items to remove from store (used for store updating)
+%             itemsToTake = [];       % Vector containing biomatter items to return to consumer (used for store updating)
+            itemsToTake = BioMatter.empty(0,length(obj.biomatterItems));        % Length of itemsToTake can't be more than the number of biomatterItems currently available
+            j = 0;      % Counter for items to take
+%             itemsToDelete = [];
+            itemsToDelete = zeros(1,length(obj.biomatterItems));     % Vector containing indexes of biomatter items to remove from store (used for store updating)
+            
+            % Ensure that request is always for positive amounts
+            if massRequested < 0
+                biomatterTaken = [];
+                return
+            end
             
             % Determine final mass to take based on resource consumer flow
             % rate limitations
@@ -85,8 +94,11 @@ classdef BiomassStoreImpl < handle
                 % If mass of current biomatterItem does not meet
                 % massStillNeeded, we take all of it
                 if obj.biomatterItems(i).Mass < massStillNeeded
-                    itemsToTake = [itemsToTake obj.biomatterItems(i)];
-                    itemsToDelete = [itemsToDelete i];          % increase efficiency in the future by preallocating array to a certain length and shrinking it at the end
+                    j = j+1;
+%                     itemsToTake = [itemsToTake obj.biomatterItems(i)];
+                    itemsToTake(j) = obj.biomatterItems(i);
+%                     itemsToDelete = [itemsToDelete i];          % increase efficiency in the future by preallocating array to a certain length and shrinking it at the end
+                    itemsToDelete(j) = i;
                     collectedMass = collectedMass + obj.biomatterItems(i).Mass;     % Update collected mass
                 else
                     % if mass of current biomatterItem is >=
@@ -102,7 +114,9 @@ classdef BiomassStoreImpl < handle
                     
                     % Add partialTakenItem to list of biomatterItems to
                     % take
-                    itemsToTake = [itemsToTake partialTakenItem];
+                    j = j+1;
+%                     itemsToTake = [itemsToTake partialTakenItem];
+                    itemsToTake(j) = partialTakenItem;
                     
                     % Update current biomatterItem mass, edible and
                     % inedible water content
@@ -116,7 +130,7 @@ classdef BiomassStoreImpl < handle
                     % to the list of biomatterItems to remove from the
                     % biomassStore
                     if obj.biomatterItems(i).Mass <= 0
-                        itemsToDelete = [itemsToDelete i];
+                        itemsToDelete(j) = i;       % Note that j has already been updated earlier for this condition
                     end
                     
                     % Update collectedMass
@@ -132,6 +146,7 @@ classdef BiomassStoreImpl < handle
             end
             
             % Remove Identified Items from BiomassStore
+            itemsToDelete = itemsToDelete(1:find(itemsToDelete,1,'last'));      % Remove trailing zeros from itemsToDelete vector
             obj.biomatterItems(itemsToDelete) = [];
             obj.contents(itemsToDelete) = [];          
                         
@@ -153,6 +168,12 @@ classdef BiomassStoreImpl < handle
         % Note that as is, this method can only take in one BioMatter Item
         % at a time. FoodStore has a means to account for this
         function [actuallyAdded, obj] = add(obj,biomatterRequested,resourceManagementDefinition)
+            
+            % Ensure that input is always a positive value
+            if biomatterRequested < 0
+                actuallyAdded = [];
+                return
+            end
             
             % Incorporate this if condition so that the function can handle
             % a varying number of inputs

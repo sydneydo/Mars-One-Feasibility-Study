@@ -8,7 +8,8 @@ classdef CrewPersonImpl2 < handle
         Age
         Weight
         Gender
-        CrewGroup                       % Contains object representing the group that the crew person is a member of
+        Diet                            % Diet of CrewPerson, specified as % of each crop type eaten (wrt calories)
+%         CrewGroup                       % Contains object representing the group that the crew person is a member of
         CurrentTick = 0                 % Current Tick
         Schedule                        % Array of ActivityImpl objects (currently assumes the same set of activities every day)
         TimeOnCurrentActivity = 1       % Time spent on current activity in hours
