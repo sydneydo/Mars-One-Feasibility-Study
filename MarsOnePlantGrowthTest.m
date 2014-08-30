@@ -20,7 +20,7 @@ plant.temperature = 20;
 %% Initialize Stores
 PotableWaterStore = StoreImpl('Potable H2O','Material',100000,100000);
 
-DirtyWaterStore = StoreImpl('Dirty H2O','Material',500,0);        % Corresponds to the UPA waste water tank - 18lb capacity (we increase volume by 10% to avoid loss of dirty water when running UPA in batch mode)
+DirtyWaterStore = StoreImpl('Dirty H2O','Material',100000,0);        % Corresponds to the UPA waste water tank - 18lb capacity (we increase volume by 10% to avoid loss of dirty water when running UPA in batch mode)
 
 GreyWaterStore = StoreImpl('Grey H2O','Material',100000,100000);
 
@@ -71,11 +71,11 @@ CropGrowthStartDays = (0:(numberOfPlots-1))*timeTilCropMaturity/numberOfPlots;
 growthArea = [54.7489,63.9891,25.3224,6.3862,49.1451];  % Growth areas calculated from the plant optimizer
 
 % Initialize crop shelves
-LettuceShelf = ShelfImpl2(Lettuce,54.75,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-PeanutShelf = ShelfImpl2(Peanut,64,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-SoybeanShelf = ShelfImpl2(Soybean,25.35,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-SweetPotatoShelf = ShelfImpl2(SweetPotato,6.4,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-WheatShelf = ShelfImpl2(Wheat,49.15,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
+LettuceShelf = ShelfImpl2(Lettuce,26.15,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
+PeanutShelf = ShelfImpl2(Peanut,69.88,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
+SoybeanShelf = ShelfImpl2(Soybean,34.76,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
+SweetPotatoShelf = ShelfImpl2(SweetPotato,1.65,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
+WheatShelf = ShelfImpl2(Wheat,67.52,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
 
 % biomassSystem = BiomassPSImpl([WhitePotatoShelf]);
 % biomassSystem = BiomassPSImpl([WheatShelf,DryBeanShelf,WhitePotatoShelf]);
@@ -194,6 +194,8 @@ figure, plot(dryfoodlevel,'LineWidth',2),grid on, title('Dry Food Level')
 figure, plot(caloriccontent,'LineWidth',2),grid on, title('Caloric Content within Food Store')
 
 figure, plot(greywaterstorelevel,'LineWidth',2),grid on, title('Grey Water Store')
+
+figure, plot(dirtywaterstorelevel,'LineWidth',2),grid on, title('Dirty Water Store')
 
 figure, plot(drywastestorelevel,'LineWidth',2),grid on, title('Dry Waste Store')
 

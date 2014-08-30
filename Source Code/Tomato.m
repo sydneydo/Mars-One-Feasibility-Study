@@ -21,13 +21,15 @@ classdef Tomato < handle
         TimeAtCropMaturity = 80 %85         % days - Updated from BioSim value according to BVAD Table 4.2.28
         OPF = 1.09;
         FractionOfEdibleBiomass = 0.7 %0.45 - Updated from BioSim value according to BVAD Table 4.2.28
-        CaloriesPerKilogram = 220;
-        EdibleFreshBasisWaterContent = 0.94
-        InedibleFreshBasisWaterContent = 0.9
+        CaloriesPerKilogram = (1-0.9452)*1000*(4*38.9+4*8.8+9*2)/(38.9+8.8+2) %220;
+        EdibleFreshBasisWaterContent = 0.9452 %0.94 % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/3270
+        InedibleFreshBasisWaterContent = 0.9 % percentage of inedible portion of crop that is made up of water
         CanopyClosureConstants
         CanopyQuantumYieldConstants
         LightCycleTemperature = 26      % in Celsius
-
+        CarbohydrateFractionOfDryMass = 38.9/(38.9+8.8+2)   % REF: http://ndb.nal.usda.gov/ndb/foods/show/3270
+        ProteinFractionOfDryMass = 8.8/(38.9+8.8+2)         % REF: http://ndb.nal.usda.gov/ndb/foods/show/3270
+        FatFractionOfDryMass = 2/(38.9+8.8+2)               % REF: http://ndb.nal.usda.gov/ndb/foods/show/3270
     end
     
     methods

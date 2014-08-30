@@ -78,7 +78,7 @@ classdef ShelfImpl2 < handle
     properties (Access = private)
         % Shelf properties
         waterNeededPerSquareMeter = 50  % Grab up to 50L/m^2 of crops per hour (default value within BioSim)
-        powerPerSquareMeter = 1520;     % this is taken from table 4.2.2 of BVAD
+        powerPerSquareMeter = 1520;     % this is taken from table 4.2.2 of BVAD (Table 4.2.3 indicates a power requiremenrs of 2.1kW/m^2)
         % Lamp Properties
         lampEfficiency = 261;           % for high pressure sodium bulbs
         PSEfficiency = 4.68;            % for high pressure sodium bulbs

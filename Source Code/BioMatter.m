@@ -1,4 +1,4 @@
-classdef BioMatter < handle
+classdef BioMatter
     %BioMatter Summary of this class goes here
     %   Note that this is originally an IDL type file
     %   BioMatter represents crops that have been sent to the biomass

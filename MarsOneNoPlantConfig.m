@@ -128,7 +128,7 @@ MethaneStore = StoreImpl('CH4 Store','Environmental');    % CH4 store for output
 % N2 Store
 % Corresponds to 2x high pressure N2 tanks currently mounted on exterior of Quest airlock on ISS (each holds 91kg of N2)
 % This is subject to change based on requirements
-numberOfN2Tanks = 2*4;
+numberOfN2Tanks = 2*4;      % We ramp the number up by a factor of 4 to make up for N2 leakage (which will be ultimately addressed by ISRU)
 initialN2TankCapacityInKg = numberOfN2Tanks*91;
 n2MolarMass = 2*14.007; %g/mol;
 initialN2StoreMoles = initialN2TankCapacityInKg*1E3/n2MolarMass;
@@ -140,24 +140,25 @@ MainPowerStore = StoreImpl('Power','Material',100000,100000);
 % Waste Stores
 DryWasteStore = StoreImpl('Dry Waste','Material',1000000,0);    % Currently waste is discarded via logistics resupply vehicles on ISS
 
-% Food Stores
-% carry along 120days worth of calories - initial simulations show an
-% average crew metabolic rate of 3040.1 Calories/day
-% Note that 120 days is equivalent to the longest growth cycle of all the
-% plants grown
-CarriedFood = Wheat;
-AvgCaloriesPerCrewPerson = 3040.1;
-CarriedCalories = numberOfCrew*AvgCaloriesPerCrewPerson*120;    % 120 days worth of calories
-CarriedTotalMass = CarriedCalories/CarriedFood.CaloriesPerKilogram; % Note that calories per kilogram is on a wet mass basis
+% % Food Stores
+% % carry along 120days worth of calories - initial simulations show an
+% % average crew metabolic rate of 3040.1 Calories/day
+% % Note that 120 days is equivalent to the longest growth cycle of all the
+% % plants grown
+% CarriedFood = Wheat;
+% AvgCaloriesPerCrewPerson = 3040.1;
+% CarriedCalories = numberOfCrew*AvgCaloriesPerCrewPerson*120;    % 120 days worth of calories
+% CarriedTotalMass = CarriedCalories/CarriedFood.CaloriesPerKilogram; % Note that calories per kilogram is on a wet mass basis
 
-% xmlFoodStoreLevel = 10000;
-% xmlFoodStoreCapacity = 10000;
-% defaultFoodWaterContent = 5;
-initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWaterContent*CarriedTotalMass); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java
+xmlFoodStoreLevel = 10000;
+xmlFoodStoreCapacity = 10000;
+defaultFoodWaterContent = 5;
+% initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWaterContent*CarriedTotalMass); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java
+initialfood = FoodMatter(Wheat,xmlFoodStoreLevel,defaultFoodWaterContent); 
 
-CarriedFoodStore = FoodStoreImpl(CarriedTotalMass,initialfood);
+CarriedFoodStore = FoodStoreImpl(xmlFoodStoreCapacity,initialfood);
 
-LocallyGrownFoodStore = FoodStoreImpl(1000);
+% LocallyGrownFoodStore = FoodStoreImpl(1000);
 
 %% Initialize SimEnvironments
 % Convert daily leakage rate to hourly leakage rate
@@ -179,6 +180,11 @@ LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',70.3,25000,0.265,0,0
 % LifeSupportUnit2 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
 CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,CarriedFoodStore);
 % CargoUnit2 = SimEnvironmentImpl('CargoUnit2',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
+
+%% Set up EVA environment
+% Size EVA for two people - include airlock losses when EVA is executed
+
+
 
 %% Initialize Key Activity Parameters
 
@@ -220,7 +226,7 @@ astro1 = CrewPersonImpl2('Male 1',35,75,'Male',[crewSchedule{1,:}]);%,O2Fraction
 astro1.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
 astro1.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
 astro1.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro1.FoodConsumerDefinition = ResourceUseDefinitionImpl([LocallyGrownFoodStore,CarriedFoodStore],5,5);
+astro1.FoodConsumerDefinition = ResourceUseDefinitionImpl(CarriedFoodStore,5,5);
 astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 
@@ -233,7 +239,7 @@ astro2 = CrewPersonImpl2('Female 1',35,55,'Female',[crewSchedule{2,:}]);
 astro2.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
 astro2.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
 astro2.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro2.FoodConsumerDefinition = ResourceUseDefinitionImpl([LocallyGrownFoodStore,CarriedFoodStore],5,5);
+astro2.FoodConsumerDefinition = ResourceUseDefinitionImpl(CarriedFoodStore,5,5);
 astro2.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 %% Crew in Labs Module (labs)
@@ -245,7 +251,7 @@ astro3 = CrewPersonImpl2('Male 2',35,72,'Male',[crewSchedule{3,:}]);
 astro3.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
 astro3.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
 astro3.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro3.FoodConsumerDefinition = ResourceUseDefinitionImpl([LocallyGrownFoodStore,CarriedFoodStore],5,5);
+astro3.FoodConsumerDefinition = ResourceUseDefinitionImpl(CarriedFoodStore,5,5);
 astro3.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 %% Crew in Maintenance Module (maint)
@@ -257,41 +263,41 @@ astro4 = CrewPersonImpl2('Female 2',35,55,'Female',[crewSchedule{4,:}]);
 astro4.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
 astro4.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
 astro4.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl([LocallyGrownFoodStore,CarriedFoodStore],5,5);
+astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl(CarriedFoodStore,5,5);
 astro4.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 %% Clear crewSchedule to save ~2MB memory
 clear crewSchedule
 
 %% Biomass Stores
-% Located within Inflatable Structure
-% xml_inedibleFraction = 0.25;
-% xml_edibleWaterContent = 5;
-% xml_inedibleWaterContent = 5;
-% initialBiomatter = [BioMatter(Wheat,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
-%     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
-%     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent)];
-% BiomassStore = BiomassStoreImpl(BioMatter(Wheat,0,0,0,0),100000);
-BiomassStore = BiomassStoreImpl(100000);
-% Set more crop type for FoodMatter somewhere later on
-
-%% Initialize crop shelves
-
-CropWaterStore = StoreImpl('Grey Crop H2O','Material',100000,100000);   % Initialize a 9200L water buffer
-
-LettuceShelf = ShelfImpl2(Lettuce,26.15,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-PeanutShelf = ShelfImpl2(Peanut,69.88,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-SoybeanShelf = ShelfImpl2(Soybean,34.76,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-SweetPotatoShelf = ShelfImpl2(SweetPotato,1.65,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-WheatShelf = ShelfImpl2(Wheat,67.52,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-
-%% Initialize FoodProcessor
-FoodProcessor = FoodProcessorImpl;
-FoodProcessor.BiomassConsumerDefinition = ResourceUseDefinitionImpl(BiomassStore,1000,1000);
-FoodProcessor.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
-FoodProcessor.FoodProducerDefinition = ResourceUseDefinitionImpl(LocallyGrownFoodStore,1000,1000);
-FoodProcessor.WaterProducerDefinition = ResourceUseDefinitionImpl(CropWaterStore,1000,1000);        % FoodProcessor now outputs back to crop water store
-FoodProcessor.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,1000,1000);
+% % Located within Inflatable Structure
+% % xml_inedibleFraction = 0.25;
+% % xml_edibleWaterContent = 5;
+% % xml_inedibleWaterContent = 5;
+% % initialBiomatter = [BioMatter(Wheat,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
+% %     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
+% %     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent)];
+% % BiomassStore = BiomassStoreImpl(BioMatter(Wheat,0,0,0,0),100000);
+% BiomassStore = BiomassStoreImpl(100000);
+% % Set more crop type for FoodMatter somewhere later on
+% 
+% %% Initialize crop shelves
+% 
+% CropWaterStore = StoreImpl('Grey Crop H2O','Material',100000,100000);   % Initialize a 9200L water buffer
+% 
+% LettuceShelf = ShelfImpl2(Lettuce,26.15,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% PeanutShelf = ShelfImpl2(Peanut,69.88,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% SoybeanShelf = ShelfImpl2(Soybean,34.76,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% SweetPotatoShelf = ShelfImpl2(SweetPotato,1.65,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% WheatShelf = ShelfImpl2(Wheat,67.52,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% 
+% %% Initialize FoodProcessor
+% FoodProcessor = FoodProcessorImpl;
+% FoodProcessor.BiomassConsumerDefinition = ResourceUseDefinitionImpl(BiomassStore,1000,1000);
+% FoodProcessor.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
+% FoodProcessor.FoodProducerDefinition = ResourceUseDefinitionImpl(LocallyGrownFoodStore,1000,1000);
+% FoodProcessor.WaterProducerDefinition = ResourceUseDefinitionImpl(CropWaterStore,1000,1000);        % FoodProcessor now outputs back to crop water store
+% FoodProcessor.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,1000,1000);
 
 %% Initialize (Intermodule Ventilation) Fans
 
@@ -382,7 +388,7 @@ dirtywaterstorelevel = zeros(1,simtime);
 greywaterstorelevel = zeros(1,simtime);
 drywastestorelevel = zeros(1,simtime);
 carriedfoodstorelevel = zeros(1,simtime);
-grownfoodstorelevel = zeros(1,simtime);
+% grownfoodstorelevel = zeros(1,simtime);
 dryfoodlevel = zeros(1,simtime);
 caloriccontent = zeros(1,simtime);
 biomassstorelevel = zeros(1,simtime);
@@ -457,7 +463,7 @@ for i = 1:simtime
         greywaterstorelevel = greywaterstorelevel(1:(i-1));
         drywastestorelevel = drywastestorelevel(1:(i-1));
         carriedfoodstorelevel = carriedfoodstorelevel(1:(i-1));
-        cropwaterstorelevel = cropwaterstorelevel(1:(i-1));
+%         cropwaterstorelevel = cropwaterstorelevel(1:(i-1));
         powerlevel = powerlevel(1:(i-1));
     
         % Record Inflatable Unit Atmosphere
@@ -525,7 +531,7 @@ for i = 1:simtime
     dirtywaterstorelevel(i) = DirtyWaterStore.currentLevel;
     greywaterstorelevel(i) = GreyWaterStore.currentLevel;
     drywastestorelevel(i) = DryWasteStore.currentLevel;
-    biomassstorelevel(i) = BiomassStore.currentLevel;
+%     biomassstorelevel(i) = BiomassStore.currentLevel;
     powerlevel(i) = MainPowerStore.currentLevel;
     
     % Record Inflatable Unit Atmosphere
@@ -601,31 +607,31 @@ for i = 1:simtime
     co2accumulatorlevel(i) = crs.CO2Accumulator.currentLevel;
     waterRS.tick;
     
-    cropwaterstorelevel(i) = CropWaterStore.currentLevel;
+%     cropwaterstorelevel(i) = CropWaterStore.currentLevel;
      
-    if CropWaterStore.currentLevel <= 0
-        disp('Crop Water Store is empty')
-        break
-    end
+%     if CropWaterStore.currentLevel <= 0
+%         disp('Crop Water Store is empty')
+%         break
+%     end
     
     % ISRU inject water into CropWaterStore (0.565L/hr)
 %     CropWaterStore.add(0.565);
     
-    % Tick Crop Shelves
-    LettuceShelf.tick;
-    PeanutShelf.tick;
-    SoybeanShelf.tick;
-    SweetPotatoShelf.tick;
-    WheatShelf.tick;
-    
-    FoodProcessor.tick;
+%     % Tick Crop Shelves
+%     LettuceShelf.tick;
+%     PeanutShelf.tick;
+%     SoybeanShelf.tick;
+%     SweetPotatoShelf.tick;
+%     WheatShelf.tick;
+%     
+%     FoodProcessor.tick;
     carriedfoodstorelevel(i) = CarriedFoodStore.currentLevel;
-    grownfoodstorelevel(i) = LocallyGrownFoodStore.currentLevel;
-    if LocallyGrownFoodStore.currentLevel > 0
-        
-        dryfoodlevel(i) = sum(cell2mat({LocallyGrownFoodStore.foodItems.Mass})-cell2mat({LocallyGrownFoodStore.foodItems.WaterContent}));
-        caloriccontent(i) = sum([LocallyGrownFoodStore.foodItems.CaloricContent]);
-    end
+%     grownfoodstorelevel(i) = LocallyGrownFoodStore.currentLevel;
+%     if LocallyGrownFoodStore.currentLevel > 0
+%         
+%         dryfoodlevel(i) = sum(cell2mat({LocallyGrownFoodStore.foodItems.Mass})-cell2mat({LocallyGrownFoodStore.foodItems.WaterContent}));
+%         caloriccontent(i) = sum([LocallyGrownFoodStore.foodItems.CaloricContent]);
+%     end
     
     % Tick Crew
     astro1.tick;

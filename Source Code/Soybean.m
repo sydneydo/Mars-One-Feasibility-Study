@@ -21,13 +21,15 @@ classdef Soybean < handle
         TimeAtCropMaturity = 86         % days
         OPF = 1.16;
         FractionOfEdibleBiomass = 0.95 %0.4 - Updated from BioSim value according to BVAD Table 4.2.28
-        CaloriesPerKilogram = 1340;
-        EdibleFreshBasisWaterContent = 0.1
+        CaloriesPerKilogram = (1-0.0854)*1000*(4*301.6+4*364.9+9*199.4)/(301.6+364.9+199.4) %1340;
+        EdibleFreshBasisWaterContent = 0.0854 %0.1 % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/4828
         InedibleFreshBasisWaterContent = 0.9
         CanopyClosureConstants
         CanopyQuantumYieldConstants
         LightCycleTemperature = 26      % in Celsius
-
+        CarbohydrateFractionOfDryMass = 301.6/(301.6+364.9+199.4)  % REF: http://ndb.nal.usda.gov/ndb/foods/show/4828
+        ProteinFractionOfDryMass = 364.9/(301.6+364.9+199.4)       % REF: http://ndb.nal.usda.gov/ndb/foods/show/4828
+        FatFractionOfDryMass = 199.4/(301.6+364.9+199.4)             % REF: http://ndb.nal.usda.gov/ndb/foods/show/4828
     end
     
     methods

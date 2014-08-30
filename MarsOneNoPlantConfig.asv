@@ -128,7 +128,7 @@ MethaneStore = StoreImpl('CH4 Store','Environmental');    % CH4 store for output
 % N2 Store
 % Corresponds to 2x high pressure N2 tanks currently mounted on exterior of Quest airlock on ISS (each holds 91kg of N2)
 % This is subject to change based on requirements
-numberOfN2Tanks = 2*4;
+numberOfN2Tanks = 2*4;      % We ramp the number up by a factor of 4 to make up for N2 leakage (which will be ultimately addressed by ISRU)
 initialN2TankCapacityInKg = numberOfN2Tanks*91;
 n2MolarMass = 2*14.007; %g/mol;
 initialN2StoreMoles = initialN2TankCapacityInKg*1E3/n2MolarMass;
@@ -140,24 +140,25 @@ MainPowerStore = StoreImpl('Power','Material',100000,100000);
 % Waste Stores
 DryWasteStore = StoreImpl('Dry Waste','Material',1000000,0);    % Currently waste is discarded via logistics resupply vehicles on ISS
 
-% Food Stores
-% carry along 120days worth of calories - initial simulations show an
-% average crew metabolic rate of 3040.1 Calories/day
-% Note that 120 days is equivalent to the longest growth cycle of all the
-% plants grown
-CarriedFood = Wheat;
-AvgCaloriesPerCrewPerson = 3040.1;
-CarriedCalories = numberOfCrew*AvgCaloriesPerCrewPerson*120;    % 120 days worth of calories
-CarriedTotalMass = CarriedCalories/CarriedFood.CaloriesPerKilogram; % Note that calories per kilogram is on a wet mass basis
+% % Food Stores
+% % carry along 120days worth of calories - initial simulations show an
+% % average crew metabolic rate of 3040.1 Calories/day
+% % Note that 120 days is equivalent to the longest growth cycle of all the
+% % plants grown
+% CarriedFood = Wheat;
+% AvgCaloriesPerCrewPerson = 3040.1;
+% CarriedCalories = numberOfCrew*AvgCaloriesPerCrewPerson*120;    % 120 days worth of calories
+% CarriedTotalMass = CarriedCalories/CarriedFood.CaloriesPerKilogram; % Note that calories per kilogram is on a wet mass basis
 
-% xmlFoodStoreLevel = 10000;
-% xmlFoodStoreCapacity = 10000;
-% defaultFoodWaterContent = 5;
-initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWaterContent*CarriedTotalMass); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java
+xmlFoodStoreLevel = 10000;
+xmlFoodStoreCapacity = 10000;
+defaultFoodWaterContent = 5;
+% initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWaterContent*CarriedTotalMass); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java
+initialfood = FoodMatter(Wheat,xmlFoodStoreLevel,defaultFoodWaterContent); 
 
 CarriedFoodStore = FoodStoreImpl(CarriedTotalMass,initialfood);
 
-LocallyGrownFoodStore = FoodStoreImpl(1000);
+% LocallyGrownFoodStore = FoodStoreImpl(1000);
 
 %% Initialize SimEnvironments
 % Convert daily leakage rate to hourly leakage rate

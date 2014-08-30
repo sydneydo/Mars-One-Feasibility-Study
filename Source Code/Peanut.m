@@ -20,13 +20,15 @@ classdef Peanut < handle%PlantImpl
         TimeAtCropMaturity = 110 %104 - Updated from BioSim value according to BVAD Table 4.2.28
         OPF = 1.19;
         FractionOfEdibleBiomass = 0.49 %0.25 - Updated from BioSim value according to BVAD Table 4.2.28
-        CaloriesPerKilogram = 5680;
-        EdibleFreshBasisWaterContent = 0.056
-        InedibleFreshBasisWaterContent = 0.9
+        CaloriesPerKilogram = (1-0.0639)*1000*(4*158.2+4*261.5+9*496)/(158.2+261.5+496) %5680;
+        EdibleFreshBasisWaterContent = 0.0639 %0.056 % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/4812
+        InedibleFreshBasisWaterContent = 0.9    % percentage of inedible portion of crop that is made up of water
         CanopyClosureConstants
         CanopyQuantumYieldConstants
         LightCycleTemperature = 26      % in Celsius
-
+        CarbohydrateFractionOfDryMass = 158.2/(158.2+261.5+496)  % REF: http://ndb.nal.usda.gov/ndb/foods/show/4812
+        ProteinFractionOfDryMass = 261.5/(158.2+261.5+496)       % REF: http://ndb.nal.usda.gov/ndb/foods/show/4812
+        FatFractionOfDryMass = 496/(158.2+261.5+496)             % REF: http://ndb.nal.usda.gov/ndb/foods/show/4812
     end
     
     methods

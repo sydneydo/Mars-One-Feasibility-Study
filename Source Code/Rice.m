@@ -19,13 +19,15 @@ classdef Rice < handle
         TimeAtCropMaturity = 88 %85         % days - Updated from BioSim value according to BVAD Table 4.2.28
         OPF = 1.08;
         FractionOfEdibleBiomass = 0.98 %0.3 - Updated from BioSim value according to BVAD Table 4.2.28
-        CaloriesPerKilogram = 3630;
-        EdibleFreshBasisWaterContent = 0.12
-        InedibleFreshBasisWaterContent = 0.9
+        CaloriesPerKilogram = (1-0.1329)*1000*(4*791.5+4*65+9*5.2)/(791.5+65+5.2) %3630;
+        EdibleFreshBasisWaterContent = 0.1329 %0.12 % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/6397
+        InedibleFreshBasisWaterContent = 0.9 % percentage of inedible portion of crop that is made up of water
         CanopyClosureConstants
         CanopyQuantumYieldConstants
         LightCycleTemperature = 29      % in Celsius
-
+        CarbohydrateFractionOfDryMass = 791.5/(791.5+65+5.2)  % REF: http://ndb.nal.usda.gov/ndb/foods/show/6397
+        ProteinFractionOfDryMass = 65/(791.5+65+5.2)          % REF: http://ndb.nal.usda.gov/ndb/foods/show/6397
+        FatFractionOfDryMass = 5.2/(791.5+65+5.2)             % REF: http://ndb.nal.usda.gov/ndb/foods/show/6397
     end
     
     methods

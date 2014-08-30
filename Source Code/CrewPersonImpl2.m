@@ -18,11 +18,11 @@ classdef CrewPersonImpl2 < handle
         % Consumer/Producer Definitions
 %         AirConsumerDefinition = AirConsumerDefinitionImpl
 %         AirProducerDefinition = AirProducerDefinitionImpl
-        PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl
-        DirtyWaterProducerDefinition = ResourceUseDefinitionImpl
-        GreyWaterProducerDefinition = ResourceUseDefinitionImpl
-        FoodConsumerDefinition = ResourceUseDefinitionImpl
-        DryWasteProducerDefinition = ResourceUseDefinitionImpl
+%         PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl
+%         DirtyWaterProducerDefinition = ResourceUseDefinitionImpl
+%         GreyWaterProducerDefinition = ResourceUseDefinitionImpl
+%         FoodConsumerDefinition = ResourceUseDefinitionImpl
+%         DryWasteProducerDefinition = ResourceUseDefinitionImpl
         
         % Physiological Buffers to Measure Crew Wellbeing
         consumedWaterBuffer
@@ -197,6 +197,19 @@ classdef CrewPersonImpl2 < handle
             end
         end
         
+        %% skipActivity
+        % Function to skip to next activity
+        function skipActivity(obj)
+            nextindex = obj.CurrentActivity.ID+1;
+            % Cycle to beginning of schedule is reached past last
+            % activity
+            if nextindex > length(obj.Schedule)
+                nextindex = 1;
+            end
+            obj.CurrentActivity = obj.Schedule(nextindex);
+            obj.TimeOnCurrentActivity = 1;
+        end
+        
         %% Consumes and Produced Resources for this tick
         function consumeAndProduceResources(obj)
             %% Resource consumption requirements
@@ -206,73 +219,67 @@ classdef CrewPersonImpl2 < handle
 
             % O2
             obj.O2Needed = calculateO2Needed(obj);
-%             AirInputs = obj.AirConsumerDefinition.ConsumptionStore;   % Define source of air inputs to human consumption
-%             AirInputs = obj.CurrentActivity.Location;
-            if length(obj.CurrentActivity.Location) < 1
-                obj.O2Consumed = 0;
-            else
-                obj.O2Consumed = obj.CurrentActivity.Location.O2Store.take(obj.O2Needed);
-            end
-            % CO2
+            obj.O2Consumed = obj.CurrentActivity.Location.O2Store.take(obj.O2Needed);
+             % CO2
             obj.CO2Produced = obj.calculateCO2Produced(obj.O2Consumed);
-%             AirOutputs = obj.AirProducerDefinition.ProductionStore;  % Define sink for human-produced air outputs
             obj.CurrentActivity.Location.CO2Store.add(obj.CO2Produced);                   % Add CO2 to current SimEnvironment
             % Food
             obj.caloriesNeeded = calculateFoodNeeded(obj);
             foodConsumed = getCaloriesFromStore(obj,obj.caloriesNeeded);    % Outputs Food Items Consumed during this tick - this takes food from the foodstore
-            % Calculate total food mass and food water content consumed this tick
-            obj.foodMassConsumed = 0;
-            obj.caloriesConsumed = 0;
-            foodWaterConsumed = 0;
-            for i = 1:length(foodConsumed)
-                obj.foodMassConsumed = obj.foodMassConsumed + foodConsumed(i).Mass;
-                obj.caloriesConsumed = obj.caloriesConsumed + foodConsumed(i).CaloricContent;
-                foodWaterConsumed = foodWaterConsumed + foodConsumed(i).WaterContent;
-            end 
+            % Calculate total food mass and food water content consumed this tick            
+            obj.foodMassConsumed = sum([foodConsumed.Mass]);
+            obj.caloriesConsumed = sum([foodConsumed.CaloricContent]);
+            foodWaterConsumed = sum([foodConsumed.WaterContent]);
+            
             % Potable Water
-            PotableWaterInputs = obj.PotableWaterConsumerDefinition.ConsumptionStore;                                       % Define potable water needed
             potableWaterRequired = calculateCleanWaterNeeded(obj);                                                  % Total potable water required by crew person
             obj.potableWaterNeeded = potableWaterRequired-foodWaterConsumed;                                      % Calculate potable water needed to be drunk (accounting for water already taken from food store)
-            obj.potableWaterConsumed = PotableWaterInputs.take(obj.potableWaterNeeded,obj.PotableWaterConsumerDefinition);  % Take potableWaterNeeded to be drunk from potable water store 
+            obj.potableWaterConsumed = obj.CurrentActivity.Location.PotableWaterStore.take(obj.potableWaterNeeded);  % Take potableWaterNeeded to be drunk from potable water store 
             % Vapor
             obj.vaporProduced = obj.calculateVaporProduced(potableWaterRequired);                                       % Calculate vapor produced as a function of potable water consumed
             obj.CurrentActivity.Location.VaporStore.add(obj.vaporProduced);                                                               % Send Vapor Produced to SimEnvironment
             % Dirty Water
-            DirtyWaterOutputs = obj.DirtyWaterProducerDefinition.ResourceStore;
             obj.dirtyWaterProduced = obj.calculateDirtyWaterProduced(potableWaterRequired);
-            DirtyWaterOutputs.add(obj.dirtyWaterProduced,obj.DirtyWaterProducerDefinition);  % Add dirtyWaterProduced from to Dirty Water store
+            obj.CurrentActivity.Location.DirtyWaterStore.add(obj.dirtyWaterProduced);  % Add dirtyWaterProduced from to Dirty Water store
             % Grey Water
-            GreyWaterOutputs = obj.GreyWaterProducerDefinition.ResourceStore;
             obj.greyWaterProduced = obj.calculateGreyWaterProduced(potableWaterRequired);
-            GreyWaterOutputs.add(obj.greyWaterProduced,obj.GreyWaterProducerDefinition);  % Add greyWaterProduced from to Grey Water store
+            obj.CurrentActivity.Location.GreyWaterStore.add(obj.greyWaterProduced);  % Add greyWaterProduced from to Grey Water store
             % Dry Waste
-            DryWasteOutputs = obj.DryWasteProducerDefinition.ResourceStore;
             obj.dryWasteProduced = obj.calculateDryWasteProduced(obj.foodMassConsumed);
-            DryWasteOutputs.add(obj.dryWasteProduced,obj.DryWasteProducerDefinition);  % Add dryWasteProduced from to Dry Waste store
+            obj.CurrentActivity.Location.DryWasteStore.add(obj.dryWasteProduced);  % Add dryWasteProduced from to Dry Waste store
             
         end
 
         %% Function to gather foodItems from stores within
         % FoodConsumerDefinition
         function foodConsumed = getCaloriesFromStore(obj,caloriesNeeded)
-            gatheredFoodMatterArrays = [];
+%             gatheredFoodMatterArrays = [];
+            gatheredFoodMatterArrays = FoodMatter.empty(0,length(obj.CurrentActivity.Location.FoodStore));
             gatheredCalories = 0;
            
-            for i = 1:length(obj.FoodConsumerDefinition.ResourceStore) % corresponds to vector of FoodConsumerDefinition
-                
+            % Order food stores by preference from which food is first
+            % taken - if not enough calories available in first store, the
+            % crew moves to the next store to look for food to consume
+%             for i = 1:length(obj.FoodConsumerDefinition.ResourceStore) % corresponds to vector of FoodConsumerDefinition
+            for i = 1:length(obj.CurrentActivity.Location.FoodStore)    % Cycle through food stores within current environment
                 if gatheredCalories < caloriesNeeded
                     
-                    limitingMassFactor = min(obj.FoodConsumerDefinition.MaxFlowRate,...
-                        obj.FoodConsumerDefinition.DesiredFlowRate);    % from FoodConsumerDefinitionImpl.getCaloriesFromStore, referred to in CrewPersonImpl.eatFood()
+%                     limitingMassFactor = min(obj.FoodConsumerDefinition.MaxFlowRate,...
+%                         obj.FoodConsumerDefinition.DesiredFlowRate);    % from FoodConsumerDefinitionImpl.getCaloriesFromStore, referred to in CrewPersonImpl.eatFood()
                     
-                    takenMatter = obj.FoodConsumerDefinition.ResourceStore(i)...
-                        .takeFoodMatterCalories(caloriesNeeded,limitingMassFactor); % from FoodStoreImpl.takeFoodMatterCalories, outputs food taken from FoodStoreImpl
+%                     takenMatter = obj.FoodConsumerDefinition.ResourceStore(i)...
+%                         .takeFoodMatterCalories(caloriesNeeded,limitingMassFactor); % from FoodStoreImpl.takeFoodMatterCalories, outputs food taken from FoodStoreImpl
                     
-                    gatheredFoodMatterArrays = [gatheredFoodMatterArrays takenMatter];
+                    takenMatter = obj.CurrentActivity.Location.FoodStore(i)...
+                        .takeFoodMatterCalories(caloriesNeeded,limitingMassFactor);
+
+%                     gatheredFoodMatterArrays = [gatheredFoodMatterArrays takenMatter];
+                    gatheredFoodMatterArrays(i) = takenMatter;
                     
-                    for j = 1:length(takenMatter)
-                        gatheredCalories = gatheredCalories + takenMatter(j).CaloricContent;
-                    end
+%                     for j = 1:length(takenMatter)
+%                         gatheredCalories = gatheredCalories + takenMatter(j).CaloricContent;
+%                     end
+                    gatheredCalories = gatheredCalories + sum([takenMatter.CaloricContent]);
                 end    
                 % Break out of for loop if we have enough calories
                 if gatheredCalories >= caloriesNeeded
@@ -390,16 +397,18 @@ classdef CrewPersonImpl2 < handle
                 obj.suffocating = 0;
             end
             
-            % Fire Hazard and Hyperoxia Check
-            if obj.CurrentActivity.Location.O2Percentage > obj.CurrentActivity.Location.DangerousOxygenThreshold
-                obj.highOxygenBuffer.take(1);%currentO2Ratio-...        % Take one hour away from buffer
-%                     obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold);       % Remove time in hyperoxic state from buffer
-                obj.fireRisked = 1;
-                disp([obj.Name,' is currently in a fire risked state on tick: ', num2str(obj.CurrentTick)])
-            else
-                obj.fireRisked = 0;
+            % Fire Hazard and Hyperoxia Check (only check when crew is not
+            % on EVA)
+            if ~(strcmpi(obj.CurrentActivity.Name,'EVA') || strcmpi(obj.CurrentActivity.Name,'EVA Prebreathe'))
+                if obj.CurrentActivity.Location.O2Percentage > obj.CurrentActivity.Location.DangerousOxygenThreshold
+                    obj.highOxygenBuffer.take(1);%currentO2Ratio-...        % Take one hour away from buffer
+                    %                     obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold);       % Remove time in hyperoxic state from buffer
+                    obj.fireRisked = 1;
+                    disp([obj.Name,' is currently in a fire risked state on tick: ', num2str(obj.CurrentTick)])
+                else
+                    obj.fireRisked = 0;
+                end
             end
-            
             % Total Pressure Check
             if obj.CurrentActivity.Location.pressure < obj.TotalPressureLowLimit
                 obj.lowTotalPressureBuffer.take(1); % Take one hour away from buffer
@@ -434,7 +443,7 @@ classdef CrewPersonImpl2 < handle
             oxygenHighRiskReturn = obj.calculateRisk(obj.highOxygenBuffer);
             totalpressureLowRiskReturn = obj.calculateRisk(obj.lowTotalPressureBuffer);
             CO2RiskReturn = obj.calculateRisk(obj.consumedCO2Buffer);
-            sleepRiskReturn = obj.calculateRisk(obj.sleepBuffer);
+%             sleepRiskReturn = obj.calculateRisk(obj.sleepBuffer);
             
             % Check for risk due to starvation
             if calorieRiskReturn > randomNumber

@@ -46,11 +46,8 @@ classdef FoodStoreImpl < handle
             end
             
             % Find combined mass of foodmatterRequested (for the case that
-            % it is a vector of length > 1)
-            massRequested = 0;
-            for i = 1:length(foodmatterRequested)
-                massRequested = massRequested + foodmatterRequested(i).Mass;
-            end
+            % it is a vector of length > 1)            
+            massRequested = sum([foodmatterRequested.Mass]);
             
             % If resourceManagementDefinition is included 
             if nargin == 3
@@ -64,14 +61,16 @@ classdef FoodStoreImpl < handle
                 % adjust the foodmatterRequested vector to meet the flow
                 % limitations (this is essentially like the take method)
                 if finalflowrate ~= massRequested
-                    itemsToTake = [];
+%                     itemsToTake = [];
+                    itemsToTake = FoodMatter.empty(0,length(foodmatterRequested));
                     collectedMass = 0;                    
                     for i = 1:length(foodmatterRequested)
                         massStillNeeded = finalflowrate-collectedMass;
                          % If mass of current FoodMatterItem does not meet
                          % massStillNeeded, we take all of it
                          if foodmatterRequested(i).Mass < massStillNeeded
-                             itemsToTake = [itemsToTake foodmatterRequested(i)];
+%                              itemsToTake = [itemsToTake foodmatterRequested(i)];
+                             itemsToTake(i) = foodmatterRequested(i);
                              collectedMass = collectedMass + foodmatterRequested(i).Mass;
                          else
                              % if mass of current FoodmatterItem is >=
@@ -84,7 +83,8 @@ classdef FoodStoreImpl < handle
                              
                              % Add partialTakenItem to list of FoodmatterItems to
                              % take
-                             itemsToTake = [itemsToTake partialTakenItem];
+%                              itemsToTake = [itemsToTake partialTakenItem];
+                             itemsToTake(i) = partialTakenItem;
                              
                              % Update collectedMass
                              collectedMass = collectedMass + partialTakenItem.Mass;
@@ -169,6 +169,11 @@ classdef FoodStoreImpl < handle
         
         %% take
         function [foodTaken, obj] = takeFoodMatterCalories(obj,caloriesNeeded,limitingMass)
+            
+            if nargin == 2
+                limitingMass = Inf;
+            end
+            
             % This function goes through each fooditem in the food store,
             % and progressively collects food to meet the desired calorie
             % and mass requirements. Note that the order in which fooditems
@@ -179,15 +184,19 @@ classdef FoodStoreImpl < handle
             % collectedMass variable. These are initialized as follows:
             collectedCalories = 0;
             collectedMass = 0;
-            itemsToTake = [];     % Vector containing fooditems to return to store (used for store updating)
-            itemsToDelete = [];     % Vector containing fooditems to remove from store (used for store updating)
+            itemsToTake = FoodMatter.empty(0,length(obj.foodItems));    % Vector containing fooditems to return to store (used for store updating)
+%             itemsToTake = [];     % Vector containing fooditems to return to store (used for store updating)
+            itemsToDelete = zeros(1,length(obj.foodItems));
+%             itemsToDelete = [];     % Vector containing fooditems to remove from store (used for store updating)
+            
+            count = 0;      % Counter for foodItems to delete
             
             % We now cycle through each foodItem within the foodstore:
             for i = 1:length(obj.foodItems)
                 
                 % Determine number of calories within current FoodMatter
                 % foodItem = food mass*food energy density
-                currentfoodItemCalories = obj.foodItems.CaloricContent;
+                currentfoodItemCalories = obj.foodItems(i).CaloricContent;
                 caloriesStillNeeded = caloriesNeeded - collectedCalories;   % Update amount of calories still needed to be taken from FoodStore
 
                 % If you have more calories from obj.foodItems(i)
@@ -271,7 +280,8 @@ classdef FoodStoreImpl < handle
                     
                     % Add newly created FoodMatter object to itemsToTake
                     % vector, signifying FoodItems taken from FoodStore
-                    itemsToTake = [itemsToTake partialReturnedFoodMatter];
+%                     itemsToTake = [itemsToTake partialReturnedFoodMatter];
+                    itemsToTake(i) = partialReturnedFoodMatter;
                     
                     % Update contents within foodItem store
                     obj.foodItems(i).Mass = obj.foodItems(i).Mass - massToRemove;
@@ -282,7 +292,9 @@ classdef FoodStoreImpl < handle
                     
                     % Remove fooditem altogether if its mass is <= 0
                     if obj.foodItems(i).Mass <= 0
-                        itemsToDelete = [itemsToDelete i];
+%                         itemsToDelete = [itemsToDelete i];
+                        count = count+1;
+                        itemsToDelete(count) = i;
                     end
                     
                     % Update total mass and calories collected
@@ -303,7 +315,8 @@ classdef FoodStoreImpl < handle
                         obj.foodItems(i).WaterContent*flowrateFractionOfOriginal);
                     
                     % Add new FoodItem to itemsToTake vector
-                    itemsToTake = [itemsToTake paredToFlowrateFoodMatter];
+%                     itemsToTake = [itemsToTake paredToFlowrateFoodMatter];
+                    itemsToTake(i) = paredToFlowrateFoodMatter;
                     
                     % Update amount of mass of FoodItem still within store
                     obj.foodItems(i).Mass = obj.foodItems(i).Mass - paredToFlowrateFoodMatter.Mass;
@@ -313,7 +326,9 @@ classdef FoodStoreImpl < handle
                     
                     % Remove fooditem altogether if its mass is <= 0
                     if obj.foodItems(i).Mass <= 0
-                        itemsToDelete = [itemsToDelete i];
+%                         itemsToDelete = [itemsToDelete i];
+                        count = count+1;
+                        itemsToDelete(count) = i;
                     end
                     
                     % Update total mass and calories collected (check the logic of this!)
@@ -347,7 +362,8 @@ classdef FoodStoreImpl < handle
 
                     % Add newly created FoodMatter object to itemsToTake
                     % vector, signifying FoodItems taken from FoodStore
-                    itemsToTake = [itemsToTake partialReturnedFoodMatter];
+%                     itemsToTake = [itemsToTake partialReturnedFoodMatter];
+                    itemsToTake(i) = partialReturnedFoodMatter;
                     
                     % Update contents within foodItem store
                     obj.foodItems(i).Mass = obj.foodItems(i).Mass - massToRemove;
@@ -358,7 +374,9 @@ classdef FoodStoreImpl < handle
                                      
                     % Remove fooditem altogether if its mass is <= 0
                     if obj.foodItems(i).Mass <= 0
-                        itemsToDelete = [itemsToDelete i];
+%                         itemsToDelete = [itemsToDelete i];
+                        count = count+1;
+                        itemsToDelete(count) = i;
                     end
                     
                     % Update total mass and calories collected
@@ -368,8 +386,11 @@ classdef FoodStoreImpl < handle
                 %% Else if we have insufficient calories and insufficient
                 % food mass, just take all of the current food item
                 else
-                    itemsToTake = [itemsToTake obj.foodItems(i)];   % Append items to take from store vector
-                    itemsToDelete = [itemsToDelete i];   % Append items to vector of items to remove from foodstore
+%                     itemsToTake = [itemsToTake obj.foodItems(i)];   % Append items to take from store vector
+                    itemsToTake(i) = obj.foodItems(i);   % Append items to take from store vector
+%                     itemsToDelete = [itemsToDelete i];   % Append items to vector of items to remove from foodstore
+                    count = count+1;
+                    itemsToDelete(count) = i;
                     
                     obj.currentLevel = obj.currentLevel - obj.foodItems(i).Mass;    % Update aggregate level in store
                     obj.currentCalories = obj.currentCalories - obj.foodItems(i).CaloricContent;    % Update aggregate calories in store
@@ -388,6 +409,8 @@ classdef FoodStoreImpl < handle
             end
             
             %% Remove Identified Items from FoodStore
+            % remove trailing zeros from itemsToDelete
+            itemsToDelete = itemsToDelete(1:find(itemsToDelete,1,'last'));
             obj.foodItems(itemsToDelete) = [];
             obj.contents(itemsToDelete) = [];
             % no update to obj.contents is currently incorporated

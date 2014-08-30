@@ -7,14 +7,17 @@ clc
 % consumption ratio of 68% carbs, 12% protein, 20% fat by energy
 
 % Mass fractions of the 9 crops of interest
-carbfraction = [600.1/(600.1+8.3+235.8),0.6868,0.177,0.9112,0.3588,0.9256,0.7979,0.8342,0.8923];
-proteinfraction = [235.8/(600.1+8.3+235.8),0.2548,0.2829,0.0813,0.4204,0.0631,0.1455,0.1478,0.1028];
-fatfraction = [8.3/(600.1+8.3+235.8),0.0584,0.5401,0.0075,0.2209,0.0113,0.0565,0.018,0.0049];
+carbfraction = [600.1/(600.1+8.3+235.8),28.7/(28.7+13.6+1.5),158.2/(158.2+261.5+496),791.5/(791.5+65+5.2),...
+    301.6/(301.6+364.9+199.4),201.2/(201.2+15.7+0.5),38.9/(38.9+8.8+2),744.8/(744.8+96.1+19.5),157.1/(157.1+16.8+1)];
+proteinfraction = [235.8/(600.1+8.3+235.8),13.6/(28.7+13.6+1.5),261.5/(158.2+261.5+496),65/(791.5+65+5.2),...
+    364.9/(301.6+364.9+199.4),15.7/(201.2+15.7+0.5),8.8/(38.9+8.8+2),96.1/(744.8+96.1+19.5),16.8/(157.1+16.8+1)];
+fatfraction = [8.3/(600.1+8.3+235.8),1.5/(28.7+13.6+1.5),496/(158.2+261.5+496),5.2/(791.5+65+5.2),...
+    199.4/(301.6+364.9+199.4),0.5/(201.2+15.7+0.5),2/(38.9+8.8+2),19.5/(744.8+96.1+19.5),1/(157.1+16.8+1)];
 
 % growthrate = [10,6.57,5.63,9.07,4.54,15,10.43,20,21.06];   % in g/m^2/day
 load CropGrowthRates
 growthrate = CropGrowthRates';
-targetPerPersonDailyCalories = 3040;
+targetPerPersonDailyCalories = 3040.2;
 
 targetcarbs = 0.68*targetPerPersonDailyCalories;    % in grams
 targetprotein = 0.12*targetPerPersonDailyCalories;  % in grams
@@ -31,7 +34,7 @@ A = -[carbfraction.*growthrate;proteinfraction.*growthrate;fatfraction.*growthra
 b = -[targetcarbs;targetprotein;targetfat];
 
 % Solve linear program (can zero out crops)
-[x,fval,exitflag,output] = linprog(f,A,b,[],[],ones(9,1),[]);
+[x,fval,exitflag,output] = linprog(f,A,b,[],[],zeros(9,1),[]);
 
 % Repeat problem except now the cost function is to minimize the average of
 % the mass of plants grown (even distribution of plants by mass)
@@ -40,13 +43,13 @@ f2 = growthrate/9;
 [x2,fval2,exitflag2,output2] = linprog(f2,A,b,[],[],zeros(9,1),[]);
 
 %% Treat problem as mixed integer linear program
-intcon = 1:9;       % components of x vector that should be integers
-
-% Minimize area
-[x3,fval3,exitflag3,output3] = intlinprog(f,intcon,A,b,[],[],zeros(9,1),[]);
+% intcon = 1:9;       % components of x vector that should be integers
+% 
+% % Minimize area
+% [x3,fval3,exitflag3,output3] = intlinprog(f,intcon,A,b,[],[],zeros(9,1),[]);
 
 %% non-linear cost function
-f3 = @(x) 1.5*std(x)+sum(x);
+f3 = @(x) 2.3*std(x)+sum(x);
 
 [x4,fval4,exitflag4,output4] = fmincon(f3,x2,A,b,[],[],zeros(9,1),[]);
 

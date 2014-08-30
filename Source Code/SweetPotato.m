@@ -21,13 +21,15 @@ classdef SweetPotato < handle
         TimeAtCropMaturity = 120 %85         % days - Updated from BioSim value according to BVAD Table 4.2.28
         OPF = 1.02;
         FractionOfEdibleBiomass = 1 %0.4 - Updated from BioSim value according to BVAD Table 4.2.28
-        CaloriesPerKilogram = 1140;
-        EdibleFreshBasisWaterContent = 0.71
-        InedibleFreshBasisWaterContent = 0.9
+        CaloriesPerKilogram = (1-0.7728)*1000*(4*201.2+4*15.7+9*0.5)/(201.2+15.7+0.5) %1140;
+        EdibleFreshBasisWaterContent = 0.7728 %0.71 % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/3254
+        InedibleFreshBasisWaterContent = 0.9 % percentage of inedible portion of crop that is made up of water
         CanopyClosureConstants
         CanopyQuantumYieldConstants
         LightCycleTemperature = 28      % in Celsius
-
+        CarbohydrateFractionOfDryMass = 201.2/(201.2+15.7+0.5)  % REF: http://ndb.nal.usda.gov/ndb/foods/show/3254
+        ProteinFractionOfDryMass = 15.7/(201.2+15.7+0.5)       % REF: http://ndb.nal.usda.gov/ndb/foods/show/3254
+        FatFractionOfDryMass = 0.5/(201.2+15.7+0.5)             % REF: http://ndb.nal.usda.gov/ndb/foods/show/3254
     end
     
     methods

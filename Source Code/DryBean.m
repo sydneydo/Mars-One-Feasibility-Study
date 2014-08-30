@@ -21,12 +21,15 @@ classdef DryBean < handle%PlantImpl
         TimeAtCropMaturity = 63 %85 - Updated from BioSim value according to BVAD Table 4.2.28
         OPF = 1.1;
         FractionOfEdibleBiomass = 0.97 %0.4 - Updated from BioSim value according to BVAD Table 4.2.28
-        CaloriesPerKilogram = 3490;
-        EdibleFreshBasisWaterContent = 0.1
-        InedibleFreshBasisWaterContent = 0.9
+        CaloriesPerKilogram = (1-0.1175)*1000*(4*600.1+9*8.3+4*235.8)/(600.1+8.3+235.8) %3490;
+        EdibleFreshBasisWaterContent = 0.1175 %0.1 % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/4749
+        InedibleFreshBasisWaterContent = 0.9 % percentage of inedible portion of crop that is made up of water
         CanopyClosureConstants %= [95488,1068.6,zeros(1,4),15.977,zeros(1,3),0.3419,0.00019733,zeros(1,3),-0.00019076,zeros(1,9)]
         CanopyQuantumYieldConstants
         LightCycleTemperature = 26      % in Celsius
+        CarbohydrateFractionOfDryMass = 600.1/(600.1+8.3+235.8)  % REF: http://ndb.nal.usda.gov/ndb/foods/show/4749
+        ProteinFractionOfDryMass = 235.8/(600.1+8.3+235.8)       % REF: http://ndb.nal.usda.gov/ndb/foods/show/4749
+        FatFractionOfDryMass = 8.3/(600.1+8.3+235.8)             % REF: http://ndb.nal.usda.gov/ndb/foods/show/4749
     end
     
     methods

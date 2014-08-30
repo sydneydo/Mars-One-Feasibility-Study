@@ -19,13 +19,15 @@ classdef Wheat < handle%PlantImpl
         TimeAtCropMaturity = 62
         OPF = 1.07;
         FractionOfEdibleBiomass = 1 %0.4 - Updated from BioSim value according to BVAD Table 4.2.28
-        CaloriesPerKilogram = 3300;
-        EdibleFreshBasisWaterContent = 0.12
-        InedibleFreshBasisWaterContent = 0.9
+        CaloriesPerKilogram = (1-0.1242)*1000*(4*744.8+4*96.1+9*19.5) /(744.8+96.1+19.5)    %3300;  % Calories per kilogram of total wet food (dry food + water)
+        EdibleFreshBasisWaterContent = 0.1242 %0.12 % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/6532
+        InedibleFreshBasisWaterContent = 0.9 % percentage of inedible portion of crop that is made up of water
         CanopyClosureConstants %= [95488,1068.6,zeros(1,4),15.977,zeros(1,3),0.3419,0.00019733,zeros(1,3),-0.00019076,zeros(1,9)]
         CanopyQuantumYieldConstants
         LightCycleTemperature = 23      % in Celsius
-
+        CarbohydrateFractionOfDryMass = 744.8/(744.8+96.1+19.5)  % REF: http://ndb.nal.usda.gov/ndb/foods/show/6532
+        ProteinFractionOfDryMass = 96.1/(744.8+96.1+19.5)       % REF: http://ndb.nal.usda.gov/ndb/foods/show/6532
+        FatFractionOfDryMass = 19.5/(744.8+96.1+19.5)             % REF: http://ndb.nal.usda.gov/ndb/foods/show/6532
     end
     
     methods

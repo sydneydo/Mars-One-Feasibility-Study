@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 19000;
+missionDurationInHours = 168*2;%19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -128,7 +128,7 @@ MethaneStore = StoreImpl('CH4 Store','Environmental');    % CH4 store for output
 % N2 Store
 % Corresponds to 2x high pressure N2 tanks currently mounted on exterior of Quest airlock on ISS (each holds 91kg of N2)
 % This is subject to change based on requirements
-numberOfN2Tanks = 2*4;
+numberOfN2Tanks = 2*4;      % We ramp the number up by a factor of 4 to make up for N2 leakage (which will be ultimately addressed by ISRU)
 initialN2TankCapacityInKg = numberOfN2Tanks*91;
 n2MolarMass = 2*14.007; %g/mol;
 initialN2StoreMoles = initialN2TankCapacityInKg*1E3/n2MolarMass;
@@ -140,24 +140,25 @@ MainPowerStore = StoreImpl('Power','Material',100000,100000);
 % Waste Stores
 DryWasteStore = StoreImpl('Dry Waste','Material',1000000,0);    % Currently waste is discarded via logistics resupply vehicles on ISS
 
-% Food Stores
-% carry along 120days worth of calories - initial simulations show an
-% average crew metabolic rate of 3040.1 Calories/day
-% Note that 120 days is equivalent to the longest growth cycle of all the
-% plants grown
-CarriedFood = Wheat;
-AvgCaloriesPerCrewPerson = 3040.1;
-CarriedCalories = numberOfCrew*AvgCaloriesPerCrewPerson*120;    % 120 days worth of calories
-CarriedTotalMass = CarriedCalories/CarriedFood.CaloriesPerKilogram; % Note that calories per kilogram is on a wet mass basis
+% % Food Stores
+% % carry along 120days worth of calories - initial simulations show an
+% % average crew metabolic rate of 3040.1 Calories/day
+% % Note that 120 days is equivalent to the longest growth cycle of all the
+% % plants grown
+% CarriedFood = Wheat;
+% AvgCaloriesPerCrewPerson = 3040.1;
+% CarriedCalories = numberOfCrew*AvgCaloriesPerCrewPerson*120;    % 120 days worth of calories
+% CarriedTotalMass = CarriedCalories/CarriedFood.CaloriesPerKilogram; % Note that calories per kilogram is on a wet mass basis
 
-% xmlFoodStoreLevel = 10000;
-% xmlFoodStoreCapacity = 10000;
-% defaultFoodWaterContent = 5;
-initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWaterContent*CarriedTotalMass); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java
+xmlFoodStoreLevel = 10000;
+xmlFoodStoreCapacity = 10000;
+defaultFoodWaterContent = 5;
+% initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWaterContent*CarriedTotalMass); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java
+initialfood = FoodMatter(Wheat,xmlFoodStoreLevel,defaultFoodWaterContent); 
 
-CarriedFoodStore = FoodStoreImpl(CarriedTotalMass,initialfood);
+CarriedFoodStore = FoodStoreImpl(xmlFoodStoreCapacity,initialfood);
 
-LocallyGrownFoodStore = FoodStoreImpl(1000);
+% LocallyGrownFoodStore = FoodStoreImpl(1000);
 
 %% Initialize SimEnvironments
 % Convert daily leakage rate to hourly leakage rate
@@ -179,6 +180,94 @@ LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',70.3,25000,0.265,0,0
 % LifeSupportUnit2 = SimEnvironmentImpl('LifeSupportUnit1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
 CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,CarriedFoodStore);
 % CargoUnit2 = SimEnvironmentImpl('CargoUnit2',70.3,25000,0.265,0,0.734,0,0.001,hourlyLeakagePercentage);
+
+%% Set up EVA environment
+% Size EVA for two people - include airlock losses when EVA is executed
+
+% That currently, CrewPersonImpl is only configured to exchange air with
+% the environment that their activity is in
+
+% EVAs last for eight hours continuously
+
+% EVA essentially consumes gases from the O2 storage tank - since these
+% recharge the PLSS tanks
+
+%% EVA Consumable Consumption
+% EVAs occur over eight ticks
+numberOfEVAcrew = 2;
+idealGasConstant = 8.314;       % J/K/mol
+O2molarMass = 2*15.999;          % g/mol
+EMUpressure = 29.6; % in kPa - equates to 4.3psi - same as Shuttle EMU and is quoted in EAWG Section 5.1 for dexterous tasks
+EMUvolume = 2*28.3168*numberOfEVAcrew; % Generally between 1.5 and 2 cubic feet [L] - EMU Handbook Section 1.5.5      % in Liters, for two crew members
+EMUtotalMoles = EMUpressure*EMUvolume/(idealGasConstant*(273.15+23));   % Total moles within both EMUs
+% EMUleakmoles = 0.005*1E3/O2molarMass;       % From BVAD Section 5.2.2 - EMU leakage is 0.005kg/h (which is higher than the value quoted within Figure 1.8 of the Hamilton Sundstand EMU Handbook (36.2cubic cm/min)
+Vleakrate = 36.2*1E-3*60;   % (L/hr) Maximum volumetric leakage rate of the PGA is calculated as 36.2 cubic cm/min (Figure 1.8) [2] [L/hr]
+EMUleakmoles = EMUpressure*Vleakrate/(idealGasConstant*(273.15+23));      % Maximum mass leakage rate of the PGA [kg/s]
+EMUleakPercentage = EMUleakmoles*numberOfEVAcrew/EMUtotalMoles;
+
+ 
+% Thermal control = {sublimator,radiator,cryogenic} = water usage = [0.57kg/hr,0.19kg/h,0]      REF:
+% BVAD Section 5.2.2
+% Note: Cryogenic cooling refers to cryogenic storage of O2
+% O2 use: metabolic + leakage - 0.076kg/h, Note: O2 leakage alone is
+% 0.005kg/h - REF BVAD Section 5.2.2 (compare this with EMU data)
+% EVAco2removal = [METOX, Amine Swingbed]
+% Amine Swingbed O2 loss rate is 0.15kg/h
+
+% Liquid Metabolic Waste = [Collect, Vent]
+% Collected urine can be sent to the UPA wastewater tank
+
+
+EMUmetabolicWaste = StoreImpl('EVA MAG','Environmental');       % This is to replace the dirty water store if water is collected within the MAG
+% Two options for liquid metabolic waste - either throw it away (as in the
+% EMU MAG), or collect urine and feed it back into the UPA - as in Apollo
+% EMU - find a reference for this!)
+
+EMUdrinkbagVolume = 32*0.0295735;  % L, converted from 32 ounces (REF: Section 1.3.9 EMU Handbook)
+EMUinsuitDrinkBag = StoreImpl('EMU Drink Bag','Material',EMUdrinkbagVolume*numberOfEVAcrew,0);
+
+EMUfeedwaterCapacity = 10*0.453592;  % (L), converted from 10 pounds of water, assuming a water density of 1000kg/m^3 = 1kg/L, REF - Section 2.1.4 EMU Handbook
+EMUfeedwaterReservoir = StoreImpl('PLSS Feedwater Reservoir','Material',EMUfeedwaterCapacity,0);
+
+EVAenvironment = SimEnvironmentImpl('EVA Environment',EMUpressure,EMUvolume,1,0,0,0,0,EMUleakPercentage,EMUdrinkbagVolume,EMUfeedwaterReservoir,DirtyWaterStore,DryWasteStore,CarriedFoodStore);
+
+EMUo2TankCapacity = 1.217*453.592/O2molarMass;      % moles, Converted from 1.217lbs - REF: Section 2.1.3 EMU Handbook
+EMUo2Tanks = StoreImpl('EMU O2 Bottles','Material',EMUo2TankCapacity*numberOfEVAcrew,EMUo2TankCapacity*numberOfEVAcrew);
+
+% EMU PCA
+EMUPCA = ISSinjectorImpl(EMUpressure,1,EMUo2Tanks,[],EVAenvironment,'EMU');
+
+% Note: EMU Food bar is no longer flown (REF:
+% http://spaceflight.nasa.gov/shuttle/reference/faq/eva.html)
+
+% TO DO: RCA model, and modify CrewPersonImpl for
+% resource consumption
+
+%% Airlock Environment
+% This environment is modeled to represent airlock depressurization losses
+% and O2 consumed during EVA prebreathe
+
+% Include airlock PCA (to recharge airlock)
+% Remember to vent airlock for only first tick of EVA
+% Remove this amount of air from the hab everytime an EVA occurs
+
+airlockFreegasVolume = 3.7*1E3;     % L (converted from 3.7m^3) REF: BVAD Section 5.2.1 - this is equivalent to shuttle airlock - total volume is 4.25m^3 (pg 230 - The New Field of Space Architecture)
+Airlock = SimEnvironmentImpl('Airlock',70.3,airlockFreegasVolume,0.265,0,0.734,0,0.001);
+
+airlockCycleLoss = 13.8*airlockFreegasVolume/(idealGasConstant*(273.15+Airlock.temperature));    % REF: ISS Airlock depress pump is operated down to 13.8kPa, so the rest of the air is vented overboard - REF: "Trending of Overboard Leakage of ISS Cabin Atmosphere" (AIAA 2011-5149)
+
+% EMU Prebreathe per CrewPerson
+% This is the same as that employed for the space shuttle (going from a
+% 70.3kPa 26.5% O2 atmosphere to a 29.6kPa 100% O2 atmosphere
+% - Prebreathe lasts for 40 minutes and is performed in suit (REF: Table
+% 3.1-1 EAWG Report)
+% On ISS, an in-suit prebreath lasts 240 minutes (REF: Table 3.1-1 EAWG
+% Report) and consumes 4.53kg per person (REF: Methodology and Assumptions
+% of Contingency Shuttle Crew Support (CSCS) Calculations Using ISS ECLSS -
+% SAE 2006-01-2061)
+% Therefore, for Mars One, prebreathe O2 for two crew persons is:
+
+prebreatheO2 = numberOfEVAcrew*4.53*40/240 * 1E3/O2molarMass;   % moles of O2... supplied from O2 tanks
 
 %% Initialize Key Activity Parameters
 
@@ -217,11 +306,11 @@ astro1 = CrewPersonImpl2('Male 1',35,75,'Male',[crewSchedule{1,:}]);%,O2Fraction
 % Initialize consumer and producer definitions
 % astro1.AirConsumerDefinition = AirConsumerDefinitionImpl(Inflatable1,0,0);
 % astro1.AirProducerDefinition = AirProducerDefinitionImpl(Inflatable1,0,0);
-astro1.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
-astro1.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
-astro1.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro1.FoodConsumerDefinition = ResourceUseDefinitionImpl([LocallyGrownFoodStore,CarriedFoodStore],5,5);
-astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+% astro1.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
+% astro1.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
+% astro1.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
+% astro1.FoodConsumerDefinition = ResourceUseDefinitionImpl(CarriedFoodStore,5,5);
+% astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 
 %% Crew in Galley Module (galley)
@@ -230,11 +319,11 @@ astro2 = CrewPersonImpl2('Female 1',35,55,'Female',[crewSchedule{2,:}]);
 % Initialize consumer and producer definitions
 % astro2.AirConsumerDefinition = AirConsumerDefinitionImpl(Inflatable1,0,0);
 % astro2.AirProducerDefinition = AirProducerDefinitionImpl(Inflatable1,0,0);
-astro2.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
-astro2.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
-astro2.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro2.FoodConsumerDefinition = ResourceUseDefinitionImpl([LocallyGrownFoodStore,CarriedFoodStore],5,5);
-astro2.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+% astro2.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
+% astro2.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
+% astro2.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
+% astro2.FoodConsumerDefinition = ResourceUseDefinitionImpl(CarriedFoodStore,5,5);
+% astro2.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 %% Crew in Labs Module (labs)
 astro3 = CrewPersonImpl2('Male 2',35,72,'Male',[crewSchedule{3,:}]);
@@ -242,11 +331,11 @@ astro3 = CrewPersonImpl2('Male 2',35,72,'Male',[crewSchedule{3,:}]);
 % Initialize consumer and producer definitions
 % astro3.AirConsumerDefinition = AirConsumerDefinitionImpl(LivingUnit1,0,0);
 % astro3.AirProducerDefinition = AirProducerDefinitionImpl(LivingUnit1,0,0);
-astro3.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
-astro3.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
-astro3.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro3.FoodConsumerDefinition = ResourceUseDefinitionImpl([LocallyGrownFoodStore,CarriedFoodStore],5,5);
-astro3.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+% astro3.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
+% astro3.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
+% astro3.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
+% astro3.FoodConsumerDefinition = ResourceUseDefinitionImpl(CarriedFoodStore,5,5);
+% astro3.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 %% Crew in Maintenance Module (maint)
 astro4 = CrewPersonImpl2('Female 2',35,55,'Female',[crewSchedule{4,:}]);
@@ -254,44 +343,44 @@ astro4 = CrewPersonImpl2('Female 2',35,55,'Female',[crewSchedule{4,:}]);
 % Initialize consumer and producer definitions
 % astro4.AirConsumerDefinition = AirConsumerDefinitionImpl(LifeSupportUnit1,0,0);
 % astro4.AirProducerDefinition = AirProducerDefinitionImpl(LifeSupportUnit1,0,0);
-astro4.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
-astro4.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
-astro4.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl([LocallyGrownFoodStore,CarriedFoodStore],5,5);
-astro4.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+% astro4.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
+% astro4.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
+% astro4.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
+% astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl(CarriedFoodStore,5,5);
+% astro4.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 %% Clear crewSchedule to save ~2MB memory
 clear crewSchedule
 
 %% Biomass Stores
-% Located within Inflatable Structure
-% xml_inedibleFraction = 0.25;
-% xml_edibleWaterContent = 5;
-% xml_inedibleWaterContent = 5;
-% initialBiomatter = [BioMatter(Wheat,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
-%     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
-%     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent)];
-% BiomassStore = BiomassStoreImpl(BioMatter(Wheat,0,0,0,0),100000);
-BiomassStore = BiomassStoreImpl(100000);
-% Set more crop type for FoodMatter somewhere later on
-
-%% Initialize crop shelves
-
-CropWaterStore = StoreImpl('Grey Crop H2O','Material',100000,100000);   % Initialize a 9200L water buffer
-
-LettuceShelf = ShelfImpl2(Lettuce,26.15,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-PeanutShelf = ShelfImpl2(Peanut,69.88,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-SoybeanShelf = ShelfImpl2(Soybean,34.76,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-SweetPotatoShelf = ShelfImpl2(SweetPotato,1.65,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-WheatShelf = ShelfImpl2(Wheat,67.52,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-
-%% Initialize FoodProcessor
-FoodProcessor = FoodProcessorImpl;
-FoodProcessor.BiomassConsumerDefinition = ResourceUseDefinitionImpl(BiomassStore,1000,1000);
-FoodProcessor.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
-FoodProcessor.FoodProducerDefinition = ResourceUseDefinitionImpl(LocallyGrownFoodStore,1000,1000);
-FoodProcessor.WaterProducerDefinition = ResourceUseDefinitionImpl(CropWaterStore,1000,1000);        % FoodProcessor now outputs back to crop water store
-FoodProcessor.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,1000,1000);
+% % Located within Inflatable Structure
+% % xml_inedibleFraction = 0.25;
+% % xml_edibleWaterContent = 5;
+% % xml_inedibleWaterContent = 5;
+% % initialBiomatter = [BioMatter(Wheat,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
+% %     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent),...
+% %     BioMatter(Rice,100000,xml_inedibleFraction,xml_edibleWaterContent,xml_inedibleWaterContent)];
+% % BiomassStore = BiomassStoreImpl(BioMatter(Wheat,0,0,0,0),100000);
+% BiomassStore = BiomassStoreImpl(100000);
+% % Set more crop type for FoodMatter somewhere later on
+% 
+% %% Initialize crop shelves
+% 
+% CropWaterStore = StoreImpl('Grey Crop H2O','Material',100000,100000);   % Initialize a 9200L water buffer
+% 
+% LettuceShelf = ShelfImpl2(Lettuce,26.15,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% PeanutShelf = ShelfImpl2(Peanut,69.88,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% SoybeanShelf = ShelfImpl2(Soybean,34.76,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% SweetPotatoShelf = ShelfImpl2(SweetPotato,1.65,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% WheatShelf = ShelfImpl2(Wheat,67.52,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+% 
+% %% Initialize FoodProcessor
+% FoodProcessor = FoodProcessorImpl;
+% FoodProcessor.BiomassConsumerDefinition = ResourceUseDefinitionImpl(BiomassStore,1000,1000);
+% FoodProcessor.PowerConsumerDefinition = ResourceUseDefinitionImpl(MainPowerStore,1000,1000);
+% FoodProcessor.FoodProducerDefinition = ResourceUseDefinitionImpl(LocallyGrownFoodStore,1000,1000);
+% FoodProcessor.WaterProducerDefinition = ResourceUseDefinitionImpl(CropWaterStore,1000,1000);        % FoodProcessor now outputs back to crop water store
+% FoodProcessor.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,1000,1000);
 
 %% Initialize (Intermodule Ventilation) Fans
 
@@ -314,6 +403,9 @@ livingUnit2LifeSupportFan = ISSFanImpl2(LivingUnit1,LifeSupportUnit1,MainPowerSt
 % IMV between Life Support Unit and Cargo Unit
 lifeSupport2CargoUnitFan = ISSFanImpl2(LifeSupportUnit1,CargoUnit1,MainPowerStore);
 
+% IMV between Life Support Unit and Airlock
+lifeSupport2AirlockFan = ISSFanImpl2(LifeSupportUnit1,Airlock,MainPowerStore);
+
 %% Initialize Injectors (Models ISS Pressure Control Assemblies)
 % See accompanying word doc for rationale behind PCA locations
 
@@ -328,6 +420,9 @@ lifeSupportUnitPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFract
 
 % Cargo Unit PPRV
 cargoUnitPPRV = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,CargoUnit1,'PPRV');
+
+% Airlock PCA
+airlockPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,Airlock);
 
 %% Initialize Temperature and Humidity Control (THC) Technologies
 % Insert CCAA within Inflatable, Living Unit, and Life Support Unit
@@ -382,7 +477,7 @@ dirtywaterstorelevel = zeros(1,simtime);
 greywaterstorelevel = zeros(1,simtime);
 drywastestorelevel = zeros(1,simtime);
 carriedfoodstorelevel = zeros(1,simtime);
-grownfoodstorelevel = zeros(1,simtime);
+% grownfoodstorelevel = zeros(1,simtime);
 dryfoodlevel = zeros(1,simtime);
 caloriccontent = zeros(1,simtime);
 biomassstorelevel = zeros(1,simtime);
@@ -421,11 +516,20 @@ cargoUnitVaporlevel = zeros(1,simtime);
 cargoUnitOtherlevel = zeros(1,simtime);
 cargoUnitTotalMoles = zeros(1,simtime);
 
+airlockPressure = zeros(1,simtime);
+airlockO2level = zeros(1,simtime);
+airlockCO2level = zeros(1,simtime);
+airlockN2level = zeros(1,simtime);
+airlockVaporlevel = zeros(1,simtime);
+airlockOtherlevel = zeros(1,simtime);
+airlockTotalMoles = zeros(1,simtime);
+
 ogsoutput = zeros(1,simtime);
 inflatablePCAaction = zeros(4,simtime+1);
 livingUnitPCAaction = zeros(4,simtime+1);
 lifeSupportUnitPCAaction = zeros(4,simtime+1);
 cargoUnitPPRVaction = zeros(4,simtime+1);
+airlockPCAaction = zeros(4,simtime+1);
 inflatableCCAAoutput = zeros(1,simtime);
 livingUnitCCAAoutput = zeros(1,simtime);
 lifeSupportUnitCCAAoutput = zeros(1,simtime);
@@ -434,6 +538,9 @@ crsH2OProduced = zeros(1,simtime);
 crsCompressorOperation = zeros(2,simtime);
 co2accumulatorlevel = zeros(1,simtime);
 co2removed = zeros(1,simtime);
+
+hoursOnEVA = 0;     % Flag to indicate whether or not the Airlock should be depressurized
+currentEVAcrew = zeros(1,4);    % Current crewpersons on EVA
 
 h = waitbar(0,'Please wait...');
 
@@ -457,7 +564,7 @@ for i = 1:simtime
         greywaterstorelevel = greywaterstorelevel(1:(i-1));
         drywastestorelevel = drywastestorelevel(1:(i-1));
         carriedfoodstorelevel = carriedfoodstorelevel(1:(i-1));
-        cropwaterstorelevel = cropwaterstorelevel(1:(i-1));
+%         cropwaterstorelevel = cropwaterstorelevel(1:(i-1));
         powerlevel = powerlevel(1:(i-1));
     
         % Record Inflatable Unit Atmosphere
@@ -495,7 +602,16 @@ for i = 1:simtime
         cargoUnitVaporlevel = cargoUnitVaporlevel(1:(i-1));
         cargoUnitOtherlevel = cargoUnitOtherlevel(1:(i-1));
         cargoUnitTotalMoles = cargoUnitTotalMoles(1:(i-1));
-           
+
+        % Record Airlock Atmosphere
+        airlockPressure(i) = airlockPressure(1:(i-1));
+        airlockO2level(i) = airlockO2level(1:(i-1));
+        airlockCO2level(i) = airlockCO2level(1:(i-1));
+        airlockN2level(i) = airlockN2level(1:(i-1));
+        airlockVaporlevel(i) = airlockVaporlevel(1:(i-1));
+        airlockOtherlevel(i) = airlockOtherlevel(1:(i-1));
+        airlockTotalMoles(i) = airlockTotalMoles(1:(i-1));
+        
         ogsoutput = ogsoutput(1:(i-1));
     
         % Common Cabin Air Assemblies
@@ -525,7 +641,7 @@ for i = 1:simtime
     dirtywaterstorelevel(i) = DirtyWaterStore.currentLevel;
     greywaterstorelevel(i) = GreyWaterStore.currentLevel;
     drywastestorelevel(i) = DryWasteStore.currentLevel;
-    biomassstorelevel(i) = BiomassStore.currentLevel;
+%     biomassstorelevel(i) = BiomassStore.currentLevel;
     powerlevel(i) = MainPowerStore.currentLevel;
     
     % Record Inflatable Unit Atmosphere
@@ -564,6 +680,15 @@ for i = 1:simtime
     cargoUnitOtherlevel(i) = CargoUnit1.OtherStore.currentLevel;
     cargoUnitTotalMoles(i) = CargoUnit1.totalMoles;
     
+    % Record Airlock Atmosphere
+    airlockPressure(i) = Airlock.pressure;
+    airlockO2level(i) = Airlock.O2Store.currentLevel;
+    airlockCO2level(i) = Airlock.CO2Store.currentLevel;
+    airlockN2level(i) = Airlock.NitrogenStore.currentLevel;
+    airlockVaporlevel(i) = Airlock.VaporStore.currentLevel;
+    airlockOtherlevel(i) = Airlock.OtherStore.currentLevel;
+    airlockTotalMoles(i) = Airlock.totalMoles;
+    
     %% Tick Modules
     
     % Leak Modules
@@ -576,7 +701,8 @@ for i = 1:simtime
     inflatable2LivingUnitFan.tick;
     livingUnit2LifeSupportFan.tick;
     lifeSupport2CargoUnitFan.tick;
-
+    lifeSupport2AirlockFan.tick;
+    
     % Run Power Supply
     powerPS.tick; 
     
@@ -588,6 +714,7 @@ for i = 1:simtime
     livingUnitPCAaction(:,i+1) = livingUnitPCA.tick(livingUnitPCAaction(:,i));
     lifeSupportUnitPCAaction(:,i+1) = lifeSupportUnitPCA.tick(lifeSupportUnitPCAaction(:,i));
     cargoUnitPPRVaction(:,i+1) = cargoUnitPPRV.tick(cargoUnitPPRVaction(:,i));
+    airlockPCAaction(:,i+1) = airlockPCA.tick(airlockPCAaction(:,i));
 
     % Common Cabin Air Assemblies
     inflatableCCAAoutput(i) = inflatableCCAA.tick;
@@ -601,43 +728,89 @@ for i = 1:simtime
     co2accumulatorlevel(i) = crs.CO2Accumulator.currentLevel;
     waterRS.tick;
     
-    cropwaterstorelevel(i) = CropWaterStore.currentLevel;
+%     cropwaterstorelevel(i) = CropWaterStore.currentLevel;
      
-    if CropWaterStore.currentLevel <= 0
-        disp('Crop Water Store is empty')
-        break
-    end
+%     if CropWaterStore.currentLevel <= 0
+%         disp('Crop Water Store is empty')
+%         break
+%     end
     
     % ISRU inject water into CropWaterStore (0.565L/hr)
 %     CropWaterStore.add(0.565);
     
-    % Tick Crop Shelves
-    LettuceShelf.tick;
-    PeanutShelf.tick;
-    SoybeanShelf.tick;
-    SweetPotatoShelf.tick;
-    WheatShelf.tick;
-    
-    FoodProcessor.tick;
+%     % Tick Crop Shelves
+%     LettuceShelf.tick;
+%     PeanutShelf.tick;
+%     SoybeanShelf.tick;
+%     SweetPotatoShelf.tick;
+%     WheatShelf.tick;
+%     
+%     FoodProcessor.tick;
     carriedfoodstorelevel(i) = CarriedFoodStore.currentLevel;
-    grownfoodstorelevel(i) = LocallyGrownFoodStore.currentLevel;
-    if LocallyGrownFoodStore.currentLevel > 0
-        
-        dryfoodlevel(i) = sum(cell2mat({LocallyGrownFoodStore.foodItems.Mass})-cell2mat({LocallyGrownFoodStore.foodItems.WaterContent}));
-        caloriccontent(i) = sum([LocallyGrownFoodStore.foodItems.CaloricContent]);
-    end
+%     grownfoodstorelevel(i) = LocallyGrownFoodStore.currentLevel;
+%     if LocallyGrownFoodStore.currentLevel > 0
+%         
+%         dryfoodlevel(i) = sum(cell2mat({LocallyGrownFoodStore.foodItems.Mass})-cell2mat({LocallyGrownFoodStore.foodItems.WaterContent}));
+%         caloriccontent(i) = sum([LocallyGrownFoodStore.foodItems.CaloricContent]);
+%     end
     
     % Tick Crew
     astro1.tick;
     astro2.tick;  
     astro3.tick;
     astro4.tick;
+   
+    %% EVA Check
+    CrewEVAstatus = [strcmpi(astro1.CurrentActivity.Name,'EVA'),...
+        strcmpi(astro2.CurrentActivity.Name,'EVA'),...
+        strcmpi(astro3.CurrentActivity.Name,'EVA'),...
+        strcmpi(astro4.CurrentActivity.Name,'EVA')];
+    
+    % if any astro has a current activity that is EVA
+    if sum(CrewEVAstatus) > 0
+        % identify first crewmember
+        hoursOnEVA = hoursOnEVA+1;
+        if hoursOnEVA == 1
+            % Store EVA status
+            currentEVAcrew = CrewEVAstatus;
+            % perform airlock ops
+            EVAprebreathedO2 = O2Store.take(prebreatheO2);      % Crew Prebreathe O2
+            % empty EVA environment to airlock and fill EVA suits with O2
+            % from O2store
+            Airlock.O2Store.add(EVAenvironment.O2Store.take(EVAenvironment.O2Store.currentLevel));
+            Airlock.CO2Store.add(EVAenvironment.CO2Store.take(EVAenvironment.CO2Store.currentLevel));
+            Airlock.NitrogenStore.add(EVAenvironment.NitrogenStore.take(EVAenvironment.NitrogenStore.currentLevel));
+            Airlock.VaporStore.add(EVAenvironment.VaporStore.take(EVAenvironment.VaporStore.currentLevel));
+            Airlock.OtherStore.add(EVAenvironment.OtherStore.take(EVAenvironment.OtherStore.currentLevel));
+                        
+            EVAsuitfill = EVAenvironment.O2Store.add(O2Store.take(EMUtotalMoles));              % Fill two EMUs with 100% O2
+            % Error
+            if EVAprebreathedO2 < prebreatheO2 || EVAsuitfill < EMUtotalMoles
+                disp(['Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: ',num2str(i)])
+                disp('Current EVA has been skipped')
+                % Advance activities for all astronauts
+                astro1.skipActivity;
+                astro2.skipActivity;
+                astro3.skipActivity;
+                astro4.skipActivity;
+            end
+            % Vent lost airlock gases
+            airlockGasVented = Airlock.vent(airlockCycleLoss);
+            
+        end
+    end
+    % If the crew is no longer on EVA, reset hoursOnEVA
+    if ~isequal(CrewEVAstatus,currentEVAcrew)
+        % if identified crewmember's current activity is not EVA
+        hoursOnEVA = 0;
+    end
 
     % Tick Waitbar
     if mod(i,100) == 0
         waitbar(i/simtime,h,['Current tick: ',num2str(i),' | Time Elapsed: ',num2str(round(toc)),'sec']);
     end
 
+%     value(i) = hoursOnEVA;
 end
 
 toc

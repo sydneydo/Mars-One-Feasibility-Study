@@ -21,13 +21,15 @@ classdef WhitePotato < handle%PlantImpl
         TimeAtCropMaturity = 138;%132   % Changed to 138 to match the value within Table 4.2.28 of BVAD
         OPF = 1.02;
         FractionOfEdibleBiomass = 1 %0.3   % referred to as XFRT (Fraction of daily carbon gain allocated to edible biomass after t_E) within BVAD Table 4.2.14, changed to a value of 1 according to BVAD Table 4.2.28 (0.3 was the value used within BioSim)
-        CaloriesPerKilogram = 760;
-        EdibleFreshBasisWaterContent = 0.8  % percentage of edible portion of crop that is made up of water
+        CaloriesPerKilogram = (1-0.8158)*1000*(4*157.1+4*16.8+9*1)/(157.1+16.8+1) %760;
+        EdibleFreshBasisWaterContent = 0.8158  % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/3129
         InedibleFreshBasisWaterContent = 0.9 % percentage of inedible portion of crop that is made up of water
         CanopyClosureConstants
         CanopyQuantumYieldConstants
         LightCycleTemperature = 20      % in Celsius
-
+        CarbohydrateFractionOfDryMass = 157.1/(157.1+16.8+1)  % REF: http://ndb.nal.usda.gov/ndb/foods/show/3129
+        ProteinFractionOfDryMass = 16.8/(157.1+16.8+1)       % REF: http://ndb.nal.usda.gov/ndb/foods/show/3129
+        FatFractionOfDryMass = 1/(157.1+16.8+1)             % REF: http://ndb.nal.usda.gov/ndb/foods/show/3129
     end
     
     methods

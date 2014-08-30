@@ -198,6 +198,26 @@ classdef SimEnvironmentImpl < handle
             obj.OtherStore.take(obj.OtherStore.currentLevel*obj.leakagePercentage/100);
         end
         
+        %% Vent
+        % Method to vent a specified number of moles
+        function molesVented = vent(obj,molesToVent)
+            % Define molar fractions for each gaseous species
+            currentO2percentage = obj.O2Percentage;
+            currentCO2percentage = obj.CO2Percentage;
+            currentN2percentage = obj.N2Percentage;
+            currentVaporpercentage = obj.VaporPercentage;
+            currentOtherpercentage = obj.OtherPercentage;
+            
+            % Take moles from SimEnvironment gaseous stores
+            o2Vented = obj.O2Store.take(currentO2percentage*molesToVent);
+            co2Vented = obj.O2Store.take(currentCO2percentage*molesToVent);
+            n2Vented = obj.O2Store.take(currentN2percentage*molesToVent);
+            vaporVented = obj.O2Store.take(currentVaporpercentage*molesToVent);
+            otherVented = obj.O2Store.take(currentOtherpercentage*molesToVent);
+            
+            molesVented = o2Vented+co2Vented+n2Vented+vaporVented+otherVented;
+        end
+        
     end
         
     % Method to track ticks in SimEnvironment

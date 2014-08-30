@@ -20,13 +20,15 @@ classdef Lettuce < handle%PlantImpl
         TimeAtCropMaturity = 30 %28  - Updated from BioSim value according to BVAD Table 4.2.28
         OPF = 1.08;
         FractionOfEdibleBiomass = 0.95 %0.9 - Updated from BioSim value according to BVAD Table 4.2.28
-        CaloriesPerKilogram = 180;
-        EdibleFreshBasisWaterContent = 0.95
-        InedibleFreshBasisWaterContent = 0.9
+        CaloriesPerKilogram = (1-0.9498)*1000*(4*28.7+4*13.6+9*1.5)/(28.7+13.6+1.5) %180;
+        EdibleFreshBasisWaterContent = 0.9498 %0.95 % percentage of edible portion of crop that is made up of water -  % REF: http://ndb.nal.usda.gov/ndb/foods/show/3050
+        InedibleFreshBasisWaterContent = 0.9 % percentage of inedible portion of crop that is made up of water
         CanopyClosureConstants %= [95488,1068.6,zeros(1,4),15.977,zeros(1,3),0.3419,0.00019733,zeros(1,3),-0.00019076,zeros(1,9)]
         CanopyQuantumYieldConstants
         LightCycleTemperature = 23      % in Celsius
-
+        CarbohydrateFractionOfDryMass = 28.7/(28.7+13.6+1.5)  % REF: http://ndb.nal.usda.gov/ndb/foods/show/3050
+        ProteinFractionOfDryMass = 13.6/(28.7+13.6+1.5)       % REF: http://ndb.nal.usda.gov/ndb/foods/show/3050
+        FatFractionOfDryMass = 1.5/(28.7+13.6+1.5)            % REF: http://ndb.nal.usda.gov/ndb/foods/show/3050
     end
     
     methods
