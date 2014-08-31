@@ -170,7 +170,7 @@ classdef BiomassStoreImpl < handle
         function [actuallyAdded, obj] = add(obj,biomatterRequested,resourceManagementDefinition)
             
             % Ensure that input is always a positive value
-            if biomatterRequested < 0
+            if length(biomatterRequested) < 0
                 actuallyAdded = [];
                 return
             end

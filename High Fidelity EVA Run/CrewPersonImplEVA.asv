@@ -68,13 +68,13 @@ classdef CrewPersonImpl2 < handle
         CO2HighLimit = 0.482633011      % CO2 partial pressure limit in kPa, converted from 0.07psia (According to Table 6.2-6, HIDH)
         CO2HighTillDead = 4
         CO2HighRecoveryRate = 0.005
-        O2HighTillDead = 24             % hours exposed at high O2 levels (with fire risk) until dead
-        O2HighRecoveryRate = 0.01
+        O2HighTillDead = 24*3600             % seconds exposed at high O2 levels (with fire risk) until dead
+        O2HighRecoveryRate = 0.01/3600
         O2LowPartialPressure = 15.168             % kPa, absolute minimum ppO2 that a person should be exposed to - REF- HIDH  pg 324, Table 6.2-5
-        O2LowTillDead = 2               % Hours spent in a low O2 level until death occurs (corresponds to amount of internal buffer that the crew has)
-        O2LowRecoveryRate = 0.01
+        O2LowTillDead = 2*3600               % seconds spent in a low O2 level until death occurs (corresponds to amount of internal buffer that the crew has)
+        O2LowRecoveryRate = 0.01/3600
         TotalPressureLowLimit = 20.6842719      % Corresponds to 3psi - the absolute lowest total pressure that a cabin can go to (REF: HIDH, pg 319, Table 6.2-3)
-        TotalPressureLowTillDead = 1            % Hours spent in a low total pressure condition until death occurs
+        TotalPressureLowTillDead = 1*3600            % Seconds spent in a low total pressure condition until death occurs
         leisureTillBurnout = 168        % in hours
         leisureRecoveryRate = 90
         awakeTillExhaustion = 120
@@ -299,8 +299,8 @@ classdef CrewPersonImpl2 < handle
                 heartRate = currentActivityIntensity*30 + 15;   % later, implement more accurate model based on paper
                 a = 0.223804;
                 b = 5.64E-7;
-                resultinLiters = (a + b*heartRate^3) * 60;  %in L/hr    Correct version
-%                 resultinLiters = a + b*heartRate^3 * 60;  %in L/hr    INCORRECT version currently implemented within BioSim
+%                 resultinLiters = (a + b*heartRate^3) * 60;  %in L/hr    Correct version
+                resultinLiters = (a + b*heartRate^3) / 60;  %in L/sec    
 %                 molarVolume = 22.4;        % in L/mol of air - value based from: http://en.wikipedia.org/wiki/Molar_volume
                 %% TO DO: implement more accurate version of this based on partial pressures within SimEnvironment
 %                 resultinMoles = resultinLiters / molarVolume;  % this is  the number of moles of O2 required per hour
@@ -317,7 +317,7 @@ classdef CrewPersonImpl2 < handle
         % NB. BioSim assumes this to be fixed at 0.1667L/hr regardless of
         % the activity intensity level
         function potableWaterNeeded = calculateCleanWaterNeeded(obj)
-            potableWaterNeeded = 0.1667*(obj.CurrentActivity.Intensity >= 0);
+            potableWaterNeeded = 0.1667/3600*(obj.CurrentActivity.Intensity >= 0);
         end
         
         %% Calculate Food Needed in Calories/hr (actually kcal)
@@ -352,7 +352,7 @@ classdef CrewPersonImpl2 < handle
                         kJneeded = 50*obj.Weight + 6066.7*activityCoefficient;	% Correct version from SAE paper
                     end
                 end
-                caloriesNeeded = kJneeded/24/4.184;   % Convert from kJ/person/day to calories/person/hour (a more accurate conversion factor would be 4.184) (actually this should be in kcal)
+                caloriesNeeded = kJneeded/(24*3600)/4.184;   % Convert from kJ/person/day to calories/person/hour (a more accurate conversion factor would be 4.184) (actually this should be in kcal)
             end          
            
         end

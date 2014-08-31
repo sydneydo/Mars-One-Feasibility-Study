@@ -28,17 +28,17 @@ classdef PLSS
     end
     
     properties (SetAccess = private)
-        METOXmaxAirFlowrate = 7*28.3168*60     % Liters/hour - converted from 7 cfm (cubic feet per minute) flows past the EMU METOX canister (REF: Section 2.5.2.2 EMU Handbook)
-        RCAmaxAirFlowRate = 6*28.3168*60     % Liters/hour - converted from 6 cfm (cubic feet per minute) (REF: Section II-C - "Performance Characterization and Simulation of )
+        METOXmaxAirFlowrate = 7*28.3168/60     % Liters/second - converted from 7 cfm (cubic feet per minute) flows past the EMU METOX canister (REF: Section 2.5.2.2 EMU Handbook)
+        RCAmaxAirFlowRate = 6*28.3168/60     % Liters/second - converted from 6 cfm (cubic feet per minute) (REF: Section II-C - "Performance Characterization and Simulation of )
         MaxCO2capacity = 1.48*453.592/(12.011+2*15.999)   % moles - converted from 1.48lb - total CO2 removal capacity of the METOX canister (REF: Section 2.5.2.3 EMU Handbook)
         RCAco2SetLevel = 0.285309868;   % kPa - converted from 2.18mmHg ppCO2 - REF: "Performance Characterization and Simulation of Amine-Based Vacuum Swing Sorption Units for Spacesuit Carbon Dioxide and Humidity Control
         TargetVaporPressure = mean([1.2276, 1.7051])*0.4 %kPa,  - Dewpoint temp = 54.5Fahrenheit = 12.5C (ref: Section 2.1.2 EMU Handbook) --> Psat = ppH2O (for dewpoint (ie. RH = 100) )= mean([1.2276, 1.7051])kPa (From Saturated Water Table - Table A-15 Cengal and Turner 2nd Ed.)
         TargetRelativeHumidity = 0.4    % Fraction - from NASA HIDH Section 6.2.3.2
         RCAdewpointSetLevel
         idealGasConstant = 8.314;       % J/K/mol
-        METOXcanisterMass = 32*0.453592      % (kg) converted from 32 pounds (REF: Section 2.5.2.1 EMU Handbook)
-        SublimatorLeakRate = 0.57           % L/hr - REF: BVAD Section 5.2.2 - (No equivalent value provided in theEMU handbook value)
-        SWMEwaterLeakRate = 2.1/7           % L/hr - converted from 2.1kg/7hr EVA, assuming water density of 1kg/L - REF: Impact of Water Recovery from Wastes on the Lunar Surface Mission Water Balance - AIAA 2010-6008
+        METOXcanisterMass = 32*0.453592	% (kg) converted from 32 pounds (REF: Section 2.5.2.1 EMU Handbook)
+        SublimatorLeakRate = 0.57/3600	% L/s - REF: BVAD Section 5.2.2 - (No equivalent value provided in theEMU handbook value)
+        SWMEwaterLeakRate = 2.1/7/3600	% L/s - converted from 2.1kg/7hr EVA, assuming water density of 1kg/L - REF: Impact of Water Recovery from Wastes on the Lunar Surface Mission Water Balance - AIAA 2010-6008
         RCAmass = 7.5                      % kg, REF - Table 3 - ICES-2014-196 Continued Development of the Rapid Cycle Amine System for Advanced Extravehicular Activity Systems
         SWMEmass = 1.87                     % kg, REF - Multifunctional Space Evaporator-Absorber-Radiator - AIAA 2013-3306
         SWMEvolume =  5.955                 % L, REF - Multifunctional Space Evaporator-Absorber-Radiator - AIAA 2013-3306

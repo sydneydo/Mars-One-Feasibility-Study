@@ -1,4 +1,4 @@
-classdef ISSinjectorImpl < handle
+classdef ISSinjectorImplEVA < handle
     %ISSinjectorImpl Summary of this class goes here
     %   By: Sydney Do (sydneydo@mit.edu)
     %   Date Created: 8/5/2014
@@ -63,7 +63,7 @@ classdef ISSinjectorImpl < handle
     
     methods
         %% Constructor
-        function obj = ISSinjectorImpl(targetTotalPressure,targetO2molarFraction,O2source,N2source,environment,PCAmode)
+        function obj = ISSinjectorImplEVA(targetTotalPressure,targetO2molarFraction,O2source,N2source,environment,PCAmode)
             
             if nargin > 0
                 if ~(strcmpi(class(O2source),'StoreImpl') || strcmpi(class(N2source),'StoreImpl'))

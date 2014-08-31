@@ -201,50 +201,50 @@ astro1 = CrewPersonImpl('Male 1',35,75,'Male',[crewSchedule{1,:}]);%,O2FractionH
 % (the whos function indicates that crewSchedule consumes almost 2MB of memory)
 
 % Initialize consumer and producer definitions
-astro1.AirConsumerDefinition = AirConsumerDefinitionImpl(Inflatable1,0,0);
-astro1.AirProducerDefinition = AirProducerDefinitionImpl(Inflatable1,0,0);
-astro1.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
-astro1.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
-astro1.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro1.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
-astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+% astro1.AirConsumerDefinition = AirConsumerDefinitionImpl(Inflatable1,0,0);
+% astro1.AirProducerDefinition = AirProducerDefinitionImpl(Inflatable1,0,0);
+% astro1.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
+% astro1.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
+% astro1.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
+% astro1.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
+% astro1.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 
 %% Crew in Galley Module (galley)
 astro2 = CrewPersonImpl('Female 1',35,55,'Female',[crewSchedule{2,:}]);
 
 % Initialize consumer and producer definitions
-astro2.AirConsumerDefinition = AirConsumerDefinitionImpl(Inflatable1,0,0);
-astro2.AirProducerDefinition = AirProducerDefinitionImpl(Inflatable1,0,0);
-astro2.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
-astro2.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
-astro2.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro2.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
-astro2.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+% astro2.AirConsumerDefinition = AirConsumerDefinitionImpl(Inflatable1,0,0);
+% astro2.AirProducerDefinition = AirProducerDefinitionImpl(Inflatable1,0,0);
+% astro2.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
+% astro2.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
+% astro2.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
+% astro2.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
+% astro2.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 %% Crew in Labs Module (labs)
 astro3 = CrewPersonImpl('Male 2',35,72,'Male',[crewSchedule{3,:}]);
 
 % Initialize consumer and producer definitions
-astro3.AirConsumerDefinition = AirConsumerDefinitionImpl(LivingUnit1,0,0);
-astro3.AirProducerDefinition = AirProducerDefinitionImpl(LivingUnit1,0,0);
-astro3.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
-astro3.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
-astro3.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro3.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
-astro3.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+% astro3.AirConsumerDefinition = AirConsumerDefinitionImpl(LivingUnit1,0,0);
+% astro3.AirProducerDefinition = AirProducerDefinitionImpl(LivingUnit1,0,0);
+% astro3.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
+% astro3.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
+% astro3.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
+% astro3.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
+% astro3.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 %% Crew in Maintenance Module (maint)
 astro4 = CrewPersonImpl('Female 2',35,55,'Female',[crewSchedule{4,:}]);
 
 % Initialize consumer and producer definitions
-astro4.AirConsumerDefinition = AirConsumerDefinitionImpl(LifeSupportUnit1,0,0);
-astro4.AirProducerDefinition = AirProducerDefinitionImpl(LifeSupportUnit1,0,0);
-astro4.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
-astro4.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
-astro4.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
-astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
-astro4.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
+% astro4.AirConsumerDefinition = AirConsumerDefinitionImpl(LifeSupportUnit1,0,0);
+% astro4.AirProducerDefinition = AirProducerDefinitionImpl(LifeSupportUnit1,0,0);
+% astro4.PotableWaterConsumerDefinition = PotableWaterConsumerDefinitionImpl(PotableWaterStore,3,3);
+% astro4.DirtyWaterProducerDefinition = ResourceUseDefinitionImpl(DirtyWaterStore,100,100);
+% astro4.GreyWaterProducerDefinition = ResourceUseDefinitionImpl(GreyWaterStore,100,100);
+% astro4.FoodConsumerDefinition = ResourceUseDefinitionImpl(FoodStore,5,5);
+% astro4.DryWasteProducerDefinition = ResourceUseDefinitionImpl(DryWasteStore,10,10);
 
 
 %% Biomass Stores

@@ -4,6 +4,9 @@
 %   Date Created: 8/29/2014
 %   Last Updated: 8/29/2014
 
+%   This is a run of the EMU at a timestep of one second. Here, we have one
+%   astronaut operating within one EMU
+
 clear all
 clc
 
@@ -46,17 +49,33 @@ CarriedFoodStore = FoodStoreImpl(xmlFoodStoreCapacity,initialfood);
 
 %% EVA Consumable Consumption
 % EVAs occur over eight ticks
-numberOfEVAcrew = 2;
+numberOfEVAcrew = 1;
 idealGasConstant = 8.314;       % J/K/mol
 O2molarMass = 2*15.999;          % g/mol
 EMUpressure = 29.6; % in kPa - equates to 4.3psi - same as Shuttle EMU and is quoted in EAWG Section 5.1 for dexterous tasks
 EMUvolume = 2*28.3168*numberOfEVAcrew; % Generally between 1.5 and 2 cubic feet [L] - EMU Handbook Section 1.5.5      % in Liters, for two crew members
 EMUtotalMoles = EMUpressure*EMUvolume/(idealGasConstant*(273.15+23));   % Total moles within both EMUs
 % EMUleakmoles = 0.005*1E3/O2molarMass;       % From BVAD Section 5.2.2 - EMU leakage is 0.005kg/h (which is higher than the value quoted within Figure 1.8 of the Hamilton Sundstand EMU Handbook (36.2cubic cm/min)
-Vleakrate = 36.2*1E-3*60;   % (L/hr) Maximum volumetric leakage rate of the PGA is calculated as 36.2 cubic cm/min (Figure 1.8) [2] [L/hr]
-EMUleakmoles = EMUpressure*Vleakrate/(idealGasConstant*(273.15+23));      % Maximum mass leakage rate of the PGA [kg/s]
-EMUleakPercentage = EMUleakmoles*numberOfEVAcrew/EMUtotalMoles*100;     % multiplied by 100 to make it a percent value
 
+Vleakrate = 36.2*1E-3;   % (L/min) Maximum volumetric leakage rate of the PGA is calculated as 36.2 cubic cm/min (Figure 1.8) [2]
+
+% Convert leakage rate per minute to leakage rate per second
+% Let S = secondLeakagePercentage and initial total moles of gas = n_init
+% Therefore we want:
+% n_init*(1-minuteLeakagePercentage/100) = n_init*(1-S/100)^60
+% Solving for S yields:
+% S = 100*(1-(1-dailyLeakagePercentage/100)^(1/60))
+
+EMUleakmoles = EMUpressure*Vleakrate/(idealGasConstant*(273.15+23));      % Maximum mass leakage rate of the PGA [moles/min]
+EMUleakPercentageMinute = EMUleakmoles*numberOfEVAcrew/EMUtotalMoles*100;     % multiplied by 100 to make it a percent value [leak% per minute]
+
+% Convert leakage rate per minute to leakage rate per second
+% Let S = secondLeakagePercentage and initial total moles of gas = n_init
+% Therefore we want:
+% n_init*(1-minuteLeakagePercentage/100) = n_init*(1-S/100)^60
+% Solving for S yields:
+% S = 100*(1-(1-minuteLeakagePercentage/100)^(1/60))
+EMUleakPercentage = 100*(1-(1-EMUleakPercentageMinute/100)^(1/60));
  
 % Thermal control = {sublimator,radiator,cryogenic} = water usage = [0.57kg/hr,0.19kg/h,0]      REF:
 % BVAD Section 5.2.2
@@ -89,17 +108,18 @@ EMUo2Tanks = StoreImpl('EMU O2 Bottles','Material',EMUo2TankCapacity*numberOfEVA
 
 %% Initialize CrewPerson
 % Initialize activity
-EVA = ActivityImpl('EVA',4,8,EVAenvironment);              % EVA - fixed length of 8 hours
+EVA = ActivityImpl('EVA',4,8*3600,EVAenvironment);              % EVA - fixed length of 8 hours
 
 % Initialize crew person
-astro1 = CrewPersonImpl2('Male 1',35,75,'Male',EVA);
-astro2 = CrewPersonImpl2('Female 1',35,55,'Female',EVA);
+astro1 = CrewPersonImplEVA('Male 1',35,75,'Male',EVA);
+astro2 = CrewPersonImplEVA('Female 1',35,55,'Female',EVA);
 
 %% Initialize PLSS
 emuPLSS = PLSS(EVAenvironment,'METOX');
+% alternative is to select RCA
 
 % EMU PCA
-EMUPCA = ISSinjectorImpl(EMUpressure,1,EMUo2Tanks,[],EVAenvironment,'EMU');
+EMUPCA = ISSinjectorImplEVA(EMUpressure,1,EMUo2Tanks,[],EVAenvironment,'EMU');
 %% RUN
 
 % On start of EVA 
@@ -111,7 +131,7 @@ EMUo2Tanks.fill(O2Store);
 EMUinsuitDrinkBag.fill(PotableWaterStore);
 
 % Initialize data arrays
-simtime = 8;
+simtime = 2000;%8*3600;
 t = 1:simtime;
 
 o2storelevel = zeros(1,simtime);
@@ -120,6 +140,7 @@ dirtywaterstorelevel = zeros(1,simtime);
 greywaterstorelevel = zeros(1,simtime);
 drywastestorelevel = zeros(1,simtime);
 foodstorelevel = zeros(1,simtime);
+feedwaterlevel = zeros(1,simtime);
 
 emuPressure = zeros(1,simtime);
 emuO2level = zeros(1,simtime);
@@ -132,8 +153,12 @@ emuTotalMoles = zeros(1,simtime);
 co2removed = zeros(1,simtime);
 emuPCAaction = zeros(4,simtime+1);
 
+tic
+
+h = waitbar(0,'Please wait...');
+
 for i = 1:simtime
-    if astro1.alive == 0 || astro2.alive == 0
+    if astro1.alive == 0 %|| astro2.alive == 0
         return
     end
     
@@ -143,6 +168,8 @@ for i = 1:simtime
     greywaterstorelevel(i) = GreyWaterStore.currentLevel;
     drywastestorelevel(i) = DryWasteStore.currentLevel;
     foodstorelevel(i) = CarriedFoodStore.currentLevel;
+    feedwaterlevel(i) = EMUfeedwaterReservoir.currentLevel;
+    plssCO2level(i) = emuPLSS.CO2
     
     % Record EVA Environment Atmosphere
     emuPressure(i) = EVAenvironment.pressure;
@@ -165,10 +192,30 @@ for i = 1:simtime
     co2removed(i) = emuPLSS.tick;
     emuPCAaction(:,i+1) = EMUPCA.tick(emuPCAaction(:,i));
     
-    astro2.tick;  
+    % Tick Waitbar
+    if mod(i,100) == 0
+        waitbar(i/simtime,h,['Current tick: ',num2str(i),' | Time Elapsed: ',num2str(round(toc)),'sec']);
+    end
     
 end
     
+toc
+
+beep
+
+close(h)
+
 % At the end of EVA
 % - Empty EMU atmosphere into airlock
 % - Depending on CO2 removal approach - dump CO2 into airlock
+
+%% Results Plotting
+
+% Atmospheric molar constituents
+figure, plot(t,emuO2level,t,emuCO2level,t,emuVaporlevel,t,emuN2level,t,emuOtherlevel,'LineWidth',2),grid on,title('EVA Environment Molar Levels'),legend('O2','CO2','Vapor','N2','Other')
+
+% Molar percentages
+figure, plot(t,emuO2level./emuTotalMoles,t,emuCO2level./emuTotalMoles,t,emuVaporlevel./emuTotalMoles,t,emuN2level./emuTotalMoles,t,emuOtherlevel./emuTotalMoles,'LineWidth',2),grid on,title('EVA Environment Molar Fractions'),legend('O2','CO2','Vapor','N2','Other')
+
+
+
