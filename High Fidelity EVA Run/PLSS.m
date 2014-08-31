@@ -136,7 +136,7 @@ classdef PLSS
                 
                 % Take co2molesToTake from environment and add them to
                 % output CO2 store
-                obj.CO2Store.add(obj.InputEnvironment.CO2Store.take(co2molesToTake));
+                CO2MolesAdsorbed = obj.CO2Store.add(obj.InputEnvironment.CO2Store.take(co2molesToTake));
 
                 % Sublimator leak (corresponds to SWME losses)
                 obj.InputEnvironment.GreyWaterStore.take(obj.SWMEwaterLeakRate);

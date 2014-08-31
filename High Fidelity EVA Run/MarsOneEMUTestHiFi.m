@@ -113,10 +113,11 @@ EVA = ActivityImpl('EVA',4,8*3600,EVAenvironment);              % EVA - fixed le
 % Initialize crew person
 astro1 = CrewPersonImplEVA('Male 1',35,75,'Male',EVA);
 astro2 = CrewPersonImplEVA('Female 1',35,55,'Female',EVA);
+astro3 = CrewPersonImplEVA('Male 2',35,72,'Male',EVA);
 
 %% Initialize PLSS
-emuPLSS = PLSS(EVAenvironment,'METOX');
-% alternative is to select RCA
+% emuPLSS = PLSS(EVAenvironment,'METOX');
+emuPLSS = PLSS(EVAenvironment,'RCA');
 
 % EMU PCA
 EMUPCA = ISSinjectorImplEVA(EMUpressure,1,EMUo2Tanks,[],EVAenvironment,'EMU');
@@ -131,7 +132,7 @@ EMUo2Tanks.fill(O2Store);
 EMUinsuitDrinkBag.fill(PotableWaterStore);
 
 % Initialize data arrays
-simtime = 2000;%8*3600;
+simtime = 8*3600;
 t = 1:simtime;
 
 o2storelevel = zeros(1,simtime);
@@ -161,7 +162,7 @@ tic
 h = waitbar(0,'Please wait...');
 
 for i = 1:simtime
-    if astro1.alive == 0 %|| astro2.alive == 0
+    if astro3.alive == 0 %|| astro2.alive == 0
         return
     end
     
@@ -191,7 +192,7 @@ for i = 1:simtime
     EVAenvironment.tick;
         
     % Tick Crew
-    astro1.tick;
+    astro3.tick;
     
     % Run ECLSS Hardware
     co2removed(i) = emuPLSS.tick;
