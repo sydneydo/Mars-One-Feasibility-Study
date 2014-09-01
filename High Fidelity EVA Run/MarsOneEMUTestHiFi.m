@@ -214,6 +214,9 @@ close(h)
 % At the end of EVA
 % - Empty EMU atmosphere into airlock
 % - Depending on CO2 removal approach - dump CO2 into airlock
+% - Dirty water is either dumped (in MAGs) or recycled by reintroducing it
+% back into the WPA
+
 
 %% Results Plotting
 
@@ -239,3 +242,95 @@ figure, plot(t,plssCO2removedlevel,'LineWidth',2),grid on, title('EMU PLSS CO2 R
 figure, plot(t,plsshumidityremovedlevel,'LineWidth',2),grid on, title('EMU PLSS Humidity Condensate Removed')
 
 
+%% Multicase plotting
+
+% CO2 removed
+figure, plot(t,co2removedMETOX1,t,co2removedMETOX2,t,co2removedMETOX3,...
+    t,co2removedRCA1,t,co2removedRCA2,t,co2removedRCA3,'LineWidth',2), grid on,
+title('PLSS CO2 Removed per tick'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% Dirty water store level
+figure, plot(t,dirtywaterstorelevelMETOX1,t,dirtywaterstorelevelMETOX2,t,dirtywaterstorelevelMETOX3,...
+    t,dirtywaterstorelevelRCA1,t,dirtywaterstorelevelRCA2,t,dirtywaterstorelevelRCA3,'LineWidth',2), grid on,
+title('Dirty Water Store Level'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% Dry waste store level
+figure, plot(t,drywastestorelevelMETOX1,t,drywastestorelevelMETOX2,t,drywastestorelevelMETOX3,...
+    t,drywastestorelevelRCA1,t,drywastestorelevelRCA2,t,drywastestorelevelRCA3,'LineWidth',2), grid on,
+title('Dry Waste Store Level'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% Greywater store level
+figure, plot(t,greywaterstorelevelMETOX1,t,greywaterstorelevelMETOX2,t,greywaterstorelevelMETOX3,...
+    t,greywaterstorelevelRCA1,t,greywaterstorelevelRCA2,t,greywaterstorelevelRCA3,'LineWidth',2), grid on,
+title('Grey Water Store Level'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% O2 store level
+figure, plot(t,o2storelevelMETOX1,t,o2storelevelMETOX2,t,o2storelevelMETOX3,...
+    t,o2storelevelRCA1,t,o2storelevelRCA2,t,o2storelevelRCA3,'LineWidth',2), grid on,
+title('O2 Store Level'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% PLSS CO2 Removed Level
+figure, plot(t,plssCO2removedlevelMETOX1,t,plssCO2removedlevelMETOX2,t,plssCO2removedlevelMETOX3,...
+    t,plssCO2removedlevelRCA1,t,plssCO2removedlevelRCA2,t,plssCO2removedlevelRCA3,'LineWidth',2), grid on,
+title('PLSS Cumulative CO2 Removed'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% PLSS O2 Tank Level
+figure, plot(t,plssO2TanklevelMETOX1,t,plssO2TanklevelMETOX2,t,plssO2TanklevelMETOX3,...
+    t,plssO2TanklevelRCA1,t,plssO2TanklevelRCA2,t,plssO2TanklevelRCA3,'LineWidth',2), grid on,
+title('PLSS O2 Tank Level'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% PLSS Feedwater Tank Level
+figure, plot(t,plssfeedwatertanklevelMETOX1,t,plssfeedwatertanklevelMETOX2,t,plssfeedwatertanklevelMETOX3,...
+    t,plssfeedwatertanklevelRCA1,t,plssfeedwatertanklevelRCA2,t,plssfeedwatertanklevelRCA3,'LineWidth',2), grid on,
+title('PLSS Feedwater Tank Level'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% PLSS Cumulative Humidity Removed
+figure, plot(t,plsshumidityremovedlevelMETOX1,t,plsshumidityremovedlevelMETOX2,t,plsshumidityremovedlevelMETOX3,...
+    t,plsshumidityremovedlevelRCA1,t,plsshumidityremovedlevelRCA2,t,plsshumidityremovedlevelRCA3,'LineWidth',2), grid on,
+title('PLSS Cumulative Humidity Removed'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% Potable Water Store Level
+figure, plot(t,potablewaterstorelevelMETOX1,t,potablewaterstorelevelMETOX2,t,potablewaterstorelevelMETOX3,...
+    t,potablewaterstorelevelRCA1,t,potablewaterstorelevelRCA2,t,potablewaterstorelevelRCA3,'LineWidth',2), grid on,
+title('Potable Water Store Level'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% EMU CO2 Store Level
+figure, plot(t,emuCO2levelMETOX1,t,emuCO2levelMETOX2,t,emuCO2levelMETOX3,...
+    t,emuCO2levelRCA1,t,emuCO2levelRCA2,t,emuCO2levelRCA3,'LineWidth',2), grid on,
+title('EMU CO2 Level (moles)'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% EMU O2 Store Level
+figure, plot(t,emuO2levelMETOX1,t,emuO2levelMETOX2,t,emuO2levelMETOX3,...
+    t,emuO2levelRCA1,t,emuO2levelRCA2,t,emuO2levelRCA3,'LineWidth',2), grid on,
+title('EMU O2 Level (moles)'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')
+
+% EMU Vapor Store Level
+figure, plot(t,emuVaporlevelMETOX1,t,emuVaporlevelMETOX2,t,emuVaporlevelMETOX3,...
+    t,emuVaporlevelRCA1,t,emuVaporlevelRCA2,t,emuVaporlevelRCA3,'LineWidth',2), grid on,
+title('EMU Vapor Level (moles)'), 
+legend('METOX - Astro 1','METOX - Astro 2','METOX - Astro 3',...
+    'RCA - Astro 1','RCA - Astro 2','RCA - Astro 3')

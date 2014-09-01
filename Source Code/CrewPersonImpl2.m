@@ -217,12 +217,15 @@ classdef CrewPersonImpl2 < handle
             % ActivityImpl
 %             currentActivityIntensity = obj.CurrentActivity.Intensity;
 
+            % Don't breathe if on EVA (we account for breathing separately
+            if ~strcmpi(obj.CurrentActivity.Name,'EVA')
             % O2
             obj.O2Needed = calculateO2Needed(obj);
             obj.O2Consumed = obj.CurrentActivity.Location.O2Store.take(obj.O2Needed);
              % CO2
             obj.CO2Produced = obj.calculateCO2Produced(obj.O2Consumed);
             obj.CurrentActivity.Location.CO2Store.add(obj.CO2Produced);                   % Add CO2 to current SimEnvironment
+            end
             % Food
             obj.caloriesNeeded = calculateFoodNeeded(obj);
             foodConsumed = getCaloriesFromStore(obj,obj.caloriesNeeded);    % Outputs Food Items Consumed during this tick - this takes food from the foodstore
@@ -388,48 +391,56 @@ classdef CrewPersonImpl2 < handle
             end            
             
             % Inhaled O2 Ratio (hypoxia check)
-            currentPPO2 = obj.CurrentActivity.Location.O2Percentage*obj.CurrentActivity.Location.pressure;
-            if currentPPO2 < obj.O2LowPartialPressure
-                obj.consumedLowOxygenBuffer.take(1);%obj.O2LowRatio-currentO2Ratio);    % Take an hour of survival time away from crewperson
-                obj.suffocating = 1;
-                disp([obj.Name,' is currently suffocating on tick: ', num2str(obj.CurrentTick)])
-            else
-                obj.suffocating = 0;
-            end
+            if ~strcmpi(obj.CurrentActivity.Name,'EVA')
+                currentPPO2 = obj.CurrentActivity.Location.O2Percentage*obj.CurrentActivity.Location.pressure;
+                if currentPPO2 < obj.O2LowPartialPressure
+                    obj.consumedLowOxygenBuffer.take(1);%obj.O2LowRatio-currentO2Ratio);    % Take an hour of survival time away from crewperson
+                    obj.suffocating = 1;
+                    disp([obj.Name,' is currently suffocating on tick: ', num2str(obj.CurrentTick),' in module: ',obj.CurrentActivity.Location.name])
+                else
+                    obj.suffocating = 0;
+                end
+%             end
             
             % Fire Hazard and Hyperoxia Check (only check when crew is not
             % on EVA)
-            if ~(strcmpi(obj.CurrentActivity.Name,'EVA') || strcmpi(obj.CurrentActivity.Name,'EVA Prebreathe'))
+%             if ~strcmpi(obj.CurrentActivity.Name,'EVA')   % this if
+%             condition is always here
                 if obj.CurrentActivity.Location.O2Percentage > obj.CurrentActivity.Location.DangerousOxygenThreshold
                     obj.highOxygenBuffer.take(1);%currentO2Ratio-...        % Take one hour away from buffer
                     %                     obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold);       % Remove time in hyperoxic state from buffer
                     obj.fireRisked = 1;
-                    disp([obj.Name,' is currently in a fire risked state on tick: ', num2str(obj.CurrentTick)])
+                    disp([obj.Name,' is currently in a fire risked state on tick: ', num2str(obj.CurrentTick),' in module: ',obj.CurrentActivity.Location.name])
                 else
                     obj.fireRisked = 0;
                 end
-            end
+%             end
+            
             % Total Pressure Check
-            if obj.CurrentActivity.Location.pressure < obj.TotalPressureLowLimit
-                obj.lowTotalPressureBuffer.take(1); % Take one hour away from buffer
-                obj.totalpressureRisked = 1;
-                disp([obj.Name,' is currently in a low total ambient pressure risked state on tick: ', num2str(obj.CurrentTick)])
-            else
-                obj.totalpressureRisked = 0;
-            end
+%             if ~strcmpi(obj.CurrentActivity.Name,'EVA')
+                if obj.CurrentActivity.Location.pressure < obj.TotalPressureLowLimit
+                    obj.lowTotalPressureBuffer.take(1); % Take one hour away from buffer
+                    obj.totalpressureRisked = 1;
+                    disp([obj.Name,' is currently in a low total ambient pressure risked state on tick: ', num2str(obj.CurrentTick),' in module: ',obj.CurrentActivity.Location.name])
+                else
+                    obj.totalpressureRisked = 0;
+                end
+%             end
             
             % CO2 Poisoning Check
-            currentPPCO2 = obj.CurrentActivity.Location.pressure*obj.CurrentActivity.Location.CO2Percentage;
-            if currentPPCO2 > obj.CO2HighLimit
-                obj.consumedCO2Buffer.take(currentPPCO2 - obj.CO2HighLimit);
-                obj.poisoned = 1;
-                disp([obj.Name,' is currently experiencing CO2 poisoning on tick: ', num2str(obj.CurrentTick)])
-            else
-                obj.poisoned = 0;
-            end
+%             if ~strcmpi(obj.CurrentActivity.Name,'EVA')
+                currentPPCO2 = obj.CurrentActivity.Location.pressure*obj.CurrentActivity.Location.CO2Percentage;
+                if currentPPCO2 > obj.CO2HighLimit
+                    obj.consumedCO2Buffer.take(currentPPCO2 - obj.CO2HighLimit);
+                    obj.poisoned = 1;
+                    disp([obj.Name,' is currently experiencing CO2 poisoning on tick: ', num2str(obj.CurrentTick),' in module: ',obj.CurrentActivity.Location.name])
+                else
+                    obj.poisoned = 0;
+                end
 %             % Alternative faster code
 %             obj.consumedCO2Buffer.take((currentCO2Ratio > obj.CO2HighRatio)*(currentCO2Ratio - obj.CO2HighRatio));
 %             obj.poisoned = (currentCO2Ratio > obj.CO2HighRatio);
+            end
         end
 
         %% HealthCheck

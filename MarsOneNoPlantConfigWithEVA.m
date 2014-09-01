@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 168*2;%19000;
+missionDurationInHours = 2*168;%19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -62,6 +62,10 @@ TotalAtmPressureTargeted = 70.3;        % targeted total atmospheric pressure, i
 O2FractionHypoxicLimit = 0.23;          % lower bound for a 70.3kPa atm based on EAWG Fig 4.1.1 and Advanced Life Support Requirements Document Fig 4-3
 TargetO2MolarFraction = 0.265; 
 TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
+
+% EMU
+EMUco2RemovalTechnology = 'METOX';  % other option is RCA
+EMUurineManagementTechnology = 'UCTA';  % other option is MAG
 
 %% Initialize Stores
 % Potable Water Store within Life Support Units (note water store capacity
@@ -205,6 +209,29 @@ Vleakrate = 36.2*1E-3*60;   % (L/hr) Maximum volumetric leakage rate of the PGA 
 EMUleakmoles = EMUpressure*Vleakrate/(idealGasConstant*(273.15+23));      % Maximum mass leakage rate of the PGA [kg/s]
 EMUleakPercentage = EMUleakmoles*numberOfEVAcrew/EMUtotalMoles;
 
+% EMUco2RemovalTechnology = 'METOX';  % other option is RCA
+% EMUurineManagementTechnology = 'UCTA';  % other option is MAG
+
+load EVAPLSSoutput
+
+% Define end of EVA EMU gaseous parameters
+if strcmpi(EMUco2RemovalTechnology,'METOX')
+    finalEMUo2level = emuO2levelMETOX*numberOfEVAcrew;
+    finalEMUco2level = emuCO2levelMETOX*numberOfEVAcrew;
+    finalFeedwaterTanklevel = plssfeedwatertanklevelMETOX*numberOfEVAcrew;    % also corresponds to total humidity level consumed, this captures any thermal control leakage
+    plssO2TankLevel = plssO2TanklevelMETOX*numberOfEVAcrew;        % set corresponding StoreImpl.currentLevel to this value
+    totalCO2removed = plssCO2removedlevelMETOX*numberOfEVAcrew;
+    METOXregeneratorLoad = StoreImpl('METOX adsorbed CO2','Environmental');
+    metoxCO2regenRate = totalCO2removed/10;         % 10 hours to completely regenerate a METOX canister
+elseif strcmpi(EMUco2RemovalTechnology,'RCA')
+    finalEMUo2level = emuO2levelRCA*numberOfEVAcrew;
+    finalEMUco2level = emuCO2levelRCA*numberOfEVAcrew;
+    finalFeedwaterTanklevel = plssfeedwatertanklevelRCA*numberOfEVAcrew;
+    plssO2TankLevel = plssO2TanklevelRCA*numberOfEVAcrew;        % set corresponding StoreImpl.currentLevel to this value
+    totalCO2removed = plssCO2removedlevelRCA*numberOfEVAcrew;
+end
+finalEMUvaporlevel = emuVaporlevelcommon*numberOfEVAcrew;
+
  
 % Thermal control = {sublimator,radiator,cryogenic} = water usage = [0.57kg/hr,0.19kg/h,0]      REF:
 % BVAD Section 5.2.2
@@ -214,34 +241,32 @@ EMUleakPercentage = EMUleakmoles*numberOfEVAcrew/EMUtotalMoles;
 % EVAco2removal = [METOX, Amine Swingbed]
 % Amine Swingbed O2 loss rate is 0.15kg/h
 
-% Liquid Metabolic Waste = [Collect, Vent]
-% Collected urine can be sent to the UPA wastewater tank
 
-
-EMUmetabolicWaste = StoreImpl('EVA MAG','Environmental');       % This is to replace the dirty water store if water is collected within the MAG
-% Two options for liquid metabolic waste - either throw it away (as in the
-% EMU MAG), or collect urine and feed it back into the UPA - as in Apollo
-% EMU - find a reference for this!)
-
-EMUdrinkbagVolume = 32*0.0295735;  % L, converted from 32 ounces (REF: Section 1.3.9 EMU Handbook)
-EMUinsuitDrinkBag = StoreImpl('EMU Drink Bag','Material',EMUdrinkbagVolume*numberOfEVAcrew,0);
+% EMUdrinkbagVolume = 32*0.0295735;  % L, converted from 32 ounces (REF: Section 1.3.9 EMU Handbook)
+% EMUinsuitDrinkBag = StoreImpl('EMU Drink Bag','Material',EMUdrinkbagVolume*numberOfEVAcrew,0);
 
 EMUfeedwaterCapacity = 10*0.453592;  % (L), converted from 10 pounds of water, assuming a water density of 1000kg/m^3 = 1kg/L, REF - Section 2.1.4 EMU Handbook
 EMUfeedwaterReservoir = StoreImpl('PLSS Feedwater Reservoir','Material',EMUfeedwaterCapacity,0);
 
-EVAenvironment = SimEnvironmentImpl('EVA Environment',EMUpressure,EMUvolume,1,0,0,0,0,EMUleakPercentage,EMUdrinkbagVolume,EMUfeedwaterReservoir,DirtyWaterStore,DryWasteStore,CarriedFoodStore);
+% Two options for liquid metabolic waste - either throw it away (as in the
+% EMU MAG), or collect urine and feed it back into the UPA - as in Apollo
+% EMU - find a reference for this!)
+if strcmpi(EMUurineManagementTechnology,'UCTA')
+    EVAenvironment = SimEnvironmentImpl('EVA Environment',EMUpressure,EMUvolume,1,0,0,0,0,EMUleakPercentage,PotableWaterStore,EMUfeedwaterReservoir,DirtyWaterStore,DryWasteStore,CarriedFoodStore);
+elseif strcmpi(EMUurineManagementTechnology,'MAG')
+    EMUmetabolicWaste = StoreImpl('EVA MAG','Environmental');       % This is to replace the dirty water store if water is collected within the MAG
+    EVAenvironment = SimEnvironmentImpl('EVA Environment',EMUpressure,EMUvolume,1,0,0,0,0,EMUleakPercentage,PotableWaterStore,EMUfeedwaterReservoir,EMUmetabolicWaste,DryWasteStore,CarriedFoodStore);
+end
+
 
 EMUo2TankCapacity = 1.217*453.592/O2molarMass;      % moles, Converted from 1.217lbs - REF: Section 2.1.3 EMU Handbook
-EMUo2Tanks = StoreImpl('EMU O2 Bottles','Material',EMUo2TankCapacity*numberOfEVAcrew,EMUo2TankCapacity*numberOfEVAcrew);
+EMUo2Tanks = StoreImpl('EMU O2 Bottles','Material',EMUo2TankCapacity*numberOfEVAcrew,0);
 
-% EMU PCA
-EMUPCA = ISSinjectorImpl(EMUpressure,1,EMUo2Tanks,[],EVAenvironment,'EMU');
+% % EMU PCA
+% EMUPCA = ISSinjectorImpl(EMUpressure,1,EMUo2Tanks,[],EVAenvironment,'EMU');
 
 % Note: EMU Food bar is no longer flown (REF:
 % http://spaceflight.nasa.gov/shuttle/reference/faq/eva.html)
-
-% TO DO: RCA model, and modify CrewPersonImpl for
-% resource consumption
 
 %% Airlock Environment
 % This environment is modeled to represent airlock depressurization losses
@@ -281,7 +306,7 @@ HabDistribution = [repmat(Inflatable1,1,2),repmat(LivingUnit1,1,2),repmat(LifeSu
 IVAhour = ActivityImpl('IVA',2,1,HabDistribution);          % One hour of IVA time (corresponds to generic IVA activity)
 Sleep = ActivityImpl('Sleep',0,8,Inflatable1);          % Sleep period
 Exercise = ActivityImpl('Exercise',5,lengthOfExercise,Inflatable1);    % Exercise period
-EVA = ActivityImpl('EVA',4,8,Inflatable1);              % EVA - fixed length of 8 hours
+EVA = ActivityImpl('EVA',4,8,EVAenvironment);              % EVA - fixed length of 8 hours
 
 % Vector of baselin activities:
 ActivityList = [IVAhour,Sleep,Exercise,EVA];
@@ -404,7 +429,7 @@ livingUnit2LifeSupportFan = ISSFanImpl2(LivingUnit1,LifeSupportUnit1,MainPowerSt
 lifeSupport2CargoUnitFan = ISSFanImpl2(LifeSupportUnit1,CargoUnit1,MainPowerStore);
 
 % IMV between Life Support Unit and Airlock
-lifeSupport2AirlockFan = ISSFanImpl2(LifeSupportUnit1,Airlock,MainPowerStore);
+livingUnit2AirlockFan = ISSFanImpl2(LivingUnit1,Airlock,MainPowerStore);
 
 %% Initialize Injectors (Models ISS Pressure Control Assemblies)
 % See accompanying word doc for rationale behind PCA locations
@@ -483,6 +508,9 @@ caloriccontent = zeros(1,simtime);
 biomassstorelevel = zeros(1,simtime);
 cropwaterstorelevel = zeros(1,simtime);
 powerlevel = zeros(1,simtime);
+metoxregenstore = zeros(1,simtime);
+plssfeedwatertanklevel = zeros(1,simtime);
+plsso2tanklevel = zeros(1,simtime);
 
 inflatablePressure = zeros(1,simtime);
 inflatableO2level = zeros(1,simtime);
@@ -566,6 +594,9 @@ for i = 1:simtime
         carriedfoodstorelevel = carriedfoodstorelevel(1:(i-1));
 %         cropwaterstorelevel = cropwaterstorelevel(1:(i-1));
         powerlevel = powerlevel(1:(i-1));
+        metoxregenstore = metoxregenstore(1:(i-1));
+        plssfeedwatertanklevel = plssfeedwatertanklevel(1:(i-1));
+        plsso2tanklevel = plsso2tanklevel(1:(i-1));
     
         % Record Inflatable Unit Atmosphere
         inflatablePressure = inflatablePressure(1:(i-1));
@@ -643,6 +674,11 @@ for i = 1:simtime
     drywastestorelevel(i) = DryWasteStore.currentLevel;
 %     biomassstorelevel(i) = BiomassStore.currentLevel;
     powerlevel(i) = MainPowerStore.currentLevel;
+    metoxregenstore(i) = METOXregeneratorLoad.currentLevel;
+
+    % Record PLSS Tanks
+    plssfeedwatertanklevel(i) = EMUfeedwaterReservoir.currentLevel;
+    plsso2tanklevel(i) = EMUo2Tanks.currentLevel;
     
     % Record Inflatable Unit Atmosphere
     inflatablePressure(i) = Inflatable1.pressure;
@@ -701,7 +737,7 @@ for i = 1:simtime
     inflatable2LivingUnitFan.tick;
     livingUnit2LifeSupportFan.tick;
     lifeSupport2CargoUnitFan.tick;
-    lifeSupport2AirlockFan.tick;
+    livingUnit2AirlockFan.tick;
     
     % Run Power Supply
     powerPS.tick; 
@@ -775,15 +811,11 @@ for i = 1:simtime
             currentEVAcrew = CrewEVAstatus;
             % perform airlock ops
             EVAprebreathedO2 = O2Store.take(prebreatheO2);      % Crew Prebreathe O2
-            % empty EVA environment to airlock and fill EVA suits with O2
-            % from O2store
-            Airlock.O2Store.add(EVAenvironment.O2Store.take(EVAenvironment.O2Store.currentLevel));
-            Airlock.CO2Store.add(EVAenvironment.CO2Store.take(EVAenvironment.CO2Store.currentLevel));
-            Airlock.NitrogenStore.add(EVAenvironment.NitrogenStore.take(EVAenvironment.NitrogenStore.currentLevel));
-            Airlock.VaporStore.add(EVAenvironment.VaporStore.take(EVAenvironment.VaporStore.currentLevel));
-            Airlock.OtherStore.add(EVAenvironment.OtherStore.take(EVAenvironment.OtherStore.currentLevel));
-                        
+            % fill EVA suits with O2 from O2Store 
             EVAsuitfill = EVAenvironment.O2Store.add(O2Store.take(EMUtotalMoles));              % Fill two EMUs with 100% O2
+            EMUfeedwaterReservoir.fill(PotableWaterStore);                                      % fill feedwater tanks
+            EMUo2Tanks.fill(O2Store);                                                           % fill PLSS O2 tanks
+            
             % Error
             if EVAprebreathedO2 < prebreatheO2 || EVAsuitfill < EMUtotalMoles
                 disp(['Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: ',num2str(i)])
@@ -796,7 +828,29 @@ for i = 1:simtime
             end
             % Vent lost airlock gases
             airlockGasVented = Airlock.vent(airlockCycleLoss);
+        elseif hoursOnEVA == 8      % end of EVA
+            % Empty EMU and add residual gases within EMU to Airlock
+            EVAenvironment.O2Store.currentLevel = 0;
+            EVAenvironment.CO2Store.currentLevel = 0;
+            EVAenvironment.VaporStore.currentLevel = 0;
             
+            Airlock.O2Store.add(finalEMUo2level);
+            Airlock.CO2Store.add(finalEMUco2level);
+            Airlock.VaporStore.add(finalEMUvaporlevel);
+            
+            % Define PLSS Store levels
+            EMUfeedwaterReservoir.currentLevel = finalFeedwaterTanklevel;
+            EMUo2Tanks.currentLevel = plssO2TankLevel;       
+            
+            % For METOX case, add PLSS removed CO2 back to Airlock 
+            % (equivalent to METOX oven baking) 
+            if strcmpi(EMUco2RemovalTechnology,'METOX')
+                METOXregeneratorLoad.add(totalCO2removed);
+            end
+            
+            % For humidity condensate: for RCA, the loss is captured in 
+            % finalEMUvaporlevel, while for the METOX, all humidity
+            % condensate is sitting within the feedwater tank
         end
     end
     % If the crew is no longer on EVA, reset hoursOnEVA
@@ -804,7 +858,13 @@ for i = 1:simtime
         % if identified crewmember's current activity is not EVA
         hoursOnEVA = 0;
     end
-
+    
+    % Regenerate METOX canisters if required
+    % Add CO2 removed from METOX canister to Airlock
+    if strcmpi(EMUco2RemovalTechnology,'METOX')
+        Airlock.CO2Store.add(METOXregeneratorLoad.take(metoxCO2regenRate));
+    end
+    
     % Tick Waitbar
     if mod(i,100) == 0
         waitbar(i/simtime,h,['Current tick: ',num2str(i),' | Time Elapsed: ',num2str(round(toc)),'sec']);
@@ -828,6 +888,9 @@ subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles,t,li
 subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
 
 t = 1:(length(o2storelevel));
+
+% Airlock ppCO2
+figure, plot(t,airlockCO2level./airlockTotalMoles.*airlockPressure,'LineWidth',2),grid on, title('Airlock ppCO2')
 
 % O2 molar fraction
 figure, 

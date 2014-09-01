@@ -210,10 +210,10 @@ classdef SimEnvironmentImpl < handle
             
             % Take moles from SimEnvironment gaseous stores
             o2Vented = obj.O2Store.take(currentO2percentage*molesToVent);
-            co2Vented = obj.O2Store.take(currentCO2percentage*molesToVent);
-            n2Vented = obj.O2Store.take(currentN2percentage*molesToVent);
-            vaporVented = obj.O2Store.take(currentVaporpercentage*molesToVent);
-            otherVented = obj.O2Store.take(currentOtherpercentage*molesToVent);
+            co2Vented = obj.CO2Store.take(currentCO2percentage*molesToVent);
+            n2Vented = obj.NitrogenStore.take(currentN2percentage*molesToVent);
+            vaporVented = obj.VaporStore.take(currentVaporpercentage*molesToVent);
+            otherVented = obj.OtherStore.take(currentOtherpercentage*molesToVent);
             
             molesVented = o2Vented+co2Vented+n2Vented+vaporVented+otherVented;
         end
