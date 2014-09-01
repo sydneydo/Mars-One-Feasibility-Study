@@ -748,12 +748,6 @@ for i = 1:simtime
         strcmpi(astro3.CurrentActivity.Name,'EVA'),...
         strcmpi(astro4.CurrentActivity.Name,'EVA')];
     
-    % Regenerate METOX canisters if required
-    % Add CO2 removed from METOX canister to Airlock
-    if strcmpi(EMUco2RemovalTechnology,'METOX')
-        Airlock.CO2Store.add(METOXregeneratorLoad.take(metoxCO2regenRate));
-    end
-    
     % if any astro has a current activity that is EVA
     if sum(CrewEVAstatus) > 0
         % identify first crewmember
@@ -778,7 +772,7 @@ for i = 1:simtime
                 astro2.skipActivity;
                 astro3.skipActivity;
                 astro4.skipActivity;
-                continue
+                
             end
             % Vent lost airlock gases
             airlockGasVented = Airlock.vent(airlockCycleLoss);
@@ -811,6 +805,12 @@ for i = 1:simtime
     if ~isequal(CrewEVAstatus,currentEVAcrew)
         % if identified crewmember's current activity is not EVA
         hoursOnEVA = 0;
+    end
+    
+    % Regenerate METOX canisters if required
+    % Add CO2 removed from METOX canister to Airlock
+    if strcmpi(EMUco2RemovalTechnology,'METOX')
+        Airlock.CO2Store.add(METOXregeneratorLoad.take(metoxCO2regenRate));
     end
     
     % Tick Waitbar
