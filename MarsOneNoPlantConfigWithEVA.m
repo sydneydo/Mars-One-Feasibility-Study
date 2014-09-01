@@ -287,12 +287,18 @@ airlockCycleLoss = 13.8*airlockFreegasVolume/(idealGasConstant*(273.15+Airlock.t
 % - Prebreathe lasts for 40 minutes and is performed in suit (REF: Table
 % 3.1-1 EAWG Report)
 % On ISS, an in-suit prebreath lasts 240 minutes (REF: Table 3.1-1 EAWG
-% Report) and consumes 4.53kg per person (REF: Methodology and Assumptions
+% Report) and consumes 4.53kg per EVA (REF: Methodology and Assumptions
 % of Contingency Shuttle Crew Support (CSCS) Calculations Using ISS ECLSS -
 % SAE 2006-01-2061)
 % Therefore, for Mars One, prebreathe O2 for two crew persons is:
 
-prebreatheO2 = numberOfEVAcrew*4.53*40/240 * 1E3/O2molarMass;   % moles of O2... supplied from O2 tanks
+% prebreatheO2 = 4.53*40/240 * 1E3/O2molarMass;   % moles of O2... supplied from O2 tanks
+
+% Modified value according to more updated data:
+% A typical suit purge on the ISS will achieve ? 95% O2 after 8 minutes and requires about 0.65 lb of O2."
+% REF: Fifteen-minute EVA Prebreathe Protocol Using NASA's Exploration
+% Atmopshere - AIAA2013-3525 - 0.65lb O2 used per EMU (includes inflation)
+prebreatheO2 = 0.65*453.592/O2molarMass*numberOfEVAcrew;   % moles of O2... supplied from O2 tanks
 
 %% Initialize Key Activity Parameters
 
@@ -762,15 +768,13 @@ for i = 1:simtime
             % Store EVA status
             currentEVAcrew = CrewEVAstatus;
             % perform airlock ops
-            EVAprebreathedO2 = O2Store.take(prebreatheO2);      % Crew Prebreathe O2
-            LivingUnit1.CO2Store.add(prebreatheO2*0.86);        % Exhaled CO2 is introduced into the Living Unit environment - to avoid CO2 loss from airlock cycle losses (we assume a respiration quotient of 0.86
-            % fill EVA suits with O2 from O2Store 
-            EVAsuitfill = EVAenvironment.O2Store.add(O2Store.take(EMUtotalMoles));              % Fill two EMUs with 100% O2
+            % purge and fill EVA suits with O2 from O2Store 
+            EVAsuitfill = EVAenvironment.O2Store.add(O2Store.take(prebreatheO2));              % Fill two EMUs with 100% O2
             EMUfeedwaterReservoir.fill(PotableWaterStore);                                      % fill feedwater tanks
             EMUo2Tanks.fill(O2Store);                                                           % fill PLSS O2 tanks
             
             % Error
-            if EVAprebreathedO2 < prebreatheO2 || EVAsuitfill < EMUtotalMoles
+            if EVAsuitfill < prebreatheO2
                 disp(['Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: ',num2str(i)])
                 disp('Current EVA has been skipped')
                 % Advance activities for all astronauts
