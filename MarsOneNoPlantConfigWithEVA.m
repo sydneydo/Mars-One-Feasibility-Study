@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 19000;
+missionDurationInHours = 3000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -463,6 +463,7 @@ powerlevel = zeros(1,simtime);
 metoxregenstore = zeros(1,simtime);
 plssfeedwatertanklevel = zeros(1,simtime);
 plsso2tanklevel = zeros(1,simtime);
+reservoirFillLevel = zeros(1,simtime);
 
 inflatablePressure = zeros(1,simtime);
 inflatableO2level = zeros(1,simtime);
@@ -519,7 +520,7 @@ crsCompressorOperation = zeros(2,simtime);
 co2accumulatorlevel = zeros(1,simtime);
 co2removed = zeros(1,simtime);
 
-hoursOnEVA = 0;     % Flag to indicate whether or not the Airlock should be depressurized
+hoursOnEVA = zeros(1,simtime);     % Flag to indicate whether or not the Airlock should be depressurized
 currentEVAcrew = zeros(1,4);    % Current crewpersons on EVA
 
 h = waitbar(0,'Please wait...');
@@ -549,6 +550,8 @@ for i = 1:simtime
         metoxregenstore = metoxregenstore(1:(i-1));
         plssfeedwatertanklevel = plssfeedwatertanklevel(1:(i-1));
         plsso2tanklevel = plsso2tanklevel(1:(i-1));
+        
+        hoursOnEVA = hoursOnEVA(1:(i-1));
     
         % Record Inflatable Unit Atmosphere
         inflatablePressure = inflatablePressure(1:(i-1));
@@ -763,18 +766,13 @@ for i = 1:simtime
     % if any astro has a current activity that is EVA
     if sum(CrewEVAstatus) > 0
         % identify first crewmember
-        hoursOnEVA = hoursOnEVA+1;
-        if hoursOnEVA == 1
+        hoursOnEVA(i) = hoursOnEVA(i-1)+1;
+        if hoursOnEVA(i) == 1
             % Store EVA status
             currentEVAcrew = CrewEVAstatus;
-            % perform airlock ops
-            % purge and fill EVA suits with O2 from O2Store 
-            EVAsuitfill = EVAenvironment.O2Store.add(O2Store.take(prebreatheO2));              % Fill two EMUs with 100% O2
-            EMUfeedwaterReservoir.fill(PotableWaterStore);                                      % fill feedwater tanks
-            EMUo2Tanks.fill(O2Store);                                                           % fill PLSS O2 tanks
-            
+
             % Error
-            if EVAsuitfill < prebreatheO2
+            if O2Store.currentLevel < prebreatheO2
                 disp(['Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: ',num2str(i)])
                 disp('Current EVA has been skipped')
                 % Advance activities for all astronauts
@@ -784,9 +782,17 @@ for i = 1:simtime
                 astro4.skipActivity;
                 continue
             end
+            
+            % perform airlock ops
+            % purge and fill EVA suits with O2 from O2Store 
+            EVAsuitfill = EVAenvironment.O2Store.add(O2Store.take(prebreatheO2));              % Fill two EMUs with 100% O2
+            reservoirFillLevel(i) = EMUfeedwaterReservoir.fill(PotableWaterStore);                                      % fill feedwater tanks
+            EMUo2Tanks.fill(O2Store);                                                           % fill PLSS O2 tanks
+            
             % Vent lost airlock gases
             airlockGasVented = Airlock.vent(airlockCycleLoss);
-        elseif hoursOnEVA == 8      % end of EVA
+            
+        elseif hoursOnEVA(i) == 8      % end of EVA
             % Empty EMU and add residual gases within EMU to Airlock
             EVAenvironment.O2Store.currentLevel = 0;
             EVAenvironment.CO2Store.currentLevel = 0;
@@ -814,10 +820,10 @@ for i = 1:simtime
     % If the crew is no longer on EVA, reset hoursOnEVA
     if ~isequal(CrewEVAstatus,currentEVAcrew)
         % if identified crewmember's current activity is not EVA
-        hoursOnEVA = 0;
+        hoursOnEVA(i) = 0;
     end
     
-    % Tick Waitbar
+    %% Tick Waitbar
     if mod(i,100) == 0
         waitbar(i/simtime,h,['Current tick: ',num2str(i),' | Time Elapsed: ',num2str(round(toc)),'sec']);
     end
