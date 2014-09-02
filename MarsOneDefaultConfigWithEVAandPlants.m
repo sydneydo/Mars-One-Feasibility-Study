@@ -156,7 +156,7 @@ CarriedTotalMass = CarriedCalories/CarriedFood.CaloriesPerKilogram; % Note that 
 
 initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWaterContent*CarriedTotalMass); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java
 
-CarriedFoodStore = FoodStoreImpl(xmlFoodStoreCapacity,initialfood);
+CarriedFoodStore = FoodStoreImpl(CarriedTotalMass,initialfood);
 
 LocallyGrownFoodStore = FoodStoreImpl(1000);
 
@@ -604,6 +604,8 @@ for i = 1:simtime
         co2removed = co2removed(1:(i-1));
         crsH2OProduced = crsH2OProduced(1:(i-1));
         co2accumulatorlevel = co2accumulatorlevel(1:(i-1));
+        
+        t = 1:(length(o2storelevel));
         
         toc
         
