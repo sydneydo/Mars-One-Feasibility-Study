@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 3000;
+missionDurationInHours = 23000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -64,7 +64,7 @@ TargetO2MolarFraction = 0.265;
 TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
 
 % EMU
-EMUco2RemovalTechnology = 'METOX';  % other option is RCA
+EMUco2RemovalTechnology = 'RCA';  % other option is RCA
 EMUurineManagementTechnology = 'UCTA';  % other option is MAG
 
 %% Initialize Stores
@@ -547,7 +547,9 @@ for i = 1:simtime
         carriedfoodstorelevel = carriedfoodstorelevel(1:(i-1));
 %         cropwaterstorelevel = cropwaterstorelevel(1:(i-1));
         powerlevel = powerlevel(1:(i-1));
-        metoxregenstore = metoxregenstore(1:(i-1));
+        if strcmpi(EMUco2RemovalTechnology,'METOX')
+            metoxregenstore = metoxregenstore(1:(i-1));
+        end
         plssfeedwatertanklevel = plssfeedwatertanklevel(1:(i-1));
         plsso2tanklevel = plsso2tanklevel(1:(i-1));
         
@@ -629,8 +631,9 @@ for i = 1:simtime
     drywastestorelevel(i) = DryWasteStore.currentLevel;
 %     biomassstorelevel(i) = BiomassStore.currentLevel;
     powerlevel(i) = MainPowerStore.currentLevel;
-    metoxregenstore(i) = METOXregeneratorLoad.currentLevel;
-
+    if strcmpi(EMUco2RemovalTechnology,'METOX')
+        metoxregenstore(i) = METOXregeneratorLoad.currentLevel;
+    end
     % Record PLSS Tanks
     plssfeedwatertanklevel(i) = EMUfeedwaterReservoir.currentLevel;
     plsso2tanklevel(i) = EMUo2Tanks.currentLevel;
