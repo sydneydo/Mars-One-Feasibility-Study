@@ -293,7 +293,7 @@ airlockCycleLoss = 13.8*airlockFreegasVolume/(idealGasConstant*(273.15+Airlock.t
 % Modified value according to more updated data:
 % A typical suit purge on the ISS will achieve ? 95% O2 after 8 minutes and requires about 0.65 lb of O2."
 % REF: Fifteen-minute EVA Prebreathe Protocol Using NASA's Exploration
-% Atmosphere - AIAA2013-3525 - 0.65lb O2 used per EMU (includes inflation)
+% Atmopshere - AIAA2013-3525 - 0.65lb O2 used per EMU (includes inflation)
 prebreatheO2 = 0.65*453.592/O2molarMass*numberOfEVAcrew;   % moles of O2... supplied from O2 tanks
 
 %% Initialize Key Activity Parameters
