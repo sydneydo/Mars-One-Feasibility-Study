@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 19000;
+missionDurationInHours = 6000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -66,7 +66,7 @@ TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;             
 % ISRU Production Rates
 isruAddedWater = 0.2;   % Liters/hour
 isruAddedO2 = 1.5;      % moles/hour
-isruAddedN2 = 1.3;      % moles/hour
+isruAddedN2 = 1.5;      % moles/hour
 
 % EMU
 EMUco2RemovalTechnology = 'RCA';  % other option is RCA
