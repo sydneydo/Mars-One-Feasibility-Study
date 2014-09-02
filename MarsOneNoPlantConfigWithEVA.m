@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 23000;
+missionDurationInHours = 19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -62,6 +62,11 @@ TotalAtmPressureTargeted = 70.3;        % targeted total atmospheric pressure, i
 O2FractionHypoxicLimit = 0.23;          % lower bound for a 70.3kPa atm based on EAWG Fig 4.1.1 and Advanced Life Support Requirements Document Fig 4-3
 TargetO2MolarFraction = 0.265; 
 TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
+
+% ISRU Production Rates
+isruAddedWater = 0.2;   % Liters/hour
+isruAddedO2 = 1.5;      % moles/hour
+isruAddedN2 = 1.3;      % moles/hour
 
 % EMU
 EMUco2RemovalTechnology = 'RCA';  % other option is RCA
@@ -748,12 +753,17 @@ for i = 1:simtime
 %         caloriccontent(i) = sum([LocallyGrownFoodStore.foodItems.CaloricContent]);
 %     end
     
-    % Tick Crew
+    %% Tick Crew
     astro1.tick;
     astro2.tick;  
     astro3.tick;
     astro4.tick;
    
+    %% Run ISRU
+    PotableWaterStore.add(isruAddedWater);
+    O2Store.add(isruAddedO2);
+    N2Store.add(isruAddedN2);
+    
     %% EVA Check
     CrewEVAstatus = [strcmpi(astro1.CurrentActivity.Name,'EVA'),...
         strcmpi(astro2.CurrentActivity.Name,'EVA'),...
