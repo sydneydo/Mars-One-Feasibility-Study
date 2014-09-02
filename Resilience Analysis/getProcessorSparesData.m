@@ -34,8 +34,8 @@
 %       each subassembly
 %
 
-function [thisSet thisLB thisUB] = getProcessorSparesData(mtbf_vec,...
-    lowThreshold,highThreshold,duration)
+function [thisSet, thisLB, thisUB] = getProcessorSparesData(mtbf_vec,...
+    lowThreshold,cutoff,highThreshold,duration,dt)
 
 % processorData contains a set of subassemblies that can be analyzed with
 % the assumption that only one failure occurs at a time (as constituent
@@ -46,6 +46,8 @@ function [thisSet thisLB thisUB] = getProcessorSparesData(mtbf_vec,...
 startState = 1; % state the system starts in 
 EULERparams = [11; 15; 18.4]; % parameters for EULER numerical ILT
 
+% convert mtbfs to days
+mtbf_vec = mtbf_vec./24;
 
 % set transition distributions
 % exponential failure for each subassembly
@@ -84,7 +86,36 @@ adjMat = sparse(r,c,vals);
 
 % setup and solve SMP
 [Q,~] = makeKernel(r,c,vals,adjMat,nStates,transitions);
-sVals = getLaplacePoints(resultTime,EULERparams);
+sVals = getLaplacePoints(duration,EULERparams);
 LQ = getLT(Q,r,c,sVals,dt); % get LQ
-thisSet = getVCDF(LQ,sVals,startState,EULERparams,duration,...
-    renewalThreshold,2:length(mtbf_vec)+1);
+
+% get Markov renewal probabilities.
+% VCDF is a matrix of doubles. Each row corresponds to a number of spares,
+% starting at zero and recorded in the first column. Each subsequent column
+% is the probablility of that number of spares being required for the
+% subassembly. Subassemblies are listed in the same order as they are
+% presented in mtbf_vec.
+VCDF = getVCDF(LQ,sVals,startState,EULERparams,duration,...
+    highThreshold,2:length(mtbf_vec)+1);
+
+%% format output
+% preallocate results
+thisSet = cell(size(mtbf_vec));
+thisLB = zeros(size(mtbf_vec));
+thisUB = zeros(size(mtbf_vec));
+
+% cycle through each subassembly and trim the outputs to with in the
+% thresholds, storing appropriately
+for j = 1:length(thisSet)
+    % pull out the renewal cdf for this subassembly, with spares numbers
+    thisVCDF = [VCDF(:,1) VCDF(:,j+1)];
+    
+    % grab the section with probabilities between lowThreshold and
+    % highThreshold, and store the results in thisSet
+    thisSet{j} = thisVCDF(find(thisVCDF(:,2)>=lowThreshold & ...
+        thisVCDF(:,2)<=highThreshold),:);
+    
+    % store upper and lower bounds
+    thisLB(j) = thisSet{j}(1,1);
+    thisUB(j) = thisSet{j}(end,1);
+end

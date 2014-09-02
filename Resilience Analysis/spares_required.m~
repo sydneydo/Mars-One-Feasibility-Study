@@ -34,8 +34,7 @@ addpath SMP_modules
 
 % minimum allowable probability; this is the probability that the minimum
 % mass architecture will be calculated for
-% ENSURE THAT THIS VALUE MATCHES THE VALUE IN THE CONSTRAINT FUNCTION
-lowThreshold = 0.99;
+lowThreshold = 0.95;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
@@ -128,7 +127,7 @@ save('sparesData.mat','sparesData');
 % processor
 
 % fitness function; outputs mass of the number of spares used
-fitnessfcn = @(x) x*ceil(massVector);
+fitnessfcn = @(x) x*massVector;
 
 % number of variables
 nvars = length(sparesData);
@@ -147,11 +146,10 @@ IntCon = 1:nvars;
 
 % ga options (for details see
 % http://www.mathworks.com/help/gads/genetic-algorithm-options.html)
-options = gaoptimset('PlotFcns',@gaplotbestf,'TolFun',1e-20,...
-    'StallGenLimit',300,'PopulationSize',20*66);
+options = gaoptimset('PlotFcns',@gaplotbestf,'TolFun',1e-16,...
+    'SelectionFcn', {@selectiontournament);
 
 disp('Performing Optimization')
 [x,fval,exitflag] = ga(fitnessfcn,nvars,[],[],[],[],lb,ub,...
     @probabilityConstraint,IntCon,options);
-thisTime = toc;
 disp(['     Total Elapsed Time: ' num2str(thisTime)])

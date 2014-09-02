@@ -32,11 +32,16 @@ p = 0;
 nSpares = 0; % set initial number of spares to 0
 VCDF = []; % preallocate VCDF matrix
 % Calculate renewal probabilities in a while loop until the minimum
-% probability is above the threshold or 100 spares are used
-while p <= renewThreshold && nSpares < 101
+% probability is above the threshold or 1000 spares are used. If 1000
+% spares are used a warning is displayed.
+while p <= renewThreshold && nSpares < 1001
     LV = getLV(LQ,startState,nSpares,sVals,renewalStates);  % calculate LV    
     V = EULERmachine(EULERparams,LV,resultTime); % find probabilities
     VCDF = [VCDF; nSpares, V];% store probabilities and number of spares
     nSpares = nSpares + 1;  % update the number of spares
     p = min(V);  % check the trigger
+end
+% display warning for 1000 spares
+if nSpares >= 1000
+    disp('WARNING: Spares calculations cut off at 1000 spares')
 end
