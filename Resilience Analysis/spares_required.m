@@ -46,7 +46,7 @@ cutoff = 1e-8;
 highThreshold = 1 - cutoff;
 
 % time between resupply missions [h]
-duration = 2*365*24;
+duration = 2*365*24;  % NEED TO STANDARDIZE USE OF HOURS OR DAYS
 
 % discretization size
 dt = 0.05;

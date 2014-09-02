@@ -34,7 +34,7 @@
 %       each subassembly
 %
 
-function [thisSet, thisLB, thisUB] = getProcessorSparesData(mtbf_vec,...
+function [thisSet, thisLB, thisUB] = getProcessorSparesData_evenDist(mtbf_vec,...
     lowThreshold,cutoff,highThreshold,duration,dt)
 
 % processorData contains a set of subassemblies that can be analyzed with
@@ -46,9 +46,8 @@ function [thisSet, thisLB, thisUB] = getProcessorSparesData(mtbf_vec,...
 startState = 1; % state the system starts in 
 EULERparams = [11; 15; 18.4]; % parameters for EULER numerical ILT
 
-% convert mtbfs and duration to days
+% convert mtbfs to days
 mtbf_vec = mtbf_vec./24;
-duration = duration/24;
 
 % set transition distributions
 % exponential failure for each subassembly
@@ -61,9 +60,9 @@ for j = 1:length(mtbf_vec)
     transitions{j} = [pdf; dt.*cumsum(pdf)];
 end
 
-% repair distribution (assume 12 h repair time, 1 h s.d.; convert to d)
-mttr = 12/24;
-sdr = 1/24;
+% repair distribution (assume 12 h repair time, 1 h s.d.)
+mttr = 12;
+sdr = 1;
 sig = sqrt(log(1+sdr^2/mttr^2)); % repair shape parameter
 mu = log(mttr)-(1/2)*sig^2; % repair log-scale parameter
 % entry 7 is the repair distribution

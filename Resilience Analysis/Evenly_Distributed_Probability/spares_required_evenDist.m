@@ -1,14 +1,12 @@
 %
-% spares_required.m
+% spares_required_evenDist.m
 %
 % Creator: Andrew Owens
-% Last updated: 2014-08-28
+% Last updated: 2014-09-02
 %
 % This script performs a spares analysis for the Mars One ECLSS; the end
-% result is the minimum mass of spares required (per crew of 4) to ensure a
-% probability greater than a given threshold value that enough spares are
-% supplied to implement any required repairs before the next resupply in
-% two years.
+% result is the mass of spares required to obtain the minimum probability
+% input in the solution parameters section.
 %
 % The implemented methodology is based on the semi-Markov analysis
 % techniques described in
@@ -28,21 +26,16 @@
 %
 
 % add the SMP solver modules to the path
-addpath SMP_modules
+addpath SMP_modules_evenDist
 
 %% Set solution parameters
 
-% minimum allowable probability; this is the probability that the minimum
-% mass architecture will be calculated for
-lowThreshold = 0.95;
+% minimum allowable probability
+lowThreshold = 0.99;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
 cutoff = 1e-8;
-
-% maximum probability; probabilities above this number will be considered
-% to be effectively 1
-highThreshold = 1 - cutoff;
 
 % time between resupply missions [h]
 duration = 2*365*24;
@@ -72,19 +65,14 @@ processorSets = [1, 7;  % OGA
     59, 65; % CRA
     66, 66]; % GLS
 
-% create result storage
-% This will be a cell array of matrices, with each cell corresponding to a
-% subassembly
-% Frist row is a number of spares
-% Second row is the probability that that many spares is enough
-sparesData = {};
+% create mass vector
+for j = 1:size(processorSets,1)
+    massVector = [massVector; ...
+        componentData(processorSets(j,1):processorSets(j,2),1)];
+end
 
-% storage for lower and upper bounds
-lowerBound = [];
-upperBound = [];
-
-% storage for mass vector
-massVector = [];
+% create result storage for the number of spares for each subassembly
+nSpares = zeros(size(massVector));
 
 % for each processor
 tic
@@ -94,20 +82,12 @@ for j = 1:size(processorSets,1)
     
     % set up and solve the SMP to get the number of spares and probability
     % for this processor
-    [thisSet, thisLB, thisUB] = getProcessorSparesData(...
+    [thisSet, thisLB, thisUB] = getProcessorSparesData_evenDist(...
         componentData(processorSets(j,1):processorSets(j,2),2),...
         lowThreshold, cutoff, highThreshold, duration, dt);
     
     % store results
-    sparesData = [sparesData; thisSet];
-    
-    % store lower bound and upper bound for these elements
-    lowerBound = [lowerBound; thisLB];
-    upperBound = [upperBound; thisUB];
-    
-    % store the masses for these elements
-    massVector = [massVector; ...
-        componentData(processorSets(j,1):processorSets(j,2),1)];
+    nSpares(j) = thisSpares;
     
     % give status
     thisTime = toc;
@@ -127,7 +107,7 @@ save('sparesData.mat','sparesData');
 % processor
 
 % fitness function; outputs mass of the number of spares used
-fitnessfcn = @(x) x*massVector;
+fitnessfcn = @(x) x*ceil(massVector);
 
 % number of variables
 nvars = length(sparesData);
@@ -146,10 +126,11 @@ IntCon = 1:nvars;
 
 % ga options (for details see
 % http://www.mathworks.com/help/gads/genetic-algorithm-options.html)
-options = gaoptimset('PlotFcns',@gaplotbestf,'TolFun',1e-16,...
-    'SelectionFcn', {@selectiontournament);
+options = gaoptimset('PlotFcns',@gaplotbestf,'TolFun',1e-20,...
+    'StallGenLimit',300,'PopulationSize',20*66);
 
 disp('Performing Optimization')
 [x,fval,exitflag] = ga(fitnessfcn,nvars,[],[],[],[],lb,ub,...
     @probabilityConstraint,IntCon,options);
+thisTime = toc;
 disp(['     Total Elapsed Time: ' num2str(thisTime)])
