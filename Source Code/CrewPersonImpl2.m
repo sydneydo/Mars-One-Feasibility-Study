@@ -515,18 +515,28 @@ classdef CrewPersonImpl2 < handle
         % physiological buffers each time step by a fraction of its
         % capacity. This represents the human body's self repair
         % mechanism
+        
+        % Modification on 9/2/2014
+        % We only repair if enough resources were supplied for the given
+        % tick - it makes no sense to repair if the crewperson is still
+        % receiving insufficient resources
         function recoverCrew(obj)
             if obj.alive == 0
                 return
             end
-            % Recover consumedCaloriesBuffer
-            obj.consumedCaloriesBuffer.add(obj.calorieRecoveryRate*obj.consumedCaloriesBuffer.currentCapacity);
-            % Recover consumedWaterBuffer
-            obj.consumedWaterBuffer.add(obj.waterRecoveryRate*obj.consumedWaterBuffer.currentCapacity);
-            % Recover consumedLowOxygenBuffer
-            obj.consumedLowOxygenBuffer.add(obj.O2LowRecoveryRate*obj.consumedLowOxygenBuffer.currentCapacity);
-            % Recover consumedCO2Buffer
-            obj.consumedCO2Buffer.add(obj.CO2HighRecoveryRate*obj.consumedCO2Buffer.currentCapacity);
+            % Recover consumedCaloriesBuffer only if caloriesConsumed >=
+            % caloriesNeeded
+            obj.consumedCaloriesBuffer.add((obj.caloriesConsumed>=obj.caloriesNeeded)*obj.calorieRecoveryRate*obj.consumedCaloriesBuffer.currentCapacity);
+            % Recover consumedWaterBuffer only if potableWaterConsumed >=
+            % potableWaterNeeded
+            obj.consumedWaterBuffer.add((obj.potableWaterConsumed>=obj.potableWaterNeeded)*obj.waterRecoveryRate*obj.consumedWaterBuffer.currentCapacity);
+            % Recover consumedLowOxygenBuffer only if atmospheric ppO2 is
+            % above low ppO2 threshold
+            obj.consumedLowOxygenBuffer.add(((obj.CurrentActivity.Location.O2Percentage*obj.CurrentActivity.Location.pressure)>obj.O2LowPartialPressure)*...
+                obj.O2LowRecoveryRate*obj.consumedLowOxygenBuffer.currentCapacity);
+            % Recover consumedCO2Buffer only if current ppCO2 is < high ppCO2 threshold 
+            obj.consumedCO2Buffer.add(((obj.CurrentActivity.Location.pressure*obj.CurrentActivity.Location.CO2Percentage)<obj.CO2HighLimit)*...
+                obj.CO2HighRecoveryRate*obj.consumedCO2Buffer.currentCapacity);
         end
     end
     

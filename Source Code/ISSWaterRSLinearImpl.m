@@ -77,11 +77,11 @@ classdef ISSWaterRSLinearImpl < handle
        UrineProcessingEfficiency = 0.74     % UPA Water Recovery Efficiency
        UPAmaxprocessingpower = 315          % Watts, max power consumed while processing
        UPAstandbypower = 56                 % Watts, power consumed while in standby mode
-       UPAwasteWaterTankCapacity = 18/2.2   % in Liters (converted from 18lb of water, assuming 1000kg.m^3 density for water) (REF: International Space Station Water Balance Operations = AIAA 2011-5150)
+       UPAwasteWaterTankCapacity = 18/2.2   % in Liters (converted from 18lb of water, assuming 1000kg/m^3 density for water) (REF: International Space Station Water Balance Operations = AIAA 2011-5150)
        UPAmaxprocessingRate = 13.6/18       % in Liters per hour (REF: Status of the Regenerative ECLSS Water Recovery and Oxygen Generation Systems (2006))
        WPAprocessingpower = 320             % Watts, power consumed while processing
        WPAstandbypower = 133                % Watts, power consumed while in standby mode
-       WPAwasteWaterTankCapacity = 0.65*100/2.2  % in Liters (converted from 65% 100lb of WPA wastewater tank (to prevent biofouling of downstream components - see above notes), assuming 1000kg.m^3 density for water) (REF: International Space Station Water Balance Operations = AIAA 2011-5150)
+       WPAwasteWaterTankCapacity = 0.65*100/2.2  % in Liters (converted from 65% 100lb of WPA wastewater tank (to prevent biofouling of downstream components - see above notes), assuming 1000kg/m^3 density for water) (REF: International Space Station Water Balance Operations = AIAA 2011-5150)
        WPAprocessingRate = 5.9              % in Liters per hour (REF: Status of the Regenerative ECLSS Water Recovery and Oxygen Generation Systems (2006))
     end
     
@@ -127,7 +127,7 @@ classdef ISSWaterRSLinearImpl < handle
                     
                     % Tune UPA processing rate based on power consumed
                     % Operating points are:
-                    % - max processing rate: 13.6/18L/hr @ max power = 315W
+                    % - max processing rate: (13.6/18)L/hr @ max power = 315W
                     % - min processing rate: 0L/hr @ standby power = 56W
                     currentUPAprocessingRate = max([obj.UPAmaxprocessingRate/(obj.UPAmaxprocessingpower-obj.UPAstandbypower)*(currentPowerConsumed-obj.UPAstandbypower),0]);   % Max command in case currentPowerConsumed < obj.UPAstandbypower
                     
