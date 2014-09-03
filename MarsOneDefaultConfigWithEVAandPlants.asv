@@ -735,7 +735,7 @@ for i = 1:simtime
 
     % Common Cabin Air Assemblies
     inflatableCCAAoutput(i) = inflatableCCAA.tick;
-    inflatableCCAA2output(i) = inflatableCCAA2.tick;
+%     inflatableCCAA2output(i) = inflatableCCAA2.tick;
 %     inflatableCCAA3output(i) = inflatableCCAA3.tick;
     livingUnitCCAAoutput(i) = livingUnitCCAA.tick;
     lifeSupportUnitCCAAoutput(i) = lifeSupportUnitCCAA.tick;

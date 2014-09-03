@@ -131,7 +131,7 @@ classdef ISSinjectorImpl < handle
                             makeupN2taken = obj.N2Source.ResourceStore.take(n2MolesToIntroduce,obj.N2Source);     % Take required makeup N2 amount from N2 Source
                             
                             if makeupN2taken < n2MolesToIntroduce
-                                disp(['Insufficient N2 available to perform pressure control action at tick ',num2str(obj.Environment.tickcount),'. Module is in a high O2% condition'])
+                                disp(['Insufficient N2 available to perform pressure control action at tick ',num2str(obj.Environment.tickcount),'. ',num2str(obj.Environment.name),' is in a high O2% condition'])
                                 obj.Error = 1;
                                 return
                             end
