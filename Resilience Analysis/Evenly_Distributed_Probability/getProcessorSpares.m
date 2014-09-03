@@ -35,24 +35,26 @@ function [thisSpares, thisProbabilities, thisDowntime] = ...
 startState = 1; % starting state
 EULERparams = [11; 15; 18.4]; % parameters for EULER numerical ILT
 
-% use num_vec to extend mtbf_vec at the appropriate location - since the
-% entire processor stops every time any internal component fails, have to
-% consider each component seperately
-full_mtbf_vec = [];
-for j = 1:length(num_vec)
-    full_mtbf_vec = [full_mtbf_vec; mtbf_vec(j).*ones(num_vec(j),1)];
-end
+% % use num_vec to extend mtbf_vec at the appropriate location - since the
+% % entire processor stops every time any internal component fails, have to
+% % consider each component seperately
+% full_mtbf_vec = [];
+% for j = 1:length(num_vec)
+%     full_mtbf_vec = [full_mtbf_vec; mtbf_vec(j).*ones(num_vec(j),1)];
+% end
+% Don't do this yet; just repeat a transition index in the adjacency data
+% and use that transition again, otherwise we'll be here forever
 
 % convert mtbfs and duration to days
-full_mtbf_vec = full_mtbf_vec./24;
+mtbf_vec = mtbf_vec./24;
 duration = duration/24;
 
 % set transition distributions
 % exponential failure for each subassembly
-lam_vec = 1./full_mtbf_vec;
-transitions = cell(length(full_mtbf_vec)+1,1);
-for j = 1:length(full_mtbf_vec)
-    t = 0:dt:-full_mtbf_vec(j)*log(full_mtbf_vec(j)*cutoff);
+lam_vec = 1./mtbf_vec;
+transitions = cell(length(mtbf_vec)+1,1);
+for j = 1:length(mtbf_vec)
+    t = 0:dt:-mtbf_vec(j)*log(mtbf_vec(j)*cutoff);
     pdf = lam_vec(j).*exp(-lam_vec(j).*t);
     pdf = pdf./(dt*sum(pdf));     % normalize
     transitions{j} = [pdf; dt.*cumsum(pdf)];
@@ -73,14 +75,26 @@ pdf = pdf./(dt*sum(pdf)); % normalize
 transitions{end} = [pdf; dt.*cumsum(pdf)]; % generate cdf and store results
 
 % find number of states
-nStates = length(full_mtbf_vec)+1;
+nStates = sum(num_vec)+1;
 
 % set adjacency data and form adjacency matrix
-r = [ones(length(full_mtbf_vec),1); (2:length(full_mtbf_vec)+1)'];
-c = [(2:length(full_mtbf_vec)+1)'; ones(length(full_mtbf_vec),1)];
-vals = [(1:length(full_mtbf_vec))'; ...
-    (length(full_mtbf_vec)+1).*ones(length(full_mtbf_vec),1)];
+% r = [ones(length(mtbf_vec),1); (2:length(mtbf_vec)+1)'];
+% c = [(2:length(mtbf_vec)+1)'; ones(length(mtbf_vec),1)];
+% vals = [(1:length(mtbf_vec))'; ...
+%     (length(mtbf_vec)+1).*ones(length(mtbf_vec),1)];
+% adjMat = sparse(r,c,vals);
+
+r = [ones(sum(num_vec),1); (2:sum(num_vec)+1)'];
+c = [(2:sum(num_vec)+1)'; ones(sum(num_vec),1)];
+
+% set vals vector with repetition where needed
+vals = [];
+for j = 1:length(num_vec)
+    vals = [vals; j.*ones(num_vec(j),1)];
+end
+vals = [vals; length(transitions).*ones(sum(num_vec),1)];
 adjMat = sparse(r,c,vals);
+
 
 % setup and solve SMP
 [Q,H] = makeKernel(r,c,vals,adjMat,nStates,transitions);
@@ -93,8 +107,8 @@ for j = 1:length(LH)
 end
 
 % preallocate results storage
-thisFullSpares = zeros(size(full_mtbf_vec));
-thisFullProbabilities = zeros(size(full_mtbf_vec));
+thisFullSpares = zeros(sum(num_vec),1);
+thisFullProbabilities = zeros(sum(num_vec),1);
 
 % for each subassembly, solve for the required number of spares
 % state 1 is nominal, so start at state 2
@@ -139,3 +153,5 @@ end
 % time is the expected downtime.
 E = getE(LQ,LH,sVals,startState,1,EULERparams,duration);
 thisDowntime = duration - E;
+
+keyboard

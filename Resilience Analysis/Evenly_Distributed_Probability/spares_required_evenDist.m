@@ -36,11 +36,11 @@ addpath SMP_modules_evenDist
 %% Set solution parameters
 
 % Required probability for the entire system
-overallProbability = 0.99;
+overallProbability = 0.999;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
-cutoff = 1e-8;
+cutoff = 1e-9;
 
 % time between resupply missions [h]
 duration = 2*365*24;
@@ -89,7 +89,7 @@ subassemProbs = [];
 % instances in the system (CRDA x2, CCAA x4)
 nSubassem = sum(numVector) + 2*sum(numVector(8:16)) + ...
     4*sum(numVector(17:26));
-keyboard
+
 % calculate probability for each subassembly required to obtain overall
 % probability requirement
 subassemProbability = overallProbability^(1/nSubassem);
@@ -129,7 +129,7 @@ disp('Calculating for GLS')
 mtbf_gls = componentData(end,2);
 mtbf_glsArray = 1/(numVector(end)*(1/mtbf_gls));
 [thisSpares, thisProbabilities, ~] = getProcessorSpares(mtbf_glsArray,1,...
-    numVector(end),subassemProbability,cutoff,duration,dt);
+    subassemProbability,cutoff,duration,dt);
 % store results
 subassemSpares = [subassemSpares; thisSpares];
 subassemProbs = [subassemProbs; thisProbabilities];
