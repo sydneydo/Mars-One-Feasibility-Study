@@ -49,10 +49,11 @@ classdef ISSDehumidifierImpl < handle
         Error = 0
     end
     
-    properties (Access = private)
+    properties (SetAccess = private)
 %         optimal_moisture_concentration = 0.0218910; %in kPa assuming 101 kPa total pressure and air temperature of 23C and relative humidity of 80% - this can be made a function of temperature according to the temperature-humidity control box
-        targetVaporPressure = 2.837*0.4  %kPa, Psat at 23C is 2.837 kPa (From Saturated Water Table - Table A-4 Cengal and Turner 2nd Ed.), targeting a relative humidity of 40%
+        saturatedVaporPressure = 2.837  %kPa, Psat at 23C is 2.837 kPa (From Saturated Water Table - Table A-4 Cengal and Turner 2nd Ed.), targeting a relative humidity of 40%
         targetRelativeHumidity = 0.4;    % Fraction - from NASA HIDH Section 6.2.3.2
+        relativeHumidityBoundingBox = 0.1;  % 10% band of relative humidity around CHX controlled (HIDH Section 6.2.3.2 states that ideal relative humidity is between 30% and 50%)
         idealGasConstant = 8.314;        % J/K/mol
         max_condensate_extracted = 1.45*1E3/(2*1.008+15.999)       % in moles per hour, converted from 1.45kg/hr
         max_power_draw = 705        % Watts
@@ -77,10 +78,13 @@ classdef ISSDehumidifierImpl < handle
             % Only run if there is no system error
             if obj.Error == 0
                                
-                % Take vapor moles removed if current vapoer partial
-                % pressure is greater than target vapor pressure
-                VaporMolesNeededToRemove = ((obj.Environment.VaporPercentage*obj.Environment.totalMoles) > obj.targetVaporPressure)*...
-                    (obj.Environment.VaporStore.currentLevel-obj.targetVaporPressure*obj.Environment.volume/(obj.idealGasConstant*(273.15+obj.Environment.temperature)));
+                % Take vapor moles removed if current vapor partial
+                % pressure is greater than vapor pressure corresponding to
+                % 50% relative humidity.
+                % Take moles to reduce relative humidity to 30%
+                VaporMolesNeededToRemove = ((obj.Environment.VaporPercentage*obj.Environment.totalMoles) > (obj.saturatedVaporPressure*(obj.targetRelativeHumidity+obj.relativeHumidityBoundingBox)))*...
+                    (obj.Environment.VaporStore.currentLevel-...
+                    (obj.saturatedVaporPressure*(obj.targetRelativeHumidity-obj.relativeHumidityBoundingBox))*obj.Environment.volume/(obj.idealGasConstant*(273.15+obj.Environment.temperature)));
                 
                 
                 % Determine amount of air corresponding to
