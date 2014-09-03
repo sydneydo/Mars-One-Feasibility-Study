@@ -153,5 +153,3 @@ end
 % time is the expected downtime.
 E = getE(LQ,LH,sVals,startState,1,EULERparams,duration);
 thisDowntime = duration - E;
-
-keyboard

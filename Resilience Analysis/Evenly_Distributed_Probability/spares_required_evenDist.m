@@ -36,7 +36,7 @@ addpath SMP_modules_evenDist
 %% Set solution parameters
 
 % Required probability for the entire system
-overallProbability = 0.999;
+overallProbability = 0.99;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
@@ -48,6 +48,25 @@ duration = 2*365*24;
 % discretization size
 dt = 0.05;
 
+% define processor sets; processors are comprised of the components in rows
+% startRow:endRow as encoded in each row of this matrix
+processorSets = [1, 7;  % OGA
+    8, 16; % CDRA and ORA
+    17, 26; % CCAA x4
+    27, 33; % UPA
+    34, 49; % WPA
+    50, 56; % CRA
+    57, 57]; % GLS (this must always be the last one)
+
+% encode the number of instances of each processor
+numInstances = [1; % OGA
+    2; % CDRA and ORA are the same
+    4; % CCAA in each cabin
+    1; % UPA
+    1; % WPA
+    1; % CRA
+    1]; % GLS
+
 %% Set up and solve SMP for each processor
 % Processors are comprised of subassemblies. Since all processors are
 % separated by buffers, each can be considered independently. Failure of a
@@ -58,16 +77,6 @@ dt = 0.05;
 % load component data
 % col 1 is mass [kg], col 2 is MTBF [h], col 3 is number in system [-]
 componentData = csvread('componentData.csv',0,1);
-
-% define processor sets; processors are comprised of the components in rows
-% startRow:endRow as encoded in each row of this matrix
-processorSets = [1, 7;  % OGA
-    8, 16; % CDRA and ORA
-    17, 26; % CCAA x4
-    27, 33; % UPA
-    34, 49; % WPA
-    50, 56; % CRA
-    57, 57]; % GLS (this must always be the last one)
 
 % create mass vector and vector indicating the number of each component
 massVector = [];
@@ -87,8 +96,11 @@ subassemProbs = [];
 % determine number of subassemblies in system
 % remember to add in subassemblies for the processors that have multiple
 % instances in the system (CRDA x2, CCAA x4)
-nSubassem = sum(numVector) + 2*sum(numVector(8:16)) + ...
-    4*sum(numVector(17:26));
+nSubassem = 0;
+for j = 1:length(numInstances)
+    nSubassem = nSubassem + sum(numVector(processorSets(j,1):...
+        processorSets(j,2)))*numInstances(j);
+end
 
 % calculate probability for each subassembly required to obtain overall
 % probability requirement
@@ -135,13 +147,37 @@ subassemSpares = [subassemSpares; thisSpares];
 subassemProbs = [subassemProbs; thisProbabilities];
 downtime(j) = 0;
 
+% give status
+thisTime = toc;
+disp(['     Total Elapsed Time: ' num2str(thisTime)])
+
+% calculate total mass and probability, accounting for multiple instances
+
+% calculate true number of spares, as well as probability, taking into
+% account multiple instances
+trueSpares = zeros(size(subassemSpares));
+totalProb = 1;
+for j = 1:length(numInstances)
+    % true number of spares
+    trueSpares(processorSets(j,1):processorSets(j,2)) = ...
+        subassemSpares(processorSets(j,1):processorSets(j,2)).* ...
+        numInstances(j);
+    
+    % probability
+    thisProb = prod(subassemProbs(processorSets(j,1):processorSets(j,2)));
+    totalProb = totalProb*(thisProb^numInstances(j));
+end
 
 % calculate total mass
-totalMass = subassemSpares'*massVector;
+totalMass = massVector'*trueSpares;
 
-% calculate resulting probability
-P = prod(subassemProbs);
+% write individual subassembly results to file
+csvwrite('RESULTS.csv',trueSpares);
 
 % display outputs
+disp('----- RESULTS -----')
 disp(['For overall probability of ' num2str(overallProbability) ':'])
 disp(['Total mass of spares: ' num2str(totalMass)])
+disp(['Resulting Probability: ' num2str(totalProb)])
+disp('Subassembly spares counts have been written to RESULTS.csv')
+disp('-------------------')
