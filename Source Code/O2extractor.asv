@@ -12,7 +12,7 @@ classdef O2extractor < handle
     
     properties (SetAccess = private)
         UpperO2FractionLimit = 0.3
-        PartialPressureBoundingBox = 1.37895146     % in kPa (converted from 0.2psia), extent of control box around which pressure is controled (REF: Section 5.1 EAWG)
+        PartialPressureBoundingBox = 1.37895146     % in kPa (converted from 0.2psia), extent of control box around which
         idealGasConstant = 8.314;        % J/K/mol
         ppO2setPoint
     end

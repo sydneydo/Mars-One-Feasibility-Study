@@ -48,7 +48,7 @@ classdef ISSinjectorImpl < handle
     
     properties (SetAccess = private)
         UpperPPO2PercentageLimit = 0.3;     % PPO2 can reach 30% (flammability limit) for 70.3kPa/26.5% O2 atmospheres (REF: Section 5.1 EAWG)
-        PartialPressureBoundingBox = 1.37895146     % in kPa (converted from 0.2psia), extent of control box around which
+        PartialPressureBoundingBox = 1.37895146     % in kPa (converted from 0.2psia), extent of control box around which pressure is controled (REF: Section 5.1 EAWG)
         VentPortDiameter = 0.056         % in meters (vent port diameter of Vent Relief Valve of the ISS PCA, REF: pg 89, Living Together in Space)
         MarsMeanAtmPressure = 6.36*0.1   % in kPa, Mean atmospheric pressure at Mars surface (REF: http://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html)
         MarsMeanAtmDensity = 0.02        % in kg/m^3, Mean atmospheric density at Mars surface (REF: http://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html)

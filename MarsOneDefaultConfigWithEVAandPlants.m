@@ -414,6 +414,9 @@ ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LifeSupportUnit1,Pot
 % Initialize CRS (Sabatier Reactor)
 crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
 
+% Initialize Oxygen Removal Assembly
+ORA = O2extractor(Inflatable1,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store);
+
 %% Initialize Water Processing Technologies
 
 % Initialize WaterRS (Linear)
@@ -508,6 +511,7 @@ crsH2OProduced = zeros(1,simtime);
 crsCompressorOperation = zeros(2,simtime);
 co2accumulatorlevel = zeros(1,simtime);
 co2removed = zeros(1,simtime);
+o2extracted = zeros(1,simtime);
 
 hoursOnEVA = zeros(1,simtime);     % Flag to indicate whether or not the Airlock should be depressurized
 currentEVAcrew = zeros(1,4);    % Current crewpersons on EVA
@@ -594,6 +598,7 @@ for i = 1:simtime
         airlockTotalMoles = airlockTotalMoles(1:(i-1));
         
         ogsoutput = ogsoutput(1:(i-1));
+        o2extracted = o2extracted(1:(i-1));
     
         % Common Cabin Air Assemblies
         inflatableCCAAoutput = inflatableCCAAoutput(1:(i-1));
@@ -747,6 +752,9 @@ for i = 1:simtime
         dryfoodlevel(i) = sum(cell2mat({LocallyGrownFoodStore.foodItems.Mass})-cell2mat({LocallyGrownFoodStore.foodItems.WaterContent}));
         caloriccontent(i) = sum([LocallyGrownFoodStore.foodItems.CaloricContent]);
     end
+    
+    % Tick ORA
+    o2extracted(i) = ORA.tick;
     
     %% Tick Crew
     astro1.tick;
