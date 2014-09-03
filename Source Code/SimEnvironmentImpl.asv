@@ -155,7 +155,6 @@ classdef SimEnvironmentImpl < handle
             saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
             saturatedVaporMoles = saturatedVaporPressure*obj.volume/(obj.idealGasConstant*(273.15+obj.temperature));
             condensedVapor = (relativeHumidity >= 1)*(obj.VaporStore.currentLevel-saturatedVaporMoles)*18.01524/1000;   % Convert to liters
-        end
         
         % Calculates O2 molar percentage within SimEnvironment
         function o2percentage = get.O2Percentage(obj)
