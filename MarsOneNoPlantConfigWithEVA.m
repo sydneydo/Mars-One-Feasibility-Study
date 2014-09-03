@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 6000;
+missionDurationInHours = 19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
