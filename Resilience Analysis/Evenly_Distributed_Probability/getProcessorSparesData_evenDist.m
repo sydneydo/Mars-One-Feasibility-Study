@@ -1,8 +1,8 @@
 %
-% getProcessorSparesData.m
+% getProcessorSparesData_evenDist.m
 %
 % Creator: Andrew Owens
-% Last updated: 2014-08-29
+% Last updated: 2014-09-02
 %
 % This function calculates the spares probabilities for a given processor
 %
@@ -46,8 +46,9 @@ function [thisSet, thisLB, thisUB] = getProcessorSparesData_evenDist(mtbf_vec,..
 startState = 1; % state the system starts in 
 EULERparams = [11; 15; 18.4]; % parameters for EULER numerical ILT
 
-% convert mtbfs to days
+% convert mtbfs and duration to days
 mtbf_vec = mtbf_vec./24;
+duration = duration/24;
 
 % set transition distributions
 % exponential failure for each subassembly
@@ -61,11 +62,11 @@ for j = 1:length(mtbf_vec)
 end
 
 % repair distribution (assume 12 h repair time, 1 h s.d.)
-mttr = 12;
-sdr = 1;
+mttr = 12/24;
+sdr = 1/24;
 sig = sqrt(log(1+sdr^2/mttr^2)); % repair shape parameter
 mu = log(mttr)-(1/2)*sig^2; % repair log-scale parameter
-% entry 7 is the repair distribution
+% last entry is the repair distribution
 t = 0:dt:mttr+15*sdr; % go out to 15 standard deviations
 pdf = (1./(t.*sqrt(2*pi).*sig)).*...
     exp(-(log(t)-mu).^2./(2*sig^2));
