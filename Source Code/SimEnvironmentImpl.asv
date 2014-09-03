@@ -65,25 +65,28 @@ classdef SimEnvironmentImpl < handle
     end
     
     methods
-        function obj = SimEnvironmentImpl(name,pressure,volume,o2Percentage,co2Percentage,nitrogenPercentage,waterPercentage,...
+        function obj = SimEnvironmentImpl(name,pressure,Volume,o2Percentage,co2Percentage,nitrogenPercentage,waterPercentage,...
                 otherPercentage,leakPercentage,potablewaterstore,greywaterstore,dirtywaterstore,drywastestore,foodstore)
             
             if nargin > 0
                 
                 obj.name = name;
                 %             obj.pressure = pressure;
-                obj.volume = volume;        % this is input in Liters
+                obj.volume = Volume;        % this is input in Liters
                 obj.O2Store = StoreImpl('O2','Environmental');
                 obj.CO2Store = StoreImpl('CO2','Environmental');
                 obj.NitrogenStore = StoreImpl('N2','Environmental');
-                obj.VaporStore = StoreImpl('H2O Vapor','Material',0.611*exp(17.4*obj.temperature/(obj.temperature+239)),CalculateMoles(obj,waterPercentage, pressure, volume)); % Vapor store is a material store to capture saturated vapor limitations
+                
+                saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
+                saturatedVaporMoles = saturatedVaporPressure*Volume/(obj.idealGasConstant*(273.15+obj.temperature));
+                obj.VaporStore = StoreImpl('H2O Vapor','Material',saturatedVaporMoles,CalculateMoles(obj,waterPercentage, pressure, Volume)); % Vapor store is a material store to capture saturated vapor limitations
                 obj.OtherStore = StoreImpl('Other','Environmental');
                 
-                obj.O2Store.currentLevel = CalculateMoles(obj,o2Percentage, pressure, volume);
-                obj.CO2Store.currentLevel = CalculateMoles(obj,co2Percentage, pressure, volume);
-                obj.NitrogenStore.currentLevel = CalculateMoles(obj,nitrogenPercentage, pressure, volume);
+                obj.O2Store.currentLevel = CalculateMoles(obj,o2Percentage, pressure, Volume);
+                obj.CO2Store.currentLevel = CalculateMoles(obj,co2Percentage, pressure, Volume);
+                obj.NitrogenStore.currentLevel = CalculateMoles(obj,nitrogenPercentage, pressure, Volume);
 %                 obj.VaporStore.currentLevel = CalculateMoles(obj,waterPercentage, pressure, volume);
-                obj.OtherStore.currentLevel = CalculateMoles(obj,otherPercentage, pressure, volume);
+                obj.OtherStore.currentLevel = CalculateMoles(obj,otherPercentage, pressure, Volume);
                 
                 % Set current capacities of StoreImpl objects to equal their
                 % current levels - i.e. can't take more from store than what's
@@ -155,6 +158,7 @@ classdef SimEnvironmentImpl < handle
             saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
             saturatedVaporMoles = saturatedVaporPressure*obj.volume/(obj.idealGasConstant*(273.15+obj.temperature));
             condensedVapor = (relativeHumidity >= 1)*(obj.VaporStore.currentLevel-saturatedVaporMoles)*18.01524/1000;   % Convert to liters
+        end
         
         % Calculates O2 molar percentage within SimEnvironment
         function o2percentage = get.O2Percentage(obj)
