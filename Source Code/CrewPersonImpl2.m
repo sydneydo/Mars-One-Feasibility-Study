@@ -258,6 +258,7 @@ classdef CrewPersonImpl2 < handle
         function foodConsumed = getCaloriesFromStore(obj,caloriesNeeded)
 %             gatheredFoodMatterArrays = [];
             gatheredFoodMatterArrays = FoodMatter.empty(0,length(obj.CurrentActivity.Location.FoodStore));
+            count = 1;
             gatheredCalories = 0;
            
             % Order food stores by preference from which food is first
@@ -277,7 +278,10 @@ classdef CrewPersonImpl2 < handle
                         .takeFoodMatterCalories(caloriesNeeded);
 
 %                     gatheredFoodMatterArrays = [gatheredFoodMatterArrays takenMatter];
-                    gatheredFoodMatterArrays(i) = takenMatter;
+                    if ~isempty(takenMatter)
+                        gatheredFoodMatterArrays(count:(count-1+length(takenMatter))) = takenMatter;
+                        count = count+length(takenMatter);
+                    end
                     
 %                     for j = 1:length(takenMatter)
 %                         gatheredCalories = gatheredCalories + takenMatter(j).CaloricContent;
