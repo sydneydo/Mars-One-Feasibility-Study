@@ -132,7 +132,7 @@ MethaneStore = StoreImpl('CH4 Store','Environmental');    % CH4 store for output
 % N2 Store
 % Corresponds to 2x high pressure N2 tanks currently mounted on exterior of Quest airlock on ISS (each holds 91kg of N2)
 % This is subject to change based on requirements
-numberOfN2Tanks = 2*4*2;      % We ramp the number up by a factor of 4 to make up for N2 leakage (which will be ultimately addressed by ISRU)
+numberOfN2Tanks = 2*4;      % We ramp the number up by a factor of 4 to make up for N2 leakage (which will be ultimately addressed by ISRU)
 initialN2TankCapacityInKg = numberOfN2Tanks*91;
 n2MolarMass = 2*14.007; %g/mol;
 initialN2StoreMoles = initialN2TankCapacityInKg*1E3/n2MolarMass;
@@ -768,7 +768,7 @@ for i = 1:simtime
     astro4.tick;
    
     %% Run ISRU
-    N2Store.add(10);    % Gradient calculation indicated that the nominal ISRU N2 production rate should be 15.3241moles/hour
+%     N2Store.add(10);    % Gradient calculation indicated that the nominal ISRU N2 production rate should be 15.3241moles/hour
     
     %% EVA
     CrewEVAstatus = [strcmpi(astro1.CurrentActivity.Name,'EVA'),...
