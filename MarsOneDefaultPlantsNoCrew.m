@@ -871,6 +871,23 @@ close(h)
 %% Random plot commands used in code validation exercise
 % Atmospheric molar fractions
 figure, 
+plot(t,inflatableO2level(t)./inflatableTotalMoles,t,inflatableCO2level./inflatableTotalMoles,t,inflatableN2level./inflatableTotalMoles,t,inflatableVaporlevel./inflatableTotalMoles,t,inflatableOtherlevel./inflatableTotalMoles,'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+
+% Total moles
+figure, plot(t,inflatableTotalMoles,'LineWidth',2),grid on, title('Inflatable Total Moles')
+
+% Partial Pressures
+figure, plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableCO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableN2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableVaporlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableOtherlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1 Partial Pressure'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+
+% Molar amounts
+figure, plot(t,inflatableO2level(t),t,inflatableCO2level(t),t,inflatableN2level(t),t,inflatableVaporlevel(t),t,inflatableOtherlevel(t),'LineWidth',2), title('Inflatable 1 Total Moles'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('No. of Moles')
+
+
+t = 1:(length(o2storelevel));
+
+
+% Atmospheric molar fractions
+figure, 
 subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles,t,inflatableCO2level./inflatableTotalMoles,t,inflatableN2level./inflatableTotalMoles,t,inflatableVaporlevel./inflatableTotalMoles,t,inflatableOtherlevel./inflatableTotalMoles,'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
 subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles,t,livingUnitCO2level./livingUnitTotalMoles,t,livingUnitN2level./livingUnitTotalMoles,t,livingUnitVaporlevel./livingUnitTotalMoles,t,livingUnitOtherlevel./livingUnitTotalMoles,'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
 subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles,t,lifeSupportUnitCO2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitN2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitVaporlevel./lifeSupportUnitTotalMoles,t,lifeSupportUnitOtherlevel./lifeSupportUnitTotalMoles,'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
