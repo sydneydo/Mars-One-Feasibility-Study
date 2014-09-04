@@ -126,7 +126,7 @@ classdef ISSDehumidifierImpl < handle
                 obj.DirtyWaterOutput.add(vaporMolesRemoved*18.01524/1000);
                 
                 %% Remove condensed water from environment
-%                 obj.TotalEnvironmentalCondensedWaterRemoved = obj.TotalEnvironmentalCondensedWaterRemoved + obj.DirtyWaterOutput.add(obj.Environment.VaporStore.takeOverflow*18.01524/1000);
+                obj.TotalEnvironmentalCondensedWaterRemoved = obj.TotalEnvironmentalCondensedWaterRemoved + obj.DirtyWaterOutput.add(obj.Environment.VaporStore.takeOverflow*18.01524/1000);
                 
             else
                 % There is an error in the OGS - no O2 is produced and we

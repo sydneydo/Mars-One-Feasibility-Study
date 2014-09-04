@@ -155,10 +155,10 @@ classdef SimEnvironmentImpl < handle
         % Calculates condensed vapor within the environment (applies if
         % relative humidity > 1)
         function condensedVapor = get.CondensedVapor(obj)
-%             saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
-%             saturatedVaporMoles = saturatedVaporPressure*obj.volume/(obj.idealGasConstant*(273.15+obj.temperature));
-%             condensedVapor = (obj.RelativeHumidity >= 1)*(obj.VaporStore.currentLevel-saturatedVaporMoles)*18.01524/1000;   % Convert to liters
-            condensedVapor = obj.VaporStore.overflow*18.01524/1000;
+            saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
+            saturatedVaporMoles = saturatedVaporPressure*obj.volume/(obj.idealGasConstant*(273.15+obj.temperature));
+            condensedVapor = (obj.RelativeHumidity >= 1)*(obj.VaporStore.currentLevel-saturatedVaporMoles)*18.01524/1000;   % Convert to liters
+            condensedVapor = 
         end
         
         % Calculates O2 molar percentage within SimEnvironment

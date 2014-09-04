@@ -206,6 +206,14 @@ classdef StoreImpl < handle
             end
        
         end
+        
+        %% Take Overflow
+        % Method to remove amount from overflow. This is typically used
+        % only for the vapor store
+        function overflowtaken = takeOverflow(obj)
+            overflowtaken = obj.overflow;
+            obj.overflow = 0;
+        end
             
         %% Fill
         % Method to fill store to capacity
