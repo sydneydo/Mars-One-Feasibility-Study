@@ -427,7 +427,7 @@ inflatableORA = O2extractor(Inflatable1,TotalAtmPressureTargeted,TargetO2MolarFr
 lifeSupportUnitORA = O2extractor(LifeSupportUnit1,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store);
 
 % Condensed Water Removal System
-inflatableWaterExtractor = CondensedWaterRemover(Inflatable1,GreyWaterStore);
+inflatableWaterExtractor = CondensedWaterRemover(Inflatable1,CropWaterStore);
 
 %% Initialize Water Processing Technologies
 
