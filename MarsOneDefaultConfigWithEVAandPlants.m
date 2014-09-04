@@ -421,7 +421,7 @@ ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LifeSupportUnit1,Pot
 crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
 
 % Initialize Oxygen Removal Assembly
-inflatableORA = O2extractor(Inflatable1,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store);
+inflatableORA = O2extractor(Inflatable1,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,'Molar Fraction');
 
 lifeSupportUnitORA = O2extractor(LifeSupportUnit1,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store);
 

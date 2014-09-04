@@ -80,6 +80,8 @@ classdef SimEnvironmentImpl < handle
                 saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
                 saturatedVaporMoles = saturatedVaporPressure*Volume/(obj.idealGasConstant*(273.15+obj.temperature));
                 obj.VaporStore = StoreImpl('H2O Vapor','Material',saturatedVaporMoles,CalculateMoles(obj,waterPercentage, pressure, Volume)); % Vapor store is a material store to capture saturated vapor limitations
+%                 obj.VaporStore = StoreImpl('H2O Vapor','Environmental',CalculateMoles(obj,waterPercentage, pressure, Volume),CalculateMoles(obj,waterPercentage, pressure, Volume));
+                
                 obj.OtherStore = StoreImpl('Other','Environmental');
                 
                 obj.O2Store.currentLevel = CalculateMoles(obj,o2Percentage, pressure, Volume);
