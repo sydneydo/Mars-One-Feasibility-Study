@@ -735,7 +735,7 @@ for i = 1:simtime
 
     % Common Cabin Air Assemblies
     inflatableCCAAoutput(i) = inflatableCCAA.tick;
-%     inflatableCCAA2output(i) = inflatableCCAA2.tick;
+    inflatableCCAA2output(i) = inflatableCCAA2.tick;
 %     inflatableCCAA3output(i) = inflatableCCAA3.tick;
     livingUnitCCAAoutput(i) = livingUnitCCAA.tick;
     lifeSupportUnitCCAAoutput(i) = lifeSupportUnitCCAA.tick;
@@ -875,6 +875,13 @@ subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles,t,inflatableCO
 subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles,t,livingUnitCO2level./livingUnitTotalMoles,t,livingUnitN2level./livingUnitTotalMoles,t,livingUnitVaporlevel./livingUnitTotalMoles,t,livingUnitOtherlevel./livingUnitTotalMoles,'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
 subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles,t,lifeSupportUnitCO2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitN2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitVaporlevel./lifeSupportUnitTotalMoles,t,lifeSupportUnitOtherlevel./lifeSupportUnitTotalMoles,'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
 subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+
+% Partial Pressures
+figure, 
+subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableCO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableN2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableVaporlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableOtherlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*inflatablePressure(t),t,livingUnitCO2level(t)./livingUnitTotalMoles(t).*inflatablePressure(t),t,livingUnitN2level(t)./livingUnitTotalMoles(t).*inflatablePressure(t),t,livingUnitVaporlevel(t)./livingUnitTotalMoles(t).*inflatablePressure(t),t,livingUnitOtherlevel(t)./livingUnitTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitCO2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitN2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitVaporlevel(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitOtherlevel(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
 
 t = 1:(length(o2storelevel));
 
