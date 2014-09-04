@@ -46,12 +46,13 @@ classdef ISSDehumidifierImpl < handle
         Environment   % ResourceStore here is set to a SimEnvironment
         DirtyWaterOutput
         PowerSource     % Power to drive CCAA Inlet (Fan) ORU
+        Units = 1           % Number of CCAA units (default value of 1)
         Error = 0
     end
     
     properties (SetAccess = private)
 %         optimal_moisture_concentration = 0.0218910; %in kPa assuming 101 kPa total pressure and air temperature of 23C and relative humidity of 80% - this can be made a function of temperature according to the temperature-humidity control box
-        targetVaporPressure = 2.837*0.4  %kPa, Psat at 23C is 2.837 kPa (From Saturated Water Table - Table A-4 Cengal and Turner 2nd Ed.), targeting a relative humidity of 40%
+        saturatedVaporPressure = 2.837  %kPa, Psat at 23C is 2.837 kPa (From Saturated Water Table - Table A-4 Cengal and Turner 2nd Ed.), targeting a relative humidity of 40%
         targetRelativeHumidity = 0.4;    % Fraction - from NASA HIDH Section 6.2.3.2
         relativeHumidityBoundingBox = 0.1;  % 10% band of relative humidity around CHX controlled (HIDH Section 6.2.3.2 states that ideal relative humidity is between 30% and 50%)
         idealGasConstant = 8.314;        % J/K/mol
@@ -64,10 +65,15 @@ classdef ISSDehumidifierImpl < handle
     
     methods
         %% Constructor
-        function obj = ISSDehumidifierImpl(environment,CondensateOutput,PowerSource)
+        function obj = ISSDehumidifierImpl(environment,CondensateOutput,PowerSource,units)
             obj.Environment = environment;
             obj.DirtyWaterOutput = CondensateOutput;
             obj.PowerSource = PowerSource;
+            
+            if nargin == 4
+                obj.Units = units;
+            end
+            
         end
         
         %% tick
@@ -78,23 +84,26 @@ classdef ISSDehumidifierImpl < handle
             % Only run if there is no system error
             if obj.Error == 0
                                
-                % Take vapor moles removed if current vapoer partial
-                % pressure is greater than target vapor pressure
-                VaporMolesNeededToRemove = ((obj.Environment.VaporPercentage*obj.Environment.totalMoles) > obj.targetVaporPressure)*...
-                    (obj.Environment.VaporStore.currentLevel-obj.targetVaporPressure*obj.Environment.volume/(obj.idealGasConstant*(273.15+obj.Environment.temperature)));
+                % Take vapor moles removed if current vapor partial
+                % pressure is greater than vapor pressure corresponding to
+                % 50% relative humidity.
+                % Take moles to reduce relative humidity to 30%
+                VaporMolesNeededToRemove = ((obj.Environment.VaporPercentage*obj.Environment.totalMoles) > (obj.saturatedVaporPressure*(obj.targetRelativeHumidity+obj.relativeHumidityBoundingBox)))*...
+                    (obj.Environment.VaporStore.currentLevel-...
+                    (obj.saturatedVaporPressure*(obj.targetRelativeHumidity-obj.relativeHumidityBoundingBox))*obj.Environment.volume/(obj.idealGasConstant*(273.15+obj.Environment.temperature)));
                 
                 
                 % Determine amount of air corresponding to
                 % vaporMolesNeededToRemove
                 if VaporMolesNeededToRemove >= obj.max_condensate_extracted
-                    powerToConsume = obj.max_power_draw;
+                    powerToConsume = obj.max_power_draw*obj.Units;
                 else
                     % Linear scaling law between max and min power and
                     % condensate extraction (where minimum extraction is zero -
                     % which corresponds to TCCV door angle at 0 degrees and all
                     % flow being sent to bypass stream - ref Fig. 59 - Living
                     % Together in Space)
-                    powerToConsume = (obj.max_power_draw-obj.min_power_draw)/obj.max_condensate_extracted*VaporMolesNeededToRemove+obj.min_power_draw;
+                    powerToConsume = obj.Units*((obj.max_power_draw-obj.min_power_draw)/obj.max_condensate_extracted*VaporMolesNeededToRemove+obj.min_power_draw);
                 end
                 
                 currentPowerConsumed = obj.PowerSource.take(powerToConsume);     % Take power from power source
@@ -108,7 +117,7 @@ classdef ISSDehumidifierImpl < handle
                     return
                 end
                 
-                vaporMolesToTake = max([obj.max_condensate_extracted/(obj.max_power_draw-obj.min_power_draw)*(currentPowerConsumed-obj.min_power_draw),0]);     % Max command just in case power available is less than minimum power draw
+                vaporMolesToTake = max([obj.Units*obj.max_condensate_extracted/(obj.Units*(obj.max_power_draw-obj.min_power_draw))*(currentPowerConsumed-obj.Units*obj.min_power_draw),0]);     % Max command just in case power available is less than minimum power draw
                 vaporMolesRemoved = obj.Environment.VaporStore.take(vaporMolesToTake); % Actually vapor moles removed
                 
                 % Push humidity condensate to dirty water store (note that we

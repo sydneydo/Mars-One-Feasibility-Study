@@ -46,6 +46,7 @@ classdef ISSDehumidifierImpl < handle
         Environment   % ResourceStore here is set to a SimEnvironment
         DirtyWaterOutput
         PowerSource     % Power to drive CCAA Inlet (Fan) ORU
+        Units = 1           % Number of CCAA units (default value of 1)
         Error = 0
     end
     
@@ -64,10 +65,15 @@ classdef ISSDehumidifierImpl < handle
     
     methods
         %% Constructor
-        function obj = ISSDehumidifierImpl(environment,CondensateOutput,PowerSource)
+        function obj = ISSDehumidifierImpl(environment,CondensateOutput,PowerSource,units)
             obj.Environment = environment;
             obj.DirtyWaterOutput = CondensateOutput;
             obj.PowerSource = PowerSource;
+            
+            if nargin == 4
+                obj.Units = units;
+            end
+            
         end
         
         %% tick
@@ -90,14 +96,14 @@ classdef ISSDehumidifierImpl < handle
                 % Determine amount of air corresponding to
                 % vaporMolesNeededToRemove
                 if VaporMolesNeededToRemove >= obj.max_condensate_extracted
-                    powerToConsume = obj.max_power_draw;
+                    powerToConsume = obj.max_power_draw*obj.Units;
                 else
                     % Linear scaling law between max and min power and
                     % condensate extraction (where minimum extraction is zero -
                     % which corresponds to TCCV door angle at 0 degrees and all
                     % flow being sent to bypass stream - ref Fig. 59 - Living
                     % Together in Space)
-                    powerToConsume = (obj.max_power_draw-obj.min_power_draw)/obj.max_condensate_extracted*VaporMolesNeededToRemove+obj.min_power_draw;
+                    powerToConsume = obj.Units*((obj.max_power_draw-obj.min_power_draw)/obj.max_condensate_extracted*VaporMolesNeededToRemove+obj.min_power_draw);
                 end
                 
                 currentPowerConsumed = obj.PowerSource.take(powerToConsume);     % Take power from power source
@@ -111,7 +117,7 @@ classdef ISSDehumidifierImpl < handle
                     return
                 end
                 
-                vaporMolesToTake = max([obj.max_condensate_extracted/(obj.max_power_draw-obj.min_power_draw)*(currentPowerConsumed-obj.min_power_draw),0]);     % Max command just in case power available is less than minimum power draw
+                vaporMolesToTake = max([obj.Units*obj.max_condensate_extracted/(obj.Units*(obj.max_power_draw-obj.min_power_draw))*(currentPowerConsumed-obj.Units*obj.min_power_draw),0]);     % Max command just in case power available is less than minimum power draw
                 vaporMolesRemoved = obj.Environment.VaporStore.take(vaporMolesToTake); % Actually vapor moles removed
                 
                 % Push humidity condensate to dirty water store (note that we
