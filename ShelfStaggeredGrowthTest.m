@@ -15,14 +15,14 @@ simtime = 19000;       % hours
 targetCO2conc = 1200*1E-6;
 % plant = SimEnvironmentImpl('Plant Growth Environment',55,1000000,0.28,targetCO2conc,(1-targetCO2conc-0.28-0.03194-0.001),0.03194,0.001,0);     %,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,FoodStore);     %Note volume input is in Liters.
 plant = SimEnvironmentImpl('Inflatable 1',70.3,500000,0.265,0,0.734,0,0.001);%,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,FoodStore);     %Note volume input is in Liters.
-plant.temperature = 20;
+% plant.temperature = 20;
 
 %% Initialize Stores
 PotableWaterStore = StoreImpl('Potable H2O','Material',100000,100000);
 
 DirtyWaterStore = StoreImpl('Dirty H2O','Material',100000,0);        % Corresponds to the UPA waste water tank - 18lb capacity (we increase volume by 10% to avoid loss of dirty water when running UPA in batch mode)
 
-GreyWaterStore = StoreImpl('Grey H2O','Material',100000,100000);
+GreyWaterStore = StoreImpl('Grey H2O','Material',1000000,1000000);
 
 % Power Stores
 MainPowerStore = StoreImpl('Power','Material',100000000,100000000);
@@ -55,28 +55,21 @@ targetDailySupply = 1.76461;%2.21;       % kg/day
 optimizedGrowthArea =1; % 104.9007;     % This approach only works if you've calibrated the growth/day/m^2 areas correctly, in adherence to the MEC models
 numberOfPlots = 1; %5;
 % growthArea = optimizedGrowthArea/numberOfPlots*ones(1,numberOfPlots);
-growthArea = 100;
-CropGrowthStartDays = (0:(numberOfPlots-1))*timeTilCropMaturity/numberOfPlots;
+growthArea = 104.9007;
+% CropGrowthStartDays = (0:(numberOfPlots-1))*timeTilCropMaturity/numberOfPlots;
 
-WhitePotatoShelf = ShelfImpl2(WhitePotato,growthArea,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-% WhitePotatoShelf2 = ShelfImpl2(WhitePotato,5,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore,138*24/2);
+temporalbatchspacing =[ 1   663.4   1325.8   1988.2   2650.6];
 
-% WhitePotatoShelf = ShelfImpl2.empty(0,daysTilCropMaturity);
-% 
-% for i = 1:numberOfPlots
-%     WhitePotatoShelf(i) = ShelfImpl2(DryBean,growthArea(i),plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore,CropGrowthStartDays(i));
-% end
+WhitePotatoShelf = ShelfImpl2(WhitePotato,growthArea/5,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore,temporalbatchspacing(1));
+% WhitePotatoShelf2 = ShelfImpl2(WhitePotato,growthArea/5,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore,temporalbatchspacing(2));
+% WhitePotatoShelf3 = ShelfImpl2(WhitePotato,growthArea/5,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore,temporalbatchspacing(3));
+% WhitePotatoShelf4 = ShelfImpl2(WhitePotato,growthArea/5,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore,temporalbatchspacing(4));
+% WhitePotatoShelf5 = ShelfImpl2(WhitePotato,growthArea/5,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore,temporalbatchspacing(5));
+numberOfBatches = 5;
+starttick = 1;
 
-% WhitePotatoShelf(i) = ShelfImpl2(DryBean,growthArea(i),plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore,CropGrowthStartDays(i));
+CropShelves = ShelfStagger(WhitePotatoShelf,numberOfBatches,starttick);
 
-growthArea = [54.7489,63.9891,25.3224,6.3862,49.1451];  % Growth areas calculated from the plant optimizer
-
-% Initialize crop shelves
-LettuceShelf = ShelfImpl2(Lettuce,26.15,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-PeanutShelf = ShelfImpl2(Peanut,69.88,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-SoybeanShelf = ShelfImpl2(Soybean,34.76,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-SweetPotatoShelf = ShelfImpl2(SweetPotato,1.65,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
-WheatShelf = ShelfImpl2(Wheat,67.52,plant,GreyWaterStore,PotableWaterStore,MainPowerStore,BiomassStore);
 
 % biomassSystem = BiomassPSImpl([WhitePotatoShelf]);
 % biomassSystem = BiomassPSImpl([WheatShelf,DryBeanShelf,WhitePotatoShelf]);
@@ -138,39 +131,32 @@ for i = 1:simtime
     biomassstorelevel(i) = BiomassStore.currentLevel;
     powerlevel(i) = MainPowerStore.currentLevel;
     
-%     for j = 1:length(WhitePotatoShelf)
-%         WhitePotatoShelf(j).tick;
-%     end
 
-    LettuceShelf.tick;
-    CO2toInject = (targetCO2conc*plant.totalMoles-plant.CO2Store.currentLevel)/(1-targetCO2conc);
-    plant.CO2Store.add(CO2toInject);
+    if GreyWaterStore.currentLevel <= 0
+        disp(['Grey Water Store is empty at tick: ',num2str(i)])
+        break
+    end
     
-    PeanutShelf.tick;
-    CO2toInject = (targetCO2conc*plant.totalMoles-plant.CO2Store.currentLevel)/(1-targetCO2conc);
-    plant.CO2Store.add(CO2toInject);
+    % Tick Shelves
+    CropShelves.tick;
     
-    SoybeanShelf.tick;
-    CO2toInject = (targetCO2conc*plant.totalMoles-plant.CO2Store.currentLevel)/(1-targetCO2conc);
-    plant.CO2Store.add(CO2toInject);
-    
-    SweetPotatoShelf.tick;
-    CO2toInject = (targetCO2conc*plant.totalMoles-plant.CO2Store.currentLevel)/(1-targetCO2conc);
-    plant.CO2Store.add(CO2toInject);
-    
-    WheatShelf.tick;
-    CO2toInject = (targetCO2conc*plant.totalMoles-plant.CO2Store.currentLevel)/(1-targetCO2conc);
-    plant.CO2Store.add(CO2toInject);
-
+%     WhitePotatoShelf.tick;
 %     WhitePotatoShelf2.tick;
-%     cropgrowthrate(i) = WhitePotatoShelf.CropGrowthRate;
+%     WhitePotatoShelf3.tick;
+%     WhitePotatoShelf4.tick;
+%     WhitePotatoShelf5.tick;
+    
+    
+    CO2toInject = (targetCO2conc*plant.totalMoles-plant.CO2Store.currentLevel)/(1-targetCO2conc);
+    plant.CO2Store.add(CO2toInject);
+    
+    
     FoodProcessor.tick;
     foodstorelevel(i) = FoodStore.currentLevel;
     if FoodStore.currentLevel > 0
         
         dryfoodlevel(i) = sum(cell2mat({FoodStore.foodItems.Mass})-cell2mat({FoodStore.foodItems.WaterContent}));
         caloriccontent(i) = sum([FoodStore.foodItems.CaloricContent]);
-%         dryfoodlevel(i) = FoodStore.foodItems.Mass-FoodStore.foodItems.WaterContent;
     end
     % Inject appropriate amount of CO2 into plant environment to
     % maintain targetCO2conc
