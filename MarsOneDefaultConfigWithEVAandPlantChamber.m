@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 200;
+missionDurationInHours = 19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -151,7 +151,7 @@ DryWasteStore = StoreImpl('Dry Waste','Material',1000000,0);    % Currently wast
 % plants grown
 CarriedFood = Wheat;
 AvgCaloriesPerCrewPerson = 3040.1;
-CarriedCalories = numberOfCrew*AvgCaloriesPerCrewPerson*120;    % 120 days worth of calories
+CarriedCalories = numberOfCrew*AvgCaloriesPerCrewPerson*150;    % 120 days worth of calories
 CarriedTotalMass = CarriedCalories/CarriedFood.CaloriesPerKilogram; % Note that calories per kilogram is on a wet mass basis
 
 initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWaterContent*CarriedTotalMass); % xmlFoodStoreLevel is declared within the createFoodStore method within SimulationInitializer.java

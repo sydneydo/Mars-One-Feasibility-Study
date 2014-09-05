@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 200;
+missionDurationInHours = 19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -959,7 +959,7 @@ subplot(2,3,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*inflatable
 subplot(2,3,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitCO2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitN2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitVaporlevel(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitOtherlevel(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
 subplot(2,3,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
 subplot(2,3,5), plot(t,airlockO2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockCO2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockN2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockVaporlevel(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockOtherlevel(t)./airlockTotalMoles(t).*airlockPressure(t),'LineWidth',2), title('Airlock'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-subplot(2,3,6), plot(t,inflatable2O2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2CO2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2N2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2Vaporlevel(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2Otherlevel(t)./inflatable2TotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 2 - Plant Environment'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(2,3,6), plot(t,inflatable2O2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2CO2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2N2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2Vaporlevel(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2Otherlevel(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),'LineWidth',2), title('Inflatable 2 - Plant Environment'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
 
 t = 1:(length(o2storelevel));
 
