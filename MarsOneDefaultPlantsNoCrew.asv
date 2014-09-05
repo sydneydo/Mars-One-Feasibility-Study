@@ -807,19 +807,19 @@ for i = 1:simtime
     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
     Inflatable1.CO2Store.add(CO2toInject);
     
-    PeanutShelves.tick;
+    PeanutShelf.tick;
     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
     Inflatable1.CO2Store.add(CO2toInject);
     
-    SoybeanShelves.tick;
+    SoybeanShelf.tick;
     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
     Inflatable1.CO2Store.add(CO2toInject);
     
-    SweetPotatoShelves.tick;
+    SweetPotatoShelf.tick;
     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
     Inflatable1.CO2Store.add(CO2toInject);
     
-    WheatShelves.tick;
+    WheatShelf.tick;
     
     FoodProcessor.tick;
     carriedfoodstorelevel(i) = CarriedFoodStore.currentLevel;
