@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 5000;
+missionDurationInHours = 19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -160,7 +160,7 @@ initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWate
 
 CarriedFoodStore = FoodStoreImpl(CarriedTotalMass,initialfood);
 
-LocallyGrownFoodStore = FoodStoreImpl(1000);
+LocallyGrownFoodStore = FoodStoreImpl(15000);
 
 %% Initialize SimEnvironments
 % Convert daily leakage rate to hourly leakage rate

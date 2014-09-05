@@ -158,7 +158,7 @@ initialfood = FoodMatter(Wheat,CarriedTotalMass,CarriedFood.EdibleFreshBasisWate
 
 CarriedFoodStore = FoodStoreImpl(CarriedTotalMass,initialfood);
 
-LocallyGrownFoodStore = FoodStoreImpl(1000);
+LocallyGrownFoodStore = FoodStoreImpl(15000);
 
 %% Initialize SimEnvironments
 % Convert daily leakage rate to hourly leakage rate
