@@ -64,12 +64,12 @@ TargetO2MolarFraction = 0.265;
 TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
 
 % ISRU Production Rates
-% isruAddedWater = 0.2;   % Liters/hour
-% isruAddedO2 = 1.5;      % moles/hour
-% isruAddedN2 = 1.5;      % moles/hour
+isruAddedWater = 0.2;%0.13;%0.2;   % Liters/hour
+isruAddedO2 = 1.6;      % moles/hour
+isruAddedN2 = 1.8;%1.5;      % moles/hour
 
 % EMU
-EMUco2RemovalTechnology = 'RCA';  % other option is RCA
+EMUco2RemovalTechnology = 'METOX';  % other option is RCA
 EMUurineManagementTechnology = 'UCTA';  % other option is MAG
 
 %% Initialize Stores
@@ -934,9 +934,9 @@ for i = 1:simtime
     astro4.tick;
    
     %% Run ISRU
-%     PotableWaterStore.add(isruAddedWater);
-%     O2Store.add(isruAddedO2);
-%     N2Store.add(isruAddedN2);
+    PotableWaterStore.add(isruAddedWater);
+    O2Store.add(isruAddedO2);
+    N2Store.add(isruAddedN2);
     
     %% EVA Check
     CrewEVAstatus = [strcmpi(astro1.CurrentActivity.Name,'EVA'),...
