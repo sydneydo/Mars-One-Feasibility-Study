@@ -43,3 +43,7 @@ end
 % Need an extra 6.841e6 calories to fill gaps on top of what we already
 % brought
 % Equates to an adidtional 563 days of food
+
+% full stagger means that no extra food is needed
+% only 8.246848508120397e+05 calories are consumed - equivalent to only a
+% 68 day supply of food
