@@ -865,7 +865,7 @@ for i = 1:simtime
     livingUnit2LifeSupportFan2.tick;
     lifeSupport2CargoUnitFan.tick;
     lifeSupport2CargoUnitFan2.tick;
-    livingUnit2livingUnitFan.tick
+    livingUnit2livingUnitFan.tick;
     livingUnit2AirlockFan.tick;
     
     % Run Power Supply
