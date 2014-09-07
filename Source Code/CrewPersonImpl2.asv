@@ -286,7 +286,7 @@ classdef CrewPersonImpl2 < handle
                             %                         .takeFoodMatterCalories(caloriesNeeded,limitingMassFactor); % from FoodStoreImpl.takeFoodMatterCalories, outputs food taken from FoodStoreImpl
                             
                             takenMatter = obj.CurrentActivity.Location.FoodStore(i)...
-                                .takeFoodMatterCalories(caloriesNeeded-gatheredCalories);
+                                .takeFoodMatterCalories(caloriesNeeded);
                             
                             %                     gatheredFoodMatterArrays = [gatheredFoodMatterArrays takenMatter];
                             if ~isempty(takenMatter)
@@ -305,11 +305,6 @@ classdef CrewPersonImpl2 < handle
                         end
                     end
                 end
-                
-                if gatheredCalories >= caloriesNeeded
-                    break
-                end
-                
             end
             foodConsumed = gatheredFoodMatterArrays; 
         end
