@@ -139,7 +139,7 @@ initialN2StoreMoles = initialN2TankCapacityInKg*1E3/n2MolarMass;
 N2Store = StoreImpl('N2 Store','Material',initialN2StoreMoles,initialN2StoreMoles);     
 
 % Power Stores
-MainPowerStore = StoreImpl('Power','Material',100000,100000);
+MainPowerStore = StoreImpl('Power','Material',1000000,1000000);
 
 % Waste Stores
 DryWasteStore = StoreImpl('Dry Waste','Material',1000000,0);    % Currently waste is discarded via logistics resupply vehicles on ISS
@@ -512,15 +512,6 @@ inflatableN2level = zeros(1,simtime);
 inflatableVaporlevel = zeros(1,simtime);
 inflatableOtherlevel = zeros(1,simtime);
 inflatableTotalMoles = zeros(1,simtime);
-
-inflatable2Pressure = zeros(1,simtime);
-inflatable2O2level = zeros(1,simtime);
-inflatable2CO2level = zeros(1,simtime);
-inflatable2N2level = zeros(1,simtime);
-inflatable2Vaporlevel = zeros(1,simtime);
-inflatable2Otherlevel = zeros(1,simtime);
-inflatable2TotalMoles = zeros(1,simtime);
-inflatableCondensedVaporMoles = zeros(1,simtime);
 
 inflatable2Pressure = zeros(1,simtime);
 inflatable2O2level = zeros(1,simtime);
@@ -902,7 +893,7 @@ for i = 1:simtime
     
     % Run Fans
     inflatable2LivingUnitFan.tick;
-    inflatable2LivingUnitFan2.tick;
+%     inflatable2LivingUnitFan2.tick;
     livingUnit2LifeSupportFan.tick;
     livingUnit2LifeSupportFan2.tick;
     lifeSupport2CargoUnitFan.tick;
@@ -935,7 +926,7 @@ for i = 1:simtime
     livingUnitCCAAoutput(i) = livingUnitCCAA.tick;
     lifeSupportUnitCCAAoutput(i) = lifeSupportUnitCCAA.tick;
     
-    inflatable2CCAAoutput(i) = inflatable2CCAA.tick;
+%     inflatable2CCAAoutput(i) = inflatable2CCAA.tick;
     livingUnit2CCAAoutput(i) = livingUnit2CCAA.tick;
     lifeSupportUnit2CCAAoutput(i) = lifeSupportUnit2CCAA.tick;
     
