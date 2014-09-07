@@ -63,6 +63,12 @@ O2FractionHypoxicLimit = 0.23;          % lower bound for a 70.3kPa atm based on
 TargetO2MolarFraction = 0.265; 
 TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
 
+% ISRU Production Rates
+isruAddedWater = 0.02;      % Liters/hour
+isruAddedCropWater = 1.11;  % Liter/hour
+isruAddedO2 = 0;            % moles/hour
+isruAddedN2 = 1.7;          % moles/hour
+
 % EMU
 EMUco2RemovalTechnology = 'RCA';  % options are RCA or METOX
 EMUurineManagementTechnology = 'UCTA';  % options are MAG or UCTA
@@ -986,7 +992,10 @@ for i = 1:simtime
     astro4.tick;
    
     %% Run ISRU
-%     N2Store.add(10);    % Gradient calculation indicated that the nominal ISRU N2 production rate should be 15.3241moles/hour
+    PotableWaterStore.add(isruAddedWater);
+    CropWaterStore.add(isruAddedCropWater);
+%     O2Store.add(isruAddedO2);
+    N2Store.add(isruAddedN2);
     
     %% EVA
     CrewEVAstatus = [strcmpi(astro1.CurrentActivity.Name,'EVA'),...
