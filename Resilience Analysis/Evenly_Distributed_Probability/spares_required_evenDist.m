@@ -50,9 +50,9 @@
 % SEE IF YOU CAN FIND PACKING MASS/VOLUME FRACTION
 % solar cells 3000m^2 (340kW)
 
-function [trueSpares, totalProb, totalMass] = spares_required_evenDist(...
-    overallProbability,cutoff,duration,dt,processorSets,numInstances,...
-    componentData,GLSflag)
+function [trueSpares, totalProb, totalMass, totalDowntime] = ...
+    spares_required_evenDist(overallProbability,cutoff,duration,dt,...
+    processorSets,numInstances,componentData,GLSflag)
 
 % create mass vector and vector indicating the number of each component
 massVector = [];
@@ -90,7 +90,7 @@ else
 end
 
 tic
-for j = 1:size(processorSets,1)-0
+for j = 1:size(processorSets,1)-subtract
     % give status
     disp(['Calculating for Processor ' num2str(j)])
     
@@ -155,18 +155,21 @@ end
 % calculate total mass
 totalMass = massVector'*trueSpares;
 
+% calculate total downtime
+totalDowntime = sum(downtime);
+
 % write individual subassembly results to file
 % csvwrite('RESULTS.csv',trueSpares);
 
 thisTime = toc;
 
 % display outputs
-disp('----- RESULTS -----')
-disp(['For overall probability of ' num2str(overallProbability) ':'])
-disp(['Total mass of spares: ' num2str(totalMass)])
-disp(['Resulting Probability: ' num2str(totalProb)])
-disp('Subassembly spares counts have been written to RESULTS.csv')
-disp(['     Total Elapsed Time: ' num2str(round((thisTime/60)*100)/100)...
-    'minutes'])
-disp('-------------------')
+% disp('----- RESULTS -----')
+% disp(['For overall probability of ' num2str(overallProbability) ':'])
+% disp(['Total mass of spares: ' num2str(totalMass)])
+% disp(['Resulting Probability: ' num2str(totalProb)])
+% disp('Subassembly spares counts have been written to RESULTS.csv')
+% disp(['     Total Elapsed Time: ' num2str(round((thisTime/60)*100)/100)...
+%     'minutes'])
+% disp('-------------------')
 end
