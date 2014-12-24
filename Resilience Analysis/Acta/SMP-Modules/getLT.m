@@ -12,7 +12,7 @@
 function Lf = getLT(f,r,c,sVals,dt)
 % preallocate cell array to store values at each sVal
 Lf = cell(size(sVals,1),1);
-for j = 1:size(sVals,1) % cycle through each point in sVals
+parfor j = 1:size(sVals,1) % cycle through each point in sVals
     % extract the sVal
     u = sVals(j,1);
     v = sVals(j,2);

@@ -17,7 +17,7 @@ overallProbability = 0.99;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
-cutoff = 1e-8;
+cutoff = 1e-10;
 
 % EULER parameters - parameters for EULER numerical Laplace transform
 % inversion
@@ -27,10 +27,10 @@ EULERparams = [11; 15; 18.4];
 duration = 19000/24;
 
 % Number of missions (including first)
-nMissions = 5;
+nMissions = 10;
 
 % discretization size
-dt = 0.05;
+dt = 1/24; % 1 hour timesteps
 
 % Set up and solve SMP for each processor
 % Processors are comprised of subassemblies. Since all processors are
@@ -46,7 +46,7 @@ dt = 0.05;
 %   2) MTBF [d]
 %   3) Life Limit [d]
 %   4) # of the component in primary system
-componentData = csvread('componentData_BPS.csv',1,3);
+componentData = csvread('componentData_BPS.csv',1,3,[1 3 90 6]);
 
 % multiple instances of the same processor are repeated as different
 % groups. Groups are:
@@ -118,7 +118,7 @@ for mission = 1:nMissions
         % split out the data corresponding to this processor
         thisGroup = componentData(componentData(:,1)==j,:);
         nComponents = size(thisGroup,1);
-        
+                
         % generate adjacency matrix for this processor. Since any single
         % failure takes the whole thing offline, this is simple to construct.
         [r,c,vals,adjMat] = getAdjMat(nComponents);
@@ -162,13 +162,13 @@ for mission = 1:nMissions
         newPMF = conv(conv(conv(thisPMF,thisPMF),thisPMF),thisPMF);
         componentPMFs{j,mission} = newPMF;
     end
+    toc
 end
-toc
 
 % save the results so we don't have to do this again
 save('BPS/PMFData.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
-    'nMissions','componentData','CCAAstart','CCAAend');
+    'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
 %% Convolve results
 % The PMFs generated above give the cumulative probabilistic demand for a
@@ -192,6 +192,7 @@ netCumulativeDemand_rand = zeros(size(componentPMFs));
 % and the 1-mission demand for 1 crew, and so on.
 % Note that this operation is not necessary for the PDISRU systems, since
 % they are refurbished by each crew; only one is operational at all times
+
 for j = 2:nMissions
     for k = 1:PDISRUstart-1
         netCumulativeDemandPMFs{k,j} = conv(...

@@ -17,7 +17,7 @@ overallProbability = 0.99;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
-cutoff = 1e-8;
+cutoff = 1e-10;
 
 % EULER parameters - parameters for EULER numerical Laplace transform
 % inversion
@@ -27,10 +27,10 @@ EULERparams = [11; 15; 18.4];
 duration = 19000/24;
 
 % Number of missions (including first)
-nMissions = 5;
+nMissions = 10;
 
 % discretization size
-dt = 0.05;
+dt = 1/24; % 1 hour timesteps
 
 % Set up and solve SMP for each processor
 % Processors are comprised of subassemblies. Since all processors are
@@ -166,7 +166,7 @@ toc
 % save the results so we don't have to do this again
 save('noBPS/PMFData.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
-    'nMissions','componentData','CCAAstart','CCAAend');
+    'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
 %% Convolve results
 % The PMFs generated above give the cumulative probabilistic demand for a

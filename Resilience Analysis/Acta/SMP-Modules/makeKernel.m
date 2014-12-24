@@ -44,7 +44,7 @@ end
 % go through each row that has entries in Q and add all the entries
 % together to form the entry for H
 uniqueRows = unique(r);
-for j = 1:length(uniqueRows)
+parfor j = 1:length(uniqueRows)
     thisH = 0;
     colsToAdd = c(r==uniqueRows(j));
     for k = 1:length(colsToAdd)

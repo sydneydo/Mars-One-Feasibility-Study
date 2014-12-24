@@ -9,8 +9,8 @@
 %
 
 % load data
-BPS = csvread('sparesRequired_BPS.csv',0,0,[0 0 125 16]);
-noBPS = csvread('sparesRequired_noBPS.csv',0,0,[0 0 113 16]);
+BPS = csvread('sparesRequired_BPS.csv',0,0,[0 0 125 26]);
+noBPS = csvread('sparesRequired_noBPS.csv',0,0,[0 0 113 26]);
 
 % Columns are:
 %   1) Mass [kg]
@@ -24,12 +24,22 @@ noBPS = csvread('sparesRequired_noBPS.csv',0,0,[0 0 113 16]);
 %   9) Crew 3 Spare Parts
 %  10) Crew 4 Spare Parts
 %  11) Crew 5 Spare Parts
-%  12) Pre-Deploy Total
-%  13) Crew 1 Total
-%  14) Crew 2 Total
-%  15) Crew 3 Total
-%  16) Crew 4 Total
-%  17) Crew 5 Total
+%  12) Crew 6 Spare Parts
+%  13) Crew 7 Spare Parts
+%  14) Crew 8 Spare Parts
+%  15) Crew 9 Spare Parts
+%  16) Crew 10 Spare Parts
+%  17) Pre-Deploy Total
+%  18) Crew 1 Total
+%  19) Crew 2 Total
+%  20) Crew 3 Total
+%  21) Crew 4 Total
+%  22) Crew 5 Total
+%  23) Crew 6 Total
+%  24) Crew 7 Total
+%  25) Crew 8 Total
+%  26) Crew 9 Total
+%  27) Crew 10 Total
 
 % Key rows in BPS:
 %   1-66: ECLSS
@@ -66,7 +76,8 @@ noBPS = csvread('sparesRequired_noBPS.csv',0,0,[0 0 113 16]);
 %  10) Food
 % for both BPS and no BPS at each mission
 labels = {'Pre-Deploy (2022)','Crew 1 (2024)','Crew 2 (2026)',...
-    'Crew 3 (2028)','Crew 4 (2030)','Crew 5 (2032)'};
+    'Crew 3 (2028)','Crew 4 (2030)','Crew 5 (2032)','Crew 6 (2034)',...
+    'Crew 7 (2036)','Crew 8 (2038)','Crew 9 (2040)','Crew 10 (2042)'};
 % 
 % labels = {{'Pre-Deploy';'2022'},{'Crew 1';'2024'},{'Crew 2';'2026'},...
 %     {'Crew 3';'2028'},{'Crew 4';'2030'},{'Crew 5';'2032'}};
@@ -85,9 +96,9 @@ bpsEVA = 125:126;
 nobpsEVA = 113:114;
 
 % generate 3D matrix for stacked bar graph. Entries are (group, stack,
-% stack element). Groups are missions (6), stacks are BPS/noBPS (2), and
+% stack element). Groups are missions (11), stacks are BPS/noBPS (2), and
 % stack elements are mass values (9).
-stackedBar1 = zeros(6,2,9);
+stackedBar1 = zeros(11,2,9);
 % go through each mission and fill in accordingly
 
 % Pre-deploy
@@ -107,7 +118,7 @@ stackedBar1(1,1,5) = sum(BPS(bpsEVA,1).*BPS(bpsEVA,12));
 stackedBar1(1,2,5) = sum(noBPS(nobpsEVA,1).*noBPS(nobpsEVA,12));
 
 % crewed missions
-for j = 2:6    
+for j = 2:11
     stackedBar1(j,1,2) = sum(BPS(bpsHAB,1).*BPS(bpsHAB,5)) + ...
         sum(BPS(bpsHAB,1).*BPS(bpsHAB,6));
     stackedBar1(j,2,2) = sum(noBPS(nobpsHAB,1).*noBPS(nobpsHAB,5)) + ...
@@ -164,7 +175,7 @@ legend('PDISRU','Habitat and Crew Systems','ECLSS','ISRU','EVA',...
     'location','northwest')
 
 %% Stacked Bar - Emplaced Mass, Spares, and Food
-stackedBar2 = zeros(6,2,3);
+stackedBar2 = zeros(11,2,3);
 stackedBar2(:,:,1) = sum(stackedBar1(:,:,1:5),3);
 stackedBar2(:,:,2) = sum(stackedBar1(:,:,6:9),3);
 stackedBar2(:,:,3) = stackedBar1(:,:,10);
