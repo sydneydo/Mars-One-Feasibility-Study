@@ -9,8 +9,8 @@
 %
 
 % load data
-BPS = csvread('sparesRequired_BPS.csv',0,0,[0 0 125 26]);
-noBPS = csvread('sparesRequired_noBPS.csv',0,0,[0 0 113 26]);
+BPS = csvread('sparesRequired_BPS.csv',0,0,[0 0 125 56]);
+noBPS = csvread('sparesRequired_noBPS.csv',0,0,[0 0 113 56]);
 
 % Columns are:
 %   1) Mass [kg]
@@ -29,17 +29,47 @@ noBPS = csvread('sparesRequired_noBPS.csv',0,0,[0 0 113 26]);
 %  14) Crew 8 Spare Parts
 %  15) Crew 9 Spare Parts
 %  16) Crew 10 Spare Parts
-%  17) Pre-Deploy Total
-%  18) Crew 1 Total
-%  19) Crew 2 Total
-%  20) Crew 3 Total
-%  21) Crew 4 Total
-%  22) Crew 5 Total
-%  23) Crew 6 Total
-%  24) Crew 7 Total
-%  25) Crew 8 Total
-%  26) Crew 9 Total
-%  27) Crew 10 Total
+%  17) Crew 11 Spare Parts
+%  18) Crew 12 Spare Parts
+%  19) Crew 13 Spare Parts
+%  20) Crew 14 Spare Parts
+%  21) Crew 15 Spare Parts
+%  22) Crew 16 Spare Parts
+%  23) Crew 17 Spare Parts
+%  24) Crew 18 Spare Parts
+%  25) Crew 19 Spare Parts
+%  26) Crew 20 Spare Parts
+%  27) Crew 21 Spare Parts
+%  28) Crew 22 Spare Parts
+%  29) Crew 23 Spare Parts
+%  30) Crew 24 Spare Parts
+%  31) Crew 25 Spare Parts
+%  32) Pre-Deploy Total
+%  33) Crew 1 Total
+%  34) Crew 2 Total
+%  35) Crew 3 Total
+%  36) Crew 4 Total
+%  37) Crew 5 Total
+%  38) Crew 6 Total
+%  39) Crew 7 Total
+%  40) Crew 8 Total
+%  41) Crew 9 Total
+%  42) Crew 10 Total
+%  43) Crew 11 Total
+%  44) Crew 12 Total
+%  45) Crew 13 Total
+%  46) Crew 14 Total
+%  47) Crew 15 Total
+%  48) Crew 16 Total
+%  49) Crew 17 Total
+%  50) Crew 18 Total
+%  51) Crew 19 Total
+%  52) Crew 20 Total
+%  53) Crew 21 Total
+%  54) Crew 22 Total
+%  55) Crew 23 Total
+%  56) Crew 24 Total
+%  57) Crew 25 Total
 
 % Key rows in BPS:
 %   1-66: ECLSS
@@ -77,7 +107,11 @@ noBPS = csvread('sparesRequired_noBPS.csv',0,0,[0 0 113 26]);
 % for both BPS and no BPS at each mission
 labels = {'Pre-Deploy (2022)','Crew 1 (2024)','Crew 2 (2026)',...
     'Crew 3 (2028)','Crew 4 (2030)','Crew 5 (2032)','Crew 6 (2034)',...
-    'Crew 7 (2036)','Crew 8 (2038)','Crew 9 (2040)','Crew 10 (2042)'};
+    'Crew 7 (2036)','Crew 8 (2038)','Crew 9 (2040)','Crew 10 (2042)',...
+    'Crew 11 (2044)','Crew 12 (2046)','Crew 13 (2048)','Crew 14 (2050)',...
+    'Crew 15 (2052)','Crew 16 (2054)','Crew 17 (2056)','Crew 18 (2058)',...
+    'Crew 19 (2060)','Crew 20 (2062)','Crew 21 (2064)','Crew 22 (2066)',...
+    'Crew 23 (2068)','Crew 24 (2070)','Crew 25 (2072)'};
 % 
 % labels = {{'Pre-Deploy';'2022'},{'Crew 1';'2024'},{'Crew 2';'2026'},...
 %     {'Crew 3';'2028'},{'Crew 4';'2030'},{'Crew 5';'2032'}};
@@ -96,9 +130,9 @@ bpsEVA = 125:126;
 nobpsEVA = 113:114;
 
 % generate 3D matrix for stacked bar graph. Entries are (group, stack,
-% stack element). Groups are missions (11), stacks are BPS/noBPS (2), and
+% stack element). Groups are missions (26), stacks are BPS/noBPS (2), and
 % stack elements are mass values (9).
-stackedBar1 = zeros(11,2,9);
+stackedBar1 = zeros(26,2,9);
 % go through each mission and fill in accordingly
 
 % Pre-deploy
@@ -118,7 +152,7 @@ stackedBar1(1,1,5) = sum(BPS(bpsEVA,1).*BPS(bpsEVA,12));
 stackedBar1(1,2,5) = sum(noBPS(nobpsEVA,1).*noBPS(nobpsEVA,12));
 
 % crewed missions
-for j = 2:11
+for j = 2:26
     stackedBar1(j,1,2) = sum(BPS(bpsHAB,1).*BPS(bpsHAB,5)) + ...
         sum(BPS(bpsHAB,1).*BPS(bpsHAB,6));
     stackedBar1(j,2,2) = sum(noBPS(nobpsHAB,1).*noBPS(nobpsHAB,5)) + ...
@@ -173,9 +207,10 @@ ylabel('Mass Delivered to Surface [tonnes]','FontSize',16)
 legend('PDISRU','Habitat and Crew Systems','ECLSS','ISRU','EVA',...
     'PDISRU Spares','ECLSS Spares','ISRU Spares','EVA Spares','Food',...
     'location','northwest')
+set(gca,'XTickLabelRotation',30)
 
 %% Stacked Bar - Emplaced Mass, Spares, and Food
-stackedBar2 = zeros(11,2,3);
+stackedBar2 = zeros(26,2,3);
 stackedBar2(:,:,1) = sum(stackedBar1(:,:,1:5),3);
 stackedBar2(:,:,2) = sum(stackedBar1(:,:,6:9),3);
 stackedBar2(:,:,3) = stackedBar1(:,:,10);
@@ -188,3 +223,24 @@ title('Breakdown of Mass Delivered Per Mission','FontSize',18,...
 xlabel('Mission','FontSize',16)
 ylabel('Mass Delivered to Surface [tonnes]','FontSize',16)
 legend('Emplaced Mass','Spare Parts','Food','location','northwest')
+set(gca,'XTickLabelRotation',30)
+
+%% Cumulative Mass Delivered
+totalMass = sum(stackedBar2,3);
+cumulativeMass = cumsum(totalMass,1);
+
+% create plot
+figure
+plot(cumulativeMass(:,1),'r*-')
+hold on
+plot(cumulativeMass(:,2),'b*-')
+set(gca,'FontSize',14)
+title('Cumulative Mass Delivered To Surface','FontSize',18,...
+    'FontWeight','bold')
+xlabel('Mission','FontSize',16)
+ylabel('Cumulative Mass Delivered to Surface [tonnes]','FontSize',16)
+legend('BPS','No BPS','location','northwest')
+ax = gca;
+ax.XTickLabel = labels;
+xlim([0.5 26.5])
+set(gca,'XTick',1:26,'XTickLabelRotation',30)

@@ -26,8 +26,8 @@ EULERparams = [11; 15; 18.4];
 % time between resupply missions [~26 months]
 duration = 19000/24;
 
-% Number of missions (including first)
-nMissions = 10;
+% Number of missions (including first, but not pre-deployment)
+nMissions = 25;
 
 % discretization size
 dt = 1/24; % 1 hour timesteps
@@ -166,7 +166,7 @@ for mission = 1:nMissions
 end
 
 % save the results so we don't have to do this again
-save('BPS/PMFData.mat','componentPMFs','overallProbability',...
+save('BPS_25crews/PMFData.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
@@ -178,7 +178,7 @@ save('BPS/PMFData.mat','componentPMFs','overallProbability',...
 % per-mission, simply take the discrete difference.
 
 % load previous data
-load BPS/PMFdata.mat
+load BPS_25crews/PMFdata.mat
 
 % preallocate the cell array indicating the net cumulative demand for each
 % component at each mission. Some cells of this will be overwritten as
@@ -261,11 +261,11 @@ end
 sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
 
 % save outputs
-save('BPS/CumulativeDemandData.mat','sparesDemand',...
+save('BPS_25crews/CumulativeDemandData.mat','sparesDemand',...
     'sparesDemand_EVAbatt','netCumulativeDemand',...
     'netCumulativeDemand_rand','netCumulativeDemand_sched')
 
 % write the results to a .csv file
-csvwrite('BPS/netCumulativeDemand.csv',netCumulativeDemand);
-csvwrite('BPS/SparesDemand.csv',sparesDemand);
-csvwrite('BPS/SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
+csvwrite('BPS_25crews/netCumulativeDemand.csv',netCumulativeDemand);
+csvwrite('BPS_25crews/SparesDemand.csv',sparesDemand);
+csvwrite('BPS_25crews/SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
