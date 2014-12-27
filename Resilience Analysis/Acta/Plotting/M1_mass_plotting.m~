@@ -213,7 +213,6 @@ legend('PDISRU','Habitat and Crew Systems','ECLSS','ISRU','EVA',...
     'PDISRU Spares','ECLSS Spares','ISRU Spares','EVA Spares','Food',...
     'location','northwest')
 set(gca,'XTickLabelRotation',30)
-xlim([0.5 nCrewsPlotted+1.5])
 
 %% Stacked Bar - Emplaced Mass, Spares, and Food
 stackedBar2 = zeros(nCrewsPlotted+1,2,3);
@@ -230,7 +229,6 @@ xlabel('Mission','FontSize',16)
 ylabel('Mass Delivered to Surface [tonnes]','FontSize',16)
 legend('Emplaced Mass','Spare Parts','Food','location','northwest')
 set(gca,'XTickLabelRotation',30)
-xlim([0.5 nCrewsPlotted+1.5])
 
 %% Cumulative Mass Delivered
 totalMass = sum(stackedBar2,3);
@@ -249,28 +247,8 @@ ylabel('Cumulative Mass Delivered to Surface [tonnes]','FontSize',16)
 legend('BPS','No BPS','location','northwest')
 ax = gca;
 ax.XTickLabel = labels;
-set(gca,'XTick',1:26,'XTickLabelRotation',30)
 xlim([0.5 nCrewsPlotted+1.5])
+set(gca,'XTick',1:26,'XTickLabelRotation',30)
 
 %% Spare Parts Mass
-sparePartsMass = stackedBar1(2:nCrewsPlotted+1,:,6:9);
-
-labels2 = {'Crew 1 (2024)','Crew 2 (2026)',...
-    'Crew 3 (2028)','Crew 4 (2030)','Crew 5 (2032)','Crew 6 (2034)',...
-    'Crew 7 (2036)','Crew 8 (2038)','Crew 9 (2040)','Crew 10 (2042)',...
-    'Crew 11 (2044)','Crew 12 (2046)','Crew 13 (2048)','Crew 14 (2050)',...
-    'Crew 15 (2052)','Crew 16 (2054)','Crew 17 (2056)','Crew 18 (2058)',...
-    'Crew 19 (2060)','Crew 20 (2062)','Crew 21 (2064)','Crew 22 (2066)',...
-    'Crew 23 (2068)','Crew 24 (2070)','Crew 25 (2072)'};
-
-% create plot
-plotBarStackGroups(sparePartsMass, labels2)
-set(gca,'FontSize',14)
-title('Mass of Spare Parts Delivered Per Mission','FontSize',18,...
-    'FontWeight','bold')
-xlabel('Mission','FontSize',16)
-ylabel('Mass of Spare Parts [tonnes]','FontSize',16)
-legend('PDISRU Spares','ECLSS Spares','ISRU Spares','EVA Spares',...
-    'location','northwest')
-set(gca,'XTickLabelRotation',30)
-xlim([0.5 nCrewsPlotted+0.5])
+sparePartsMass = stackedBar1(1:nCrewsPlotted+1,:,6:

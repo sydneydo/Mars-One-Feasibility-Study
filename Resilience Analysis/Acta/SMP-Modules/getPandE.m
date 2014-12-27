@@ -19,7 +19,7 @@
 % Outputs:
 %   P - vector of state probabilities, for this startState
 %   E - vector of expected time in each state
-function P = getPandE(LQ,LH,sVals,startState,EULERparams,resultTime)
+function [P,E] = getPandE(LQ,LH,sVals,startState,EULERparams,resultTime)
 LP = cell(size(LQ)); % preallocate LP
 LE = cell(size(LQ)); % preallocate LE
 ident = speye(size(LQ{1})); % create a sparse identity matrix 
