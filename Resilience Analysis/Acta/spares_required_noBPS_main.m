@@ -27,7 +27,7 @@ EULERparams = [11; 15; 18.4];
 duration = 19000/24;
 
 % Number of missions (including first)
-nMissions = 25;
+nMissions = 15;
 
 % discretization size
 dt = 1/24; % 1 hour timesteps
@@ -47,6 +47,9 @@ dt = 1/24; % 1 hour timesteps
 %   3) Life Limit [d]
 %   4) # of the component in primary system
 componentData = csvread('componentData_noBPS.csv',1,3);
+
+% multiply the MTBF by 2 (increase reliability of each component)
+componentData(:,2) = 2.*componentData(:,2);
 
 % multiple instances of the same processor are repeated as different
 % groups. Groups are:
@@ -164,7 +167,7 @@ for mission = 1:nMissions
 end
 
 % save the results so we don't have to do this again
-save('noBPS_25crews/PMFData.mat','componentPMFs','overallProbability',...
+save('noBPS_MTBFx2/PMFData.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
@@ -176,7 +179,7 @@ save('noBPS_25crews/PMFData.mat','componentPMFs','overallProbability',...
 % per-mission, simply take the discrete difference.
 
 % load previous data
-load noBPS_25crews/PMFdata.mat
+load noBPS_MTBFx2/PMFdata.mat
 
 % preallocate the cell array indicating the net cumulative demand for each
 % component at each mission. Some cells of this will be overwritten as
@@ -258,11 +261,11 @@ end
 sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
 
 % save outputs
-save('noBPS_25crews/CumulativeDemandData.mat','sparesDemand',...
+save('noBPS_MTBFx2/CumulativeDemandData.mat','sparesDemand',...
     'sparesDemand_EVAbatt','netCumulativeDemand',...
     'netCumulativeDemand_rand','netCumulativeDemand_sched')
 
 % write the results to a .csv file
-csvwrite('noBPS_25crews/netCumulativeDemand.csv',netCumulativeDemand);
-csvwrite('noBPS_25crews/SparesDemand.csv',sparesDemand);
-csvwrite('noBPS_25crews/SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
+csvwrite('noBPS_MTBFx2/netCumulativeDemand.csv',netCumulativeDemand);
+csvwrite('noBPS_MTBFx2/SparesDemand.csv',sparesDemand);
+csvwrite('noBPS_MTBFx2/SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);

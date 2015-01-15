@@ -27,7 +27,7 @@ EULERparams = [11; 15; 18.4];
 duration = 19000/24;
 
 % Number of missions (including first, but not pre-deployment)
-nMissions = 25;
+nMissions = 15;
 
 % discretization size
 dt = 1/24; % 1 hour timesteps
@@ -47,6 +47,9 @@ dt = 1/24; % 1 hour timesteps
 %   3) Life Limit [d]
 %   4) # of the component in primary system
 componentData = csvread('componentData_BPS.csv',1,3,[1 3 90 6]);
+
+% multiply the MTBF by 2 (increase the reliability of each component
+componentData(:,2) = 2.*componentData(:,2);
 
 % multiple instances of the same processor are repeated as different
 % groups. Groups are:
@@ -177,108 +180,108 @@ for mission = 1:nMissions
     end
     toc
 end
-% 
-% % save the results so we don't have to do this again
-% save('BPS_25crews/PMFData.mat','componentPMFs','overallProbability',...
-%     'thresholdProbability','nComponents','cutoff','dt','duration',...
-%     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
-% 
-% %% Convolve results
-% % The PMFs generated above give the cumulative probabilistic demand for a
-% % single crew at each mission. To determine overall cumulative demand,
-% % convolve the probabilistic demand for each crew at each mission and use a
-% % probability threshold to select values. To go from cumulative demand to
-% % per-mission, simply take the discrete difference.
-% 
-% % load previous data
-% load BPS_25crews/PMFdata.mat
-% 
-% % preallocate the cell array indicating the net cumulative demand for each
-% % component at each mission. Some cells of this will be overwritten as
-% % needed.
-% netCumulativeDemandPMFs = componentPMFs;
-% netCumulativeDemand_rand = zeros(size(componentPMFs));
-% 
-% % note that the cumulative demand for the first mission is the same as the
-% % demand for one crew, since there is only one crew present. At each
-% % subsequent mission, need to convolve in the 2-mission demand for 1 crew
-% % and the 1-mission demand for 1 crew, and so on.
-% % Note that this operation is not necessary for the PDISRU systems, since
-% % they are refurbished by each crew; only one is operational at all times
-% 
-% for j = 2:nMissions
-%     for k = 1:PDISRUstart-1
-%         netCumulativeDemandPMFs{k,j} = conv(...
-%             netCumulativeDemandPMFs{k,j-1},componentPMFs{k,j});
-%     end
-% end
-% 
-% % use the overall probability threshold to determine the number of spares
-% % that must be manifested (this is cumulative, for all crews)
-% for j = 1:nMissions
-%     for k = 1:size(netCumulativeDemandPMFs,1)
-%         thisCDF = cumsum(netCumulativeDemandPMFs{k,j});
-%         netCumulativeDemand_rand(k,j) = ...
-%             find(thisCDF>=thresholdProbability,1)-1;
-%     end
-% end
-% 
-% % check the required spares for scheduled replacement. If the scheduled
-% % repairs is greater than the random repairs, use that number instead.
-% % scheduled is the cumulative number of spares required for scheduled for
-% % one crew.
-% scheduled = zeros(size(netCumulativeDemand_rand));
-% for j = 1:nMissions
-%     thisScheduled = duration*j./componentData(:,3);
-%     % replace inf with 0 - this indicates that the life limit is 0, or not
-%     % given
-%     thisScheduled(isinf(thisScheduled)) = 0;
-%     % multiply by the number of that element in the system and round down
-%     scheduled(:,j) = componentData(:,4).*floor(thisScheduled);
-% end
-% 
-% % account for the fact that there are four instances of the CCAA
-% scheduled(CCAAstart:CCAAend,:) = 4.*scheduled(CCAAstart:CCAAend,:);
-% 
-% % using scheduled, generate the matrix of scheduled spares required given
-% % that a new crew arrives every 26 months.
-% netCumulativeDemand_sched = scheduled;
-% for j = 1:nMissions-1
-%     netCumulativeDemand_sched = netCumulativeDemand_sched + ...
-%         [zeros(size(scheduled,1),j), scheduled(:,1:size(scheduled,2)-j)];
-% end
-% 
-% % For demand prediction, take the maximum from either random failures or
-% % scheduled repair
-% netCumulativeDemand = max(netCumulativeDemand_rand,...
-%     netCumulativeDemand_sched);
-% 
-% % transform cumulative demand into per-launch demand
-% sparesDemand = diff([zeros(size(netCumulativeDemand,1),1),...
-%     netCumulativeDemand],1,2);
-% 
-% % Side calculation: calculate spares for scheduled replacement of EVA
-% % batteries
-% lifetime = 0.1230769231*365; % life limit based on 32 eva limit at 5 evas/wk
-% numBatt = 2; % number in system
-% cumulativeEVAbatt = zeros(1,nMissions);
-% for j = 1:nMissions
-%     cumulativeEVAbatt(j) = numBatt*floor(duration*j/lifetime);
-% end
-% 
-% netCumulativeEVAbatt = cumulativeEVAbatt;
-% for j = 1:nMissions-1
-%     netCumulativeEVAbatt = netCumulativeEVAbatt + ...
-%         [zeros(1,j), cumulativeEVAbatt(1:nMissions-j)];
-% end
-% sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
-% 
-% % save outputs
-% save('BPS_25crews/CumulativeDemandData.mat','sparesDemand',...
-%     'sparesDemand_EVAbatt','netCumulativeDemand',...
-%     'netCumulativeDemand_rand','netCumulativeDemand_sched')
-% 
-% % write the results to a .csv file
-% csvwrite('BPS_25crews/netCumulativeDemand.csv',netCumulativeDemand);
-% csvwrite('BPS_25crews/SparesDemand.csv',sparesDemand);
-% csvwrite('BPS_25crews/SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
+
+% save the results so we don't have to do this again
+save('BPS_MTBFx2/PMFData.mat','componentPMFs','overallProbability',...
+    'thresholdProbability','nComponents','cutoff','dt','duration',...
+    'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
+
+%% Convolve results
+% The PMFs generated above give the cumulative probabilistic demand for a
+% single crew at each mission. To determine overall cumulative demand,
+% convolve the probabilistic demand for each crew at each mission and use a
+% probability threshold to select values. To go from cumulative demand to
+% per-mission, simply take the discrete difference.
+
+% load previous data
+load BPS_MTBFx2/PMFdata.mat
+
+% preallocate the cell array indicating the net cumulative demand for each
+% component at each mission. Some cells of this will be overwritten as
+% needed.
+netCumulativeDemandPMFs = componentPMFs;
+netCumulativeDemand_rand = zeros(size(componentPMFs));
+
+% note that the cumulative demand for the first mission is the same as the
+% demand for one crew, since there is only one crew present. At each
+% subsequent mission, need to convolve in the 2-mission demand for 1 crew
+% and the 1-mission demand for 1 crew, and so on.
+% Note that this operation is not necessary for the PDISRU systems, since
+% they are refurbished by each crew; only one is operational at all times
+
+for j = 2:nMissions
+    for k = 1:PDISRUstart-1
+        netCumulativeDemandPMFs{k,j} = conv(...
+            netCumulativeDemandPMFs{k,j-1},componentPMFs{k,j});
+    end
+end
+
+% use the overall probability threshold to determine the number of spares
+% that must be manifested (this is cumulative, for all crews)
+for j = 1:nMissions
+    for k = 1:size(netCumulativeDemandPMFs,1)
+        thisCDF = cumsum(netCumulativeDemandPMFs{k,j});
+        netCumulativeDemand_rand(k,j) = ...
+            find(thisCDF>=thresholdProbability,1)-1;
+    end
+end
+
+% check the required spares for scheduled replacement. If the scheduled
+% repairs is greater than the random repairs, use that number instead.
+% scheduled is the cumulative number of spares required for scheduled for
+% one crew.
+scheduled = zeros(size(netCumulativeDemand_rand));
+for j = 1:nMissions
+    thisScheduled = duration*j./componentData(:,3);
+    % replace inf with 0 - this indicates that the life limit is 0, or not
+    % given
+    thisScheduled(isinf(thisScheduled)) = 0;
+    % multiply by the number of that element in the system and round down
+    scheduled(:,j) = componentData(:,4).*floor(thisScheduled);
+end
+
+% account for the fact that there are four instances of the CCAA
+scheduled(CCAAstart:CCAAend,:) = 4.*scheduled(CCAAstart:CCAAend,:);
+
+% using scheduled, generate the matrix of scheduled spares required given
+% that a new crew arrives every 26 months.
+netCumulativeDemand_sched = scheduled;
+for j = 1:nMissions-1
+    netCumulativeDemand_sched = netCumulativeDemand_sched + ...
+        [zeros(size(scheduled,1),j), scheduled(:,1:size(scheduled,2)-j)];
+end
+
+% For demand prediction, take the maximum from either random failures or
+% scheduled repair
+netCumulativeDemand = max(netCumulativeDemand_rand,...
+    netCumulativeDemand_sched);
+
+% transform cumulative demand into per-launch demand
+sparesDemand = diff([zeros(size(netCumulativeDemand,1),1),...
+    netCumulativeDemand],1,2);
+
+% Side calculation: calculate spares for scheduled replacement of EVA
+% batteries
+lifetime = 0.1230769231*365; % life limit based on 32 eva limit at 5 evas/wk
+numBatt = 2; % number in system
+cumulativeEVAbatt = zeros(1,nMissions);
+for j = 1:nMissions
+    cumulativeEVAbatt(j) = numBatt*floor(duration*j/lifetime);
+end
+
+netCumulativeEVAbatt = cumulativeEVAbatt;
+for j = 1:nMissions-1
+    netCumulativeEVAbatt = netCumulativeEVAbatt + ...
+        [zeros(1,j), cumulativeEVAbatt(1:nMissions-j)];
+end
+sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
+
+% save outputs
+save('BPS_MTBFx2/CumulativeDemandData.mat','sparesDemand',...
+    'sparesDemand_EVAbatt','netCumulativeDemand',...
+    'netCumulativeDemand_rand','netCumulativeDemand_sched')
+
+% write the results to a .csv file
+csvwrite('BPS_MTBFx2/netCumulativeDemand.csv',netCumulativeDemand);
+csvwrite('BPS_MTBFx2/SparesDemand.csv',sparesDemand);
+csvwrite('BPS_MTBFx2/SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
