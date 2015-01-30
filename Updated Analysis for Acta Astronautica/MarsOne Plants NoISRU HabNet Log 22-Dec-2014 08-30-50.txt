@@ -1,0 +1,137 @@
+Simulation Run Started: 22-Dec-2014 08:30:50
+
+Simulation Run without ISRU
+
+Insufficient N2 available to perform pressure control action at tick 8293. 
+Living Unit 1 is in a high O2% condition
+
+Insufficient N2 available to perform pressure control action at tick 0. Airlock is in a high O2% condition
+
+Insufficient N2 available to perform pressure control action at tick 9449. Living Unit 2 is in a high O2% condition
+
+Male 2 is currently in a fire risked state on tick: 9779 in module: Life Support Unit 2
+
+Female 1 is currently in a fire risked state on tick: 9780 in module: Living Unit 1
+
+Male 2 is currently in a fire risked state on tick: 9801 in module: Life Support Unit 1
+
+Male 2 is currently in a fire risked state on tick: 9802 in module: Life Support Unit 2
+
+Female 1 is currently in a fire risked state on tick: 9803 in module: Living Unit 1
+Insufficient N2 available to perform pressure control action at tick 9875. Life Support Unit 2 is in a high O2% condition
+Male 1 is currently in a fire risked state on tick: 9933 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 10050 in module: Living Unit 2
+Female 2 is currently in a fire risked state on tick: 10486 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 10580 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 10670 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 10671 in module: Living Unit 2
+Female 1 is currently in a fire risked state on tick: 10673 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 10796 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 10797 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 10797 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 10798 in module: Living Unit 2
+Male 2 is currently in a fire risked state on tick: 10798 in module: Living Unit 2
+Male 2 is currently suffocating on tick: 10885 in module: Living Unit 1
+Male 1 is currently suffocating on tick: 10887 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 10928 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 11000 in module: Living Unit 2
+Male 1 is currently in a fire risked state on tick: 11002 in module: Life Support Unit 2
+Female 1 is currently in a fire risked state on tick: 11035 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 11035 in module: Living Unit 2
+Female 2 is currently in a fire risked state on tick: 11035 in module: Living Unit 2
+Male 1 is currently in a fire risked state on tick: 11036 in module: Cargo Unit 2
+Male 1 is currently in a fire risked state on tick: 11037 in module: Life Support Unit 2
+Male 1 is currently in a fire risked state on tick: 11038 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 11039 in module: Living Unit 1
+Male 2 is currently in a fire risked state on tick: 11063 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 11111 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 11130 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 11130 in module: Living Unit 2
+Female 2 is currently in a fire risked state on tick: 11131 in module: Living Unit 2
+Male 2 is currently in a fire risked state on tick: 11132 in module: Life Support Unit 2
+Male 1 is currently in a fire risked state on tick: 11133 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 11133 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 11169 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 11170 in module: Life Support Unit 1
+
+Male 2 is currently in a fire risked state on tick: 11170 in module: Living Unit 2
+
+Male 1 is currently in a fire risked state on tick: 11171 in module: Living Unit 2
+
+Male 1 is currently in a fire risked state on tick: 11230 in module: Life Support Unit 1
+
+Female 1 is currently in a fire risked state on tick: 11230 in module: Life Support Unit 1
+
+Male 1 is currently in a fire risked state on tick: 11269 in module: Cargo Unit 2
+
+Female 1 is currently in a fire risked state on tick: 11269 in module: Cargo Unit 2
+
+Male 1 is currently in a fire risked state on tick: 11271 in module: Living Unit 1
+
+Male 2 is currently in a fire risked state on tick: 11271 in module: Living Unit 1
+
+Female 2 is currently in a fire risked state on tick: 11271 in module: Living Unit 1
+
+Male 1 is currently in a fire risked state on tick: 11272 in module: Living Unit 1
+
+Female 1 is currently in a fire risked state on tick: 11272 in module: Living Unit 1
+
+Female 2 is currently in a fire risked state on tick: 11289 in module: Living Unit 2
+
+Male 2 is currently in a fire risked state on tick: 11290 in module: Living Unit 2
+
+Female 2 is currently in a fire risked state on tick: 11292 in module: Life Support Unit 2
+
+Male 1 is currently in a fire risked state on tick: 11324 in module: Life Support Unit 2
+
+Female 2 is currently in a fire risked state on tick: 11324 in module: Living Unit 1
+
+Male 1 is currently in a fire risked state on tick: 11439 in module: Life Support Unit 1
+
+Female 1 is currently in a fire risked state on tick: 11440 in module: Cargo Unit 2
+
+Male 1 has died from oxygen flammability on tick: 11441 with a risk value of: 0.009901
+
+Male 1 has been killed
+
+{Undefined function 'whitePotatoShelfWaterLevel' for
+input arguments of type 'double'.
+
+Error in
+<a href="matlab:helpUtils.errorDocCallback('MarsOneFullHabWithEVAandPlantChamberUpdatedNoISRU', '/home/kadmin/Desktop/Mars One Simulation/Mars-One-Feasibility-Study/Updated Analysis for Acta Astronautica/MarsOneFullHabWithEVAandPlantChamberUpdatedNoISRU.m', 767)" style="font-weight:bold">MarsOneFullHabWithEVAandPlantChamberUpdatedNoISRU</a>
+(<a href="matlab: opentoline('/home/kadmin/Desktop/Mars One Simulation/Mars-One-Feasibility-Study/Updated Analysis for Acta Astronautica/MarsOneFullHabWithEVAandPlantChamberUpdatedNoISRU.m',767,0)">line 767</a>)
+        whitePotatoShelfWaterLevel =
+        whitePotatoShelfWaterLevel(1:(i-1));
+} 
+inflatableCCAAoutput = inflatableCCAAoutput(1:(i-1));
+        livingUnitCCAAoutput = livingUnitCCAAoutput(1:(i-1));
+        lifeSupportUnitCCAAoutput = lifeSupportUnitCCAAoutput(1:(i-1));
+        inflatable2CCAAoutput = inflatable2CCAAoutput(1:(i-1));
+        livingUnit2CCAAoutput = livingUnit2CCAAoutput(1:(i-1));
+        lifeSupportUnit2CCAAoutput = lifeSupportUnit2CCAAoutput(1:(i-1));
+        
+        % Pressure Control Assemblies
+        inflatablePCAaction = inflatablePCAaction(:,1:(i-1));
+        inflatable2PCAaction = inflatable2PCAaction(:,1:(i-1));
+        livingUnitPCAaction = livingUnitPCAaction(:,1:(i-1));
+        livingUnit2PCAaction = livingUnit2PCAaction(:,1:(i-1));
+        lifeSupportUnitPCAaction = lifeSupportUnitPCAaction(:,1:(i-1));
+        lifeSupportUnit2PCAaction = lifeSupportUnit2PCAaction(:,1:(i-1));
+        cargoUnitPPRVaction = cargoUnitPPRVaction(:,1:(i-1));
+        cargoUnit2PPRVaction = cargoUnit2PPRVaction(:,1:(i-1));
+        airlockPCAaction = airlockPCAaction(:,1:(i-1));
+        
+        % Run Waste Processing ECLSS Hardware
+        co2removed = co2removed(1:(i-1));
+        crsH2OProduced = crsH2OProduced(1:(i-1));
+        co2accumulatorlevel = co2accumulatorlevel(1:(i-1));
+        
+        t = 1:(length(o2storelevel));
+        
+        toc
+Elapsed time is 53438.453825 seconds.
+        
+        % Record and save command window display
+        disp(['Simulation Run Ended: ',datestr(clock)]);
+Simulation Run Ended: 22-Dec-2014 23:21:28
+        diary off

@@ -1,0 +1,49 @@
+Simulation Run Started: 26-Dec-2014 18:55:52
+Insufficient N2 available to perform pressure control action at tick 1035. Living Unit 1 is in a high O2% condition
+Insufficient N2 available to perform pressure control action at tick 0. Airlock is in a high O2% condition
+Male 1 is currently in a fire risked state on tick: 1040 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 1040 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 1040 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 1041 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 1041 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 1044 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 1044 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 1044 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 1045 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 1047 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 1047 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 1047 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 1048 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 1048 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 1048 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 1049 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 1049 in module: Living Unit 1
+Male 2 is currently in a fire risked state on tick: 1049 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 1049 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 1050 in module: Living Unit 1
+Male 2 is currently in a fire risked state on tick: 1052 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 1052 in module: Living Unit 1
+Male 1 is currently in a fire risked state on tick: 1053 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 1053 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 1054 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 1055 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 1055 in module: Living Unit 1
+Insufficient N2 available to perform pressure control action at tick 1064. Inflatable 1 is in a high O2% condition
+Male 1 is currently in a fire risked state on tick: 1064 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 1064 in module: Living Unit 1
+Male 1 is currently in a fire risked state on tick: 1065 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 1065 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 1066 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 1066 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 1066 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 1066 in module: Cargo Unit 1
+Insufficient N2 available to perform pressure control action at tick 1067. Life Support Unit 1 is in a high O2% condition
+Male 2 is currently in a fire risked state on tick: 1067 in module: Cargo Unit 1
+Female 2 is currently in a fire risked state on tick: 1067 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 1068 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 1069 in module: Living Unit 1
+Male 2 has died from oxygen flammability on tick: 1069 with a risk value of: 0.000999
+Male 2 has been killed
+Female 2 is currently in a fire risked state on tick: 1069 in module: Life Support Unit 1
+Elapsed time is 589.168034 seconds.
+Simulation Run Ended: 26-Dec-2014 19:05:41

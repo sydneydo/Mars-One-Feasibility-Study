@@ -2,6 +2,9 @@ classdef ShelfStagger < handle
     %UNTITLED3 Summary of this class goes here
     %   Class to evenly stagger a given shelf
     
+    % Update 12/22/2014
+    % Updated ShelfImpl2 to ShelfImpl3
+    
     properties
         Shelves
         NumberOfBatches
@@ -29,9 +32,9 @@ classdef ShelfStagger < handle
 %             shelves = repmat(modifiedShelf,1,numberOfBatches);
             
             % Set CropCycleStartTimes
-            shelves = ShelfImpl2.empty(0,numberOfBatches);
+            shelves = ShelfImpl3.empty(0,numberOfBatches);
             for i = 1:numberOfBatches
-                shelves(i) = ShelfImpl2(shelf.Crop,shelf.cropAreaTotal/numberOfBatches,...
+                shelves(i) = ShelfImpl3(shelf.Crop,shelf.cropAreaTotal/numberOfBatches,...
                     shelf.AirConsumerDefinition.ResourceStore,...
                     shelf.GreyWaterConsumerDefinition.ResourceStore,...
                     shelf.PotableWaterConsumerDefinition.ResourceStore,...
@@ -47,6 +50,11 @@ classdef ShelfStagger < handle
         function tick(obj)
             
             for i = 1:length(obj.Shelves)
+%                 if obj.Shelves(i).hasDied == 1
+%                     disp([obj.Shelves(i).Crop.Name, ' crop has been killd'])
+%                     return
+%                 end
+                    
                 obj.Shelves(i).tick;
             end
             

@@ -1,0 +1,97 @@
+Simulation Run Started: 22-Dec-2014 06:16:36
+Insufficient N2 available to perform pressure control action at tick 757. Living Unit 1 is in a high O2% condition
+Male 1 is currently in a fire risked state on tick: 757 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 758 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 758 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 759 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 762 in module: Life Support Unit 1
+Insufficient N2 available to perform pressure control action at tick 0. Airlock is in a high O2% condition
+Female 1 is currently in a fire risked state on tick: 763 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 763 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 765 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 765 in module: Living Unit 1
+Male 1 is currently in a fire risked state on tick: 766 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 766 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 766 in module: Living Unit 1
+Male 1 is currently in a fire risked state on tick: 767 in module: Living Unit 1
+Male 1 is currently in a fire risked state on tick: 776 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 776 in module: Living Unit 1
+Male 2 is currently in a fire risked state on tick: 776 in module: Living Unit 1
+Male 2 is currently in a fire risked state on tick: 777 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 777 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 778 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 779 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 781 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 782 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 784 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 784 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 785 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 787 in module: Life Support Unit 1
+Male 2 is currently in a fire risked state on tick: 787 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 787 in module: Life Support Unit 1
+Insufficient N2 available to perform pressure control action at tick 788. Inflatable 1 is in a high O2% condition
+Female 1 is currently in a fire risked state on tick: 788 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 789 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 789 in module: Living Unit 1
+Male 2 is currently in a fire risked state on tick: 789 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 789 in module: Living Unit 1
+Male 1 is currently in a fire risked state on tick: 790 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 790 in module: Living Unit 1
+Male 2 is currently in a fire risked state on tick: 790 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 790 in module: Life Support Unit 1
+Insufficient N2 available to perform pressure control action at tick 791. Life Support Unit 1 is in a high O2% condition
+Male 1 is currently in a fire risked state on tick: 791 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 791 in module: Living Unit 1
+Male 2 is currently in a fire risked state on tick: 791 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 791 in module: Living Unit 1
+Male 1 is currently in a fire risked state on tick: 792 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 792 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 792 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 792 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 793 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 793 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 793 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 793 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 794 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 794 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 794 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 794 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 795 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 795 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 795 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 795 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 796 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 796 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 796 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 796 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 797 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 797 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 797 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 797 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 798 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 798 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 798 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 798 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 799 in module: Inflatable 1
+Female 1 is currently in a fire risked state on tick: 799 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 799 in module: Inflatable 1
+Female 2 is currently in a fire risked state on tick: 799 in module: Inflatable 1
+Male 1 is currently in a fire risked state on tick: 800 in module: Living Unit 1
+Female 1 is currently in a fire risked state on tick: 800 in module: Inflatable 1
+Male 2 is currently in a fire risked state on tick: 800 in module: Cargo Unit 1
+Female 2 is currently suffocating on tick: 800 in module: Life Support Unit 1
+Female 2 is currently in a fire risked state on tick: 800 in module: Life Support Unit 1
+Male 1 is currently suffocating on tick: 801 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 801 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 801 in module: Cargo Unit 1
+Male 2 is currently in a fire risked state on tick: 801 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 801 in module: Cargo Unit 1
+Male 1 is currently suffocating on tick: 802 in module: Life Support Unit 1
+Male 1 is currently in a fire risked state on tick: 802 in module: Life Support Unit 1
+Female 1 is currently in a fire risked state on tick: 802 in module: Living Unit 1
+Female 1 has died from oxygen flammability on tick: 802 with a risk value of: 0.5
+Female 1 has been killed
+Male 2 is currently in a fire risked state on tick: 802 in module: Living Unit 1
+Female 2 is currently in a fire risked state on tick: 802 in module: Living Unit 1
+Elapsed time is 42.097549 seconds.
+Simulation Run Ended: 22-Dec-2014 06:17:18

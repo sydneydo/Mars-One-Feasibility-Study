@@ -1,0 +1,102 @@
+Simulation Run Started: 25-Dec-2014 11:43:52
+{Operation terminated by user during <a href="matlab:helpUtils.errorDocCallback('StoreImpl/add', 'C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\StoreImpl.m', 0)" style="font-weight:bold">StoreImpl/add</a>
+
+
+In <a href="matlab:helpUtils.errorDocCallback('CrewPersonImpl2/recoverCrew', 'C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\CrewPersonImpl2.m', 557)" style="font-weight:bold">CrewPersonImpl2/recoverCrew</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\CrewPersonImpl2.m',557,0)">line 557</a>)
+            obj.consumedLowOxygenBuffer.add(((obj.CurrentActivity.Location.O2Percentage*obj.CurrentActivity.Location.pressure)>obj.O2LowPartialPressure)*...
+            
+In <a href="matlab:helpUtils.errorDocCallback('CrewPersonImpl2/tick', 'C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\CrewPersonImpl2.m', 177)" style="font-weight:bold">CrewPersonImpl2/tick</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\CrewPersonImpl2.m',177,0)">line 177</a>)
+            recoverCrew(obj);
+
+In <a href="matlab:helpUtils.errorDocCallback('MarsOneBaselineHalfHabUpdated', 'C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\MarsOneBaselineHalfHabUpdated.m', 1033)" style="font-weight:bold">MarsOneBaselineHalfHabUpdated</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\MarsOneBaselineHalfHabUpdated.m',1033,0)">line 1033</a>)
+    astro1.tick;
+} 
+i
+
+i =
+
+   384
+
+figure, plot(inflatableCO2level./inflatableTotalMoles*1E6)
+figure, plot(co2removed)
+min(co2removed)
+
+ans =
+
+     0
+
+obj=mainvccr;
+obj
+
+obj = 
+
+  <a href="matlab:helpPopup ISSVCCRLinearImpl" style="font-weight:bold">ISSVCCRLinearImpl</a> with properties:
+
+            AirConsumerDefinition: [1x1 ResourceUseDefinitionImpl]
+            AirProducerDefinition: [1x1 ResourceUseDefinitionImpl]
+            CO2ProducerDefinition: [1x1 ResourceUseDefinitionImpl]
+          PowerConsumerDefinition: [1x1 ResourceUseDefinitionImpl]
+                            Error: 0
+                    OperatingMode: 'Set Point'
+                         SetPoint: 1500
+       CDRA_Avg_Power_Consumption: 860
+       CDRA_Max_Power_Consumption: 1487
+    CDRA_Nominal_CO2_Removal_Rate: 5.9779
+        CDRA_Max_CO2_Removal_Rate: 7.5910
+        CDRA_Nominal_Airflow_Rate: 979.1461
+            CDRA_Max_Airflow_Rate: 1.3296e+03
+
+(obj.SetPoint*1E-6*obj.AirConsumerDefinition.ResourceStore.totalMoles-...
+                            obj.AirConsumerDefinition.ResourceStore.CO2Store.currentLevel)/(obj.SetPoint*1E-6-1)
+
+ans =
+
+     0
+
+LifeSupportUnit1
+
+LifeSupportUnit1 = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Life Support Unit 1'
+                          id: 0
+                   tickcount: 384
+                      volume: 25000
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0.0021
+              lightIntensity: 1.9197e-25
+                    pressure: 67.3695
+            RelativeHumidity: 0.3024
+              CondensedVapor: 0
+                O2Percentage: 0.2740
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7110
+             VaporPercentage: 0.0126
+             OtherPercentage: 8.3509e-04
+                  totalMoles: 684.0406
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: [1x1 StoreImpl]
+              GreyWaterStore: [1x1 StoreImpl]
+             DirtyWaterStore: [1x1 StoreImpl]
+               DryWasteStore: [1x1 StoreImpl]
+                   FoodStore: [1x2 FoodStoreImpl]
+
+LifeSupportUnit1.COPercentage*1E6
+{No appropriate method, property, or field COPercentage for class
+SimEnvironmentImpl.
+} 
+LifeSupportUnit1.CO2Percentage*1E6
+
+ans =
+
+   1.5000e+03
+
+figure, plot(lifeSupportUnitCO2level./lifeSupportUnitTotalMoles*1E6)
+diary off

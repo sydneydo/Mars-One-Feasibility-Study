@@ -883,6 +883,8 @@ subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*inflatable
 subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitCO2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitN2level(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitVaporlevel(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),t,lifeSupportUnitOtherlevel(t)./lifeSupportUnitTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
 subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
 
+T = t/24;
+
 t = 1:(length(o2storelevel));
 
 % Airlock ppCO2
@@ -902,6 +904,11 @@ subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnit
 subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
 subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
 
+figure, 
+subplot(2,2,1), plot(T,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (days)'), ylabel('O_2 Partial Pressure')
+subplot(2,2,2), plot(T,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (days)'), ylabel('O_2 Partial Pressure')
+subplot(2,2,3), plot(T,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (days)'), ylabel('O_2 Partial Pressure')
+subplot(2,2,4), plot(T,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (days)'), ylabel('O_2 Partial Pressure')
 
 % CO2 molar fraction
 figure, 

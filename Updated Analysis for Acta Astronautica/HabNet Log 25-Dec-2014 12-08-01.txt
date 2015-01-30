@@ -1,0 +1,10 @@
+Simulation Run Started: 25-Dec-2014 12:08:01
+Wheat crop has been killed at tick 453 due to insufficient [CO2]
+Wheat crop has been killed at tick 453 due to insufficient [CO2]
+Wheat crop has been killed at tick 453 due to insufficient [CO2]
+Wheat crop has been killed at tick 453 due to insufficient [CO2]
+Wheat crop has been killed at tick 453 due to insufficient [CO2]
+Wheat crop has been killed at tick 453 due to insufficient [CO2]
+Wheat crop has been killed at tick 453 due to insufficient [CO2]
+Elapsed time is 149.266166 seconds.
+Simulation Run Ended: 25-Dec-2014 12:10:30

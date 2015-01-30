@@ -1,0 +1,196 @@
+Simulation Run Started: 22-Dec-2014 05:51:48
+Female 2 is currently experiencing CO2 poisoning on tick: 69 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 81 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 90 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 92 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 95 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 95 in module: Cargo Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 105 in module: Life Support Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 105 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 106 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 106 in module: Life Support Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 106 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 109 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 110 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 112 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 113 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 115 in module: Living Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 115 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 115 in module: Cargo Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 116 in module: Living Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 116 in module: Cargo Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 116 in module: Cargo Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 117 in module: Cargo Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 117 in module: Life Support Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 118 in module: Cargo Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 118 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 119 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 128 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 128 in module: Cargo Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 128 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 129 in module: Cargo Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 129 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 130 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 130 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 130 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 130 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 131 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 131 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 132 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 132 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 133 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 133 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 134 in module: Cargo Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 134 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 135 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 135 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 136 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 136 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 137 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 137 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 138 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 138 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 139 in module: Life Support Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 139 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 139 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 139 in module: Cargo Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 140 in module: Living Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 140 in module: Cargo Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 140 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 140 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 141 in module: Life Support Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 141 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 141 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 141 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 142 in module: Living Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 142 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 142 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 142 in module: Cargo Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 143 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 143 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 143 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 143 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 144 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 144 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 144 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 144 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 145 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 145 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 145 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 145 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 146 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 146 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 146 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 146 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 147 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 147 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 147 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 147 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 148 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 148 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 148 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 148 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 149 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 149 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 149 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 149 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 150 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 150 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 150 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 150 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 151 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 151 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 151 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 151 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 152 in module: Living Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 152 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 152 in module: Life Support Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 152 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 153 in module: Living Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 153 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 153 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 153 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 154 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 154 in module: Cargo Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 154 in module: Cargo Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 154 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 155 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 155 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 156 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 156 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 157 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 157 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 158 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 158 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 159 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 159 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 160 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 160 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 161 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 161 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 162 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 162 in module: Cargo Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 163 in module: Cargo Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 163 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 163 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 163 in module: Life Support Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 164 in module: Life Support Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 164 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 164 in module: Life Support Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 164 in module: Living Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 165 in module: Cargo Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 165 in module: Living Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 165 in module: Life Support Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 165 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 166 in module: Cargo Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 166 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 166 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 166 in module: Cargo Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 167 in module: Living Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 167 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 167 in module: Living Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 167 in module: Cargo Unit 1
+Male 1 is currently experiencing CO2 poisoning on tick: 168 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 168 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 168 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 168 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 169 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 169 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 169 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 169 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 170 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 170 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 170 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 170 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 171 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 171 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 171 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 171 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 172 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 172 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 172 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 172 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 173 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 173 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 173 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 173 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 174 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 174 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 174 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 174 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 175 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 175 in module: Inflatable 1
+Male 2 is currently experiencing CO2 poisoning on tick: 175 in module: Inflatable 1
+Female 2 is currently experiencing CO2 poisoning on tick: 175 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 176 in module: Living Unit 1
+Female 1 is currently experiencing CO2 poisoning on tick: 176 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 176 in module: Life Support Unit 1
+Female 2 is currently experiencing CO2 poisoning on tick: 176 in module: Inflatable 1
+Male 1 is currently experiencing CO2 poisoning on tick: 177 in module: Inflatable 1
+Female 1 is currently experiencing CO2 poisoning on tick: 177 in module: Life Support Unit 1
+Male 2 is currently experiencing CO2 poisoning on tick: 177 in module: Life Support Unit 1
+Male 2 has died from CO2 poisoning on tick: 177 with a risk value of: 0.23622
+Male 2 has been killed
+Female 2 is currently experiencing CO2 poisoning on tick: 177 in module: Inflatable 1
+Elapsed time is 14.498451 seconds.
+Simulation Run Ended: 22-Dec-2014 05:52:02

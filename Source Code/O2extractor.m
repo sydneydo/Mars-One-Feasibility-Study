@@ -73,7 +73,7 @@ classdef O2extractor < handle
                 case 'Molar Fraction'
                     % we determine the target ppO2 based on molar fraction
                     % and take away the number of moles corresponding to
-                    % the other side of the equivelant pressure bounding
+                    % the other side of the equivalant pressure bounding
                     % box
                     currentTargetppO2 = obj.TargetO2MolarFraction*obj.Environment.totalMoles*obj.idealGasConstant*...
                         (obj.Environment.temperature+273.15)/obj.Environment.volume;

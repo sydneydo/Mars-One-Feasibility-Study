@@ -51,7 +51,7 @@ f2 = growthrate/9;
 % [x3,fval3,exitflag3,output3] = intlinprog(f,intcon,A,b,[],[],zeros(9,1),[]);
 
 %% non-linear cost function
-f3 = @(x) 2.3*std(x)+sum(x);
+f3 = @(x) 2.75/3.75*std(x)+1/3.75*sum(x);
 
 [x4,fval4,exitflag4,output4] = fmincon(f3,x2,A,b,[],[],zeros(9,1),[]);
 

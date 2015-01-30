@@ -1,0 +1,5 @@
+Simulation Run Started: 22-Dec-2014 08:27:48
+Simulation Run with ISRU
+Elapsed time is 18635.162532 seconds.
+if system_dependent('IsDebugMode')==1, dbquit; end
+diary off

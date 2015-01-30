@@ -53,7 +53,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 2000;%19000;
+missionDurationInHours = 19000;%19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -276,6 +276,8 @@ BiomassStore = BiomassStoreImpl(100000);
 % Set more crop type for FoodMatter somewhere later on
 
 %% Initialize crop shelves
+
+targetCO2conc = 1200*1E-6;
 
 CropWaterStore = StoreImpl('Grey Crop H2O','Material',100000,100000);   % Initialize a 9200L water buffer
 
@@ -613,10 +615,29 @@ for i = 1:simtime
     
     % Tick Crop Shelves
     LettuceShelf.tick;
+    % Inject CO2 for crops
+%     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
+%     Inflatable1.CO2Store.add(CO2toInject);
+    
     PeanutShelf.tick;
+    % Inject CO2 for crops
+%     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
+%     Inflatable1.CO2Store.add(CO2toInject);
+    
     SoybeanShelf.tick;
+    % Inject CO2 for crops
+%     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
+%     Inflatable1.CO2Store.add(CO2toInject);
+    
     SweetPotatoShelf.tick;
+    % Inject CO2 for crops
+%     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
+%     Inflatable1.CO2Store.add(CO2toInject);
+    
     WheatShelf.tick;
+    % Inject CO2 for crops
+%     CO2toInject = (targetCO2conc*Inflatable1.totalMoles-Inflatable1.CO2Store.currentLevel)/(1-targetCO2conc);
+%     Inflatable1.CO2Store.add(CO2toInject);
     
     FoodProcessor.tick;
     carriedfoodstorelevel(i) = CarriedFoodStore.currentLevel;
@@ -653,6 +674,14 @@ subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles,t,inflatableCO
 subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles,t,livingUnitCO2level./livingUnitTotalMoles,t,livingUnitN2level./livingUnitTotalMoles,t,livingUnitVaporlevel./livingUnitTotalMoles,t,livingUnitOtherlevel./livingUnitTotalMoles,'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
 subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles,t,lifeSupportUnitCO2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitN2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitVaporlevel./lifeSupportUnitTotalMoles,t,lifeSupportUnitOtherlevel./lifeSupportUnitTotalMoles,'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
 subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+
+% Atmospheric molar amounts
+figure, 
+subplot(2,2,1), plot(t,inflatableO2level(t),t,inflatableCO2level,t,inflatableN2level,t,inflatableVaporlevel,t,inflatableOtherlevel,'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Quantity')
+subplot(2,2,2), plot(t,livingUnitO2level(t),t,livingUnitCO2level,t,livingUnitN2level,t,livingUnitVaporlevel,t,livingUnitOtherlevel,'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Quantity')
+subplot(2,2,3), plot(t,lifeSupportUnitO2level(t),t,lifeSupportUnitCO2level,t,lifeSupportUnitN2level,t,lifeSupportUnitVaporlevel,t,lifeSupportUnitOtherlevel./lifeSupportUnitTotalMoles,'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Quantity')
+subplot(2,2,4), plot(t,cargoUnitO2level(t),t,cargoUnitCO2level(t),t,cargoUnitN2level(t),t,cargoUnitVaporlevel(t),t,cargoUnitOtherlevel(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Quantity')
+
 
 t = 1:(length(o2storelevel));
 

@@ -1,0 +1,10 @@
+Simulation Run Started: 22-Dec-2014 06:52:50
+{Operation terminated by user during <a href="matlab:helpUtils.errorDocCallback('waitbar', '/usr/local/MATLAB/toolbox/matlab/uitools/waitbar.m', 111)" style="font-weight:bold">waitbar</a> (<a href="matlab: opentoline('/usr/local/MATLAB/toolbox/matlab/uitools/waitbar.m',111,0)">line 111</a>)
+
+
+In <a href="matlab:helpUtils.errorDocCallback('MarsOneBaselineHalfHabUpdated', '/home/kadmin/Desktop/Mars One Simulation/Mars-One-Feasibility-Study/Updated Analysis for Acta Astronautica/MarsOneBaselineHalfHabUpdated.m', 1118)" style="font-weight:bold">MarsOneBaselineHalfHabUpdated</a> (<a href="matlab: opentoline('/home/kadmin/Desktop/Mars One Simulation/Mars-One-Feasibility-Study/Updated Analysis for Acta Astronautica/MarsOneBaselineHalfHabUpdated.m',1118,0)">line 1118</a>)
+        waitbar(i/simtime,h,['Current tick: ',num2str(i),' | Time Elapsed: ',num2str(round(toc)),'sec']);
+} 
+close(h)
+MarsOneBaselineHalfHabUpdated
+Elapsed time is 6.854770 seconds.

@@ -34,7 +34,7 @@ classdef ShelfImpl2 < handle
         BiomassProducerDefinition
         
         % Plant Properties
-        Age = 0;        % Age of current crop group
+        Age = 0;        % Age of current crop group (in hours)
         hasDied = 0;
         canopyClosed = 0; 
         AveragePPF = 0;
@@ -71,7 +71,8 @@ classdef ShelfImpl2 < handle
         CanopyClosurePPFValues
         CanopyClosureCO2Values
         ProductionRate = 1;
-        MolesOfCO2Inhaled = 0;
+        MolesOfCO2Inhaled
+        MolesOfO2Exhaled
         CropGrowthRate          % for validation testing with data in "Crop Models for Varying Environmental Conditions"
     end
     
@@ -278,10 +279,9 @@ classdef ShelfImpl2 < handle
                     obj.TimeTillCanopyClosure) / 24;      % This gives a fraction of the PPFFractionAbsorbedMax (0.93) value, scaled by DaDt
                 
                 % BVAD Equation 4.2-1 indicates that this should be
-                % obj.PPFFractionAbsorbed = obj.PPFFractionAbsorbed + ...
-                % 0.93*(daysOfGrowth/obj.TimeTillCanopyClosure)^obj.Crop.N
-                % /...
-                % 24;
+%                 obj.PPFFractionAbsorbed = obj.PPFFractionAbsorbed + ...
+%                     0.93*(daysOfGrowth/obj.TimeTillCanopyClosure)^obj.Crop.N/...
+%                     24;
 
 
             end
@@ -312,7 +312,7 @@ classdef ShelfImpl2 < handle
             
             % calculateDailyCarbonGain (in g/m^2/day)
             dailyCarbonGain = 0.0036*obj.Crop.Photoperiod*obj.carbonUseEfficiency24*...
-                obj.PPFFractionAbsorbed*obj.CQY*obj.AveragePPF;                 % amount of carbon absorbed daily = function of photoperiod, carbon use efficieny, CQY (
+                obj.PPFFractionAbsorbed*obj.CQY*obj.AveragePPF;                 % amount of carbon absorbed daily = function of photoperiod, carbon use efficieny, CQY (moles of Carbon/m^2/day)
             % From Monje & Bugbee - "Adaptation to high CO2 concentration
             % in an optimal environment, radiation capture, canopy quantum
             % yield, and carbon use efficiency":
@@ -321,7 +321,7 @@ classdef ShelfImpl2 < handle
             % the absorbed radiation. CQY measures the photo-chemical
             % conversion efficiency of absorbed radiation into fixed carbon
            
-            obj.DailyCarbonGain = dailyCarbonGain;
+            obj.DailyCarbonGain = dailyCarbonGain;      % (moles of Carbon/m^2/day)
             
             % Add daily carbon gain at the end of every 24hour period
             %             if mod(obj.Age,24) == 0
@@ -415,7 +415,7 @@ classdef ShelfImpl2 < handle
             if waterFraction < 1
                 molesOfCO2ToInhale = waterFraction*dailyCarbonGain*obj.cropAreaUsed/24;
             else
-                molesOfCO2ToInhale = dailyCarbonGain*obj.cropAreaUsed/24;
+                molesOfCO2ToInhale = dailyCarbonGain*obj.cropAreaUsed/24;       % [moles/hour]
             end
             
             % Take CO2 from Air Consumer store
@@ -432,7 +432,7 @@ classdef ShelfImpl2 < handle
             if waterFraction < 1
                 dailyO2MolesProduced = waterFraction*obj.Crop.OPF*dailyCarbonGain*obj.cropAreaUsed;
             else
-                dailyO2MolesProduced = obj.Crop.OPF*dailyCarbonGain*obj.cropAreaUsed;
+                dailyO2MolesProduced = obj.Crop.OPF*dailyCarbonGain*obj.cropAreaUsed;       % [moles/day]
             end
             % OPF is the oxygen production fraction in moles of O2 produced
             % per moles of CO2 inhaled (reverse of respiration quotient)
@@ -440,11 +440,12 @@ classdef ShelfImpl2 < handle
             % Update O2 grams produced (note molecular weight of O2 assumed
             % to be 32grams/mol. We divide by 24 to get the hourly rate of
             % O2 production)
-            obj.totalO2GramsProduced = obj.totalO2GramsProduced + dailyO2MolesProduced*32/24;
+            obj.totalO2GramsProduced = obj.totalO2GramsProduced + dailyO2MolesProduced*32/24;   % [cumulative grams/hour]
                 
             % Add O2 produced to Air Producer Store (note we divide by 24
             % to get the hourly rate)
-            obj.AirProducerDefinition.ResourceStore.O2Store.add(dailyO2MolesProduced/24);
+            obj.MolesOfO2Exhaled = dailyO2MolesProduced/24;   % [moles/hour]
+            obj.AirProducerDefinition.ResourceStore.O2Store.add(dailyO2MolesProduced/24);   % [moles/hour]
             
             %% DETERMINE WATER VAPOR PRODUCED
             if waterFraction < 1
@@ -531,7 +532,7 @@ classdef ShelfImpl2 < handle
                 tA = 0;
             end
             
-            timeTillCanopyClosure = round(tA);  % Final time until canopy closure is rounded (according to BioSim PlantImpl code)
+            timeTillCanopyClosure = round(tA);  % Final time until canopy closure is rounded (according to BioSim PlantImpl code) - in days
             
         end
         
@@ -654,7 +655,7 @@ classdef ShelfImpl2 < handle
 %             saturatedMoistureVaporPressure = 0.611*exp(17.4*environmentalTemperature/(environmentalTemperature+239));   %239 should be 273.15 (conversion to kelvin - according to the equation for relative humidity used in the SimEnvironment code)
             
             % Below: INCORRECT version currently implemented within BioSim - it should be exp, not abs - we implement this here to ensure that the same output as that of BioSim
-%             saturatedMoistureVaporPressure = 0.611*abs(17.4*environmentalTemperature/(environmentalTemperature+239));   %239 should be 273.15 (conversion to kelvin - according to the equation for relative humidity used in the SimEnvironment code)
+%             saturatedMoistureVaporPressure = 0.611*abs(17.4*environmentalTemperature/(environmentalTemperature+239));  
             saturatedMoistureVaporPressure = 0.611*exp(17.4*environmentalTemperature/(environmentalTemperature+239));
             actualMoistureVaporPressure = obj.AirProducerDefinition.ResourceStore.VaporPercentage...
                 *obj.AirProducerDefinition.ResourceStore.pressure;      % According to BVAD - this should equal: saturatedMoistureVaporPressure * RelativeHumidity (RH is the mean atmospheric relative humidity as a fraction bounded between 0 and 1, inclusive.)

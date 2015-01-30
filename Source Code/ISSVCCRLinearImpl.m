@@ -34,6 +34,10 @@ classdef ISSVCCRLinearImpl < handle
     %   off and the OGA goes to standby, stopping H2 production and 
     %   signaling the Sabatier to transition into standby as well
     
+    %   Modifications on 12/25/2014
+    %   - Added a "Setpoint" mode - to control CO2 concentration within the
+    %   atmosphere to a predefined level (required for crops)
+    
     properties
         % Consumer/Producer Definitions
         AirConsumerDefinition
@@ -44,6 +48,8 @@ classdef ISSVCCRLinearImpl < handle
     end
     
     properties (SetAccess = private)
+        OperatingMode
+        SetPoint        % measure in ppm of CO2
         CDRA_Avg_Power_Consumption% = 860
         CDRA_Max_Power_Consumption
         CDRA_Nominal_CO2_Removal_Rate% = 0.58*453.592/(12.011+2*15.999)  % mol/hr (converted from 0.58lb CO2/hr)
@@ -55,7 +61,7 @@ classdef ISSVCCRLinearImpl < handle
     
     methods
         %% Constructor
-        function obj = ISSVCCRLinearImpl(AirInput,AirOutput,CO2Output,PowerSource)
+        function obj = ISSVCCRLinearImpl(AirInput,AirOutput,CO2Output,PowerSource,setpoint)
             
             % Error Checking
             if nargin > 0
@@ -90,7 +96,15 @@ classdef ISSVCCRLinearImpl < handle
                 obj.CDRA_Max_CO2_Removal_Rate = maxCDRAco2RemovalRate;
                 
                 obj.CO2ProducerDefinition = ResourceUseDefinitionImpl(CO2Output,nominalCDRAco2RemovalRate,maxCDRAco2RemovalRate);
-            
+                
+                % Define Operating Mode
+                if nargin >= 5
+                    obj.OperatingMode = 'Set Point';
+                    obj.SetPoint = setpoint;
+                else
+                    obj.OperatingMode = 'Nominal';
+                end                   
+                
             end
         end
         
@@ -100,28 +114,70 @@ classdef ISSVCCRLinearImpl < handle
             % Only run if there is no system error
             if obj.Error == 0
                 
-                % The code written below follows the VCCRLinearImpl.tick method
-                currentPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(obj.PowerConsumerDefinition.MaxFlowRate,obj.PowerConsumerDefinition);     % Take power
-                
-                % Error source
-                if currentPowerConsumed == 0
-                    disp('VCCR has switched off due to zero power draw')
-                    obj.Error = 1;
-                    molesOfCO2Adsorbed = 0;
-                    return
+                switch obj.OperatingMode
+                    
+                    case 'Nominal'
+                        
+                        % The code written below follows the VCCRLinearImpl.tick method
+                        currentPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(obj.PowerConsumerDefinition.MaxFlowRate,obj.PowerConsumerDefinition);     % Take power
+                        
+                        % Error source
+                        if currentPowerConsumed == 0
+                            disp('VCCR has switched off due to zero power draw')
+                            obj.Error = 1;
+                            molesOfCO2Adsorbed = 0;
+                            return
+                        end
+                        
+                        %gatherCO2(obj);
+                        
+                        % Size of air input sample is tuned to be a
+                        % linear equation between the nominal and maximum power
+                        % consumptions and air flow rates
+                        molesAirNeeded = (obj.CDRA_Max_Airflow_Rate-obj.CDRA_Nominal_Airflow_Rate)/...
+                            (obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*...
+                            (currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_Airflow_Rate;
+                        
+                        % Similarly CO2 removal rate is tuned to power input (maps to
+                        % more power sent to heaters for quicker desorption --> leads to
+                        % fast adsorption/desorption cycles
+                        co2RemovalRate = (obj.CDRA_Max_CO2_Removal_Rate-obj.CDRA_Nominal_CO2_Removal_Rate)/...
+                            (obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*...
+                            (currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_CO2_Removal_Rate;  % in mol/hr
+                        
+                    case 'Set Point'
+                        
+                        % CO2 removal rate based on reaching set point
+                        co2RemovalRate = max([(obj.SetPoint*1E-6*obj.AirConsumerDefinition.ResourceStore.totalMoles-...
+                            obj.AirConsumerDefinition.ResourceStore.CO2Store.currentLevel)/(obj.SetPoint*1E-6-1),0]);
+                        
+                        % Determine corresponding airflow required
+                        molesAirNeeded = co2RemovalRate/obj.AirConsumerDefinition.ResourceStore.CO2Percentage;
+                        
+                        % Calculate corresponding power to remove
+                        % corresponding airflow
+                        powerRequired = (obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)/...
+                            (obj.CDRA_Max_Airflow_Rate-obj.CDRA_Nominal_Airflow_Rate)*...
+                            (molesAirNeeded-obj.CDRA_Nominal_Airflow_Rate)+obj.CDRA_Avg_Power_Consumption;
+                        
+                        % Take power according to CO2 removal rate
+                        currentPowerConsumed = obj.PowerConsumerDefinition.ResourceStore.take(min([obj.PowerConsumerDefinition.MaxFlowRate,powerRequired]));     % Take power
+                        
+                        % Rescale co2RemovalRate if insufficient power
+                        % available
+                        if currentPowerConsumed < powerRequired
+                            disp('Insufficient power to reduce [CO2] to desired level. Removing as much CO2 as power level allows')
+                            co2RemovalRate = (obj.CDRA_Max_CO2_Removal_Rate-obj.CDRA_Nominal_CO2_Removal_Rate)/...
+                                (obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*...
+                                (currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_CO2_Removal_Rate;  % in mol/hr
+                            
+                            molesAirNeeded = (obj.CDRA_Max_Airflow_Rate-obj.CDRA_Nominal_Airflow_Rate)/...
+                                (obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*...
+                                (currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_Airflow_Rate;
+                        end
+                        
+                        
                 end
-                
-                %gatherCO2(obj);
-                
-                % Size of air input sample is tuned to be a
-                % linear equation between the nominal and maximum power
-                % consumptions and air flow rates
-                molesAirNeeded = (obj.CDRA_Max_Airflow_Rate-obj.CDRA_Nominal_Airflow_Rate)/(obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*(currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_Airflow_Rate;
-                
-                % Similarly CO2 removal rate is tuned to power input (maps to
-                % more power sent to heaters for quicker desorption --> leads to
-                % fast adsorption/desorption cycles
-                co2RemovalRate = (obj.CDRA_Max_CO2_Removal_Rate-obj.CDRA_Nominal_CO2_Removal_Rate)/(obj.CDRA_Max_Power_Consumption-obj.CDRA_Avg_Power_Consumption)*(currentPowerConsumed-obj.CDRA_Avg_Power_Consumption)+obj.CDRA_Nominal_CO2_Removal_Rate;  % in mol/hr
                 
                 % Define molar percentages internally to avoid errors from
                 % auto updating after taking constituents

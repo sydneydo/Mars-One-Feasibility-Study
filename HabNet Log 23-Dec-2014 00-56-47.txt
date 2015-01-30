@@ -1,0 +1,8 @@
+Simulation Run Started: 23-Dec-2014 00:56:47
+White Potato crop has been killed at tick 82 due to insufficient [CO2]
+Peanut crop has been killed at tick 82 due to insufficient [CO2]
+Soybean crop has been killed at tick 82 due to insufficient [CO2]
+Sweet Potato crop has been killed at tick 82 due to insufficient [CO2]
+Wheat crop has been killed at tick 82 due to insufficient [CO2]
+Elapsed time is 32.460736 seconds.
+Simulation Run Ended: 23-Dec-2014 00:57:19
