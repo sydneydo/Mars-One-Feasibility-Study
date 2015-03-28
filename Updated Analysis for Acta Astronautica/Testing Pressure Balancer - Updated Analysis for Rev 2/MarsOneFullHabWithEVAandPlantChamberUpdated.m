@@ -1,11 +1,7 @@
 %%  Mars One Default Simulation Case
 %   By: Sydney Do (sydneydo@mit.edu)
 %   Date Created: 6/28/2014
-%   Last Updated: 3/27/2015
-%
-%   UPDATE 3/26/2015
-%   Introduced PressureBalancer object to ensure that atmospheric pressures
-%   across all habitats are consistent
+%   Last Updated: 12/21/2014
 %
 %   UPDATE 12/21/2014
 %   - Corrected plant model code (ShelfImpl3.m - updated 12/20/2014) incorporated
@@ -20,7 +16,6 @@
 %   This simulation represents the 26month mission of the first Mars One
 %   Crew. Here, we assume that the potable water and oxygen stores have
 %   already been filled by the ISRU system prior to the crew arriving
-%   Here, HALF the Mars One Hab is modeled.
 %   
 %%  Simulation Notes
 %   Time Horizon: 26 months (time between resupply) (approx. 19000 hours)
@@ -63,7 +58,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 3000;%19000;
+missionDurationInHours = 19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -74,15 +69,15 @@ TargetO2MolarFraction = 0.265;
 % TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
 
 % ISRU Production Rates
-% isruAddedWater = 0.02;      % Liters/hour
-% isruAddedCropWater = 1.11;  % Liter/hour
-% isruAddedO2 = 0;            % moles/hour
-% isruAddedN2 = 1.7;          % moles/hour
-
-isruAddedWater = 0;      % Liters/hour
-isruAddedCropWater = 0;  % Liter/hour
+isruAddedWater = 0.02;      % Liters/hour
+isruAddedCropWater = 1.11;  % Liter/hour
 isruAddedO2 = 0;            % moles/hour
-isruAddedN2 = 0;          % moles/hour
+isruAddedN2 = 1.7;          % moles/hour
+
+% isruAddedWater = 0;      % Liters/hour
+% isruAddedCropWater = 0;  % Liter/hour
+% isruAddedO2 = 0;            % moles/hour
+% isruAddedN2 = 0;          % moles/hour
 
 % EMU
 EMUco2RemovalTechnology = 'RCA';  % options are RCA or METOX
@@ -125,22 +120,22 @@ H2Store = StoreImpl('H2 Store','Material',10000,0);     % H2 store for output of
 
 % From: "Analyses of the Integration of Carbon Dioxide Removal Assembly, Compressor, Accumulator 
 % and Sabatier Carbon Dioxide Reduction Assembly" SAE 2004-01-2496
-% "CO2 accumulator – The accumulator volume was set at 0.7 ft3, based on an assessment of available 
+% "CO2 accumulator ï¿½ The accumulator volume was set at 0.7 ft3, based on an assessment of available 
 % space within the OGA rack where the CRA will reside. Mass balance of CO2 pumped in from the 
 % compressor and CO2 fed to the Sabatier CO2 reduction system is used to calculate the CO2 pressure. 
-% Currently the operating pressure has been set to 20 – 130 psia."
+% Currently the operating pressure has been set to 20 ï¿½ 130 psia."
 
 % From SAE 2004-01-2496, on CDRA bed heaters - informs temp of CO2 sent to
 % accumulator
 % "During the first 10 min of the heat cycle, ullage air is pumped out back to the cabin. After this time, the bed is
-% heated to approximately 250 °F and is exposed to space vacuum for desorption of the bed."
+% heated to approximately 250 ï¿½F and is exposed to space vacuum for desorption of the bed."
 % ...
-% "The heaters were OFF during the “night time”, or when the desorb bed temperature reached its set point
-% of 400 ºF, or when it was an adsorb cycle."
+% "The heaters were OFF during the ï¿½night timeï¿½, or when the desorb bed temperature reached its set point
+% of 400 ï¿½F, or when it was an adsorb cycle."
 
 % (Ref: Functional Performance of an Enabling Atmosphere Revitalization Subsystem Architecture for Deep Space Exploration Missions (AIAA 2013-3421)
-% Quote: “Because the commercial compressor discharge pressure was 414 kPa compared to the flight CO2 Reduction Assembly (CRA)
-% compressor’s 827 kPa, the accumulator volume was increased from 19.8 liters to 48.1 liters”
+% Quote: ï¿½Because the commercial compressor discharge pressure was 414 kPa compared to the flight CO2 Reduction Assembly (CRA)
+% compressorï¿½s 827 kPa, the accumulator volume was increased from 19.8 liters to 48.1 litersï¿½
 
 % CO2StoreTemp = 5/9*(400-32)+273.15;        % Converted to Kelvin from 400F, here we assume isothermal compression by the compressor
 % CO2accumulatorVolumeInLiters = 19.8;
@@ -194,18 +189,13 @@ dailyLeakagePercentage = 0.05;      % Based on BVAD Table 4.1.1 for percentage o
 hourlyLeakagePercentage = 100*(1-(1-dailyLeakagePercentage/100)^(1/24));
 
 Inflatable1 = SimEnvironmentImpl('Inflatable 1',70.3,500000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);     %Note volume input is in Liters.
-% Inflatable2 = SimEnvironmentImpl('Inflatable 2',70.3,500000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);     
+Inflatable2 = SimEnvironmentImpl('Inflatable 2',70.3,500000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);     
 LivingUnit1 = SimEnvironmentImpl('Living Unit 1',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);   % Note that here we assume that the internal volume of the Dragon modules sent to the surface is 25m^3
-% LivingUnit2 = SimEnvironmentImpl('Living Unit 2',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
+LivingUnit2 = SimEnvironmentImpl('Living Unit 2',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
 LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
-% LifeSupportUnit2 = SimEnvironmentImpl('Life Support Unit 2',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
+LifeSupportUnit2 = SimEnvironmentImpl('Life Support Unit 2',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
 CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
-% CargoUnit2 = SimEnvironmentImpl('Cargo Unit 2',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
-
-% Inflatable1 = SimEnvironmentImpl('Inflatable 1',100,500000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);     %Note volume input is in Liters.
-% LivingUnit1 = SimEnvironmentImpl('Living Unit 1',90,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
-% LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',110,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
-% CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',80,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
+CargoUnit2 = SimEnvironmentImpl('Cargo Unit 2',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
 
 %% Set up EVA environment
 % Size EVA for two people - include airlock losses when EVA is executed
@@ -321,17 +311,6 @@ airlockCycleLoss = 13.8*airlockFreegasVolume/(idealGasConstant*(273.15+Airlock.t
 % Atmosphere - AIAA2013-3525 - 0.65lb O2 used per EMU (includes inflation)
 prebreatheO2 = 0.65*453.592/O2molarMass*numberOfEVAcrew;   % moles of O2... supplied from O2 tanks
 
-%% Initialize Pressure Balancer
-% Adjacency Matrix to represent connectivity between modules
-AdjacencyMatrix = zeros(4);
-AdjacencyMatrix(1,2) = 1;
-AdjacencyMatrix(2,[1,3,5]) = 1;
-AdjacencyMatrix(3,[2,4]) = 1;
-AdjacencyMatrix(4,3) = 1;
-AdjacencyMatrix(5,2) = 1;
-Modules = [Inflatable1,LivingUnit1,LifeSupportUnit1,CargoUnit1,Airlock];
-PressureFlow = PressureDistribute(Modules,AdjacencyMatrix);
-
 %% Initialize Key Activity Parameters
 
 % Baseline Activities and Location Mappings
@@ -339,7 +318,7 @@ lengthOfExercise = 2;                       % Number of hours spent on exercise 
 
 % Generate distribution of habitation options from which IVA activities
 % will take place
-HabDistribution = [repmat(Inflatable1,1,2),repmat(LivingUnit1,1,2),repmat(LifeSupportUnit1,1,2),CargoUnit1];
+HabDistribution = [repmat(Inflatable1,1,2),repmat(LivingUnit1,1,2),repmat(LifeSupportUnit1,1,2),CargoUnit1,repmat(Inflatable2,1,2),repmat(LivingUnit2,1,2),repmat(LifeSupportUnit2,1,2),CargoUnit2];
 
 IVAhour = ActivityImpl('IVA',2,1,HabDistribution);          % One hour of IVA time (corresponds to generic IVA activity)
 Sleep = ActivityImpl('Sleep',0,8,Inflatable1);          % Sleep period
@@ -369,25 +348,18 @@ BiomassStore = BiomassStoreImpl(100000);
 
 CropWaterStore = StoreImpl('Grey Crop H2O','Material',100000,100000);   % Initialize a 9200L water buffer
 
-WhitePotatoShelf = ShelfImpl3(WhitePotato,5/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-PeanutShelf = ShelfImpl3(Peanut,72.68/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-SoybeanShelf = ShelfImpl3(Soybean,39.7/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-SweetPotatoShelf = ShelfImpl3(SweetPotato,9.8/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-WheatShelf = ShelfImpl3(Wheat,72.53/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+WhitePotatoShelf = ShelfImpl3(WhitePotato,5,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+PeanutShelf = ShelfImpl3(Peanut,72.68,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+SoybeanShelf = ShelfImpl3(Soybean,39.7,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+SweetPotatoShelf = ShelfImpl3(SweetPotato,9.8,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+WheatShelf = ShelfImpl3(Wheat,72.53,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
 
 % Initialize Staggered Shelves
-% WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,WhitePotatoShelf.Crop.TimeAtCropMaturity,0);
-% PeanutShelves = ShelfStagger(PeanutShelf,PeanutShelf.Crop.TimeAtCropMaturity,0);
-% SoybeanShelves = ShelfStagger(SoybeanShelf,SoybeanShelf.Crop.TimeAtCropMaturity,0);
-% SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,SweetPotatoShelf.Crop.TimeAtCropMaturity,0);
-% WheatShelves = ShelfStagger(WheatShelf,WheatShelf.Crop.TimeAtCropMaturity,0);
-
-% Single Shelves for Testing
-WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,1,0);
-PeanutShelves = ShelfStagger(PeanutShelf,1,0);
-SoybeanShelves = ShelfStagger(SoybeanShelf,1,0);
-SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,1,0);
-WheatShelves = ShelfStagger(WheatShelf,1,0);
+WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,WhitePotatoShelf.Crop.TimeAtCropMaturity,0);
+PeanutShelves = ShelfStagger(PeanutShelf,PeanutShelf.Crop.TimeAtCropMaturity,0);
+SoybeanShelves = ShelfStagger(SoybeanShelf,SoybeanShelf.Crop.TimeAtCropMaturity,0);
+SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,SweetPotatoShelf.Crop.TimeAtCropMaturity,0);
+WheatShelves = ShelfStagger(WheatShelf,WheatShelf.Crop.TimeAtCropMaturity,0);
 
 %% Initialize FoodProcessor
 FoodProcessor = FoodProcessorImpl;
@@ -422,16 +394,16 @@ lifeSupport2CargoUnitFan = ISSFanImpl2(LifeSupportUnit1,CargoUnit1,MainPowerStor
 livingUnit2AirlockFan = ISSFanImpl2(LivingUnit1,Airlock,MainPowerStore);
 
 % IMV between Living Units
-% livingUnit2livingUnitFan = ISSFanImpl2(LivingUnit1,LivingUnit2,MainPowerStore);
+livingUnit2livingUnitFan = ISSFanImpl2(LivingUnit1,LivingUnit2,MainPowerStore);
 
 % IMV between Inflatable 2 and Living Unit 2
-% inflatable2LivingUnitFan2 = ISSFanImpl2(Inflatable2,LivingUnit2,MainPowerStore);
+inflatable2LivingUnitFan2 = ISSFanImpl2(Inflatable2,LivingUnit2,MainPowerStore);
 
 % IMV between Living Unit 2 and Life Support Unit 2
-% livingUnit2LifeSupportFan2 = ISSFanImpl2(LivingUnit2,LifeSupportUnit2,MainPowerStore);
+livingUnit2LifeSupportFan2 = ISSFanImpl2(LivingUnit2,LifeSupportUnit2,MainPowerStore);
 
 % IMV between Life Support Unit 2 and Cargo Unit 2
-% lifeSupport2CargoUnitFan2 = ISSFanImpl2(LifeSupportUnit2,CargoUnit2,MainPowerStore);
+lifeSupport2CargoUnitFan2 = ISSFanImpl2(LifeSupportUnit2,CargoUnit2,MainPowerStore);
 
 %% Initialize Injectors (Models ISS Pressure Control Assemblies)
 % See accompanying word doc for rationale behind PCA locations
@@ -440,25 +412,25 @@ livingUnit2AirlockFan = ISSFanImpl2(LivingUnit1,Airlock,MainPowerStore);
 inflatablePCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,Inflatable1);
 
 % Inflatable2 PCA 
-% inflatable2PCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,Inflatable2);
+inflatable2PCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,Inflatable2);
 
 % Living Unit PCA
 livingUnitPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,LivingUnit1);
 
 % Living Unit 2 PCA
-% livingUnit2PCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,LivingUnit2);
+livingUnit2PCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,LivingUnit2);
 
 % Life Support Unit PCA
 lifeSupportUnitPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,LifeSupportUnit1);
 
 % Life Support Unit 2 PCA
-% lifeSupportUnit2PCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,LifeSupportUnit2);
+lifeSupportUnit2PCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,LifeSupportUnit2);
 
 % Cargo Unit PPRV
 cargoUnitPPRV = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,CargoUnit1,'PPRV');
 
 % Cargo Unit 2 PPRV
-% cargoUnit2PPRV = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,CargoUnit2,'PPRV');
+cargoUnit2PPRV = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,CargoUnit2,'PPRV');
 
 % Airlock PCA
 airlockPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,N2Store,Airlock);
@@ -472,26 +444,24 @@ airlockPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2St
 inflatableCCAA = ISSDehumidifierImpl(Inflatable1,DirtyWaterStore,MainPowerStore);
 
 % Inflatable 2 CCAA
-% inflatable2CCAA = ISSDehumidifierImpl(Inflatable2,DirtyWaterStore,MainPowerStore);
+inflatable2CCAA = ISSDehumidifierImpl(Inflatable2,DirtyWaterStore,MainPowerStore);
 
 % Living Unit/Airlock CCAA
 livingUnitCCAA = ISSDehumidifierImpl(LivingUnit1,DirtyWaterStore,MainPowerStore);
 
 % Living Unit 2
-% livingUnit2CCAA = ISSDehumidifierImpl(LivingUnit2,DirtyWaterStore,MainPowerStore);
+livingUnit2CCAA = ISSDehumidifierImpl(LivingUnit2,DirtyWaterStore,MainPowerStore);
 
 % Life Support Unit CCAA
 lifeSupportUnitCCAA = ISSDehumidifierImpl(LifeSupportUnit1,DirtyWaterStore,MainPowerStore);
 
 % Life Support Unit 2 CCAA
-% lifeSupportUnit2CCAA = ISSDehumidifierImpl(LifeSupportUnit2,DirtyWaterStore,MainPowerStore);
+lifeSupportUnit2CCAA = ISSDehumidifierImpl(LifeSupportUnit2,DirtyWaterStore,MainPowerStore);
 
 %% Initialize Air Processing Technologies
 
 % Initialize Main VCCR (Linear)
-CDRAsetpoint = 1500;    % Set CDRA set point to 1500ppm
-% mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowerStore);
-mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowerStore,CDRAsetpoint);
+mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowerStore);
 
 % Initialize OGS
 ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LifeSupportUnit1,PotableWaterStore,MainPowerStore,H2Store);
@@ -500,16 +470,16 @@ ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LifeSupportUnit1,Pot
 crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
 
 % Initialize Oxygen Removal Assembly
-% inflatableORA = O2extractor(Inflatable2,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,'Molar Fraction');
+inflatableORA = O2extractor(Inflatable2,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,'Molar Fraction');
 
 % Initialize CO2 Injector
 targetCO2conc = 1200*1E-6;
-co2Injector = CO2Injector(Inflatable1,CO2Store,targetCO2conc);
+co2Injector = CO2Injector(Inflatable2,CO2Store,targetCO2conc);
 
 % lifeSupportUnitORA = O2extractor(LifeSupportUnit1,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store);
 
 % Condensed Water Removal System
-inflatable1WaterExtractor = CondensedWaterRemover(Inflatable1,CropWaterStore);
+inflatable2WaterExtractor = CondensedWaterRemover(Inflatable2,CropWaterStore);
 
 %% Initialize Water Processing Technologies
 
@@ -558,16 +528,15 @@ inflatableN2level = zeros(1,simtime);
 inflatableVaporlevel = zeros(1,simtime);
 inflatableOtherlevel = zeros(1,simtime);
 inflatableTotalMoles = zeros(1,simtime);
-inflatableCondensedVaporMoles = zeros(1,simtime);
 
-% inflatable2Pressure = zeros(1,simtime);
-% inflatable2O2level = zeros(1,simtime);
-% inflatable2CO2level = zeros(1,simtime);
-% inflatable2N2level = zeros(1,simtime);
-% inflatable2Vaporlevel = zeros(1,simtime);
-% inflatable2Otherlevel = zeros(1,simtime);
-% inflatable2TotalMoles = zeros(1,simtime);
-% inflatable2CondensedVaporMoles = zeros(1,simtime);
+inflatable2Pressure = zeros(1,simtime);
+inflatable2O2level = zeros(1,simtime);
+inflatable2CO2level = zeros(1,simtime);
+inflatable2N2level = zeros(1,simtime);
+inflatable2Vaporlevel = zeros(1,simtime);
+inflatable2Otherlevel = zeros(1,simtime);
+inflatable2TotalMoles = zeros(1,simtime);
+inflatable2CondensedVaporMoles = zeros(1,simtime);
 
 livingUnitPressure = zeros(1,simtime);
 livingUnitO2level = zeros(1,simtime);
@@ -577,13 +546,13 @@ livingUnitVaporlevel = zeros(1,simtime);
 livingUnitOtherlevel = zeros(1,simtime);
 livingUnitTotalMoles = zeros(1,simtime);
 
-% livingUnit2Pressure = zeros(1,simtime);
-% livingUnit2O2level = zeros(1,simtime);
-% livingUnit2CO2level = zeros(1,simtime);
-% livingUnit2N2level = zeros(1,simtime);
-% livingUnit2Vaporlevel = zeros(1,simtime);
-% livingUnit2Otherlevel = zeros(1,simtime);
-% livingUnit2TotalMoles = zeros(1,simtime);
+livingUnit2Pressure = zeros(1,simtime);
+livingUnit2O2level = zeros(1,simtime);
+livingUnit2CO2level = zeros(1,simtime);
+livingUnit2N2level = zeros(1,simtime);
+livingUnit2Vaporlevel = zeros(1,simtime);
+livingUnit2Otherlevel = zeros(1,simtime);
+livingUnit2TotalMoles = zeros(1,simtime);
 
 lifeSupportUnitPressure = zeros(1,simtime);
 lifeSupportUnitO2level = zeros(1,simtime);
@@ -593,13 +562,13 @@ lifeSupportUnitVaporlevel = zeros(1,simtime);
 lifeSupportUnitOtherlevel = zeros(1,simtime);
 lifeSupportUnitTotalMoles = zeros(1,simtime);
 
-% lifeSupportUnit2Pressure = zeros(1,simtime);
-% lifeSupportUnit2O2level = zeros(1,simtime);
-% lifeSupportUnit2CO2level = zeros(1,simtime);
-% lifeSupportUnit2N2level = zeros(1,simtime);
-% lifeSupportUnit2Vaporlevel = zeros(1,simtime);
-% lifeSupportUnit2Otherlevel = zeros(1,simtime);
-% lifeSupportUnit2TotalMoles = zeros(1,simtime);
+lifeSupportUnit2Pressure = zeros(1,simtime);
+lifeSupportUnit2O2level = zeros(1,simtime);
+lifeSupportUnit2CO2level = zeros(1,simtime);
+lifeSupportUnit2N2level = zeros(1,simtime);
+lifeSupportUnit2Vaporlevel = zeros(1,simtime);
+lifeSupportUnit2Otherlevel = zeros(1,simtime);
+lifeSupportUnit2TotalMoles = zeros(1,simtime);
 
 cargoUnitPressure = zeros(1,simtime);
 cargoUnitO2level = zeros(1,simtime);
@@ -609,13 +578,13 @@ cargoUnitVaporlevel = zeros(1,simtime);
 cargoUnitOtherlevel = zeros(1,simtime);
 cargoUnitTotalMoles = zeros(1,simtime);
 
-% cargoUnit2Pressure = zeros(1,simtime);
-% cargoUnit2O2level = zeros(1,simtime);
-% cargoUnit2CO2level = zeros(1,simtime);
-% cargoUnit2N2level = zeros(1,simtime);
-% cargoUnit2Vaporlevel = zeros(1,simtime);
-% cargoUnit2Otherlevel = zeros(1,simtime);
-% cargoUnit2TotalMoles = zeros(1,simtime);
+cargoUnit2Pressure = zeros(1,simtime);
+cargoUnit2O2level = zeros(1,simtime);
+cargoUnit2CO2level = zeros(1,simtime);
+cargoUnit2N2level = zeros(1,simtime);
+cargoUnit2Vaporlevel = zeros(1,simtime);
+cargoUnit2Otherlevel = zeros(1,simtime);
+cargoUnit2TotalMoles = zeros(1,simtime);
 
 airlockPressure = zeros(1,simtime);
 airlockO2level = zeros(1,simtime);
@@ -627,26 +596,26 @@ airlockTotalMoles = zeros(1,simtime);
 
 ogsoutput = zeros(1,simtime);
 inflatablePCAaction = zeros(4,simtime+1);
-% inflatable2PCAaction = zeros(4,simtime+1);
+inflatable2PCAaction = zeros(4,simtime+1);
 livingUnitPCAaction = zeros(4,simtime+1);
-% livingUnit2PCAaction = zeros(4,simtime+1);
+livingUnit2PCAaction = zeros(4,simtime+1);
 lifeSupportUnitPCAaction = zeros(4,simtime+1);
-% lifeSupportUnit2PCAaction = zeros(4,simtime+1);
+lifeSupportUnit2PCAaction = zeros(4,simtime+1);
 cargoUnitPPRVaction = zeros(4,simtime+1);
-% cargoUnit2PPRVaction = zeros(4,simtime+1);
+cargoUnit2PPRVaction = zeros(4,simtime+1);
 airlockPCAaction = zeros(4,simtime+1);
 
 inflatableCCAAoutput = zeros(1,simtime);
 livingUnitCCAAoutput = zeros(1,simtime);
 lifeSupportUnitCCAAoutput = zeros(1,simtime);
-% inflatable2CCAAoutput = zeros(1,simtime);
-% livingUnit2CCAAoutput = zeros(1,simtime);
-% lifeSupportUnit2CCAAoutput = zeros(1,simtime);
+inflatable2CCAAoutput = zeros(1,simtime);
+livingUnit2CCAAoutput = zeros(1,simtime);
+lifeSupportUnit2CCAAoutput = zeros(1,simtime);
 
 condensedWaterRemoved = zeros(1,simtime);
 co2injected = zeros(1,simtime);
 
-whitePotatoShelfWaterLevel = zeros(1,simtime);
+lettuceShelfWaterLevel = zeros(1,simtime);
 peanutShelfWaterLevel = zeros(1,simtime);
 soybeanShelfWaterLevel = zeros(1,simtime);
 sweetPotatoShelfWaterLevel = zeros(1,simtime);
@@ -674,6 +643,7 @@ timestamp(timestamp==':') = '-';
 % Start recording command window
 diary(['HabNet Log ',timestamp,'.txt'])
 disp(['Simulation Run Started: ',datestr(clock)]);
+disp('Simulation Run with ISRU')
 
 for i = 1:simtime
         
@@ -717,16 +687,15 @@ for i = 1:simtime
         inflatableVaporlevel = inflatableVaporlevel(1:(i-1));
         inflatableOtherlevel = inflatableOtherlevel(1:(i-1));
         inflatableTotalMoles = inflatableTotalMoles(1:(i-1));
-        inflatableCondensedVaporMoles = inflatableCondensedVaporMoles(1:(i-1));
-        
-%         inflatable2Pressure = inflatable2Pressure(1:(i-1));
-%         inflatable2O2level = inflatable2O2level(1:(i-1));
-%         inflatable2CO2level = inflatable2CO2level(1:(i-1));
-%         inflatable2N2level = inflatable2N2level(1:(i-1));
-%         inflatable2Vaporlevel = inflatable2Vaporlevel(1:(i-1));
-%         inflatable2Otherlevel = inflatable2Otherlevel(1:(i-1));
-%         inflatable2TotalMoles = inflatable2TotalMoles(1:(i-1));
-%         inflatable2CondensedVaporMoles = inflatable2CondensedVaporMoles(1:(i-1));
+                
+        inflatable2Pressure = inflatable2Pressure(1:(i-1));
+        inflatable2O2level = inflatable2O2level(1:(i-1));
+        inflatable2CO2level = inflatable2CO2level(1:(i-1));
+        inflatable2N2level = inflatable2N2level(1:(i-1));
+        inflatable2Vaporlevel = inflatable2Vaporlevel(1:(i-1));
+        inflatable2Otherlevel = inflatable2Otherlevel(1:(i-1));
+        inflatable2TotalMoles = inflatable2TotalMoles(1:(i-1));
+        inflatable2CondensedVaporMoles = inflatable2CondensedVaporMoles(1:(i-1));
     
         % Record Living Unit Atmosphere
         livingUnitPressure = livingUnitPressure(1:(i-1));
@@ -738,13 +707,13 @@ for i = 1:simtime
         livingUnitTotalMoles = livingUnitTotalMoles(1:(i-1));
         
         % Record Living Unit 2 Atmosphere
-%         livingUnit2Pressure = livingUnit2Pressure(1:(i-1));
-%         livingUnit2O2level = livingUnit2O2level(1:(i-1));
-%         livingUnit2CO2level = livingUnit2CO2level(1:(i-1));
-%         livingUnit2N2level = livingUnit2N2level(1:(i-1));
-%         livingUnit2Vaporlevel = livingUnit2Vaporlevel(1:(i-1));
-%         livingUnit2Otherlevel = livingUnit2Otherlevel(1:(i-1));
-%         livingUnit2TotalMoles = livingUnit2TotalMoles(1:(i-1));
+        livingUnit2Pressure = livingUnit2Pressure(1:(i-1));
+        livingUnit2O2level = livingUnit2O2level(1:(i-1));
+        livingUnit2CO2level = livingUnit2CO2level(1:(i-1));
+        livingUnit2N2level = livingUnit2N2level(1:(i-1));
+        livingUnit2Vaporlevel = livingUnit2Vaporlevel(1:(i-1));
+        livingUnit2Otherlevel = livingUnit2Otherlevel(1:(i-1));
+        livingUnit2TotalMoles = livingUnit2TotalMoles(1:(i-1));
        
         % Record Life Support Unit Atmosphere
         lifeSupportUnitPressure = lifeSupportUnitPressure(1:(i-1));
@@ -756,13 +725,13 @@ for i = 1:simtime
         lifeSupportUnitTotalMoles = lifeSupportUnitTotalMoles(1:(i-1));
            
         % Record Life Support Unit 2 Atmosphere
-%         lifeSupportUnit2Pressure = lifeSupportUnit2Pressure(1:(i-1));
-%         lifeSupportUnit2O2level = lifeSupportUnit2O2level(1:(i-1));
-%         lifeSupportUnit2CO2level = lifeSupportUnit2CO2level(1:(i-1));
-%         lifeSupportUnit2N2level = lifeSupportUnit2N2level(1:(i-1));
-%         lifeSupportUnit2Vaporlevel = lifeSupportUnit2Vaporlevel(1:(i-1));
-%         lifeSupportUnit2Otherlevel = lifeSupportUnit2Otherlevel(1:(i-1));
-%         lifeSupportUnit2TotalMoles = lifeSupportUnit2TotalMoles(1:(i-1));
+        lifeSupportUnit2Pressure = lifeSupportUnit2Pressure(1:(i-1));
+        lifeSupportUnit2O2level = lifeSupportUnit2O2level(1:(i-1));
+        lifeSupportUnit2CO2level = lifeSupportUnit2CO2level(1:(i-1));
+        lifeSupportUnit2N2level = lifeSupportUnit2N2level(1:(i-1));
+        lifeSupportUnit2Vaporlevel = lifeSupportUnit2Vaporlevel(1:(i-1));
+        lifeSupportUnit2Otherlevel = lifeSupportUnit2Otherlevel(1:(i-1));
+        lifeSupportUnit2TotalMoles = lifeSupportUnit2TotalMoles(1:(i-1));
         
         % Record Cargo Unit Atmosphere
         cargoUnitPressure = cargoUnitPressure(1:(i-1));
@@ -774,13 +743,13 @@ for i = 1:simtime
         cargoUnitTotalMoles = cargoUnitTotalMoles(1:(i-1));
 
         % Record Cargo Unit 2 Atmosphere
-%         cargoUnit2Pressure = cargoUnit2Pressure(1:(i-1));
-%         cargoUnit2O2level = cargoUnit2O2level(1:(i-1));
-%         cargoUnit2CO2level = cargoUnit2CO2level(1:(i-1));
-%         cargoUnit2N2level = cargoUnit2N2level(1:(i-1));
-%         cargoUnit2Vaporlevel = cargoUnit2Vaporlevel(1:(i-1));
-%         cargoUnit2Otherlevel = cargoUnit2Otherlevel(1:(i-1));
-%         cargoUnit2TotalMoles = cargoUnit2TotalMoles(1:(i-1));
+        cargoUnit2Pressure = cargoUnit2Pressure(1:(i-1));
+        cargoUnit2O2level = cargoUnit2O2level(1:(i-1));
+        cargoUnit2CO2level = cargoUnit2CO2level(1:(i-1));
+        cargoUnit2N2level = cargoUnit2N2level(1:(i-1));
+        cargoUnit2Vaporlevel = cargoUnit2Vaporlevel(1:(i-1));
+        cargoUnit2Otherlevel = cargoUnit2Otherlevel(1:(i-1));
+        cargoUnit2TotalMoles = cargoUnit2TotalMoles(1:(i-1));
         
         % Record Airlock Atmosphere
         airlockPressure = airlockPressure(1:(i-1));
@@ -805,19 +774,19 @@ for i = 1:simtime
         inflatableCCAAoutput = inflatableCCAAoutput(1:(i-1));
         livingUnitCCAAoutput = livingUnitCCAAoutput(1:(i-1));
         lifeSupportUnitCCAAoutput = lifeSupportUnitCCAAoutput(1:(i-1));
-%         inflatable2CCAAoutput = inflatable2CCAAoutput(1:(i-1));
-%         livingUnit2CCAAoutput = livingUnit2CCAAoutput(1:(i-1));
-%         lifeSupportUnit2CCAAoutput = lifeSupportUnit2CCAAoutput(1:(i-1));
+        inflatable2CCAAoutput = inflatable2CCAAoutput(1:(i-1));
+        livingUnit2CCAAoutput = livingUnit2CCAAoutput(1:(i-1));
+        lifeSupportUnit2CCAAoutput = lifeSupportUnit2CCAAoutput(1:(i-1));
         
         % Pressure Control Assemblies
         inflatablePCAaction = inflatablePCAaction(:,1:(i-1));
-%         inflatable2PCAaction = inflatable2PCAaction(:,1:(i-1));
+        inflatable2PCAaction = inflatable2PCAaction(:,1:(i-1));
         livingUnitPCAaction = livingUnitPCAaction(:,1:(i-1));
-%         livingUnit2PCAaction = livingUnit2PCAaction(:,1:(i-1));
+        livingUnit2PCAaction = livingUnit2PCAaction(:,1:(i-1));
         lifeSupportUnitPCAaction = lifeSupportUnitPCAaction(:,1:(i-1));
-%         lifeSupportUnit2PCAaction = lifeSupportUnit2PCAaction(:,1:(i-1));
+        lifeSupportUnit2PCAaction = lifeSupportUnit2PCAaction(:,1:(i-1));
         cargoUnitPPRVaction = cargoUnitPPRVaction(:,1:(i-1));
-%         cargoUnit2PPRVaction = cargoUnit2PPRVaction(:,1:(i-1));
+        cargoUnit2PPRVaction = cargoUnit2PPRVaction(:,1:(i-1));
         airlockPCAaction = airlockPCAaction(:,1:(i-1));
         
         % Run Waste Processing ECLSS Hardware
@@ -872,13 +841,13 @@ for i = 1:simtime
     inflatableTotalMoles(i) = Inflatable1.totalMoles;
     
     % Record Inflatable2 Unit Atmosphere
-%     inflatable2Pressure(i) = Inflatable2.pressure;
-%     inflatable2O2level(i) = Inflatable2.O2Store.currentLevel;
-%     inflatable2CO2level(i) = Inflatable2.CO2Store.currentLevel;
-%     inflatable2N2level(i) = Inflatable2.NitrogenStore.currentLevel;
-%     inflatable2Vaporlevel(i) = Inflatable2.VaporStore.currentLevel;
-%     inflatable2Otherlevel(i) = Inflatable2.OtherStore.currentLevel;
-%     inflatable2TotalMoles(i) = Inflatable2.totalMoles;
+    inflatable2Pressure(i) = Inflatable2.pressure;
+    inflatable2O2level(i) = Inflatable2.O2Store.currentLevel;
+    inflatable2CO2level(i) = Inflatable2.CO2Store.currentLevel;
+    inflatable2N2level(i) = Inflatable2.NitrogenStore.currentLevel;
+    inflatable2Vaporlevel(i) = Inflatable2.VaporStore.currentLevel;
+    inflatable2Otherlevel(i) = Inflatable2.OtherStore.currentLevel;
+    inflatable2TotalMoles(i) = Inflatable2.totalMoles;
     
     % Record Living Unit Atmosphere
     livingUnitPressure(i) = LivingUnit1.pressure;
@@ -890,13 +859,13 @@ for i = 1:simtime
     livingUnitTotalMoles(i) = LivingUnit1.totalMoles;
     
     % Record Living Unit 2 Atmosphere
-%     livingUnit2Pressure(i) = LivingUnit2.pressure;
-%     livingUnit2O2level(i) = LivingUnit2.O2Store.currentLevel;
-%     livingUnit2CO2level(i) = LivingUnit2.CO2Store.currentLevel;
-%     livingUnit2N2level(i) = LivingUnit2.NitrogenStore.currentLevel;
-%     livingUnit2Vaporlevel(i) = LivingUnit2.VaporStore.currentLevel;
-%     livingUnit2Otherlevel(i) = LivingUnit2.OtherStore.currentLevel;
-%     livingUnit2TotalMoles(i) = LivingUnit2.totalMoles;
+    livingUnit2Pressure(i) = LivingUnit2.pressure;
+    livingUnit2O2level(i) = LivingUnit2.O2Store.currentLevel;
+    livingUnit2CO2level(i) = LivingUnit2.CO2Store.currentLevel;
+    livingUnit2N2level(i) = LivingUnit2.NitrogenStore.currentLevel;
+    livingUnit2Vaporlevel(i) = LivingUnit2.VaporStore.currentLevel;
+    livingUnit2Otherlevel(i) = LivingUnit2.OtherStore.currentLevel;
+    livingUnit2TotalMoles(i) = LivingUnit2.totalMoles;
     
     % Record Life Support Unit Atmosphere
     lifeSupportUnitPressure(i) = LifeSupportUnit1.pressure;
@@ -908,13 +877,13 @@ for i = 1:simtime
     lifeSupportUnitTotalMoles(i) = LifeSupportUnit1.totalMoles;
     
     % Record Life Support Unit 2 Atmosphere
-%     lifeSupportUnit2Pressure(i) = LifeSupportUnit2.pressure;
-%     lifeSupportUnit2O2level(i) = LifeSupportUnit2.O2Store.currentLevel;
-%     lifeSupportUnit2CO2level(i) = LifeSupportUnit2.CO2Store.currentLevel;
-%     lifeSupportUnit2N2level(i) = LifeSupportUnit2.NitrogenStore.currentLevel;
-%     lifeSupportUnit2Vaporlevel(i) = LifeSupportUnit2.VaporStore.currentLevel;
-%     lifeSupportUnit2Otherlevel(i) = LifeSupportUnit2.OtherStore.currentLevel;
-%     lifeSupportUnit2TotalMoles(i) = LifeSupportUnit2.totalMoles;
+    lifeSupportUnit2Pressure(i) = LifeSupportUnit2.pressure;
+    lifeSupportUnit2O2level(i) = LifeSupportUnit2.O2Store.currentLevel;
+    lifeSupportUnit2CO2level(i) = LifeSupportUnit2.CO2Store.currentLevel;
+    lifeSupportUnit2N2level(i) = LifeSupportUnit2.NitrogenStore.currentLevel;
+    lifeSupportUnit2Vaporlevel(i) = LifeSupportUnit2.VaporStore.currentLevel;
+    lifeSupportUnit2Otherlevel(i) = LifeSupportUnit2.OtherStore.currentLevel;
+    lifeSupportUnit2TotalMoles(i) = LifeSupportUnit2.totalMoles;
     
     % Record Cargo Unit Atmosphere
     cargoUnitPressure(i) = CargoUnit1.pressure;
@@ -926,13 +895,13 @@ for i = 1:simtime
     cargoUnitTotalMoles(i) = CargoUnit1.totalMoles;
     
     % Record Cargo Unit 2 Atmosphere
-%     cargoUnit2Pressure(i) = CargoUnit2.pressure;
-%     cargoUnit2O2level(i) = CargoUnit2.O2Store.currentLevel;
-%     cargoUnit2CO2level(i) = CargoUnit2.CO2Store.currentLevel;
-%     cargoUnit2N2level(i) = CargoUnit2.NitrogenStore.currentLevel;
-%     cargoUnit2Vaporlevel(i) = CargoUnit2.VaporStore.currentLevel;
-%     cargoUnit2Otherlevel(i) = CargoUnit2.OtherStore.currentLevel;
-%     cargoUnit2TotalMoles(i) = CargoUnit2.totalMoles;
+    cargoUnit2Pressure(i) = CargoUnit2.pressure;
+    cargoUnit2O2level(i) = CargoUnit2.O2Store.currentLevel;
+    cargoUnit2CO2level(i) = CargoUnit2.CO2Store.currentLevel;
+    cargoUnit2N2level(i) = CargoUnit2.NitrogenStore.currentLevel;
+    cargoUnit2Vaporlevel(i) = CargoUnit2.VaporStore.currentLevel;
+    cargoUnit2Otherlevel(i) = CargoUnit2.OtherStore.currentLevel;
+    cargoUnit2TotalMoles(i) = CargoUnit2.totalMoles;
     
     % Record Airlock Atmosphere
     airlockPressure(i) = Airlock.pressure;
@@ -947,13 +916,13 @@ for i = 1:simtime
     
     % Leak Modules
     Inflatable1.tick;
-%     Inflatable2.tick;
+    Inflatable2.tick;
     LivingUnit1.tick;
-%     LivingUnit2.tick;
+    LivingUnit2.tick;
     LifeSupportUnit1.tick;
-%     LifeSupportUnit2.tick;
+    LifeSupportUnit2.tick;
     CargoUnit1.tick;
-%     CargoUnit2.tick;
+    CargoUnit2.tick;
     
     % Run Fans
     inflatable2LivingUnitFan.tick;
@@ -961,14 +930,11 @@ for i = 1:simtime
 %     atmospheric flow between plant growth chamber and the remainder of
 %     the hab
     livingUnit2LifeSupportFan.tick;
-%     livingUnit2LifeSupportFan2.tick;
+    livingUnit2LifeSupportFan2.tick;
     lifeSupport2CargoUnitFan.tick;
-%     lifeSupport2CargoUnitFan2.tick;
-%     livingUnit2livingUnitFan.tick;
+    lifeSupport2CargoUnitFan2.tick;
+    livingUnit2livingUnitFan.tick;
     livingUnit2AirlockFan.tick;
-    
-    % Equalize Pressures Across Modules
-    PressureFlow.tick;
     
     % Run Power Supply
     powerPS.tick; 
@@ -977,17 +943,17 @@ for i = 1:simtime
     ogsoutput(i) = ogs.tick;
     
     % Tick ORA
-%     inflatableO2extracted(i) = inflatableORA.tick;
+    inflatableO2extracted(i) = inflatableORA.tick;
     
     % Pressure Control Assemblies
     inflatablePCAaction(:,i+1) = inflatablePCA.tick(inflatablePCAaction(:,i));
-%     inflatable2PCAaction(:,i+1) = inflatable2PCA.tick(inflatable2PCAaction(:,i));
+    inflatable2PCAaction(:,i+1) = inflatable2PCA.tick(inflatable2PCAaction(:,i));
     livingUnitPCAaction(:,i+1) = livingUnitPCA.tick(livingUnitPCAaction(:,i));
-%     livingUnit2PCAaction(:,i+1) = livingUnit2PCA.tick(livingUnit2PCAaction(:,i));
+    livingUnit2PCAaction(:,i+1) = livingUnit2PCA.tick(livingUnit2PCAaction(:,i));
     lifeSupportUnitPCAaction(:,i+1) = lifeSupportUnitPCA.tick(lifeSupportUnitPCAaction(:,i));
-%     lifeSupportUnit2PCAaction(:,i+1) = lifeSupportUnit2PCA.tick(lifeSupportUnit2PCAaction(:,i));
+    lifeSupportUnit2PCAaction(:,i+1) = lifeSupportUnit2PCA.tick(lifeSupportUnit2PCAaction(:,i));
     cargoUnitPPRVaction(:,i+1) = cargoUnitPPRV.tick(cargoUnitPPRVaction(:,i));
-%     cargoUnit2PPRVaction(:,i+1) = cargoUnit2PPRV.tick(cargoUnit2PPRVaction(:,i));
+    cargoUnit2PPRVaction(:,i+1) = cargoUnit2PPRV.tick(cargoUnit2PPRVaction(:,i));
     airlockPCAaction(:,i+1) = airlockPCA.tick(airlockPCAaction(:,i));
 
     % Common Cabin Air Assemblies
@@ -995,12 +961,13 @@ for i = 1:simtime
     livingUnitCCAAoutput(i) = livingUnitCCAA.tick;
     lifeSupportUnitCCAAoutput(i) = lifeSupportUnitCCAA.tick;
     
-%     inflatable2CCAAoutput(i) = inflatable2CCAA.tick;
-%     livingUnit2CCAAoutput(i) = livingUnit2CCAA.tick;
-%     lifeSupportUnit2CCAAoutput(i) = lifeSupportUnit2CCAA.tick;
+%     inflatable2CCAAoutput(i) = inflatable2CCAA.tick;  % Commented out
+%     since the food processor takes care of excess water within the plant chamber
+    livingUnit2CCAAoutput(i) = livingUnit2CCAA.tick;
+    lifeSupportUnit2CCAAoutput(i) = lifeSupportUnit2CCAA.tick;
     
     % Condensed Water Remover
-%     condensedWaterRemoved(i) = inflatable1WaterExtractor.tick;
+    condensedWaterRemoved(i) = inflatable2WaterExtractor.tick;
     
     % Run Waste Processing ECLSS Hardware
     co2removed(i) = mainvccr.tick;
@@ -1020,30 +987,25 @@ for i = 1:simtime
     % ISRU inject water into CropWaterStore (0.565L/hr)
 %     CropWaterStore.add(0.565);
     
-    % Record shelf water levels
-    whitePotatoShelfWaterLevel(i) = WhitePotatoShelf.ShelfWaterLevel;
-    peanutShelfWaterLevel(i) = PeanutShelf.ShelfWaterLevel;
-    soybeanShelfWaterLevel(i) = SoybeanShelf.ShelfWaterLevel;
-    sweetPotatoShelfWaterLevel(i) = SweetPotatoShelf.ShelfWaterLevel;
-    wheatShelfWaterLevel(i) = WheatShelf.ShelfWaterLevel;
+%     % Record shelf water levels
+%     lettuceShelfWaterLevel(i) = LettuceShelf.ShelfWaterLevel;
+%     peanutShelfWaterLevel(i) = PeanutShelf.ShelfWaterLevel;
+%     soybeanShelfWaterLevel(i) = SoybeanShelf.ShelfWaterLevel;
+%     sweetPotatoShelfWaterLevel(i) = SweetPotatoShelf.ShelfWaterLevel;
+%     wheatShelfWaterLevel(i) = WheatShelf.ShelfWaterLevel;
 
     % Tick Crop Shelves
     %% add co2 injector here
     co2injected(i) = co2Injector.tick;
     WhitePotatoShelves.tick;
-%     WhitePotatoShelf.tick;
 %     co2Injector.tick;
     PeanutShelves.tick;
-%     PeanutShelf.tick;
 %     co2Injector.tick;
     SoybeanShelves.tick;
-%     SoybeanShelf.tick;
 %     co2Injector.tick;
     SweetPotatoShelves.tick;
-%     SweetPotatoShelf.tick;
 %     co2Injector.tick;
     WheatShelves.tick;
-%     WheatShelf.tick;
     
     FoodProcessor.tick;
     carriedfoodstorelevel(i) = CarriedFoodStore.currentLevel;
@@ -1060,10 +1022,10 @@ for i = 1:simtime
     astro4.tick;
    
     %% Run ISRU
-%     PotableWaterStore.add(isruAddedWater);
-%     CropWaterStore.add(isruAddedCropWater);
-% %     O2Store.add(isruAddedO2);
-%     N2Store.add(isruAddedN2);
+    PotableWaterStore.add(isruAddedWater);
+    CropWaterStore.add(isruAddedCropWater);
+    O2Store.add(isruAddedO2);
+    N2Store.add(isruAddedN2);
     
     %% EVA
     CrewEVAstatus = [strcmpi(astro1.CurrentActivity.Name,'EVA'),...
@@ -1151,39 +1113,39 @@ beep
 
 close(h)
 
-diary off
+save('MarsOnePlantGrowthWithISRU')
 
 %% Random plot commands used in code validation exercise
 % Atmospheric molar fractions
 figure, 
-subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles,t,inflatableCO2level./inflatableTotalMoles,t,inflatableN2level./inflatableTotalMoles,t,inflatableVaporlevel./inflatableTotalMoles,t,inflatableOtherlevel./inflatableTotalMoles,'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
-subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles,t,livingUnitCO2level./livingUnitTotalMoles,t,livingUnitN2level./livingUnitTotalMoles,t,livingUnitVaporlevel./livingUnitTotalMoles,t,livingUnitOtherlevel./livingUnitTotalMoles,'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
-subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles,t,lifeSupportUnitCO2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitN2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitVaporlevel./lifeSupportUnitTotalMoles,t,lifeSupportUnitOtherlevel./lifeSupportUnitTotalMoles,'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
-subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
-% subplot(3,3,5), plot(t,inflatable2O2level(t)./inflatable2TotalMoles,t,inflatable2CO2level./inflatable2TotalMoles,t,inflatable2N2level./inflatable2TotalMoles,t,inflatable2Vaporlevel./inflatable2TotalMoles,t,inflatable2Otherlevel./inflatable2TotalMoles,'LineWidth',2), title('Inflatable 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
-% subplot(3,3,6), plot(t,livingUnit2O2level(t)./livingUnit2TotalMoles,t,livingUnit2CO2level./livingUnit2TotalMoles,t,livingUnit2N2level./livingUnit2TotalMoles,t,livingUnit2Vaporlevel./livingUnit2TotalMoles,t,livingUnit2Otherlevel./livingUnit2TotalMoles,'LineWidth',2), title('Living Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
-% subplot(3,3,7), plot(t,lifeSupportUnit2O2level(t)./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2CO2level./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2N2level./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2Vaporlevel./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2Otherlevel./lifeSupportUnit2TotalMoles,'LineWidth',2), title('Life Support Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
-% subplot(3,3,8), plot(t,cargoUnit2O2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2CO2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2N2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2Vaporlevel(t)./cargoUnit2TotalMoles(t),t,cargoUnit2Otherlevel(t)./cargoUnit2TotalMoles(t),'LineWidth',2), title('Cargo Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
-% subplot(3,3,9), plot(t,airlockO2level(t)./airlockTotalMoles,t,airlockCO2level./airlockTotalMoles,t,airlockN2level./airlockTotalMoles,t,airlockVaporlevel./airlockTotalMoles,t,airlockOtherlevel./airlockTotalMoles,'LineWidth',2), title('Airlock'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,1), plot(t,inflatableO2level(t)./inflatableTotalMoles,t,inflatableCO2level./inflatableTotalMoles,t,inflatableN2level./inflatableTotalMoles,t,inflatableVaporlevel./inflatableTotalMoles,t,inflatableOtherlevel./inflatableTotalMoles,'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles,t,livingUnitCO2level./livingUnitTotalMoles,t,livingUnitN2level./livingUnitTotalMoles,t,livingUnitVaporlevel./livingUnitTotalMoles,t,livingUnitOtherlevel./livingUnitTotalMoles,'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles,t,lifeSupportUnitCO2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitN2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitVaporlevel./lifeSupportUnitTotalMoles,t,lifeSupportUnitOtherlevel./lifeSupportUnitTotalMoles,'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,5), plot(t,inflatable2O2level(t)./inflatable2TotalMoles,t,inflatable2CO2level./inflatable2TotalMoles,t,inflatable2N2level./inflatable2TotalMoles,t,inflatable2Vaporlevel./inflatable2TotalMoles,t,inflatable2Otherlevel./inflatable2TotalMoles,'LineWidth',2), title('Inflatable 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,6), plot(t,livingUnit2O2level(t)./livingUnit2TotalMoles,t,livingUnit2CO2level./livingUnit2TotalMoles,t,livingUnit2N2level./livingUnit2TotalMoles,t,livingUnit2Vaporlevel./livingUnit2TotalMoles,t,livingUnit2Otherlevel./livingUnit2TotalMoles,'LineWidth',2), title('Living Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,7), plot(t,lifeSupportUnit2O2level(t)./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2CO2level./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2N2level./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2Vaporlevel./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2Otherlevel./lifeSupportUnit2TotalMoles,'LineWidth',2), title('Life Support Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,8), plot(t,cargoUnit2O2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2CO2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2N2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2Vaporlevel(t)./cargoUnit2TotalMoles(t),t,cargoUnit2Otherlevel(t)./cargoUnit2TotalMoles(t),'LineWidth',2), title('Cargo Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,9), plot(t,airlockO2level(t)./airlockTotalMoles,t,airlockCO2level./airlockTotalMoles,t,airlockN2level./airlockTotalMoles,t,airlockVaporlevel./airlockTotalMoles,t,airlockOtherlevel./airlockTotalMoles,'LineWidth',2), title('Airlock'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
 
 % Partial Pressures
 figure, 
-subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableCO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableN2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableVaporlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableOtherlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitCO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitN2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitVaporlevel(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitOtherlevel(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitCO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitN2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitVaporlevel(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitOtherlevel(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-% subplot(3,3,5), plot(t,inflatable2O2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2CO2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2N2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2Vaporlevel(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2Otherlevel(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),'LineWidth',2), title('Inflatable 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-% subplot(3,3,6), plot(t,livingUnit2O2level(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),t,livingUnit2CO2level(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),t,livingUnit2N2level(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),t,livingUnit2Vaporlevel(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),t,livingUnit2Otherlevel(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),'LineWidth',2), title('Living Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-% subplot(3,3,7), plot(t,lifeSupportUnit2O2level(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,lifeSupportUnit2CO2level(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,lifeSupportUnit2N2level(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,lifeSupportUnit2Vaporlevel(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,lifeSupportUnit2Otherlevel(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),'LineWidth',2), title('Life Support Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-% subplot(3,3,8), plot(t,cargoUnit2O2level(t)./cargoUnit2TotalMoles(t).*cargoUnit2Pressure(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
-% subplot(3,3,9), plot(t,airlockO2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockCO2level./airlockTotalMoles.*airlockPressure(t),t,airlockN2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockVaporlevel(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockOtherlevel(t)./airlockTotalMoles(t).*airlockPressure(t),'LineWidth',2), title('Airlock'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableCO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableN2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableVaporlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableOtherlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitCO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitN2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitVaporlevel(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitOtherlevel(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitCO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitN2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitVaporlevel(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitOtherlevel(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,5), plot(t,inflatable2O2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2CO2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2N2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2Vaporlevel(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,inflatable2Otherlevel(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),'LineWidth',2), title('Inflatable 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,6), plot(t,livingUnit2O2level(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),t,livingUnit2CO2level(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),t,livingUnit2N2level(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),t,livingUnit2Vaporlevel(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),t,livingUnit2Otherlevel(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),'LineWidth',2), title('Living Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,7), plot(t,lifeSupportUnit2O2level(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,lifeSupportUnit2CO2level(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,lifeSupportUnit2N2level(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,lifeSupportUnit2Vaporlevel(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,lifeSupportUnit2Otherlevel(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),'LineWidth',2), title('Life Support Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,8), plot(t,cargoUnit2O2level(t)./cargoUnit2TotalMoles(t).*cargoUnit2Pressure(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(3,3,9), plot(t,airlockO2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockCO2level./airlockTotalMoles.*airlockPressure(t),t,airlockN2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockVaporlevel(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockOtherlevel(t)./airlockTotalMoles(t).*airlockPressure(t),'LineWidth',2), title('Airlock'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
 
 t = 1:(length(o2storelevel));
 
 % Airlock ppCO2
 figure, plot(t,airlockCO2level./airlockTotalMoles.*airlockPressure,'LineWidth',2),grid on, title('Airlock ppCO2')
 
-% O2 molar fraction 
+% O2 molar fraction
 figure, 
 subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t),'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Molar Fraction')
 subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Molar Fraction')
@@ -1192,19 +1154,18 @@ subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t),'LineWidth',2
 
 % O2 Partial Pressure
 figure, 
-subplot(2,3,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
-subplot(2,3,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
-subplot(2,3,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
-subplot(2,3,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
-subplot(2,3,5), plot(t,airlockO2level(t)./airlockTotalMoles(t).*airlockPressure(t),'LineWidth',2), title('Airlock'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
 
 
-% CO2 molar fraction (ppm)
+% CO2 molar fraction
 figure, 
-subplot(2,2,1), plot(t,inflatableCO2level(t)./inflatableTotalMoles(t)*1E6,'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (hours)'), ylabel('CO2 Molar Fraction')
-subplot(2,2,2), plot(t,livingUnitCO2level(t)./livingUnitTotalMoles(t)*1E6,'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('CO2 Molar Fraction')
-subplot(2,2,3), plot(t,lifeSupportUnitCO2level(t)./lifeSupportUnitTotalMoles(t)*1E6,'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('CO2 Molar Fraction')
-subplot(2,2,4), plot(t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t)*1E6,'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('CO2 Molar Fraction')
+subplot(2,2,1), plot(t,inflatableCO2level(t)./inflatableTotalMoles(t),'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (hours)'), ylabel('CO2 Molar Fraction')
+subplot(2,2,2), plot(t,livingUnitCO2level(t)./livingUnitTotalMoles(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('CO2 Molar Fraction')
+subplot(2,2,3), plot(t,lifeSupportUnitCO2level(t)./lifeSupportUnitTotalMoles(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('CO2 Molar Fraction')
+subplot(2,2,4), plot(t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('CO2 Molar Fraction')
 
 % CO2 Partial Pressure
 figure, 
