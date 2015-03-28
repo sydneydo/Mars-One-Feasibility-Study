@@ -1,7 +1,12 @@
 %%  Mars One Default Simulation Case
 %   By: Sydney Do (sydneydo@mit.edu)
 %   Date Created: 6/28/2014
-%   Last Updated: 12/21/2014
+%   Last Updated: 3/28/2015
+%
+%   UPDATE 3/26/2015
+%   Introduced PressureDistribution object to ensure that atmospheric pressures
+%   across all habitats are consistent
+%   Connect airlock to the rest of the habitat via pressure distribution
 %
 %   UPDATE 12/21/2014
 %   - Corrected plant model code (ShelfImpl3.m - updated 12/20/2014) incorporated
@@ -310,6 +315,21 @@ airlockCycleLoss = 13.8*airlockFreegasVolume/(idealGasConstant*(273.15+Airlock.t
 % REF: Fifteen-minute EVA Prebreathe Protocol Using NASA's Exploration
 % Atmosphere - AIAA2013-3525 - 0.65lb O2 used per EMU (includes inflation)
 prebreatheO2 = 0.65*453.592/O2molarMass*numberOfEVAcrew;   % moles of O2... supplied from O2 tanks
+
+%% Initialize Pressure Balancer
+% Adjacency Matrix to represent connectivity between modules
+AdjacencyMatrix = zeros(9);
+AdjacencyMatrix(1,2) = 1;
+AdjacencyMatrix(2,[1,3,5,7]) = 1;
+AdjacencyMatrix(3,[2,4]) = 1;
+AdjacencyMatrix(4,3) = 1;
+AdjacencyMatrix(5,2) = 1;
+AdjacencyMatrix(6,7) = 1;
+AdjacencyMatrix(7,[2,6,8]) = 1;
+AdjacencyMatrix(8,[7,9]) = 1;
+AdjacencyMatrix(9,8) = 1;
+Modules = [Inflatable1,LivingUnit1,LifeSupportUnit1,CargoUnit1,Airlock,Inflatable2,LivingUnit2,LifeSupportUnit2,CargoUnit2];
+PressureFlow = PressureDistribute(Modules,AdjacencyMatrix);
 
 %% Initialize Key Activity Parameters
 
