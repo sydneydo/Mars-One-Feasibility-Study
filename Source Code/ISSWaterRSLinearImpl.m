@@ -14,6 +14,11 @@ classdef ISSWaterRSLinearImpl < handle
     
     %   Note this implementation assumes 100% water processing efficiency
     
+    %   UPDATE LOG
+    %   2/24/2015 - Removed "return" calls so that UPA and WPA code is
+    %   still cycled through when there's an error. Specifically, so that
+    %   WPA runs even if there's a UPA error
+    
     %% Notes to tune to the ISS UPA and WPA
     % From: "ECLSS Design for the International Space Station Nodes 2 and 3" (1999):
     % Urine is plumbed from the W&HC's urinal to the Urine Processor Assembly (UPA) portion of the WRS. 
@@ -133,7 +138,7 @@ classdef ISSWaterRSLinearImpl < handle
                     
                     % Process Dirty Water and send condensate to GreyWaterStore
                     UrineToProcess = obj.UPAwasteWaterTank.take(currentUPAprocessingRate);      % Take urine from UPAwasteWaterTank based on currentUPAprocessingRate
-                    obj.GreyWaterConsumerDefinition.ResourceStore.add(obj.UrineProcessingEfficiency*UrineToProcess);
+                    obj.GreyWaterProducerDefinition.ResourceStore.add(obj.UrineProcessingEfficiency*UrineToProcess);
                     obj.DryWasteProducerDefinition.ResourceStore.add((1-obj.UrineProcessingEfficiency)*UrineToProcess);     % Send brine to dry waste store (we lose this amount of water) - this equivalent to sending brine to the UPA ARFTA (note that dry waste is measured in kg)
                     
                 else
@@ -147,10 +152,10 @@ classdef ISSWaterRSLinearImpl < handle
                     
                 end
                 
-            else
-                % There is an error in the UPA
-                % skip the tick function
-                return
+%             else
+%                 % There is an error in the UPA
+%                 % skip the tick function
+%                 return
                 
             end
             
@@ -197,10 +202,10 @@ classdef ISSWaterRSLinearImpl < handle
                     
                 end
                 
-            else
-                % There is an error in the UPA
-                % skip the tick function
-                return
+%             else
+%                 % There is an error in the UPA
+%                 % skip the tick function
+%                 return
                 
             end
         end

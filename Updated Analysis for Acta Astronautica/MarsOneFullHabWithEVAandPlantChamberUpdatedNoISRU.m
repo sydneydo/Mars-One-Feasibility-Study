@@ -258,7 +258,7 @@ finalEMUvaporlevel = emuVaporlevelcommon*numberOfEVAcrew;
 % EMUinsuitDrinkBag = StoreImpl('EMU Drink Bag','Material',EMUdrinkbagVolume*numberOfEVAcrew,0);
 
 EMUfeedwaterCapacity = 10*0.453592;  % (L), converted from 10 pounds of water, assuming a water density of 1000kg/m^3 = 1kg/L, REF - Section 2.1.4 EMU Handbook
-EMUfeedwaterReservoir = StoreImpl('PLSS Feedwater Reservoir','Material',EMUfeedwaterCapacity,0);
+EMUfeedwaterReservoir = StoreImpl('PLSS Feedwater Reservoir','Material',EMUfeedwaterCapacity*numberOfEVAcrew,0);
 
 % Two options for liquid metabolic waste - either throw it away (as in the
 % EMU MAG), or collect urine and feed it back into the UPA - as in Apollo
@@ -1141,6 +1141,13 @@ subplot(3,3,8), plot(t,cargoUnit2O2level(t)./cargoUnit2TotalMoles(t).*cargoUnit2
 subplot(3,3,9), plot(t,airlockO2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockCO2level./airlockTotalMoles.*airlockPressure(t),t,airlockN2level(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockVaporlevel(t)./airlockTotalMoles(t).*airlockPressure(t),t,airlockOtherlevel(t)./airlockTotalMoles(t).*airlockPressure(t),'LineWidth',2), title('Airlock'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
 
 t = 1:(length(o2storelevel));
+
+figure, 
+subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableCO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableN2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableVaporlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,inflatableOtherlevel(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitCO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitN2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitVaporlevel(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),t,livingUnitOtherlevel(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitCO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitN2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitVaporlevel(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,lifeSupportUnitOtherlevel(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Partial Pressure')
+
 
 % Airlock ppCO2
 figure, plot(t,airlockCO2level./airlockTotalMoles.*airlockPressure,'LineWidth',2),grid on, title('Airlock ppCO2')

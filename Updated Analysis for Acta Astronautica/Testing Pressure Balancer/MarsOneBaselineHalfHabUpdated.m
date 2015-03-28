@@ -1,7 +1,11 @@
 %%  Mars One Default Simulation Case
 %   By: Sydney Do (sydneydo@mit.edu)
 %   Date Created: 6/28/2014
-%   Last Updated: 12/22/2014
+%   Last Updated: 3/27/2015
+%
+%   UPDATE 3/26/2015
+%   Introduced PressureBalancer object to ensure that atmospheric pressures
+%   across all habitats are consistent
 %
 %   UPDATE 12/21/2014
 %   - Corrected plant model code (ShelfImpl3.m - updated 12/20/2014) incorporated
@@ -59,7 +63,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 19000;
+missionDurationInHours = 3000;%19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -70,10 +74,10 @@ TargetO2MolarFraction = 0.265;
 % TotalPPO2Targeted = TargetO2MolarFraction*TotalAtmPressureTargeted;               % targeted O2 partial pressure, in kPa (converted from 26.5% O2)
 
 % ISRU Production Rates
-isruAddedWater = 0.02;      % Liters/hour
-isruAddedCropWater = 1.11;  % Liter/hour
-isruAddedO2 = 0;            % moles/hour
-isruAddedN2 = 1.7;          % moles/hour
+% isruAddedWater = 0.02;      % Liters/hour
+% isruAddedCropWater = 1.11;  % Liter/hour
+% isruAddedO2 = 0;            % moles/hour
+% isruAddedN2 = 1.7;          % moles/hour
 
 isruAddedWater = 0;      % Liters/hour
 isruAddedCropWater = 0;  % Liter/hour
@@ -198,6 +202,11 @@ LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',70.3,25000,0.265,0.0
 CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
 % CargoUnit2 = SimEnvironmentImpl('Cargo Unit 2',70.3,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
 
+% Inflatable1 = SimEnvironmentImpl('Inflatable 1',100,500000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);     %Note volume input is in Liters.
+% LivingUnit1 = SimEnvironmentImpl('Living Unit 1',90,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
+% LifeSupportUnit1 = SimEnvironmentImpl('Life Support Unit 1',110,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
+% CargoUnit1 = SimEnvironmentImpl('Cargo Unit 1',80,25000,0.265,0.003,0.731,0,0.001,hourlyLeakagePercentage,PotableWaterStore,GreyWaterStore,DirtyWaterStore,DryWasteStore,[LocallyGrownFoodStore,CarriedFoodStore]);
+
 %% Set up EVA environment
 % Size EVA for two people - include airlock losses when EVA is executed
 
@@ -312,6 +321,17 @@ airlockCycleLoss = 13.8*airlockFreegasVolume/(idealGasConstant*(273.15+Airlock.t
 % Atmosphere - AIAA2013-3525 - 0.65lb O2 used per EMU (includes inflation)
 prebreatheO2 = 0.65*453.592/O2molarMass*numberOfEVAcrew;   % moles of O2... supplied from O2 tanks
 
+%% Initialize Pressure Balancer
+% Adjacency Matrix to represent connectivity between modules
+AdjacencyMatrix = zeros(4);
+AdjacencyMatrix(1,2) = 1;
+AdjacencyMatrix(2,[1,3,5]) = 1;
+AdjacencyMatrix(3,[2,4]) = 1;
+AdjacencyMatrix(4,3) = 1;
+AdjacencyMatrix(5,2) = 1;
+Modules = [Inflatable1,LivingUnit1,LifeSupportUnit1,CargoUnit1,Airlock];
+PressureFlow = PressureDistribute(Modules,AdjacencyMatrix);
+
 %% Initialize Key Activity Parameters
 
 % Baseline Activities and Location Mappings
@@ -356,18 +376,18 @@ SweetPotatoShelf = ShelfImpl3(SweetPotato,9.8/2,Inflatable1,CropWaterStore,CropW
 WheatShelf = ShelfImpl3(Wheat,72.53/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
 
 % Initialize Staggered Shelves
-WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,WhitePotatoShelf.Crop.TimeAtCropMaturity,0);
-PeanutShelves = ShelfStagger(PeanutShelf,PeanutShelf.Crop.TimeAtCropMaturity,0);
-SoybeanShelves = ShelfStagger(SoybeanShelf,SoybeanShelf.Crop.TimeAtCropMaturity,0);
-SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,SweetPotatoShelf.Crop.TimeAtCropMaturity,0);
-WheatShelves = ShelfStagger(WheatShelf,WheatShelf.Crop.TimeAtCropMaturity,0);
+% WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,WhitePotatoShelf.Crop.TimeAtCropMaturity,0);
+% PeanutShelves = ShelfStagger(PeanutShelf,PeanutShelf.Crop.TimeAtCropMaturity,0);
+% SoybeanShelves = ShelfStagger(SoybeanShelf,SoybeanShelf.Crop.TimeAtCropMaturity,0);
+% SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,SweetPotatoShelf.Crop.TimeAtCropMaturity,0);
+% WheatShelves = ShelfStagger(WheatShelf,WheatShelf.Crop.TimeAtCropMaturity,0);
 
 % Single Shelves for Testing
-% WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,1,0);
-% PeanutShelves = ShelfStagger(PeanutShelf,1,0);
-% SoybeanShelves = ShelfStagger(SoybeanShelf,1,0);
-% SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,1,0);
-% WheatShelves = ShelfStagger(WheatShelf,1,0);
+WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,1,0);
+PeanutShelves = ShelfStagger(PeanutShelf,1,0);
+SoybeanShelves = ShelfStagger(SoybeanShelf,1,0);
+SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,1,0);
+WheatShelves = ShelfStagger(WheatShelf,1,0);
 
 %% Initialize FoodProcessor
 FoodProcessor = FoodProcessorImpl;
@@ -947,6 +967,9 @@ for i = 1:simtime
 %     livingUnit2livingUnitFan.tick;
     livingUnit2AirlockFan.tick;
     
+    % Equalize Pressures Across Modules
+    PressureFlow.tick;
+    
     % Run Power Supply
     powerPS.tick; 
     
@@ -1169,10 +1192,11 @@ subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t),'LineWidth',2
 
 % O2 Partial Pressure
 figure, 
-subplot(2,2,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
-subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
-subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
-subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,3,1), plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,3,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,3,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,3,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+subplot(2,3,5), plot(t,airlockO2level(t)./airlockTotalMoles(t).*airlockPressure(t),'LineWidth',2), title('Airlock'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
 
 
 % CO2 molar fraction (ppm)

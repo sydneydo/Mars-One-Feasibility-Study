@@ -258,7 +258,7 @@ finalEMUvaporlevel = emuVaporlevelcommon*numberOfEVAcrew;
 % EMUinsuitDrinkBag = StoreImpl('EMU Drink Bag','Material',EMUdrinkbagVolume*numberOfEVAcrew,0);
 
 EMUfeedwaterCapacity = 10*0.453592;  % (L), converted from 10 pounds of water, assuming a water density of 1000kg/m^3 = 1kg/L, REF - Section 2.1.4 EMU Handbook
-EMUfeedwaterReservoir = StoreImpl('PLSS Feedwater Reservoir','Material',EMUfeedwaterCapacity,0);
+EMUfeedwaterReservoir = StoreImpl('PLSS Feedwater Reservoir','Material',EMUfeedwaterCapacity*numberOfEVAcrew,0);
 
 % Two options for liquid metabolic waste - either throw it away (as in the
 % EMU MAG), or collect urine and feed it back into the UPA - as in Apollo

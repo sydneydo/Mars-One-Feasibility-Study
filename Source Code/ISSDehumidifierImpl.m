@@ -44,7 +44,7 @@ classdef ISSDehumidifierImpl < handle
     properties
         % Consumer/Producer Definitions
         Environment   % ResourceStore here is set to a SimEnvironment
-        DirtyWaterOutput
+        GreyWaterOutput
         PowerSource     % Power to drive CCAA Inlet (Fan) ORU
         Units = 1           % Number of CCAA units (default value of 1)
         Error = 0
@@ -68,7 +68,7 @@ classdef ISSDehumidifierImpl < handle
         %% Constructor
         function obj = ISSDehumidifierImpl(environment,CondensateOutput,PowerSource,units)
             obj.Environment = environment;
-            obj.DirtyWaterOutput = CondensateOutput;
+            obj.GreyWaterOutput = CondensateOutput;
             obj.PowerSource = PowerSource;
             
             if nargin == 4
@@ -125,7 +125,7 @@ classdef ISSDehumidifierImpl < handle
 
                 % Push humidity condensate to dirty water store (note that we
                 % convert from water moles to water liters here)
-                obj.DirtyWaterOutput.add(vaporMolesRemoved*18.01524/1000);
+                obj.GreyWaterOutput.add(vaporMolesRemoved*18.01524/1000);
                 
                 %% Remove condensed water from environment
 %                 obj.TotalEnvironmentalCondensedWaterRemoved = obj.TotalEnvironmentalCondensedWaterRemoved + obj.DirtyWaterOutput.add(obj.Environment.VaporStore.takeOverflow*18.01524/1000);
