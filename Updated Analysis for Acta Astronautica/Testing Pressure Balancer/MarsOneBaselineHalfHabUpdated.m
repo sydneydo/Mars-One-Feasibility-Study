@@ -4,7 +4,7 @@
 %   Last Updated: 3/27/2015
 %
 %   UPDATE 3/26/2015
-%   Introduced PressureBalancer object to ensure that atmospheric pressures
+%   Introduced PressureDistribution object to ensure that atmospheric pressures
 %   across all habitats are consistent
 %
 %   UPDATE 12/21/2014
@@ -63,7 +63,7 @@ clc
 tic
 
 %% Key Mission Parameters
-missionDurationInHours = 3000;%19000;
+missionDurationInHours = 19000;
 numberOfEVAdaysPerWeek = 5;
 numberOfCrew = 4;
 missionDurationInWeeks = ceil(missionDurationInHours/24/7);
@@ -376,18 +376,18 @@ SweetPotatoShelf = ShelfImpl3(SweetPotato,9.8/2,Inflatable1,CropWaterStore,CropW
 WheatShelf = ShelfImpl3(Wheat,72.53/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
 
 % Initialize Staggered Shelves
-% WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,WhitePotatoShelf.Crop.TimeAtCropMaturity,0);
-% PeanutShelves = ShelfStagger(PeanutShelf,PeanutShelf.Crop.TimeAtCropMaturity,0);
-% SoybeanShelves = ShelfStagger(SoybeanShelf,SoybeanShelf.Crop.TimeAtCropMaturity,0);
-% SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,SweetPotatoShelf.Crop.TimeAtCropMaturity,0);
-% WheatShelves = ShelfStagger(WheatShelf,WheatShelf.Crop.TimeAtCropMaturity,0);
+WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,WhitePotatoShelf.Crop.TimeAtCropMaturity,0);
+PeanutShelves = ShelfStagger(PeanutShelf,PeanutShelf.Crop.TimeAtCropMaturity,0);
+SoybeanShelves = ShelfStagger(SoybeanShelf,SoybeanShelf.Crop.TimeAtCropMaturity,0);
+SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,SweetPotatoShelf.Crop.TimeAtCropMaturity,0);
+WheatShelves = ShelfStagger(WheatShelf,WheatShelf.Crop.TimeAtCropMaturity,0);
 
 % Single Shelves for Testing
-WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,1,0);
-PeanutShelves = ShelfStagger(PeanutShelf,1,0);
-SoybeanShelves = ShelfStagger(SoybeanShelf,1,0);
-SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,1,0);
-WheatShelves = ShelfStagger(WheatShelf,1,0);
+% WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,1,0);
+% PeanutShelves = ShelfStagger(PeanutShelf,1,0);
+% SoybeanShelves = ShelfStagger(SoybeanShelf,1,0);
+% SweetPotatoShelves = ShelfStagger(SweetPotatoShelf,1,0);
+% WheatShelves = ShelfStagger(WheatShelf,1,0);
 
 %% Initialize FoodProcessor
 FoodProcessor = FoodProcessorImpl;
