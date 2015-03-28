@@ -369,11 +369,11 @@ BiomassStore = BiomassStoreImpl(100000);
 CropWaterStore = StoreImpl('Grey Crop H2O','Material',100000,100000);   % Initialize a 9200L water buffer
 
 % Inflatable 1
-WhitePotatoShelf = ShelfImpl3(WhitePotato,5/2,Inflatable,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-PeanutShelf = ShelfImpl3(Peanut,72.68/2,Inflatable,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-SoybeanShelf = ShelfImpl3(Soybean,39.7/2,Inflatable,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-SweetPotatoShelf = ShelfImpl3(SweetPotato,9.8/2,Inflatable,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
-WheatShelf = ShelfImpl3(Wheat,72.53/2,Inflatable,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+WhitePotatoShelf = ShelfImpl3(WhitePotato,5/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+PeanutShelf = ShelfImpl3(Peanut,72.68/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+SoybeanShelf = ShelfImpl3(Soybean,39.7/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+SweetPotatoShelf = ShelfImpl3(SweetPotato,9.8/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
+WheatShelf = ShelfImpl3(Wheat,72.53/2,Inflatable1,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
 
 % Inflatable 2
 WhitePotatoShelf2 = ShelfImpl3(WhitePotato,5/2,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
