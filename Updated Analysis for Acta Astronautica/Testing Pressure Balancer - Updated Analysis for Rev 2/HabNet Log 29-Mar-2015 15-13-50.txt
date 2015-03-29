@@ -1,0 +1,9 @@
+Simulation Run Started: 29-Mar-2015 15:13:50
+Simulation Run without ISRU
+{Undefined variable "WhitePotatoShelves" or function "WhitePotatoShelves.Shelves.hasDied".
+
+Error in <a href="matlab:helpUtils.errorDocCallback('MarsOneFullHabSFCase', 'C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabSFCase.m', 679)" style="font-weight:bold">MarsOneFullHabSFCase</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabSFCase.m',679,0)">line 679</a>)
+    if astro1.alive == 0 || astro2.alive == 0 || astro3.alive == 0 || astro4.alive == 0 ||...
+} 
+MarsOneFullHabSFCase
+Elapsed time is 15.072232 seconds.

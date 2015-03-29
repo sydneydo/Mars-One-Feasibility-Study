@@ -1,0 +1,9 @@
+Simulation Run Started: 29-Mar-2015 15:14:38
+Simulation Run without ISRU
+{Undefined variable "BiomassStore" or function "BiomassStore.currentLevel".
+
+Error in <a href="matlab:helpUtils.errorDocCallback('MarsOneFullHabSFCase', 'C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabSFCase.m', 855)" style="font-weight:bold">MarsOneFullHabSFCase</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabSFCase.m',855,0)">line 855</a>)
+    biomassstorelevel(i) = BiomassStore.currentLevel;
+} 
+MarsOneFullHabSFCase
+Elapsed time is 14.690995 seconds.
