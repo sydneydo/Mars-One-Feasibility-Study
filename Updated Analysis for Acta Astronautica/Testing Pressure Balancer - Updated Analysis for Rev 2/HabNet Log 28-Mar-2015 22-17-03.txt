@@ -1,0 +1,2904 @@
+Simulation Run Started: 28-Mar-2015 22:17:03
+Simulation Run without ISRU
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 1
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 851.8543
+                    pressure: 70.3000
+            RelativeHumidity: 0
+              CondensedVapor: 0
+                O2Percentage: 0.2650
+               CO2Percentage: 0
+                N2Percentage: 0.7340
+             VaporPercentage: 0
+             OtherPercentage: 1.0000e-03
+                  totalMoles: 105.6417
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 2
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.3494e+03
+                    pressure: 70.2985
+            RelativeHumidity: 0
+              CondensedVapor: 0
+                O2Percentage: 0.2650
+               CO2Percentage: 0.0030
+                N2Percentage: 0.7310
+             VaporPercentage: 0
+             OtherPercentage: 1.0000e-03
+                  totalMoles: 105.6395
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 3
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 7.3223e+03
+                    pressure: 70.3285
+            RelativeHumidity: 0
+              CondensedVapor: 0
+                O2Percentage: 0.2650
+               CO2Percentage: 0.0030
+                N2Percentage: 0.7310
+             VaporPercentage: 0
+             OtherPercentage: 0.0010
+                  totalMoles: 105.6845
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 4
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.2500e+04
+                    pressure: 70.3585
+            RelativeHumidity: 2.6822e-12
+              CondensedVapor: 0
+                O2Percentage: 0.2650
+               CO2Percentage: 0.0030
+                N2Percentage: 0.7310
+             VaporPercentage: 1.0730e-13
+             OtherPercentage: 1.0000e-03
+                  totalMoles: 105.7296
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 5
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.8530e+04
+                    pressure: 70.3884
+            RelativeHumidity: 2.8175e-08
+              CondensedVapor: 0
+                O2Percentage: 0.2650
+               CO2Percentage: 0.0030
+                N2Percentage: 0.7310
+             VaporPercentage: 1.1266e-09
+             OtherPercentage: 1.0000e-03
+                  totalMoles: 105.7746
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 6
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 2.5000e+04
+                    pressure: 70.4184
+            RelativeHumidity: 1.0097e-05
+              CondensedVapor: 0
+                O2Percentage: 0.2685
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7290
+             VaporPercentage: 4.0358e-07
+             OtherPercentage: 9.9731e-04
+                  totalMoles: 105.8195
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 7
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.1470e+04
+                    pressure: 70.4482
+            RelativeHumidity: 4.9978e-05
+              CondensedVapor: 0
+                O2Percentage: 0.2685
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7290
+             VaporPercentage: 1.9968e-06
+             OtherPercentage: 9.9731e-04
+                  totalMoles: 105.8644
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 8
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.7500e+04
+                    pressure: 70.4780
+            RelativeHumidity: 0.0113
+              CondensedVapor: 0
+                O2Percentage: 0.2683
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7287
+             VaporPercentage: 4.5196e-04
+             OtherPercentage: 9.9688e-04
+                  totalMoles: 105.9092
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 9
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.2678e+04
+                    pressure: 70.5078
+            RelativeHumidity: 0.0220
+              CondensedVapor: 0
+                O2Percentage: 0.2682
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7284
+             VaporPercentage: 8.7948e-04
+             OtherPercentage: 9.9645e-04
+                  totalMoles: 105.9539
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 10
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.6651e+04
+                    pressure: 70.5254
+            RelativeHumidity: 0.1449
+              CondensedVapor: 0
+                O2Percentage: 0.2663
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7249
+             VaporPercentage: 0.0058
+             OtherPercentage: 9.9167e-04
+                  totalMoles: 105.9804
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 11
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.9148e+04
+                    pressure: 70.5552
+            RelativeHumidity: 0.0422
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7279
+             VaporPercentage: 0.0017
+             OtherPercentage: 9.9569e-04
+                  totalMoles: 106.0252
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 12
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 50000
+                    pressure: 70.5786
+            RelativeHumidity: 0.0517
+              CondensedVapor: 0
+                O2Percentage: 0.2678
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7276
+             VaporPercentage: 0.0021
+             OtherPercentage: 9.9534e-04
+                  totalMoles: 106.0604
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 13
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.9148e+04
+                    pressure: 70.6022
+            RelativeHumidity: 0.1164
+              CondensedVapor: 0
+                O2Percentage: 0.2670
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7257
+             VaporPercentage: 0.0046
+             OtherPercentage: 9.9267e-04
+                  totalMoles: 106.0958
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 14
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.6651e+04
+                    pressure: 70.6322
+            RelativeHumidity: 0.0684
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7269
+             VaporPercentage: 0.0027
+             OtherPercentage: 9.9436e-04
+                  totalMoles: 106.1408
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 15
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.2678e+04
+                    pressure: 70.6501
+            RelativeHumidity: 0.1216
+              CondensedVapor: 0
+                O2Percentage: 0.2672
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7252
+             VaporPercentage: 0.0048
+             OtherPercentage: 9.9209e-04
+                  totalMoles: 106.1678
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 16
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.7500e+04
+                    pressure: 70.6801
+            RelativeHumidity: 0.1227
+              CondensedVapor: 0
+                O2Percentage: 0.2673
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7251
+             VaporPercentage: 0.0049
+             OtherPercentage: 9.9188e-04
+                  totalMoles: 106.2129
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 17
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.1470e+04
+                    pressure: 70.7103
+            RelativeHumidity: 0.1930
+              CondensedVapor: 0
+                O2Percentage: 0.2663
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7231
+             VaporPercentage: 0.0077
+             OtherPercentage: 9.8910e-04
+                  totalMoles: 106.2582
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 18
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 2.5000e+04
+                    pressure: 70.7400
+            RelativeHumidity: 0.3085
+              CondensedVapor: 0
+                O2Percentage: 0.2645
+               CO2Percentage: 0.0025
+                N2Percentage: 0.7197
+             VaporPercentage: 0.0123
+             OtherPercentage: 9.8452e-04
+                  totalMoles: 106.3029
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 19
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.8530e+04
+                    pressure: 70.7698
+            RelativeHumidity: 0.1483
+              CondensedVapor: 0
+                O2Percentage: 0.2672
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7242
+             VaporPercentage: 0.0059
+             OtherPercentage: 9.9061e-04
+                  totalMoles: 106.3477
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 20
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.2500e+04
+                    pressure: 70.7995
+            RelativeHumidity: 0.2061
+              CondensedVapor: 0
+                O2Percentage: 0.2664
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7224
+             VaporPercentage: 0.0082
+             OtherPercentage: 9.8823e-04
+                  totalMoles: 106.3922
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 21
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 7.3223e+03
+                    pressure: 70.8289
+            RelativeHumidity: 0.1483
+              CondensedVapor: 0
+                O2Percentage: 0.2674
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7240
+             VaporPercentage: 0.0059
+             OtherPercentage: 9.9034e-04
+                  totalMoles: 106.4364
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 22
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.3494e+03
+                    pressure: 70.8578
+            RelativeHumidity: 0.1583
+              CondensedVapor: 0
+                O2Percentage: 0.2674
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7236
+             VaporPercentage: 0.0063
+             OtherPercentage: 9.8982e-04
+                  totalMoles: 106.4800
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 23
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 851.8543
+                    pressure: 70.8809
+            RelativeHumidity: 0.1614
+              CondensedVapor: 0
+                O2Percentage: 0.2675
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7236
+             VaporPercentage: 0.0064
+             OtherPercentage: 9.8987e-04
+                  totalMoles: 106.5146
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 24
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 7.4988e-28
+                    pressure: 70.9047
+            RelativeHumidity: 0.2353
+              CondensedVapor: 0
+                O2Percentage: 0.2664
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7215
+             VaporPercentage: 0.0093
+             OtherPercentage: 9.8699e-04
+                  totalMoles: 106.5504
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 25
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 851.8543
+                    pressure: 70.9343
+            RelativeHumidity: 0.2468
+              CondensedVapor: 0
+                O2Percentage: 0.2663
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7209
+             VaporPercentage: 0.0098
+             OtherPercentage: 9.8620e-04
+                  totalMoles: 106.5948
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 26
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.3494e+03
+                    pressure: 70.9635
+            RelativeHumidity: 0.2547
+              CondensedVapor: 0
+                O2Percentage: 0.2663
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7206
+             VaporPercentage: 0.0101
+             OtherPercentage: 9.8576e-04
+                  totalMoles: 106.6388
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 27
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 7.3223e+03
+                    pressure: 70.9936
+            RelativeHumidity: 0.2658
+              CondensedVapor: 0
+                O2Percentage: 0.2662
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7203
+             VaporPercentage: 0.0105
+             OtherPercentage: 9.8536e-04
+                  totalMoles: 106.6840
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 28
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.2500e+04
+                    pressure: 71.0238
+            RelativeHumidity: 0.1650
+              CondensedVapor: 0
+                O2Percentage: 0.2678
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7232
+             VaporPercentage: 0.0065
+             OtherPercentage: 9.8929e-04
+                  totalMoles: 106.7294
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 29
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.8530e+04
+                    pressure: 71.0541
+            RelativeHumidity: 0.2208
+              CondensedVapor: 0
+                O2Percentage: 0.2671
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7217
+             VaporPercentage: 0.0087
+             OtherPercentage: 9.8719e-04
+                  totalMoles: 106.7749
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 30
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 2.5000e+04
+                    pressure: 71.0844
+            RelativeHumidity: 0.1646
+              CondensedVapor: 0
+                O2Percentage: 0.2680
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7230
+             VaporPercentage: 0.0065
+             OtherPercentage: 9.8898e-04
+                  totalMoles: 106.8204
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 31
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.1470e+04
+                    pressure: 71.1147
+            RelativeHumidity: 0.1817
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7224
+             VaporPercentage: 0.0072
+             OtherPercentage: 9.8819e-04
+                  totalMoles: 106.8660
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 32
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.7500e+04
+                    pressure: 71.1452
+            RelativeHumidity: 0.1960
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7219
+             VaporPercentage: 0.0078
+             OtherPercentage: 9.8751e-04
+                  totalMoles: 106.9118
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 33
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.2678e+04
+                    pressure: 71.1758
+            RelativeHumidity: 0.2101
+              CondensedVapor: 0
+                O2Percentage: 0.2678
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7214
+             VaporPercentage: 0.0083
+             OtherPercentage: 9.8683e-04
+                  totalMoles: 106.9577
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 34
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.6651e+04
+                    pressure: 71.2002
+            RelativeHumidity: 0.3360
+              CondensedVapor: 0
+                O2Percentage: 0.2660
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7177
+             VaporPercentage: 0.0133
+             OtherPercentage: 9.8185e-04
+                  totalMoles: 106.9945
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 35
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.9148e+04
+                    pressure: 71.2248
+            RelativeHumidity: 0.3450
+              CondensedVapor: 0
+                O2Percentage: 0.2660
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7174
+             VaporPercentage: 0.0136
+             OtherPercentage: 9.8134e-04
+                  totalMoles: 107.0314
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 36
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 50000
+                    pressure: 71.2435
+            RelativeHumidity: 0.2440
+              CondensedVapor: 0
+                O2Percentage: 0.2677
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7201
+             VaporPercentage: 0.0096
+             OtherPercentage: 9.8513e-04
+                  totalMoles: 107.0595
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 37
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.9148e+04
+                    pressure: 71.2744
+            RelativeHumidity: 0.3076
+              CondensedVapor: 0
+                O2Percentage: 0.2669
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7183
+             VaporPercentage: 0.0121
+             OtherPercentage: 9.8254e-04
+                  totalMoles: 107.1059
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 38
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.6651e+04
+                    pressure: 71.3047
+            RelativeHumidity: 0.3152
+              CondensedVapor: 0
+                O2Percentage: 0.2669
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7179
+             VaporPercentage: 0.0124
+             OtherPercentage: 9.8210e-04
+                  totalMoles: 107.1515
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 39
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.2678e+04
+                    pressure: 71.3292
+            RelativeHumidity: 0.3672
+              CondensedVapor: 0
+                O2Percentage: 0.2662
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7164
+             VaporPercentage: 0.0145
+             OtherPercentage: 9.7993e-04
+                  totalMoles: 107.1883
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 40
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.7500e+04
+                    pressure: 71.3600
+            RelativeHumidity: 0.4757
+              CondensedVapor: 0
+                O2Percentage: 0.2646
+               CO2Percentage: 0.0025
+                N2Percentage: 0.7132
+             VaporPercentage: 0.0188
+             OtherPercentage: 9.7559e-04
+                  totalMoles: 107.2346
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 41
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.1470e+04
+                    pressure: 71.3847
+            RelativeHumidity: 0.3161
+              CondensedVapor: 0
+                O2Percentage: 0.2672
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7176
+             VaporPercentage: 0.0125
+             OtherPercentage: 9.8157e-04
+                  totalMoles: 107.2718
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 42
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 2.5000e+04
+                    pressure: 71.3628
+            RelativeHumidity: 0.3212
+              CondensedVapor: 0
+                O2Percentage: 0.2673
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7173
+             VaporPercentage: 0.0127
+             OtherPercentage: 9.8128e-04
+                  totalMoles: 107.2387
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 43
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.8530e+04
+                    pressure: 71.3929
+            RelativeHumidity: 0.4393
+              CondensedVapor: 0
+                O2Percentage: 0.2655
+               CO2Percentage: 0.0023
+                N2Percentage: 0.7140
+             VaporPercentage: 0.0173
+             OtherPercentage: 9.7671e-04
+                  totalMoles: 107.2840
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 44
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.2500e+04
+                    pressure: 71.3575
+            RelativeHumidity: 0.3345
+              CondensedVapor: 0
+                O2Percentage: 0.2672
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7169
+             VaporPercentage: 0.0132
+             OtherPercentage: 9.8066e-04
+                  totalMoles: 107.2308
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 45
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 7.3223e+03
+                    pressure: 71.3872
+            RelativeHumidity: 0.3460
+              CondensedVapor: 0
+                O2Percentage: 0.2671
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7165
+             VaporPercentage: 0.0136
+             OtherPercentage: 9.8018e-04
+                  totalMoles: 107.2754
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 46
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.3494e+03
+                    pressure: 71.3523
+            RelativeHumidity: 0.3502
+              CondensedVapor: 0
+                O2Percentage: 0.2673
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7164
+             VaporPercentage: 0.0138
+             OtherPercentage: 9.8017e-04
+                  totalMoles: 107.2230
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 47
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 851.8543
+                    pressure: 71.3819
+            RelativeHumidity: 0.3130
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7173
+             VaporPercentage: 0.0123
+             OtherPercentage: 9.8122e-04
+                  totalMoles: 107.2675
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 48
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 2.9995e-27
+                    pressure: 71.4053
+            RelativeHumidity: 0.3752
+              CondensedVapor: 0
+                O2Percentage: 0.2671
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7154
+             VaporPercentage: 0.0148
+             OtherPercentage: 9.7879e-04
+                  totalMoles: 107.3026
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 49
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 851.8543
+                    pressure: 71.3818
+            RelativeHumidity: 0.3807
+              CondensedVapor: 0
+                O2Percentage: 0.2670
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7153
+             VaporPercentage: 0.0150
+             OtherPercentage: 9.7846e-04
+                  totalMoles: 107.2674
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 50
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.3494e+03
+                    pressure: 71.3589
+            RelativeHumidity: 0.3907
+              CondensedVapor: 0
+                O2Percentage: 0.2669
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7150
+             VaporPercentage: 0.0154
+             OtherPercentage: 9.7815e-04
+                  totalMoles: 107.2329
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 51
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 7.3223e+03
+                    pressure: 71.3676
+            RelativeHumidity: 0.3056
+              CondensedVapor: 0
+                O2Percentage: 0.2674
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7176
+             VaporPercentage: 0.0121
+             OtherPercentage: 9.8161e-04
+                  totalMoles: 107.2460
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 52
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.2500e+04
+                    pressure: 71.3981
+            RelativeHumidity: 0.3971
+              CondensedVapor: 0
+                O2Percentage: 0.2669
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7147
+             VaporPercentage: 0.0157
+             OtherPercentage: 9.7773e-04
+                  totalMoles: 107.2919
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 53
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.8530e+04
+                    pressure: 71.3755
+            RelativeHumidity: 0.4021
+              CondensedVapor: 0
+                O2Percentage: 0.2670
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7146
+             VaporPercentage: 0.0159
+             OtherPercentage: 9.7765e-04
+                  totalMoles: 107.2579
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 54
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 2.5000e+04
+                    pressure: 71.4063
+            RelativeHumidity: 0.3501
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7158
+             VaporPercentage: 0.0138
+             OtherPercentage: 9.7932e-04
+                  totalMoles: 107.3041
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 55
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.1470e+04
+                    pressure: 71.3834
+            RelativeHumidity: 0.3632
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7153
+             VaporPercentage: 0.0143
+             OtherPercentage: 9.7852e-04
+                  totalMoles: 107.2698
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 56
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.7500e+04
+                    pressure: 71.3615
+            RelativeHumidity: 0.3754
+              CondensedVapor: 0
+                O2Percentage: 0.2678
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7149
+             VaporPercentage: 0.0148
+             OtherPercentage: 9.7793e-04
+                  totalMoles: 107.2368
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 57
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.2678e+04
+                    pressure: 71.3924
+            RelativeHumidity: 0.3872
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7144
+             VaporPercentage: 0.0153
+             OtherPercentage: 9.7746e-04
+                  totalMoles: 107.2832
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 58
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.6651e+04
+                    pressure: 71.3701
+            RelativeHumidity: 0.3954
+              CondensedVapor: 0
+                O2Percentage: 0.2677
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7142
+             VaporPercentage: 0.0156
+             OtherPercentage: 9.7693e-04
+                  totalMoles: 107.2497
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 59
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.9148e+04
+                    pressure: 71.3949
+            RelativeHumidity: 0.4605
+              CondensedVapor: 0
+                O2Percentage: 0.2669
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7122
+             VaporPercentage: 0.0182
+             OtherPercentage: 9.7445e-04
+                  totalMoles: 107.2870
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 60
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 50000
+                    pressure: 57.5486
+            RelativeHumidity: 0.3068
+              CondensedVapor: 0
+                O2Percentage: 0.0930
+               CO2Percentage: 0.0025
+                N2Percentage: 0.8883
+             VaporPercentage: 0.0150
+             OtherPercentage: 0.0012
+                  totalMoles: 86.4799
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 61
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.9148e+04
+                    pressure: 71.3419
+            RelativeHumidity: 0.3103
+              CondensedVapor: 0
+                O2Percentage: 0.2641
+               CO2Percentage: 0.0020
+                N2Percentage: 0.7206
+             VaporPercentage: 0.0122
+             OtherPercentage: 9.9013e-04
+                  totalMoles: 107.2073
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 62
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.6651e+04
+                    pressure: 71.2825
+            RelativeHumidity: 0.4326
+              CondensedVapor: 0
+                O2Percentage: 0.2678
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7126
+             VaporPercentage: 0.0171
+             OtherPercentage: 9.7500e-04
+                  totalMoles: 107.1181
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 63
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.2678e+04
+                    pressure: 71.3017
+            RelativeHumidity: 0.4858
+              CondensedVapor: 0
+                O2Percentage: 0.2670
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7111
+             VaporPercentage: 0.0192
+             OtherPercentage: 9.7275e-04
+                  totalMoles: 107.1470
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 64
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.7500e+04
+                    pressure: 71.2836
+            RelativeHumidity: 0.3064
+              CondensedVapor: 0
+                O2Percentage: 0.2688
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7163
+             VaporPercentage: 0.0121
+             OtherPercentage: 9.7999e-04
+                  totalMoles: 107.1197
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 65
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.1470e+04
+                    pressure: 71.2706
+            RelativeHumidity: 0.3064
+              CondensedVapor: 0
+                O2Percentage: 0.2689
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7162
+             VaporPercentage: 0.0121
+             OtherPercentage: 9.7977e-04
+                  totalMoles: 107.1003
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 66
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 2.5000e+04
+                    pressure: 71.2832
+            RelativeHumidity: 0.4402
+              CondensedVapor: 0
+                O2Percentage: 0.2681
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7120
+             VaporPercentage: 0.0174
+             OtherPercentage: 9.7407e-04
+                  totalMoles: 107.1192
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 67
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.8530e+04
+                    pressure: 72.2078
+            RelativeHumidity: 0.4410
+              CondensedVapor: 0
+                O2Percentage: 0.2742
+               CO2Percentage: 0.0016
+                N2Percentage: 0.7061
+             VaporPercentage: 0.0172
+             OtherPercentage: 9.6586e-04
+                  totalMoles: 108.5086
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 68
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.2500e+04
+                    pressure: 71.3174
+            RelativeHumidity: 0.4322
+              CondensedVapor: 0
+                O2Percentage: 0.2674
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7131
+             VaporPercentage: 0.0171
+             OtherPercentage: 9.7530e-04
+                  totalMoles: 107.1706
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 69
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 7.3223e+03
+                    pressure: 71.3438
+            RelativeHumidity: 0.4940
+              CondensedVapor: 0
+                O2Percentage: 0.2665
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7113
+             VaporPercentage: 0.0195
+             OtherPercentage: 9.7302e-04
+                  totalMoles: 107.2103
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 70
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.3494e+03
+                    pressure: 71.3305
+            RelativeHumidity: 0.4979
+              CondensedVapor: 0
+                O2Percentage: 0.2666
+               CO2Percentage: 0.0017
+                N2Percentage: 0.7111
+             VaporPercentage: 0.0196
+             OtherPercentage: 9.7272e-04
+                  totalMoles: 107.1903
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 71
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 851.8543
+                    pressure: 71.3616
+            RelativeHumidity: 0.6058
+              CondensedVapor: 0
+                O2Percentage: 0.2649
+               CO2Percentage: 0.0022
+                N2Percentage: 0.7080
+             VaporPercentage: 0.0239
+             OtherPercentage: 9.6847e-04
+                  totalMoles: 107.2370
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 72
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 6.7489e-27
+                    pressure: 71.3619
+            RelativeHumidity: 0.3647
+              CondensedVapor: 0
+                O2Percentage: 0.2674
+               CO2Percentage: 0.0023
+                N2Percentage: 0.7150
+             VaporPercentage: 0.0144
+             OtherPercentage: 9.7803e-04
+                  totalMoles: 107.2375
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 73
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 851.8543
+                    pressure: 71.3551
+            RelativeHumidity: 0.4920
+              CondensedVapor: 0
+                O2Percentage: 0.2669
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7109
+             VaporPercentage: 0.0194
+             OtherPercentage: 9.7251e-04
+                  totalMoles: 107.2272
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 74
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.3494e+03
+                    pressure: 71.3640
+            RelativeHumidity: 0.4361
+              CondensedVapor: 0
+                O2Percentage: 0.2679
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7124
+             VaporPercentage: 0.0172
+             OtherPercentage: 9.7458e-04
+                  totalMoles: 107.2406
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 75
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 7.3223e+03
+                    pressure: 71.3843
+            RelativeHumidity: 0.3639
+              CondensedVapor: 0
+                O2Percentage: 0.2677
+               CO2Percentage: 0.0025
+                N2Percentage: 0.7145
+             VaporPercentage: 0.0143
+             OtherPercentage: 9.7737e-04
+                  totalMoles: 107.2711
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 76
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.2500e+04
+                    pressure: 71.3631
+            RelativeHumidity: 0.4408
+              CondensedVapor: 0
+                O2Percentage: 0.2681
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7120
+             VaporPercentage: 0.0174
+             OtherPercentage: 9.7405e-04
+                  totalMoles: 107.2392
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 77
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 1.8530e+04
+                    pressure: 71.3947
+            RelativeHumidity: 0.3050
+              CondensedVapor: 0
+                O2Percentage: 0.2695
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7160
+             VaporPercentage: 0.0120
+             OtherPercentage: 9.7945e-04
+                  totalMoles: 107.2866
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 78
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 2.5000e+04
+                    pressure: 71.3731
+            RelativeHumidity: 0.4409
+              CondensedVapor: 0
+                O2Percentage: 0.2653
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7148
+             VaporPercentage: 0.0174
+             OtherPercentage: 9.7789e-04
+                  totalMoles: 107.2543
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 79
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.1470e+04
+                    pressure: 71.4047
+            RelativeHumidity: 0.4513
+              CondensedVapor: 0
+                O2Percentage: 0.2682
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7116
+             VaporPercentage: 0.0178
+             OtherPercentage: 9.7338e-04
+                  totalMoles: 107.3017
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 80
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 3.7500e+04
+                    pressure: 71.3827
+            RelativeHumidity: 0.4625
+              CondensedVapor: 0
+                O2Percentage: 0.2682
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7111
+             VaporPercentage: 0.0182
+             OtherPercentage: 9.7291e-04
+                  totalMoles: 107.2687
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 81
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.2678e+04
+                    pressure: 71.4031
+            RelativeHumidity: 0.4735
+              CondensedVapor: 0
+                O2Percentage: 0.2681
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7107
+             VaporPercentage: 0.0187
+             OtherPercentage: 9.7226e-04
+                  totalMoles: 107.2993
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 82
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.6651e+04
+                    pressure: 71.0776
+            RelativeHumidity: 0.4765
+              CondensedVapor: 0
+                O2Percentage: 0.2682
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7105
+             VaporPercentage: 0.0189
+             OtherPercentage: 9.7210e-04
+                  totalMoles: 106.8102
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 83
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.9148e+04
+                    pressure: 71.0550
+            RelativeHumidity: 0.4834
+              CondensedVapor: 0
+                O2Percentage: 0.2681
+               CO2Percentage: 0.0015
+                N2Percentage: 0.7102
+             VaporPercentage: 0.0191
+             OtherPercentage: 9.7152e-04
+                  totalMoles: 106.7762
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 84
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 50000
+                    pressure: 57.2424
+            RelativeHumidity: 0.3614
+              CondensedVapor: 0
+                O2Percentage: 0.0892
+               CO2Percentage: 0.0025
+                N2Percentage: 0.8894
+             VaporPercentage: 0.0178
+             OtherPercentage: 0.0012
+                  totalMoles: 86.0197
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+
+ans = 
+
+  <a href="matlab:helpPopup SimEnvironmentImpl" style="font-weight:bold">SimEnvironmentImpl</a> with properties:
+
+                        name: 'Airlock'
+                          id: 0
+                   tickcount: 85
+                      volume: 3700
+                 temperature: 23
+                   maxlumens: 50000
+           leakagePercentage: 0
+              lightIntensity: 4.9148e+04
+                    pressure: 71.0511
+            RelativeHumidity: 0.3128
+              CondensedVapor: 0
+                O2Percentage: 0.2654
+               CO2Percentage: 0.0018
+                N2Percentage: 0.7195
+             VaporPercentage: 0.0124
+             OtherPercentage: 9.8845e-04
+                  totalMoles: 106.7703
+    DangerousOxygenThreshold: 0.3000
+                     O2Store: [1x1 StoreImpl]
+                    CO2Store: [1x1 StoreImpl]
+               NitrogenStore: [1x1 StoreImpl]
+                  VaporStore: [1x1 StoreImpl]
+                  OtherStore: [1x1 StoreImpl]
+           PotableWaterStore: []
+              GreyWaterStore: []
+             DirtyWaterStore: []
+               DryWasteStore: []
+                   FoodStore: []
+
+{Operation terminated by user during <a href="matlab:helpUtils.errorDocCallback('StoreImpl/add', 'C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\StoreImpl.m', 0)" style="font-weight:bold">StoreImpl/add</a>
+
+
+In <a href="matlab:helpUtils.errorDocCallback('CO2Injector/tick', 'C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\CO2Injector.m', 25)" style="font-weight:bold">CO2Injector/tick</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\CO2Injector.m',25,0)">line 25</a>)
+            co2injected =
+            obj.Environment.CO2Store.add(CO2toInject);
+            
+In <a href="matlab:helpUtils.errorDocCallback('MarsOneFullHabBPSCase', 'C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabBPSCase.m', 1047)" style="font-weight:bold">MarsOneFullHabBPSCase</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabBPSCase.m',1047,0)">line 1047</a>)
+    co2Injector.tick;
+} 
+MarsOneFullHabBPSCase
+Elapsed time is 4.639107 seconds.

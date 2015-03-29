@@ -83,7 +83,7 @@ TargetO2MolarFraction = 0.265;
 % isruAddedO2 = 0;            % moles/hour
 % isruAddedN2 = 1.7;          % moles/hour
 
-isruAddedWater = 0;      % Liters/hour
+isruAddedWater = 0.21;      % Liters/hour
 isruAddedCropWater = 0;  % Liter/hour
 isruAddedO2 = 0;            % moles/hour
 isruAddedN2 = 0;          % moles/hour
@@ -956,7 +956,7 @@ for i = 1:simtime
     LifeSupportUnit2.tick;
     CargoUnit1.tick;
     CargoUnit2.tick;
-    Airlock.tick
+    Airlock.tick;
     
     % Run Fans
     inflatable2LivingUnitFan.tick;
