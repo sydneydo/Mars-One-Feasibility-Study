@@ -1,0 +1,2620 @@
+Simulation Run Started: 29-Mar-2015 15:19:50
+Simulation Run without ISRU
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2747
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2763
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2766
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2778
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2781
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2797
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2800
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2815
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2818
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2882
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2898
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2900
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2916
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2918
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2934
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2936
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2949
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 2951
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3012
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3015
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3037
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3039
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3042
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3045
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3061
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3064
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3079
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3081
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3145
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3148
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3160
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3163
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3175
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3178
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3190
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3193
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3205
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3208
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3272
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3275
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3287
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3290
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3312
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3314
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3317
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3320
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3336
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3339
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3399
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3402
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3424
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3426
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3429
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3432
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3448
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3451
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3463
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3466
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3526
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3529
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3541
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3544
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3556
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3559
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3571
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3574
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3590
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3593
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3653
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3656
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3668
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3671
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3683
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3686
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3709
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3720
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3723
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3783
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3786
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3802
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3805
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3817
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3820
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3842
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3844
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3858
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3860
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3911
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3914
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3926
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3940
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3942
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3961
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3964
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3977
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3979
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 3998
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4041
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4057
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4060
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4083
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4099
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4102
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4114
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4116
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4118
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4179
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4192
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4208
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4224
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4226
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4228
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4241
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4254
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4266
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4282
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4326
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4329
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4344
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4346
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4359
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4361
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4363
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4376
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4378
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4394
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4438
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4454
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4456
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4458
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4461
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4488
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4491
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4494
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4497
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4513
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4564
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4576
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4579
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4615
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4618
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4634
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4650
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4666
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4693
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4709
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4712
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4735
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4747
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4749
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4751
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4754
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4771
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4774
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4816
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4832
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4834
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4871
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4873
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4875
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4895
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4910
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4913
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4929
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4993
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4995
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 4997
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5013
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5016
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5028
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5044
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5047
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5070
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5110
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5133
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5149
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5151
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5153
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5156
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5207
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5234
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5237
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5249
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5252
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5275
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5290
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5292
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5305
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5307
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5368
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5370
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5372
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5385
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5387
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5403
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5419
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5422
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5438
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5454
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5480
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5482
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5498
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5514
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5517
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5529
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5532
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5555
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5571
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5618
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5634
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5636
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5638
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5641
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5657
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5673
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5675
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5698
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5714
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5741
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5757
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5776
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5796
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5799
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5814
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5816
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5818
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5831
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5847
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5874
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5890
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5906
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5932
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5934
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5947
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5963
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5979
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 5982
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6005
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6027
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6038
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6041
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6057
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6060
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6072
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6122
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6135
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6162
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6174
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6177
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6193
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6196
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6211
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6238
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6258
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6273
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6275
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6291
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6307
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6334
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6350
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6353
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6369
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6395
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6414
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6454
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6456
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6469
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6471
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6473
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6486
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6489
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6511
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6527
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6554
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6590
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6593
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6609
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6625
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6628
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6650
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6670
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6686
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6702
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6729
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6741
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6744
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6784
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6787
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6799
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6825
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6827
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6840
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6856
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6859
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6875
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6878
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6894
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6896
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6935
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6938
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6954
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6956
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6969
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 6985
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7001
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7004
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7027
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7043
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7086
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7089
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7101
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7127
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7140
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7143
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7165
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7181
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7197
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7224
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7247
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7270
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7282
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7284
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7286
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7299
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7301
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7317
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7333
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7336
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7352
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7355
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7367
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7383
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7386
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7433
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7449
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7465
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7467
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7515
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7527
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7529
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7542
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7544
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7546
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7549
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7565
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7567
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7631
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7647
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7650
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7662
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7665
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7681
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7708
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7724
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7750
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7766
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7768
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7785
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7809
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7824
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7840
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7843
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7855
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7858
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7898
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7901
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7913
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7916
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7928
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7931
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7971
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7990
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 7993
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8029
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8056
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8072
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8088
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8091
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8107
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8110
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8126
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8129
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8169
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8188
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8204
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8207
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8219
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8222
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8234
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8237
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8260
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8320
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8323
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8335
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8338
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8350
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8353
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8365
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8381
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8445
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8448
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8464
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8480
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8503
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8505
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8518
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8545
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8561
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8563
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8576
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8578
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8601
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8641
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8657
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8660
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8700
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8703
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8742
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8744
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8746
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8759
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8775
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8778
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8794
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8797
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8857
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8859
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8861
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8864
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8867
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8870
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8873
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8876
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8943
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8963
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 8966
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9002
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9004
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9017
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9019
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9059
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9062
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9074
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9125
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9137
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9140
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9152
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9168
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9171
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9183
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9199
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9226
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9249
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9261
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9264
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9276
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9292
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9295
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9307
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9323
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9350
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9366
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9369
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9405
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9407
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9409
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9412
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9439
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9455
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9474
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9490
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9493
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9509
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9525
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9527
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9543
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9563
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9566
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9589
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9605
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9621
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9648
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9664
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9667
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9683
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9686
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9701
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9717
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9720
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9736
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9752
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9755
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9791
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9794
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9810
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9813
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9836
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9875
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9877
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9890
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9893
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9909
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9928
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9948
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9951
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9963
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 9966
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10026
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10029
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10052
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10064
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10067
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10079
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10082
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10129
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10145
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10161
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10184
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10200
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10203
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10215
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10218
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10234
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10261
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10277
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10293
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10309
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10312
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10324
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10327
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10374
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10413
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10437
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10453
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10455
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10468
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10471
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10487
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10490
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10502
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10504
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10552
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10567
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10569
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10582
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10584
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10586
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10602
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10605
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10621
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10685
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10688
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10724
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10727
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10743
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10759
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10761
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10774
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10790
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10817
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10833
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10876
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10879
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10891
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10894
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10930
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10933
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10956
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10972
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10975
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10987
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 10990
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11002
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11005
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11028
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11044
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11087
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11090
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11102
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11105
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11117
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11120
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11132
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11135
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11158
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11222
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11240
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11243
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11255
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11258
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11274
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11290
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11293
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11305
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11321
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11324
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11347
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11363
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11366
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11382
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11398
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11401
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11423
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11425
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11441
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11485
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11487
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11511
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11523
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11525
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11541
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11561
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11580
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11596
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11599
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11615
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11618
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11630
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11657
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11668
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11671
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11674
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11693
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11733
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11749
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11752
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11764
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11767
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11783
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11786
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11802
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11829
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11841
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11868
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11884
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11887
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11899
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11902
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11918
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11921
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11940
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 11956
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12020
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12023
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12035
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12038
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12054
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12057
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12073
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12095
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12112
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12139
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12157
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12159
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12172
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12174
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12176
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12192
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12208
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12211
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12271
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12274
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12286
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12289
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12301
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12304
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12320
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12343
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12383
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12386
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12398
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12425
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12441
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12457
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12460
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12476
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12499
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12539
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12541
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12557
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12560
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12572
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12575
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12591
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12594
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12617
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12657
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12680
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12699
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12701
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12714
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12730
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12733
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12749
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12752
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12764
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12815
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12831
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12834
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12846
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12849
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12861
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12864
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12928
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12944
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12947
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12983
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 12986
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13002
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13005
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13021
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13023
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13065
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13083
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13085
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13101
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13117
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13120
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13132
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13135
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13158
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13198
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13214
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13217
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13233
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13236
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13248
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13264
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13267
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13279
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13282
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13305
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13341
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13357
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13360
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13372
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13375
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13387
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13390
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13402
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13466
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13469
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13481
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13484
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13500
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13516
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13518
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13531
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13582
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13598
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13601
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13615
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13631
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13634
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13646
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13649
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13689
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13729
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13731
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13733
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13746
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13748
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13750
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13763
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13765
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13778
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13780
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13793
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13857
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13873
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13876
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13888
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13891
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13914
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13930
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13953
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13969
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13972
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13988
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 13990
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14003
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14006
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14028
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14041
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14043
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14090
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14103
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14105
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14118
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14134
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14137
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14160
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14183
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14199
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14215
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14231
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14234
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14257
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14273
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14276
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14288
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14315
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14326
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14377
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14396
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14399
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14435
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14437
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14450
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14452
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14468
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14471
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14483
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14534
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14550
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14553
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14567
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14569
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14582
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14585
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14597
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14600
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14636
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14663
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14686
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14698
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14701
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14713
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14716
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14732
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14775
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14778
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14794
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14817
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14833
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14835
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14848
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14851
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14867
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14870
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14930
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14946
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14949
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14972
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14987
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 14989
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15005
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15028
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15048
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15075
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15091
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15107
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15109
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15111
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15114
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15130
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15149
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15176
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15191
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15215
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15217
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15230
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15232
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15248
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15250
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15263
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15266
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15278
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15329
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15345
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15361
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15388
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15409
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15425
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15427
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15443
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15459
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15462
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15478
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15481
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15493
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15516
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15519
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15559
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15577
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15593
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15596
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15636
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15639
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15654
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15678
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15704
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15720
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15736
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15762
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15764
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15780
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15783
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15795
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15797
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15799
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15802
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15838
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15854
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15875
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15878
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15914
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15916
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15918
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15921
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15924
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15937
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15939
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 15952
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16003
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16006
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16018
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16032
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16044
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16047
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16066
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16082
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16105
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16121
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16124
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16143
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16163
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16181
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16184
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16196
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16199
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16211
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16214
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16237
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16249
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16252
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16268
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16271
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16283
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16286
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16298
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16301
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16348
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16371
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16383
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16409
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16446
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16448
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16450
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16463
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16465
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16478
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16480
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16483
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16495
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16522
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16549
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16565
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16568
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16584
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16611
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16623
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16626
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16638
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16641
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16701
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16704
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16720
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16736
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16738
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16740
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16743
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16746
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16797
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16813
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16816
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16828
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16830
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16870
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16873
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16885
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16888
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16900
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16927
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16950
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16965
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16967
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16980
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16983
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 16995
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17059
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17075
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17078
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17094
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17097
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17136
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17138
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17154
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17157
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17169
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17196
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17212
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17215
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17238
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17253
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17269
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17272
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17284
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17300
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17327
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17343
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17366
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17381
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17407
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17423
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17426
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17438
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17441
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17457
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17473
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17476
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17488
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17491
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17538
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17550
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17553
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17565
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17581
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17584
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17607
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17619
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17622
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17638
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17641
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17657
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17724
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17726
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17742
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17758
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17761
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17777
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17780
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17795
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17815
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17858
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17861
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17877
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17880
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17892
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17919
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17931
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17934
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17950
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 17997
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18016
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18032
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18034
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18036
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18041
+Female 1 is currently dehydrated on tick: 18041
+Male 2 is currently dehydrated on tick: 18041
+Female 2 is currently dehydrated on tick: 18041
+Male 1 is currently dehydrated on tick: 18042
+Female 1 is currently dehydrated on tick: 18042
+Male 2 is currently dehydrated on tick: 18042
+Female 2 is currently dehydrated on tick: 18042
+Male 1 is currently dehydrated on tick: 18043
+Female 1 is currently dehydrated on tick: 18043
+Male 2 is currently dehydrated on tick: 18043
+Female 2 is currently dehydrated on tick: 18043
+Male 1 is currently dehydrated on tick: 18044
+Female 1 is currently dehydrated on tick: 18044
+Male 2 is currently dehydrated on tick: 18044
+Female 2 is currently dehydrated on tick: 18044
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18049
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18051
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18064
+Current EVA has been skipped
+Female 2 is currently dehydrated on tick: 18087
+Male 1 is currently dehydrated on tick: 18088
+Female 1 is currently dehydrated on tick: 18088
+Male 2 is currently dehydrated on tick: 18088
+Female 2 is currently dehydrated on tick: 18088
+Male 1 is currently dehydrated on tick: 18089
+Female 1 is currently dehydrated on tick: 18089
+Male 2 is currently dehydrated on tick: 18089
+Female 2 is currently dehydrated on tick: 18089
+Male 1 is currently dehydrated on tick: 18090
+Female 1 is currently dehydrated on tick: 18090
+Male 2 is currently dehydrated on tick: 18090
+Female 2 is currently dehydrated on tick: 18090
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18090
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18092
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18105
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18118
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18131
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18134
+Female 1 is currently dehydrated on tick: 18134
+Male 2 is currently dehydrated on tick: 18134
+Female 2 is currently dehydrated on tick: 18134
+Male 1 is currently dehydrated on tick: 18135
+Female 1 is currently dehydrated on tick: 18135
+Male 2 is currently dehydrated on tick: 18135
+Female 2 is currently dehydrated on tick: 18135
+Male 1 is currently dehydrated on tick: 18136
+Female 1 is currently dehydrated on tick: 18136
+Male 2 is currently dehydrated on tick: 18136
+Female 2 is currently dehydrated on tick: 18136
+Male 1 is currently dehydrated on tick: 18137
+Female 1 is currently dehydrated on tick: 18137
+Male 2 is currently dehydrated on tick: 18137
+Female 2 is currently dehydrated on tick: 18137
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18152
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18155
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18167
+Current EVA has been skipped
+Female 1 is currently dehydrated on tick: 18181
+Male 2 is currently dehydrated on tick: 18181
+Female 2 is currently dehydrated on tick: 18181
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18181
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18182
+Female 1 is currently dehydrated on tick: 18182
+Male 2 is currently dehydrated on tick: 18182
+Female 2 is currently dehydrated on tick: 18182
+Male 1 is currently dehydrated on tick: 18183
+Female 1 is currently dehydrated on tick: 18183
+Male 2 is currently dehydrated on tick: 18183
+Female 2 is currently dehydrated on tick: 18183
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18193
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18196
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18212
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18215
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18227
+Female 1 is currently dehydrated on tick: 18227
+Male 2 is currently dehydrated on tick: 18227
+Female 2 is currently dehydrated on tick: 18227
+Male 1 is currently dehydrated on tick: 18228
+Female 1 is currently dehydrated on tick: 18228
+Male 2 is currently dehydrated on tick: 18228
+Female 2 is currently dehydrated on tick: 18228
+Male 1 is currently dehydrated on tick: 18229
+Female 1 is currently dehydrated on tick: 18229
+Male 2 is currently dehydrated on tick: 18229
+Female 2 is currently dehydrated on tick: 18229
+Male 1 is currently dehydrated on tick: 18230
+Female 1 is currently dehydrated on tick: 18230
+Male 2 is currently dehydrated on tick: 18230
+Female 2 is currently dehydrated on tick: 18230
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18231
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18234
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18246
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18249
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18261
+Current EVA has been skipped
+Female 1 is currently dehydrated on tick: 18273
+Male 2 is currently dehydrated on tick: 18273
+Female 2 is currently dehydrated on tick: 18273
+Male 1 is currently dehydrated on tick: 18274
+Female 1 is currently dehydrated on tick: 18274
+Male 2 is currently dehydrated on tick: 18274
+Female 2 is currently dehydrated on tick: 18274
+Male 1 is currently dehydrated on tick: 18275
+Female 1 is currently dehydrated on tick: 18275
+Male 2 is currently dehydrated on tick: 18275
+Female 2 is currently dehydrated on tick: 18275
+Male 1 is currently dehydrated on tick: 18276
+Female 1 is currently dehydrated on tick: 18276
+Male 2 is currently dehydrated on tick: 18276
+Female 2 is currently dehydrated on tick: 18276
+Male 1 is currently dehydrated on tick: 18277
+Female 1 is currently dehydrated on tick: 18277
+Male 2 is currently dehydrated on tick: 18277
+Female 2 is currently dehydrated on tick: 18277
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18277
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18278
+Female 1 is currently dehydrated on tick: 18278
+Male 2 is currently dehydrated on tick: 18278
+Female 2 is currently dehydrated on tick: 18278
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18304
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18320
+Current EVA has been skipped
+Female 2 is currently dehydrated on tick: 18321
+Male 1 is currently dehydrated on tick: 18322
+Female 1 is currently dehydrated on tick: 18322
+Male 2 is currently dehydrated on tick: 18322
+Female 2 is currently dehydrated on tick: 18322
+Male 1 is currently dehydrated on tick: 18323
+Female 1 is currently dehydrated on tick: 18323
+Male 2 is currently dehydrated on tick: 18323
+Female 2 is currently dehydrated on tick: 18323
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18323
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18324
+Female 1 is currently dehydrated on tick: 18324
+Male 2 is currently dehydrated on tick: 18324
+Female 2 is currently dehydrated on tick: 18324
+Male 1 is currently dehydrated on tick: 18325
+Female 1 is currently dehydrated on tick: 18325
+Male 2 is currently dehydrated on tick: 18325
+Female 2 is currently dehydrated on tick: 18325
+Male 1 is currently dehydrated on tick: 18326
+Female 1 is currently dehydrated on tick: 18326
+Male 2 is currently dehydrated on tick: 18326
+Female 2 is currently dehydrated on tick: 18326
+Female 1 is currently dehydrated on tick: 18370
+Male 2 is currently dehydrated on tick: 18370
+Female 2 is currently dehydrated on tick: 18370
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18370
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18371
+Female 1 is currently dehydrated on tick: 18371
+Male 2 is currently dehydrated on tick: 18371
+Female 2 is currently dehydrated on tick: 18371
+Male 1 is currently dehydrated on tick: 18372
+Female 1 is currently dehydrated on tick: 18372
+Male 2 is currently dehydrated on tick: 18372
+Female 2 is currently dehydrated on tick: 18372
+Male 1 is currently dehydrated on tick: 18373
+Female 1 is currently dehydrated on tick: 18373
+Male 2 is currently dehydrated on tick: 18373
+Female 2 is currently dehydrated on tick: 18373
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18382
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18384
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18397
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18400
+Current EVA has been skipped
+Male 2 is currently dehydrated on tick: 18416
+Female 2 is currently dehydrated on tick: 18416
+Male 1 is currently dehydrated on tick: 18417
+Female 1 is currently dehydrated on tick: 18417
+Male 2 is currently dehydrated on tick: 18417
+Female 2 is currently dehydrated on tick: 18417
+Male 1 is currently dehydrated on tick: 18418
+Female 1 is currently dehydrated on tick: 18418
+Male 2 is currently dehydrated on tick: 18418
+Female 2 is currently dehydrated on tick: 18418
+Male 1 is currently dehydrated on tick: 18419
+Female 1 is currently dehydrated on tick: 18419
+Male 2 is currently dehydrated on tick: 18419
+Female 2 is currently dehydrated on tick: 18419
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18422
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18435
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18438
+Current EVA has been skipped
+Female 2 is currently dehydrated on tick: 18463
+Male 1 is currently dehydrated on tick: 18464
+Female 1 is currently dehydrated on tick: 18464
+Male 2 is currently dehydrated on tick: 18464
+Female 2 is currently dehydrated on tick: 18464
+Male 1 is currently dehydrated on tick: 18465
+Female 1 is currently dehydrated on tick: 18465
+Male 2 is currently dehydrated on tick: 18465
+Female 2 is currently dehydrated on tick: 18465
+Male 1 is currently dehydrated on tick: 18466
+Female 1 is currently dehydrated on tick: 18466
+Male 2 is currently dehydrated on tick: 18466
+Female 2 is currently dehydrated on tick: 18466
+Male 1 is currently dehydrated on tick: 18467
+Female 1 is currently dehydrated on tick: 18467
+Male 2 is currently dehydrated on tick: 18467
+Female 2 is currently dehydrated on tick: 18467
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18478
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18494
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18497
+Current EVA has been skipped
+Female 2 is currently dehydrated on tick: 18506
+Male 1 is currently dehydrated on tick: 18507
+Female 1 is currently dehydrated on tick: 18507
+Male 2 is currently dehydrated on tick: 18507
+Female 2 is currently dehydrated on tick: 18507
+Male 1 is currently dehydrated on tick: 18508
+Female 1 is currently dehydrated on tick: 18508
+Male 2 is currently dehydrated on tick: 18508
+Female 2 is currently dehydrated on tick: 18508
+Male 1 is currently dehydrated on tick: 18509
+Female 1 is currently dehydrated on tick: 18509
+Male 2 is currently dehydrated on tick: 18509
+Female 2 is currently dehydrated on tick: 18509
+Male 1 is currently dehydrated on tick: 18510
+Female 1 is currently dehydrated on tick: 18510
+Male 2 is currently dehydrated on tick: 18510
+Female 2 is currently dehydrated on tick: 18510
+Male 1 is currently dehydrated on tick: 18511
+Female 1 is currently dehydrated on tick: 18511
+Male 2 is currently dehydrated on tick: 18511
+Female 2 is currently dehydrated on tick: 18511
+Male 1 is currently dehydrated on tick: 18512
+Female 1 is currently dehydrated on tick: 18512
+Male 2 is currently dehydrated on tick: 18512
+Female 2 is currently dehydrated on tick: 18512
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18537
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18540
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18552
+Female 1 is currently dehydrated on tick: 18552
+Male 2 is currently dehydrated on tick: 18552
+Female 2 is currently dehydrated on tick: 18552
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18552
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18553
+Female 1 is currently dehydrated on tick: 18553
+Male 2 is currently dehydrated on tick: 18553
+Female 2 is currently dehydrated on tick: 18553
+Male 1 is currently dehydrated on tick: 18554
+Female 1 is currently dehydrated on tick: 18554
+Male 2 is currently dehydrated on tick: 18554
+Female 2 is currently dehydrated on tick: 18554
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18554
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18555
+Female 1 is currently dehydrated on tick: 18555
+Male 2 is currently dehydrated on tick: 18555
+Female 2 is currently dehydrated on tick: 18555
+Male 1 is currently dehydrated on tick: 18556
+Female 1 is currently dehydrated on tick: 18556
+Male 2 is currently dehydrated on tick: 18556
+Female 2 is currently dehydrated on tick: 18556
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18556
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18557
+Female 1 is currently dehydrated on tick: 18557
+Male 2 is currently dehydrated on tick: 18557
+Female 2 is currently dehydrated on tick: 18557
+Male 1 is currently dehydrated on tick: 18558
+Female 1 is currently dehydrated on tick: 18558
+Male 2 is currently dehydrated on tick: 18558
+Female 2 is currently dehydrated on tick: 18558
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18559
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18576
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18579
+Current EVA has been skipped
+Female 2 is currently dehydrated on tick: 18601
+Male 1 is currently dehydrated on tick: 18602
+Female 1 is currently dehydrated on tick: 18602
+Male 2 is currently dehydrated on tick: 18602
+Female 2 is currently dehydrated on tick: 18602
+Male 1 is currently dehydrated on tick: 18603
+Female 1 is currently dehydrated on tick: 18603
+Male 2 is currently dehydrated on tick: 18603
+Female 2 is currently dehydrated on tick: 18603
+Male 1 is currently dehydrated on tick: 18604
+Female 1 is currently dehydrated on tick: 18604
+Male 2 is currently dehydrated on tick: 18604
+Female 2 is currently dehydrated on tick: 18604
+Male 1 is currently dehydrated on tick: 18605
+Female 1 is currently dehydrated on tick: 18605
+Male 2 is currently dehydrated on tick: 18605
+Female 2 is currently dehydrated on tick: 18605
+Male 1 is currently dehydrated on tick: 18606
+Female 1 is currently dehydrated on tick: 18606
+Male 2 is currently dehydrated on tick: 18606
+Female 2 is currently dehydrated on tick: 18606
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18617
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18620
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18632
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18635
+Current EVA has been skipped
+Male 2 is currently dehydrated on tick: 18649
+Female 2 is currently dehydrated on tick: 18649
+Male 1 is currently dehydrated on tick: 18650
+Female 1 is currently dehydrated on tick: 18650
+Male 2 is currently dehydrated on tick: 18650
+Female 2 is currently dehydrated on tick: 18650
+Male 1 is currently dehydrated on tick: 18651
+Female 1 is currently dehydrated on tick: 18651
+Male 2 is currently dehydrated on tick: 18651
+Female 2 is currently dehydrated on tick: 18651
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18651
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18652
+Female 1 is currently dehydrated on tick: 18652
+Male 2 is currently dehydrated on tick: 18652
+Female 2 is currently dehydrated on tick: 18652
+Male 1 is currently dehydrated on tick: 18653
+Female 1 is currently dehydrated on tick: 18653
+Male 2 is currently dehydrated on tick: 18653
+Female 2 is currently dehydrated on tick: 18653
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18667
+Current EVA has been skipped
+Female 1 is currently dehydrated on tick: 18696
+Male 2 is currently dehydrated on tick: 18696
+Female 2 is currently dehydrated on tick: 18696
+Male 1 is currently dehydrated on tick: 18697
+Female 1 is currently dehydrated on tick: 18697
+Male 2 is currently dehydrated on tick: 18697
+Female 2 is currently dehydrated on tick: 18697
+Male 1 is currently dehydrated on tick: 18698
+Female 1 is currently dehydrated on tick: 18698
+Male 2 is currently dehydrated on tick: 18698
+Female 2 is currently dehydrated on tick: 18698
+Male 1 is currently dehydrated on tick: 18699
+Female 1 is currently dehydrated on tick: 18699
+Male 2 is currently dehydrated on tick: 18699
+Female 2 is currently dehydrated on tick: 18699
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18718
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18734
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18737
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18743
+Female 1 is currently dehydrated on tick: 18743
+Male 2 is currently dehydrated on tick: 18743
+Female 2 is currently dehydrated on tick: 18743
+Male 1 is currently dehydrated on tick: 18744
+Female 1 is currently dehydrated on tick: 18744
+Male 2 is currently dehydrated on tick: 18744
+Female 2 is currently dehydrated on tick: 18744
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18749
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18752
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18768
+Current EVA has been skipped
+Female 1 is currently dehydrated on tick: 18788
+Male 2 is currently dehydrated on tick: 18788
+Female 2 is currently dehydrated on tick: 18788
+Male 1 is currently dehydrated on tick: 18789
+Female 1 is currently dehydrated on tick: 18789
+Male 2 is currently dehydrated on tick: 18789
+Female 2 is currently dehydrated on tick: 18789
+Male 1 is currently dehydrated on tick: 18790
+Female 1 is currently dehydrated on tick: 18790
+Male 2 is currently dehydrated on tick: 18790
+Female 2 is currently dehydrated on tick: 18790
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18795
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18807
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18809
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18825
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18828
+Current EVA has been skipped
+Female 2 is currently dehydrated on tick: 18833
+Male 1 is currently dehydrated on tick: 18834
+Female 1 is currently dehydrated on tick: 18834
+Male 2 is currently dehydrated on tick: 18834
+Female 2 is currently dehydrated on tick: 18834
+Male 1 is currently dehydrated on tick: 18835
+Female 1 is currently dehydrated on tick: 18835
+Male 2 is currently dehydrated on tick: 18835
+Female 2 is currently dehydrated on tick: 18835
+Male 1 is currently dehydrated on tick: 18836
+Female 1 is currently dehydrated on tick: 18836
+Male 2 is currently dehydrated on tick: 18836
+Female 2 is currently dehydrated on tick: 18836
+Male 1 is currently dehydrated on tick: 18837
+Female 1 is currently dehydrated on tick: 18837
+Male 2 is currently dehydrated on tick: 18837
+Female 2 is currently dehydrated on tick: 18837
+Male 1 is currently dehydrated on tick: 18838
+Female 1 is currently dehydrated on tick: 18838
+Male 2 is currently dehydrated on tick: 18838
+Female 2 is currently dehydrated on tick: 18838
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18840
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18843
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18879
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18882
+Female 1 is currently dehydrated on tick: 18882
+Male 2 is currently dehydrated on tick: 18882
+Female 2 is currently dehydrated on tick: 18882
+Male 1 is currently dehydrated on tick: 18883
+Female 1 is currently dehydrated on tick: 18883
+Male 2 is currently dehydrated on tick: 18883
+Female 2 is currently dehydrated on tick: 18883
+Male 1 is currently dehydrated on tick: 18884
+Female 1 is currently dehydrated on tick: 18884
+Male 2 is currently dehydrated on tick: 18884
+Female 2 is currently dehydrated on tick: 18884
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18906
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18922
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18925
+Current EVA has been skipped
+Male 1 is currently dehydrated on tick: 18927
+Female 1 is currently dehydrated on tick: 18927
+Male 2 is currently dehydrated on tick: 18927
+Female 2 is currently dehydrated on tick: 18927
+Male 1 is currently dehydrated on tick: 18928
+Female 1 is currently dehydrated on tick: 18928
+Male 2 is currently dehydrated on tick: 18928
+Female 2 is currently dehydrated on tick: 18928
+Male 1 is currently dehydrated on tick: 18929
+Female 1 is currently dehydrated on tick: 18929
+Male 2 is currently dehydrated on tick: 18929
+Female 2 is currently dehydrated on tick: 18929
+Male 1 is currently dehydrated on tick: 18930
+Female 1 is currently dehydrated on tick: 18930
+Male 2 is currently dehydrated on tick: 18930
+Female 2 is currently dehydrated on tick: 18930
+Male 1 is currently dehydrated on tick: 18931
+Female 1 is currently dehydrated on tick: 18931
+Male 2 is currently dehydrated on tick: 18931
+Female 2 is currently dehydrated on tick: 18931
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18940
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18942
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18944
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18957
+Current EVA has been skipped
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18959
+Current EVA has been skipped
+Male 2 is currently dehydrated on tick: 18976
+Female 2 is currently dehydrated on tick: 18976
+Male 1 is currently dehydrated on tick: 18977
+Female 1 is currently dehydrated on tick: 18977
+Male 2 is currently dehydrated on tick: 18977
+Female 2 is currently dehydrated on tick: 18977
+Male 1 is currently dehydrated on tick: 18978
+Female 1 is currently dehydrated on tick: 18978
+Male 2 is currently dehydrated on tick: 18978
+Female 2 is currently dehydrated on tick: 18978
+Male 1 is currently dehydrated on tick: 18979
+Female 1 is currently dehydrated on tick: 18979
+Male 2 is currently dehydrated on tick: 18979
+Female 2 is currently dehydrated on tick: 18979
+Insufficient O2 for crew EVA prebreathe or EMU suit fill at tick: 18986
+Current EVA has been skipped
+Elapsed time is 1064.588641 seconds.
