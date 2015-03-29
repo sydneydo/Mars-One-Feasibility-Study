@@ -1,0 +1,21 @@
+Simulation Run Started: 28-Mar-2015 15:08:02
+Simulation Run without ISRU
+Insufficient N2 available to perform pressure control action at tick 661. Living Unit 1 is in a high O2% condition
+Insufficient N2 available to perform pressure control action at tick 0. Airlock is in a high O2% condition
+Insufficient N2 available to perform pressure control action at tick 668. Living Unit 2 is in a high O2% condition
+Insufficient N2 available to perform pressure control action at tick 695. Inflatable 2 is in a high O2% condition
+Insufficient N2 available to perform pressure control action at tick 696. Inflatable 1 is in a high O2% condition
+Insufficient N2 available to perform pressure control action at tick 697. Life Support Unit 2 is in a high O2% condition
+Insufficient N2 available to perform pressure control action at tick 699. Life Support Unit 1 is in a high O2% condition
+Female 1 is currently suffocating on tick: 704 in module: Life Support Unit 2
+Female 2 is currently suffocating on tick: 706 in module: Life Support Unit 2
+Male 1 is currently suffocating on tick: 707 in module: Life Support Unit 1
+Female 2 is currently suffocating on tick: 707 in module: Life Support Unit 2
+Male 1 is currently suffocating on tick: 708 in module: Life Support Unit 1
+Female 1 is currently suffocating on tick: 708 in module: Life Support Unit 2
+Male 2 is currently suffocating on tick: 708 in module: Life Support Unit 1
+Female 1 has died from lack of oxygen (hypoxia) on tick: 709 with a risk value of: 0.39784
+Female 1 has been killed
+Female 2 is currently suffocating on tick: 709 in module: Life Support Unit 1
+Elapsed time is 188.277708 seconds.
+Simulation Run Ended: 28-Mar-2015 15:11:11

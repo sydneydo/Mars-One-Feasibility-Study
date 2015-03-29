@@ -1,0 +1,31 @@
+Simulation Run Started: 28-Mar-2015 12:39:53
+Simulation Run without ISRU
+{No appropriate method, property, or field takeOverflow for
+class StoreImpl.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('CondensedWaterRemover/tick', 'C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\CondensedWaterRemover.m', 25)" style="font-weight:bold">CondensedWaterRemover/tick</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\CondensedWaterRemover.m',25,0)">line 25</a>)
+            condensedWaterRemoved =
+            obj.Environment.VaporStore.takeOverflow*18.01524/1000;
+            
+Error in <a href="matlab:helpUtils.errorDocCallback('MarsOneFullHabBaselineTwoHalvesNoISRU', 'C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabBaselineTwoHalvesNoISRU.m', 1019)" style="font-weight:bold">MarsOneFullHabBaselineTwoHalvesNoISRU</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabBaselineTwoHalvesNoISRU.m',1019,0)">line 1019</a>)
+    condensedWaterRemoved1(i) =
+    inflatable1WaterExtractor.tick;
+} 
+Inflatable1.VaporStore
+
+ans = 
+
+  <a href="matlab:helpPopup StoreImpl" style="font-weight:bold">StoreImpl</a> with properties:
+
+             contents: 'H2O Vapor'
+                 type: 'Environmental'
+            tickcount: 1
+         currentLevel: 0
+      currentCapacity: 0
+             overflow: 0
+                 pipe: 0
+    resupplyFrequency: 0
+       resupplyAmount: 0
+
+MarsOneFullHabBaselineTwoHalvesNoISRU
+Elapsed time is 5.023895 seconds.

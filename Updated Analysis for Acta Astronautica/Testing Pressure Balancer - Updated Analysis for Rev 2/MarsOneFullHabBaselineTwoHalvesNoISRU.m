@@ -985,6 +985,9 @@ for i = 1:simtime
     livingUnit2livingUnitFan.tick;
     livingUnit2AirlockFan.tick;
     
+    % Equalize Pressures Across Modules
+    PressureFlow.tick;
+    
     % Run Power Supply
     powerPS.tick; 
     
@@ -1175,6 +1178,8 @@ toc
 beep
 
 close(h)
+
+diary off
 
 % save('MarsOnePlantGrowthWithoutISRU')
 
