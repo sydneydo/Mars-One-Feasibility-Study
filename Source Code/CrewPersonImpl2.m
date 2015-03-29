@@ -428,14 +428,14 @@ classdef CrewPersonImpl2 < handle
             % on EVA)
 %             if ~strcmpi(obj.CurrentActivity.Name,'EVA')   % this if
 %             condition is always here
-%                 if obj.CurrentActivity.Location.O2Percentage > obj.CurrentActivity.Location.DangerousOxygenThreshold
-%                     obj.highOxygenBuffer.take(1);%currentO2Ratio-...        % Take one hour away from buffer
-%                     %                     obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold);       % Remove time in hyperoxic state from buffer
-%                     obj.fireRisked = 1;
-%                     disp([obj.Name,' is currently in a fire risked state on tick: ', num2str(obj.CurrentTick),' in module: ',obj.CurrentActivity.Location.name])
-%                 else
-%                     obj.fireRisked = 0;
-%                 end
+                if obj.CurrentActivity.Location.O2Percentage > obj.CurrentActivity.Location.DangerousOxygenThreshold
+                    obj.highOxygenBuffer.take(1);%currentO2Ratio-...        % Take one hour away from buffer
+                    %                     obj.AirConsumerDefinition.ConsumptionStore.DangerousOxygenThreshold);       % Remove time in hyperoxic state from buffer
+                    obj.fireRisked = 1;
+                    disp([obj.Name,' is currently in a fire risked state on tick: ', num2str(obj.CurrentTick),' in module: ',obj.CurrentActivity.Location.name])
+                else
+                    obj.fireRisked = 0;
+                end
 %             end
             
             % Total Pressure Check

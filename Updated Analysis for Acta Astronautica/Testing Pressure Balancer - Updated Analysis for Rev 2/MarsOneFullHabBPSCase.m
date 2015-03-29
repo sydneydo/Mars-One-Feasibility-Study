@@ -3,6 +3,10 @@
 %   Date Created: 6/28/2014
 %   Last Updated: 3/28/2015
 %
+%   UPDATE 3/28/2015
+%   File simulated BPS Case - All crops moved to Inflatable 2, ORA
+%   installed. Inflatable 2 not included in PressureDistribution
+%
 %   UPDATE 3/26/2015
 %   Introduced PressureDistribution object to ensure that atmospheric pressures
 %   across all habitats are consistent
@@ -318,17 +322,16 @@ prebreatheO2 = 0.65*453.592/O2molarMass*numberOfEVAcrew;   % moles of O2... supp
 
 %% Initialize Pressure Balancer
 % Adjacency Matrix to represent connectivity between modules
-AdjacencyMatrix = zeros(9);
+AdjacencyMatrix = zeros(8);
 AdjacencyMatrix(1,2) = 1;
-AdjacencyMatrix(2,[1,3,5,7]) = 1;
+AdjacencyMatrix(2,[1,3,5,6]) = 1;
 AdjacencyMatrix(3,[2,4]) = 1;
 AdjacencyMatrix(4,3) = 1;
 AdjacencyMatrix(5,2) = 1;
-AdjacencyMatrix(6,7) = 1;
-AdjacencyMatrix(7,[2,6,8]) = 1;
-AdjacencyMatrix(8,[7,9]) = 1;
-AdjacencyMatrix(9,8) = 1;
-Modules = [Inflatable1,LivingUnit1,LifeSupportUnit1,CargoUnit1,Airlock,Inflatable2,LivingUnit2,LifeSupportUnit2,CargoUnit2];
+AdjacencyMatrix(6,[2,7]) = 1;
+AdjacencyMatrix(7,[6,8]) = 1;
+AdjacencyMatrix(8,7) = 1;
+Modules = [Inflatable1,LivingUnit1,LifeSupportUnit1,CargoUnit1,Airlock,LivingUnit2,LifeSupportUnit2,CargoUnit2];
 PressureFlow = PressureDistribute(Modules,AdjacencyMatrix);
 
 %% Initialize Key Activity Parameters
@@ -368,6 +371,7 @@ BiomassStore = BiomassStoreImpl(100000);
 
 CropWaterStore = StoreImpl('Grey Crop H2O','Material',100000,100000);   % Initialize a 9200L water buffer
 
+% Inflatable 2
 WhitePotatoShelf = ShelfImpl3(WhitePotato,5,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
 PeanutShelf = ShelfImpl3(Peanut,72.68,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
 SoybeanShelf = ShelfImpl3(Soybean,39.7,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
@@ -375,6 +379,7 @@ SweetPotatoShelf = ShelfImpl3(SweetPotato,9.8,Inflatable2,CropWaterStore,CropWat
 WheatShelf = ShelfImpl3(Wheat,72.53,Inflatable2,CropWaterStore,CropWaterStore,MainPowerStore,BiomassStore);
 
 % Initialize Staggered Shelves
+% Inflatable 2
 WhitePotatoShelves = ShelfStagger(WhitePotatoShelf,WhitePotatoShelf.Crop.TimeAtCropMaturity,0);
 PeanutShelves = ShelfStagger(PeanutShelf,PeanutShelf.Crop.TimeAtCropMaturity,0);
 SoybeanShelves = ShelfStagger(SoybeanShelf,SoybeanShelf.Crop.TimeAtCropMaturity,0);
@@ -417,7 +422,7 @@ livingUnit2AirlockFan = ISSFanImpl2(LivingUnit1,Airlock,MainPowerStore);
 livingUnit2livingUnitFan = ISSFanImpl2(LivingUnit1,LivingUnit2,MainPowerStore);
 
 % IMV between Inflatable 2 and Living Unit 2
-inflatable2LivingUnitFan2 = ISSFanImpl2(Inflatable2,LivingUnit2,MainPowerStore);
+% inflatable2LivingUnitFan2 = ISSFanImpl2(Inflatable2,LivingUnit2,MainPowerStore);
 
 % IMV between Living Unit 2 and Life Support Unit 2
 livingUnit2LifeSupportFan2 = ISSFanImpl2(LivingUnit2,LifeSupportUnit2,MainPowerStore);
@@ -481,7 +486,8 @@ lifeSupportUnit2CCAA = ISSDehumidifierImpl(LifeSupportUnit2,DirtyWaterStore,Main
 %% Initialize Air Processing Technologies
 
 % Initialize Main VCCR (Linear)
-mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowerStore);
+CDRAsetpoint = 1500;    % Set CDRA set point to 1500ppm
+mainvccr = ISSVCCRLinearImpl(LifeSupportUnit1,LifeSupportUnit1,CO2Store,MainPowerStore,CDRAsetpoint);
 
 % Initialize OGS
 ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LifeSupportUnit1,PotableWaterStore,MainPowerStore,H2Store);
@@ -490,15 +496,19 @@ ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LifeSupportUnit1,Pot
 crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
 
 % Initialize Oxygen Removal Assembly
-inflatableORA = O2extractor(Inflatable2,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,'Molar Fraction');
+% inflatableORA = O2extractor(Inflatable2,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,'Molar Fraction');
 
 % Initialize CO2 Injector
 targetCO2conc = 1200*1E-6;
-co2Injector = CO2Injector(Inflatable2,CO2Store,targetCO2conc);
+% Inflatable 1
+co2Injector1 = CO2Injector(Inflatable2,CO2Store,targetCO2conc);
+% Inflatable 2
+% co2Injector2 = CO2Injector(Inflatable2,CO2Store,targetCO2conc);
 
 % lifeSupportUnitORA = O2extractor(LifeSupportUnit1,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store);
 
 % Condensed Water Removal System
+% inflatable1WaterExtractor = CondensedWaterRemover(Inflatable1,CropWaterStore);
 inflatable2WaterExtractor = CondensedWaterRemover(Inflatable2,CropWaterStore);
 
 %% Initialize Water Processing Technologies
@@ -632,8 +642,10 @@ inflatable2CCAAoutput = zeros(1,simtime);
 livingUnit2CCAAoutput = zeros(1,simtime);
 lifeSupportUnit2CCAAoutput = zeros(1,simtime);
 
-condensedWaterRemoved = zeros(1,simtime);
-co2injected = zeros(1,simtime);
+condensedWaterRemoved1 = zeros(1,simtime);
+condensedWaterRemoved2 = zeros(1,simtime);
+co2injected1 = zeros(1,simtime);
+co2injected2 = zeros(1,simtime);
 
 lettuceShelfWaterLevel = zeros(1,simtime);
 peanutShelfWaterLevel = zeros(1,simtime);
@@ -672,7 +684,12 @@ for i = 1:simtime
             sum([PeanutShelves.Shelves.hasDied]) >= 1 || ...
             sum([SoybeanShelves.Shelves.hasDied]) >= 1 || ...
             sum([SweetPotatoShelves.Shelves.hasDied]) >= 1 || ...
-            sum([WheatShelves.Shelves.hasDied]) >= 1
+            sum([WheatShelves.Shelves.hasDied]) >= 1 %||...
+%             sum([WhitePotatoShelves2.Shelves.hasDied]) >= 1 ||...
+%             sum([PeanutShelves2.Shelves.hasDied]) >= 1 || ...
+%             sum([SoybeanShelves2.Shelves.hasDied]) >= 1 || ...
+%             sum([SweetPotatoShelves2.Shelves.hasDied]) >= 1 || ...
+%             sum([WheatShelves2.Shelves.hasDied]) >= 1
         
         % Remove all trailing zeros from recorded data vectors
         o2storelevel = o2storelevel(1:(i-1));
@@ -782,13 +799,14 @@ for i = 1:simtime
         
         ogsoutput = ogsoutput(1:(i-1));
         inflatableO2extracted = inflatableO2extracted(1:(i-1));
-        condensedWaterRemoved = condensedWaterRemoved(1:(i-1));
+        condensedWaterRemoved1 = condensedWaterRemoved1(1:(i-1));
+        condensedWaterRemoved2 = condensedWaterRemoved2(1:(i-1));
         
-        whitePotatoShelfWaterLevel = whitePotatoShelfWaterLevel(1:(i-1));
-        peanutShelfWaterLevel = peanutShelfWaterLevel(1:(i-1));
-        soybeanShelfWaterLevel = soybeanShelfWaterLevel(1:(i-1));
-        sweetPotatoShelfWaterLevel = sweetPotatoShelfWaterLevel(1:(i-1));
-        wheatShelfWaterLevel = wheatShelfWaterLevel(1:(i-1));
+%         whitePotatoShelfWaterLevel = whitePotatoShelfWaterLevel(1:(i-1));
+%         peanutShelfWaterLevel = peanutShelfWaterLevel(1:(i-1));
+%         soybeanShelfWaterLevel = soybeanShelfWaterLevel(1:(i-1));
+%         sweetPotatoShelfWaterLevel = sweetPotatoShelfWaterLevel(1:(i-1));
+%         wheatShelfWaterLevel = wheatShelfWaterLevel(1:(i-1));
     
         % Common Cabin Air Assemblies
         inflatableCCAAoutput = inflatableCCAAoutput(1:(i-1));
@@ -943,6 +961,7 @@ for i = 1:simtime
     LifeSupportUnit2.tick;
     CargoUnit1.tick;
     CargoUnit2.tick;
+    Airlock.tick
     
     % Run Fans
     inflatable2LivingUnitFan.tick;
@@ -956,6 +975,9 @@ for i = 1:simtime
     livingUnit2livingUnitFan.tick;
     livingUnit2AirlockFan.tick;
     
+    % Equalize Pressures Across Modules
+    PressureFlow.tick;
+    
     % Run Power Supply
     powerPS.tick; 
     
@@ -963,7 +985,7 @@ for i = 1:simtime
     ogsoutput(i) = ogs.tick;
     
     % Tick ORA
-    inflatableO2extracted(i) = inflatableORA.tick;
+%     inflatableO2extracted(i) = inflatableORA.tick;
     
     % Pressure Control Assemblies
     inflatablePCAaction(:,i+1) = inflatablePCA.tick(inflatablePCAaction(:,i));
@@ -981,13 +1003,14 @@ for i = 1:simtime
     livingUnitCCAAoutput(i) = livingUnitCCAA.tick;
     lifeSupportUnitCCAAoutput(i) = lifeSupportUnitCCAA.tick;
     
-%     inflatable2CCAAoutput(i) = inflatable2CCAA.tick;  % Commented out
+    inflatable2CCAAoutput(i) = inflatable2CCAA.tick;  % Commented out
 %     since the food processor takes care of excess water within the plant chamber
     livingUnit2CCAAoutput(i) = livingUnit2CCAA.tick;
     lifeSupportUnit2CCAAoutput(i) = lifeSupportUnit2CCAA.tick;
     
     % Condensed Water Remover
-    condensedWaterRemoved(i) = inflatable2WaterExtractor.tick;
+%     condensedWaterRemoved1(i) = inflatable1WaterExtractor.tick;
+    condensedWaterRemoved2(i) = inflatable2WaterExtractor.tick;
     
     % Run Waste Processing ECLSS Hardware
     co2removed(i) = mainvccr.tick;
@@ -1016,16 +1039,29 @@ for i = 1:simtime
 
     % Tick Crop Shelves
     %% add co2 injector here
-    co2injected(i) = co2Injector.tick;
+%     co2injected1(i) = co2Injector1.tick;
+%     co2injected2(i) = co2Injector2.tick;
+    co2Injector1.tick;
     WhitePotatoShelves.tick;
-%     co2Injector.tick;
+    co2Injector1.tick;
     PeanutShelves.tick;
-%     co2Injector.tick;
+    co2Injector1.tick;
     SoybeanShelves.tick;
-%     co2Injector.tick;
+    co2Injector1.tick;
     SweetPotatoShelves.tick;
-%     co2Injector.tick;
+    co2Injector1.tick;
     WheatShelves.tick;
+    
+%     co2Injector2.tick;
+%     WhitePotatoShelves2.tick;
+%     co2Injector2.tick;
+%     PeanutShelves2.tick;
+%     co2Injector2.tick;
+%     SoybeanShelves2.tick;
+%     co2Injector2.tick;
+%     SweetPotatoShelves2.tick;
+%     co2Injector2.tick;
+%     WheatShelves2.tick;
     
     FoodProcessor.tick;
     carriedfoodstorelevel(i) = CarriedFoodStore.currentLevel;
@@ -1042,10 +1078,10 @@ for i = 1:simtime
     astro4.tick;
    
     %% Run ISRU
-    PotableWaterStore.add(isruAddedWater);
-    CropWaterStore.add(isruAddedCropWater);
-    O2Store.add(isruAddedO2);
-    N2Store.add(isruAddedN2);
+%     PotableWaterStore.add(isruAddedWater);
+%     CropWaterStore.add(isruAddedCropWater);
+%     O2Store.add(isruAddedO2);
+%     N2Store.add(isruAddedN2);
     
     %% EVA
     CrewEVAstatus = [strcmpi(astro1.CurrentActivity.Name,'EVA'),...
@@ -1133,7 +1169,7 @@ beep
 
 close(h)
 
-save('MarsOnePlantGrowthWithoutISRU')
+% save('MarsOnePlantGrowthWithoutISRU')
 
 %% Random plot commands used in code validation exercise
 % Atmospheric molar fractions

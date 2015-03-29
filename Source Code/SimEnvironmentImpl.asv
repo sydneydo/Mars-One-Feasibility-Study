@@ -27,6 +27,8 @@ classdef SimEnvironmentImpl < handle
         lightIntensity          % used for solar power collection
         pressure        % in Pa
         RelativeHumidity
+        SaturatedVaporPressure
+        CondensedVapor  % Condensed Vapor within the Habitat due to too high a vapor pressure
         O2Percentage
         CO2Percentage
         N2Percentage
@@ -64,25 +66,32 @@ classdef SimEnvironmentImpl < handle
     end
     
     methods
-        function obj = SimEnvironmentImpl(name,pressure,volume,o2Percentage,co2Percentage,nitrogenPercentage,waterPercentage,...
+        function obj = SimEnvironmentImpl(name,pressure,Volume,o2Percentage,co2Percentage,nitrogenPercentage,waterPercentage,...
                 otherPercentage,leakPercentage,potablewaterstore,greywaterstore,dirtywaterstore,drywastestore,foodstore)
             
             if nargin > 0
                 
                 obj.name = name;
                 %             obj.pressure = pressure;
-                obj.volume = volume;        % this is input in Liters
+                obj.volume = Volume;        % this is input in Liters
                 obj.O2Store = StoreImpl('O2','Environmental');
                 obj.CO2Store = StoreImpl('CO2','Environmental');
                 obj.NitrogenStore = StoreImpl('N2','Environmental');
-                obj.VaporStore = StoreImpl('H2O Vapor','Environmental');
+                
+                saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
+                saturatedVaporMoles = saturatedVaporPressure*Volume/(obj.idealGasConstant*(273.15+obj.temperature));
+                obj.SaturatedVaporPressure = saturatedVaporPressure;
+                
+                obj.VaporStore = StoreImpl('H2O Vapor','Material',saturatedVaporMoles,CalculateMoles(obj,waterPercentage, pressure, Volume)); % Vapor store is a material store to capture saturated vapor limitations
+%                 obj.VaporStore = StoreImpl('H2O Vapor','Environmental',CalculateMoles(obj,waterPercentage, pressure, Volume),CalculateMoles(obj,waterPercentage, pressure, Volume));
+                
                 obj.OtherStore = StoreImpl('Other','Environmental');
                 
-                obj.O2Store.currentLevel = CalculateMoles(obj,o2Percentage, pressure, volume);
-                obj.CO2Store.currentLevel = CalculateMoles(obj,co2Percentage, pressure, volume);
-                obj.NitrogenStore.currentLevel = CalculateMoles(obj,nitrogenPercentage, pressure, volume);
-                obj.VaporStore.currentLevel = CalculateMoles(obj,waterPercentage, pressure, volume);
-                obj.OtherStore.currentLevel = CalculateMoles(obj,otherPercentage, pressure, volume);
+                obj.O2Store.currentLevel = CalculateMoles(obj,o2Percentage, pressure, Volume);
+                obj.CO2Store.currentLevel = CalculateMoles(obj,co2Percentage, pressure, Volume);
+                obj.NitrogenStore.currentLevel = CalculateMoles(obj,nitrogenPercentage, pressure, Volume);
+%                 obj.VaporStore.currentLevel = CalculateMoles(obj,waterPercentage, pressure, volume);
+                obj.OtherStore.currentLevel = CalculateMoles(obj,otherPercentage, pressure, Volume);
                 
                 % Set current capacities of StoreImpl objects to equal their
                 % current levels - i.e. can't take more from store than what's
@@ -91,7 +100,7 @@ classdef SimEnvironmentImpl < handle
                 obj.O2Store.currentCapacity = obj.O2Store.currentLevel;
                 obj.CO2Store.currentCapacity = obj.CO2Store.currentLevel;
                 obj.NitrogenStore.currentCapacity = obj.NitrogenStore.currentLevel;
-                obj.VaporStore.currentCapacity = obj.VaporStore.currentLevel;
+%                 obj.VaporStore.currentCapacity = obj.VaporStore.currentLevel;
                 obj.OtherStore.currentCapacity = obj.OtherStore.currentLevel;
             
                 if nargin > 8
@@ -145,7 +154,16 @@ classdef SimEnvironmentImpl < handle
         function relativeHumidity = get.RelativeHumidity(obj)
             saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
             VaporPartialPressure = obj.VaporPercentage*obj.pressure;
-            relativeHumidity = VaporPartialPressure/saturatedVaporPressure;
+            relativeHumidity = min([VaporPartialPressure/saturatedVaporPressure,1]);    % Maximum relative humidity possible is 1
+        end
+        
+        % Calculates condensed vapor within the environment (applies if
+        % relative humidity > 1)
+        function condensedVapor = get.CondensedVapor(obj)
+            saturatedVaporPressure = 0.611*exp(17.4*obj.temperature/(obj.temperature+239));      % From equation 4.2-10 of BVAD
+            saturatedVaporMoles = saturatedVaporPressure*obj.volume/(obj.idealGasConstant*(273.15+obj.temperature));
+            condensedVapor = (obj.RelativeHumidity >= 1)*(obj.VaporStore.currentLevel-saturatedVaporMoles)*18.01524/1000;   % Convert to liters
+%             condensedVapor = obj.VaporStore.overflow*18.01524/1000;
         end
         
         % Calculates O2 molar percentage within SimEnvironment
@@ -210,10 +228,10 @@ classdef SimEnvironmentImpl < handle
             
             % Take moles from SimEnvironment gaseous stores
             o2Vented = obj.O2Store.take(currentO2percentage*molesToVent);
-            co2Vented = obj.CO2Store.take(currentCO2percentage*molesToVent);
-            n2Vented = obj.NitrogenStore.take(currentN2percentage*molesToVent);
-            vaporVented = obj.VaporStore.take(currentVaporpercentage*molesToVent);
-            otherVented = obj.OtherStore.take(currentOtherpercentage*molesToVent);
+            co2Vented = obj.O2Store.take(currentCO2percentage*molesToVent);
+            n2Vented = obj.O2Store.take(currentN2percentage*molesToVent);
+            vaporVented = obj.O2Store.take(currentVaporpercentage*molesToVent);
+            otherVented = obj.O2Store.take(currentOtherpercentage*molesToVent);
             
             molesVented = o2Vented+co2Vented+n2Vented+vaporVented+otherVented;
         end

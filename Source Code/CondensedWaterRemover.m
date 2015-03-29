@@ -22,8 +22,8 @@ classdef CondensedWaterRemover < handle
         %% Tick
         function condensedWaterRemoved = tick(obj)
             % Take condensed water from environment
-%             condensedWaterRemoved = obj.Environment.VaporStore.takeOverflow*18.01524/1000;
-            condensedWaterRemoved = obj.Environment.CondensedVapor;
+            condensedWaterRemoved = obj.Environment.VaporStore.takeOverflow*18.01524/1000;
+%             condensedWaterRemoved = obj.Environment.CondensedVapor;
             % Add to dirty water store
             obj.DirtyWaterOutput.add(condensedWaterRemoved);
         end
