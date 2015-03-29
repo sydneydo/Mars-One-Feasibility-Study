@@ -469,7 +469,7 @@ airlockPCA = ISSinjectorImpl(TotalAtmPressureTargeted,TargetO2MolarFraction,O2St
 inflatableCCAA = ISSDehumidifierImpl(Inflatable1,DirtyWaterStore,MainPowerStore);
 
 % Inflatable 2 CCAA
-inflatable2CCAA = ISSDehumidifierImpl(Inflatable2,DirtyWaterStore,MainPowerStore);
+% inflatable2CCAA = ISSDehumidifierImpl(Inflatable2,DirtyWaterStore,MainPowerStore);
 
 % Living Unit/Airlock CCAA
 livingUnitCCAA = ISSDehumidifierImpl(LivingUnit1,DirtyWaterStore,MainPowerStore);
@@ -496,16 +496,11 @@ ogs = ISSOGA(TotalAtmPressureTargeted,TargetO2MolarFraction,LifeSupportUnit1,Pot
 crs = ISSCRSImpl(H2Store,CO2Store,GreyWaterStore,MethaneStore,MainPowerStore);
 
 % Initialize Oxygen Removal Assembly
-% inflatableORA = O2extractor(Inflatable2,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,'Molar Fraction');
+inflatableORA = O2extractor(Inflatable2,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store,'Molar Fraction');
 
 % Initialize CO2 Injector
 targetCO2conc = 1200*1E-6;
-% Inflatable 1
-co2Injector1 = CO2Injector(Inflatable2,CO2Store,targetCO2conc);
-% Inflatable 2
-% co2Injector2 = CO2Injector(Inflatable2,CO2Store,targetCO2conc);
-
-% lifeSupportUnitORA = O2extractor(LifeSupportUnit1,TotalAtmPressureTargeted,TargetO2MolarFraction,O2Store);
+co2Injector = CO2Injector(Inflatable2,CO2Store,targetCO2conc);
 
 % Condensed Water Removal System
 % inflatable1WaterExtractor = CondensedWaterRemover(Inflatable1,CropWaterStore);
@@ -985,7 +980,7 @@ for i = 1:simtime
     ogsoutput(i) = ogs.tick;
     
     % Tick ORA
-%     inflatableO2extracted(i) = inflatableORA.tick;
+    inflatableO2extracted(i) = inflatableORA.tick;
     
     % Pressure Control Assemblies
     inflatablePCAaction(:,i+1) = inflatablePCA.tick(inflatablePCAaction(:,i));
@@ -1003,8 +998,8 @@ for i = 1:simtime
     livingUnitCCAAoutput(i) = livingUnitCCAA.tick;
     lifeSupportUnitCCAAoutput(i) = lifeSupportUnitCCAA.tick;
     
-    inflatable2CCAAoutput(i) = inflatable2CCAA.tick;  % Commented out
-%     since the food processor takes care of excess water within the plant chamber
+%     inflatable2CCAAoutput(i) = inflatable2CCAA.tick;  % Commented out
+%     since the condensed water remover takes care of excess water within the plant chamber
     livingUnit2CCAAoutput(i) = livingUnit2CCAA.tick;
     lifeSupportUnit2CCAAoutput(i) = lifeSupportUnit2CCAA.tick;
     
@@ -1041,15 +1036,15 @@ for i = 1:simtime
     %% add co2 injector here
 %     co2injected1(i) = co2Injector1.tick;
 %     co2injected2(i) = co2Injector2.tick;
-    co2Injector1.tick;
+    co2Injector.tick;
     WhitePotatoShelves.tick;
-    co2Injector1.tick;
+    co2Injector.tick;
     PeanutShelves.tick;
-    co2Injector1.tick;
+    co2Injector.tick;
     SoybeanShelves.tick;
-    co2Injector1.tick;
+    co2Injector.tick;
     SweetPotatoShelves.tick;
-    co2Injector1.tick;
+    co2Injector.tick;
     WheatShelves.tick;
     
 %     co2Injector2.tick;
@@ -1078,10 +1073,10 @@ for i = 1:simtime
     astro4.tick;
    
     %% Run ISRU
-%     PotableWaterStore.add(isruAddedWater);
-%     CropWaterStore.add(isruAddedCropWater);
-%     O2Store.add(isruAddedO2);
-%     N2Store.add(isruAddedN2);
+    PotableWaterStore.add(isruAddedWater);
+    CropWaterStore.add(isruAddedCropWater);
+    O2Store.add(isruAddedO2);
+    N2Store.add(isruAddedN2);
     
     %% EVA
     CrewEVAstatus = [strcmpi(astro1.CurrentActivity.Name,'EVA'),...
@@ -1168,6 +1163,8 @@ toc
 beep
 
 close(h)
+
+diary off
 
 % save('MarsOnePlantGrowthWithoutISRU')
 
