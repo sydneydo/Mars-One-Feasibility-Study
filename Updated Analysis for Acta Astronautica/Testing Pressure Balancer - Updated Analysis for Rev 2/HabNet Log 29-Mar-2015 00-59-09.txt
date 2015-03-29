@@ -1,0 +1,3 @@
+Simulation Run Started: 29-Mar-2015 00:59:09
+Simulation Run without ISRU
+Elapsed time is 11264.580942 seconds.
