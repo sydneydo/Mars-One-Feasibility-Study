@@ -84,10 +84,10 @@ TargetO2MolarFraction = 0.265;
 % isruAddedO2 = 0;            % moles/hour
 % isruAddedN2 = 1.7;          % moles/hour
 
-isruAddedWater = 0;      % Liters/hour
+isruAddedWater = 0.2;      % Liters/hour
 isruAddedCropWater = 0;  % Liter/hour
-isruAddedO2 = 0;            % moles/hour
-isruAddedN2 = 0;          % moles/hour
+isruAddedO2 = 1.62;            % moles/hour
+isruAddedN2 = 0.5;          % moles/hour
 
 % EMU
 EMUco2RemovalTechnology = 'RCA';  % options are RCA or METOX
