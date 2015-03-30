@@ -1,0 +1,133 @@
+Simulation Run Started: 29-Mar-2015 15:15:57
+Simulation Run without ISRU
+{Operation terminated by user during <a href="matlab:helpUtils.errorDocCallback('SimEnvironmentImpl/tick', 'C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\SimEnvironmentImpl.m', 253)" style="font-weight:bold">SimEnvironmentImpl/tick</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Source Code\SimEnvironmentImpl.m',253,0)">line 253</a>)
+
+
+In <a href="matlab:helpUtils.errorDocCallback('MarsOneFullHabSFCase', 'C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabSFCase.m', 956)" style="font-weight:bold">MarsOneFullHabSFCase</a> (<a href="matlab: opentoline('C:\Users\Sydney Do\Desktop\MIT\PhD Research\IAC2014\Mars One Simulation\Mars-One-Feasibility-Study\Updated Analysis for Acta Astronautica\Testing Pressure Balancer - Updated Analysis for Rev 2\MarsOneFullHabSFCase.m',956,0)">line 956</a>)
+    LivingUnit2.tick;
+} 
+clear all, clc, close(h)
+{Undefined function or variable 'h'.
+} 
+load('FullHabTwoPlantHalvesNoISRUNoFireRisk.mat')
+figure, 
+plot(t,inflatablePressure(t),t,livingUnitPressure(t),t,lifeSupportUnitPressure(t),t,cargoUnitPressure(t),...
+    t,inflatable2Pressure(t),t,livingUnit2Pressure(t),t,lifeSupportUnit2Pressure(t),t,cargoUnit2Pressure(t),'LineWidth',2), grid on,
+title('Module Total Pressure'),ylabel('Total Pressure (kPa)'),xlabel('Time (hours)'),
+legend('Inflatable 1','Living Unit 1','Life Support Unit 1','Cargo Unit 1',...
+    'Inflatable 2','Living Unit 2','Life Support Unit 2','Cargo Unit 2')
+figure, 
+subplot(2,2,1), plot(t,inflatablePressure(t),'LineWidth',2), title('Inflatable 1'), grid on, xlabel('Time (hours)'), ylabel('Total Pressure')
+subplot(2,2,2), plot(t,livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('Total Pressure')
+subplot(2,2,3), plot(t,lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('Total Pressure')
+subplot(2,2,4), plot(t,cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('Total Pressure')
+figure, 
+plot(t,inflatablePressure(t),t,livingUnitPressure(t),t,lifeSupportUnitPressure(t),t,cargoUnitPressure(t),'LineWidth',2), grid on,
+title('Module Total Pressure'),ylabel('Total Pressure (kPa)'),xlabel('Time (hours)'),
+legend('Inflatable 1','Living Unit 1','Life Support Unit 1','Cargo Unit 1')
+figure, plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),...
+    t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),...
+    t,inflatable2O2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,livingUnit2O2level(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),...
+    t,lifeSupportUnit2O2level(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,cargoUnit2O2level(t)./cargoUnit2TotalMoles(t).*cargoUnit2Pressure(t),'LineWidth',2),
+title('Module O2 Partial Pressure'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+legend('Inflatable 1','Living Unit 1','Life Support Unit 1','Cargo Unit 1',...
+    'Inflatable 2','Living Unit 2','Life Support Unit 2','Cargo Unit 2')
+figure, plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),...
+    t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2),
+title('Module O2 Partial Pressure'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+legend('Inflatable 1','Living Unit 1','Life Support Unit 1','Cargo Unit 1')
+clear all, clc
+load('FullHabTwoPlantHalvesNoISRUNoFireRisk.mat')
+figure, plot(potablewaterstorelevel)
+figure, plot(o2storelevel)
+figure, plot(n2storelevel)
+(n2storelevel(865)-n2storelevel(1180))/(1180-865)
+
+ans =
+
+   33.0853
+
+clear all, clc
+load('BPScaseWithISRU.mat')
+clear all, clc
+load('FullHabTwoPlantHalvesNoISRUNoFireRisk.mat')
+figure, plot(cropwaterstorelevel)
+clear all
+load('FullHabTwoPlantHalvesNoISRUNoFireRisk.mat')
+inflatable1WaterExtractor
+
+inflatable1WaterExtractor = 
+
+  <a href="matlab:helpPopup CondensedWaterRemover" style="font-weight:bold">CondensedWaterRemover</a> with properties:
+
+         Environment: [1x1 SimEnvironmentImpl]
+    DirtyWaterOutput: [1x1 StoreImpl]
+
+inflatable1WaterExtractor.DirtyWaterOutput
+
+ans = 
+
+  <a href="matlab:helpPopup StoreImpl" style="font-weight:bold">StoreImpl</a> with properties:
+
+             contents: 'Grey Crop H2O'
+                 type: 'Material'
+            tickcount: 0
+         currentLevel: 2.0023e+04
+      currentCapacity: 100000
+             overflow: 0
+                 pipe: 0
+    resupplyFrequency: 0
+       resupplyAmount: 0
+
+inflatable2WaterExtractor.DirtyWaterOutput
+
+ans = 
+
+  <a href="matlab:helpPopup StoreImpl" style="font-weight:bold">StoreImpl</a> with properties:
+
+             contents: 'Grey Crop H2O'
+                 type: 'Material'
+            tickcount: 0
+         currentLevel: 2.0023e+04
+      currentCapacity: 100000
+             overflow: 0
+                 pipe: 0
+    resupplyFrequency: 0
+       resupplyAmount: 0
+
+load('BPScaseWithISRU.mat')
+clear all, clc
+load('BPScaseWithISRU.mat')
+figure, plot(n2storelevel)
+(n2storelevel(1643)-n2storelevel(17966)/(17966-1643)
+ (n2storelevel(1643)-n2storelevel(17966)/(17966-1643)
+                                                     |
+{Error: Expression or statement is incorrect--possibly unbalanced (, {, or [.
+} 
+(n2storelevel(1643)-n2storelevel(17966))/(17966-1643)
+
+ans =
+
+    0.4745
+
+clear all, clc
+load('FullHabTwoPlantHalvesNoISRUNoFireRisk.mat')
+figure, plot(o2storelevel)
+(o2storelevel(156)-o2storelevel(3012))/(3012-156)
+
+ans =
+
+    1.0965
+
+figure, plot(n2storelevel)
+figure, 
+subplot(3,3,1), plot(t,inflatableO2level(t)./inflatableTotalMoles,t,inflatableCO2level./inflatableTotalMoles,t,inflatableN2level./inflatableTotalMoles,t,inflatableVaporlevel./inflatableTotalMoles,t,inflatableOtherlevel./inflatableTotalMoles,'LineWidth',2), title('Inflatable 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles,t,livingUnitCO2level./livingUnitTotalMoles,t,livingUnitN2level./livingUnitTotalMoles,t,livingUnitVaporlevel./livingUnitTotalMoles,t,livingUnitOtherlevel./livingUnitTotalMoles,'LineWidth',2), title('Living Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles,t,lifeSupportUnitCO2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitN2level./lifeSupportUnitTotalMoles,t,lifeSupportUnitVaporlevel./lifeSupportUnitTotalMoles,t,lifeSupportUnitOtherlevel./lifeSupportUnitTotalMoles,'LineWidth',2), title('Life Support Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitCO2level(t)./cargoUnitTotalMoles(t),t,cargoUnitN2level(t)./cargoUnitTotalMoles(t),t,cargoUnitVaporlevel(t)./cargoUnitTotalMoles(t),t,cargoUnitOtherlevel(t)./cargoUnitTotalMoles(t),'LineWidth',2), title('Cargo Unit 1'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,5), plot(t,inflatable2O2level(t)./inflatable2TotalMoles,t,inflatable2CO2level./inflatable2TotalMoles,t,inflatable2N2level./inflatable2TotalMoles,t,inflatable2Vaporlevel./inflatable2TotalMoles,t,inflatable2Otherlevel./inflatable2TotalMoles,'LineWidth',2), title('Inflatable 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,6), plot(t,livingUnit2O2level(t)./livingUnit2TotalMoles,t,livingUnit2CO2level./livingUnit2TotalMoles,t,livingUnit2N2level./livingUnit2TotalMoles,t,livingUnit2Vaporlevel./livingUnit2TotalMoles,t,livingUnit2Otherlevel./livingUnit2TotalMoles,'LineWidth',2), title('Living Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,7), plot(t,lifeSupportUnit2O2level(t)./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2CO2level./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2N2level./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2Vaporlevel./lifeSupportUnit2TotalMoles,t,lifeSupportUnit2Otherlevel./lifeSupportUnit2TotalMoles,'LineWidth',2), title('Life Support Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,8), plot(t,cargoUnit2O2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2CO2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2N2level(t)./cargoUnit2TotalMoles(t),t,cargoUnit2Vaporlevel(t)./cargoUnit2TotalMoles(t),t,cargoUnit2Otherlevel(t)./cargoUnit2TotalMoles(t),'LineWidth',2), title('Cargo Unit 2'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+subplot(3,3,9), plot(t,airlockO2level(t)./airlockTotalMoles,t,airlockCO2level./airlockTotalMoles,t,airlockN2level./airlockTotalMoles,t,airlockVaporlevel./airlockTotalMoles,t,airlockOtherlevel./airlockTotalMoles,'LineWidth',2), title('Airlock'),legend('O2','CO2','N2','Vapor','Other'), grid on, xlabel('Time (hours)'), ylabel('Molar Fraction')
+close all

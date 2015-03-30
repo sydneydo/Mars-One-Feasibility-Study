@@ -1234,6 +1234,19 @@ subplot(2,2,2), plot(t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnit
 subplot(2,2,3), plot(t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
 subplot(2,2,4), plot(t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
 
+% O2 Partial Pressure Overplot
+figure, plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),...
+    t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),...
+    t,inflatable2O2level(t)./inflatable2TotalMoles(t).*inflatable2Pressure(t),t,livingUnit2O2level(t)./livingUnit2TotalMoles(t).*livingUnit2Pressure(t),...
+    t,lifeSupportUnit2O2level(t)./lifeSupportUnit2TotalMoles(t).*lifeSupportUnit2Pressure(t),t,cargoUnit2O2level(t)./cargoUnit2TotalMoles(t).*cargoUnit2Pressure(t),'LineWidth',2),
+title('Module O2 Partial Pressure'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+legend('Inflatable 1','Living Unit 1','Life Support Unit 1','Cargo Unit 1',...
+    'Inflatable 2','Living Unit 2','Life Support Unit 2','Cargo Unit 2')
+
+figure, plot(t,inflatableO2level(t)./inflatableTotalMoles(t).*inflatablePressure(t),t,livingUnitO2level(t)./livingUnitTotalMoles(t).*livingUnitPressure(t),...
+    t,lifeSupportUnitO2level(t)./lifeSupportUnitTotalMoles(t).*lifeSupportUnitPressure(t),t,cargoUnitO2level(t)./cargoUnitTotalMoles(t).*cargoUnitPressure(t),'LineWidth',2),
+title('Module O2 Partial Pressure'), grid on, xlabel('Time (hours)'), ylabel('O2 Partial Pressure')
+legend('Inflatable 1','Living Unit 1','Life Support Unit 1','Cargo Unit 1')
 
 % CO2 molar fraction
 figure, 
@@ -1276,6 +1289,20 @@ subplot(2,2,1), plot(t,inflatablePressure(t),'LineWidth',2), title('Inflatable 1
 subplot(2,2,2), plot(t,livingUnitPressure(t),'LineWidth',2), title('Living Unit 1'), grid on, xlabel('Time (hours)'), ylabel('Total Pressure')
 subplot(2,2,3), plot(t,lifeSupportUnitPressure(t),'LineWidth',2), title('Life Support Unit 1'), grid on, xlabel('Time (hours)'), ylabel('Total Pressure')
 subplot(2,2,4), plot(t,cargoUnitPressure(t),'LineWidth',2), title('Cargo Unit 1'), grid on, xlabel('Time (hours)'), ylabel('Total Pressure')
+
+% Total Pressure Overplot
+figure, 
+plot(t,inflatablePressure(t),t,livingUnitPressure(t),t,lifeSupportUnitPressure(t),t,cargoUnitPressure(t),...
+    t,inflatable2Pressure(t),t,livingUnit2Pressure(t),t,lifeSupportUnit2Pressure(t),t,cargoUnit2Pressure(t),'LineWidth',2), grid on,
+title('Module Total Pressure'),ylabel('Total Pressure (kPa)'),xlabel('Time (hours)'),
+legend('Inflatable 1','Living Unit 1','Life Support Unit 1','Cargo Unit 1',...
+    'Inflatable 2','Living Unit 2','Life Support Unit 2','Cargo Unit 2')
+
+figure, 
+plot(t,inflatablePressure(t),t,livingUnitPressure(t),t,lifeSupportUnitPressure(t),t,cargoUnitPressure(t),'LineWidth',2), grid on,
+title('Module Total Pressure'),ylabel('Total Pressure (kPa)'),xlabel('Time (hours)'),
+legend('Inflatable 1','Living Unit 1','Life Support Unit 1','Cargo Unit 1')
+    
 
 % % Environmental N2 Store plots
 % figure, 
