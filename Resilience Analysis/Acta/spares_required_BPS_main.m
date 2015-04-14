@@ -4,7 +4,7 @@
 % Creator: Andrew Owens
 % Last updated: 2014-12-23
 %
-% This script executes the spares analysis for the first 5 crews of Mars
+% This script executes the spares analysis for the first n crews of Mars
 % One.
 %
 
@@ -27,7 +27,7 @@ EULERparams = [11; 15; 18.4];
 duration = 19000/24;
 
 % Number of missions (including first, but not pre-deployment)
-nMissions = 15;
+nMissions = 10;
 
 % discretization size
 dt = 1/24; % 1 hour timesteps
@@ -182,7 +182,7 @@ for mission = 1:nMissions
 end
 
 % save the results so we don't have to do this again
-save('BPS_MTBFx2/PMFData.mat','componentPMFs','overallProbability',...
+save('Acta2_BPS_PMFs_MTBFx2.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
@@ -194,7 +194,7 @@ save('BPS_MTBFx2/PMFData.mat','componentPMFs','overallProbability',...
 % per-mission, simply take the discrete difference.
 
 % load previous data
-load BPS_MTBFx2/PMFdata.mat
+load Acta2_BPS_PMFs_MTBFx2.mat
 
 % preallocate the cell array indicating the net cumulative demand for each
 % component at each mission. Some cells of this will be overwritten as
@@ -277,11 +277,11 @@ end
 sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
 
 % save outputs
-save('BPS_MTBFx2/CumulativeDemandData.mat','sparesDemand',...
+save('Acta2_BPS_CumulativeDemandData_MTBFx2.mat','sparesDemand',...
     'sparesDemand_EVAbatt','netCumulativeDemand',...
     'netCumulativeDemand_rand','netCumulativeDemand_sched')
 
 % write the results to a .csv file
-csvwrite('BPS_MTBFx2/netCumulativeDemand.csv',netCumulativeDemand);
-csvwrite('BPS_MTBFx2/SparesDemand.csv',sparesDemand);
-csvwrite('BPS_MTBFx2/SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
+csvwrite('Acta2_BPS_netCumulativeDemand_MTBFx2.csv',netCumulativeDemand);
+csvwrite('Acta2_BPS_SparesDemand_MTBFx2.csv',sparesDemand);
+csvwrite('Acta2_BPS_SparesDemand_EVAbatt_MTBFx2.csv',sparesDemand_EVAbatt);

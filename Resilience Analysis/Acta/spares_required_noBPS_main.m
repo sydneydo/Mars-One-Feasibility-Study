@@ -27,7 +27,7 @@ EULERparams = [11; 15; 18.4];
 duration = 19000/24;
 
 % Number of missions (including first)
-nMissions = 15;
+nMissions = 10;
 
 % discretization size
 dt = 1/24; % 1 hour timesteps
@@ -167,7 +167,7 @@ for mission = 1:nMissions
 end
 
 % save the results so we don't have to do this again
-save('noBPS_MTBFx2/PMFData.mat','componentPMFs','overallProbability',...
+save('Acta2_noBPS_PMFs_MTBFx2.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
@@ -179,7 +179,7 @@ save('noBPS_MTBFx2/PMFData.mat','componentPMFs','overallProbability',...
 % per-mission, simply take the discrete difference.
 
 % load previous data
-load noBPS_MTBFx2/PMFdata.mat
+load Acta2_noBPS_PMFs_MTBFx2.mat
 
 % preallocate the cell array indicating the net cumulative demand for each
 % component at each mission. Some cells of this will be overwritten as
@@ -261,11 +261,11 @@ end
 sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
 
 % save outputs
-save('noBPS_MTBFx2/CumulativeDemandData.mat','sparesDemand',...
+save('Acta2_noBPS_CumulativeDemandData_MTBFx2.mat','sparesDemand',...
     'sparesDemand_EVAbatt','netCumulativeDemand',...
     'netCumulativeDemand_rand','netCumulativeDemand_sched')
 
 % write the results to a .csv file
-csvwrite('noBPS_MTBFx2/netCumulativeDemand.csv',netCumulativeDemand);
-csvwrite('noBPS_MTBFx2/SparesDemand.csv',sparesDemand);
-csvwrite('noBPS_MTBFx2/SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
+csvwrite('Acta2_noBPS_netCumulativeDemand_MTBFx2.csv',netCumulativeDemand);
+csvwrite('Acta2_noBPS_SparesDemand_MTBFx2.csv',sparesDemand);
+csvwrite('Acta2_noBPS_SparesDemand_EVAbatt_MTBFx2.csv',sparesDemand_EVAbatt);
