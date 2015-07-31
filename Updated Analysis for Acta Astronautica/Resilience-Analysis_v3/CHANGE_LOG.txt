@@ -1,5 +1,7 @@
 This document lists all changes made to the analysis for this revision
 
- - BPS LIGHTING (row 7): Reviewer commented that the number of lights required for BPS seemed high and recommended a different lighting system, thus changing the number of light units in the system.
+ - BPS LIGHTING (row 7): Reviewer commented that the number of lights required for BPS seemed high and recommended a different lighting system, thus changing the number of light units in the system. 137.
 
  - SUBSYSTEM RUNTIMES (row 24): Reviewer commented that the use of plants to cover some ECLS functions (atmosphere processing) could reduce the required runtime on some physicochemical systems, thus reducing wear and reducing spares requirements. Analysis was redone using simulation results that indicate the actual runtime for each subsystem and that runtime was used as the time horizon for the spares analysis.
+
+ - ARFTA: switch the lifetime of the RFTA to be the lifetime of ARFTA to account for longer duration operations
