@@ -1,0 +1,71 @@
+Group,Subgroup,Subassembly,Group ID,MTBF [d],Life Limit [d],# in Primary System
+ECLSS,OGA,Hydrogen Sensor,1,2576.9,91.25,1
+,,Inlet Deionizing Bed,1,12362.55,2190,1
+,,Nitrogen Purge ORU,1,5767,,1
+,,Oxygen Outlet,1,4088,3650,1
+,,Power Supply Module,1,1978.3,1522.05,1
+,,Process Controller,1,4303.35,2817.8,1
+,,Pump,1,6022.5,365,1
+,CDRA,Air Pump Two-Stage ORU,2,6508.333333,5580.85,1
+,,Blower,2,5404.166667,3650,1
+,,Check Valves,2,1370.833333,,1
+,,Dessicant Beds,2,3212.5,,2
+,,Heat Controller,2,10112.5,,2
+,,Precooler,2,5404.166667,3650,1
+,,Pump Fan Motor Controller,2,94583.33333,,2
+,,Selector Valves,2,4875,3872.65,6
+,,Sorbent Beds (Zeolite),2,3212.5,832.2,2
+,CCAA x6,Condensing Heat Exchanger,3,34691.66667,,1
+,,Electronic Interface Box (EIB),3,97916.66667,,2
+,,Fan Delta Pressure Sensor,3,52083.33333,,1
+,,Heat Exchanger Liquid Sensor,3,47500,,2
+,,Inlet ORU,3,13875,,1
+,,Pressure Transducer,3,52083.33333,5475,1
+,,Temperature Control Check Valve (TCCV),3,1370.833333,,2
+,,Temperature Sensor,3,1566666.667,,4
+,,Water Separator,3,5458.333333,1825,2
+,,Water Separator Liquid Sensor,3,47500,,2
+,UPA,Distillation Assembly,4,5938.55,730,1
+,,Firmware Controller Assembly,4,1138.8,876,1
+,,Fluids Control and Pump Assembly,4,3755.85,1460,1
+,,Pressure Control and Pump Assembly,4,7562.8,730,1
+,,Recycle Filter Tank Assembly,4,8318.35,29.2,1
+,,Separator Plumbing Assembly,4,16027.15,365,1
+,WPA,Catalytic Reactor,5,1065.8,821.25,1
+,,Gas Separator,5,3500.35,365,1
+,,Ion Exchange Bed,5,12362.55,58.4,1
+,,Microbial Check Valve,5,5978.7,365,1
+,,Multifiltration Bed #1,5,12362.55,131.4,1
+,,Multifiltration Bed #2,5,12362.55,131.4,1
+,,Particulate Filter,5,29889.85,80.3,1
+,,pH Adjuster,5,5715.9,365,1
+,,Process Controller,5,3664.6,2817.8,1
+,,Pump Separator,5,1766.6,730,1
+,,Reactor Health Sensor,5,2361.55,365,1
+,,Sensor,5,5986,3650,1
+,,Separator Filter,5,14961.35,306.6,1
+,,Start-up Filter,5,9453.5,7270.8,1
+,,Water Delivery,5,2690.05,1825,1
+,CRA,Sabatier Methanation Reactor,6,2083.333333,,1
+,,Condensing Heat Exchanger,6,34691.66667,,1
+,,Phase Separator,6,5458.333333,1825,1
+,,Valves,6,4875,3872.65,7
+,,Sensors,6,5986,3650,1
+,,Controller,6,4303.35,2817.8,1
+,,Compressor,6,2777.779167,,1
+ISRU (Crew System),AP,Zeolite and Support Structure,7,3212.5,,1
+,,Compressor,7,2777.779167,,2
+,,Cryocooler,7,20833.33333,,4
+,SP,Mixing Auger,8,20833.33333,,1
+,,Feed Cone,8,20833.33333,,1
+,,Horizontal Feed Auger,8,20833.33333,,1
+,,Condensing Heat Exchanger,8,34691.66667,,1
+,,Oven Heater,8,10112.5,,1
+ISRU (Pre Deploy),AP,Zeolite and Support Structure,9,3212.5,,1
+,,Compressor,9,2777.779167,,2
+,,Cryocooler,9,20833.33333,,4
+,SP,Mixing Auger,10,20833.33333,,1
+,,Feed Cone,10,20833.33333,,1
+,,Horizontal Feed Auger,10,20833.33333,,1
+,,Condensing Heat Exchanger,10,34691.66667,,1
+,,Oven Heater,10,10112.5,,1

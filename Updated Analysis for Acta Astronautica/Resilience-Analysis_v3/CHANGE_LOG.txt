@@ -1,7 +1,7 @@
 This document lists all changes made to the analysis for this revision
 
- - BPS LIGHTING (row 7): Reviewer commented that the number of lights required for BPS seemed high and recommended a different lighting system, thus changing the number of light units in the system. 137.
+ - BPS LIGHTING (row 7): Reviewer commented that the number of lights required for BPS seemed high and recommended a different lighting system, thus changing the number of light units in the system. 137. Reliability estimated assuming that 2yr warranty accounts for 1% failures during that time (MTBF = 72634 days). New bulb: http://www.heliospectra.com/led_grow_light_products#lx-techspecs. Mass = 8kg, dimension = 0.425x0.219x0.199m. DONE
 
- - SUBSYSTEM RUNTIMES (row 24): Reviewer commented that the use of plants to cover some ECLS functions (atmosphere processing) could reduce the required runtime on some physicochemical systems, thus reducing wear and reducing spares requirements. Analysis was redone using simulation results that indicate the actual runtime for each subsystem and that runtime was used as the time horizon for the spares analysis.
+ - SUBSYSTEM RUNTIMES (row 24): Reviewer commented that the use of plants to cover some ECLS functions (atmosphere processing) could reduce the required runtime on some physicochemical systems, thus reducing wear and reducing spares requirements. Analysis was redone using simulation results that indicate the actual runtime for each subsystem and that runtime was used as the time horizon for the spares analysis. DONE
 
- - ARFTA: switch the lifetime of the RFTA to be the lifetime of ARFTA to account for longer duration operations
+ - (could not find data to implement, don't know mass of ARFTA or life limited components within it) ARFTA: switch the lifetime of the RFTA to be the lifetime of ARFTA to account for longer duration operations

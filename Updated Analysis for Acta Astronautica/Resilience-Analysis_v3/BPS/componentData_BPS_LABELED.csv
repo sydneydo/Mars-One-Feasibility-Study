@@ -1,0 +1,77 @@
+Group,Subgroup,Subassembly,Group ID,MTBF [d],Life Limit [d],# in Primary System
+ECLSS,CDRA,Air Pump Two-Stage ORU,1,6508.333333,5580.85,1
+,,Blower,1,5404.166667,3650,1
+,,Check Valves,1,1370.833333,,1
+,,Dessicant Beds,1,3212.5,,2
+,,Heat Controller,1,10112.5,,2
+,,Precooler,1,5404.166667,3650,1
+,,Pump Fan Motor Controller,1,94583.33333,,2
+,,Selector Valves,1,4875,3872.65,6
+,,Sorbent Beds (Zeolite),1,3212.5,832.2,2
+,ORA,Air Pump Two-Stage ORU,2,6508.333333,5580.85,1
+,,Blower,2,5404.166667,3650,1
+,,Check Valves,2,1370.833333,,1
+,,Dessicant Beds,2,3212.5,,2
+,,Heat Controller,2,10112.5,,2
+,,Precooler,2,5404.166667,3650,1
+,,Pump Fan Motor Controller,2,94583.33333,,2
+,,Selector Valves,2,4875,3872.65,6
+,,Sorbent Beds (Zeolite),2,3212.5,832.2,2
+,CCAA x6,Condensing Heat Exchanger,3,34691.66667,,1
+,,Electronic Interface Box (EIB),3,97916.66667,,2
+,,Fan Delta Pressure Sensor,3,52083.33333,,1
+,,Heat Exchanger Liquid Sensor,3,47500,,2
+,,Inlet ORU,3,13875,,1
+,,Pressure Transducer,3,52083.33333,5475,1
+,,Temperature Control Check Valve (TCCV),3,1370.833333,,2
+,,Temperature Sensor,3,1566666.667,,4
+,,Water Separator,3,5458.333333,1825,2
+,,Water Separator Liquid Sensor,3,47500,,2
+,UPA,Distillation Assembly,4,5938.55,730,1
+,,Firmware Controller Assembly,4,1138.8,876,1
+,,Fluids Control and Pump Assembly,4,3755.85,1460,1
+,,Pressure Control and Pump Assembly,4,7562.8,730,1
+,,Recycle Filter Tank Assembly,4,8318.35,29.2,1
+,,Separator Plumbing Assembly,4,16027.15,365,1
+,WPA,Catalytic Reactor,5,1065.8,821.25,1
+,,Gas Separator,5,3500.35,365,1
+,,Ion Exchange Bed,5,12362.55,58.4,1
+,,Microbial Check Valve,5,5978.7,365,1
+,,Multifiltration Bed #1,5,12362.55,131.4,1
+,,Multifiltration Bed #2,5,12362.55,131.4,1
+,,Particulate Filter,5,29889.85,80.3,1
+,,pH Adjuster,5,5715.9,365,1
+,,Process Controller,5,3664.6,2817.8,1
+,,Pump Separator,5,1766.6,730,1
+,,Reactor Health Sensor,5,2361.55,365,1
+,,Sensor,5,5986,3650,1
+,,Separator Filter,5,14961.35,306.6,1
+,,Start-up Filter,5,9453.5,7270.8,1
+,,Water Delivery,5,2690.05,1825,1
+,CO2 Injector,Air Pump Two-Stage ORU,6,6508.333333,5580.85,1
+,,Blower,6,5404.166667,3650,1
+,,Check Valves,6,1370.833333,,1
+,,Dessicant Beds,6,3212.5,,2
+,,Heat Controller,6,10112.5,,2
+,,Precooler,6,5404.166667,3650,1
+,,Pump Fan Motor Controller,6,94583.33333,,2
+,,Selector Valves,6,4875,3872.65,6
+,,Sorbent Beds (Zeolite),6,3212.5,832.2,2
+,,Compressor 1 (Mars to 1atm),6,2777.779167,,1
+,GLS,LED Growth Light ORU,7,72634,2083.333333,137
+ISRU (Crew System),AP,Zeolite and Support Structure,8,3212.5,,1
+,,Compressor,8,2777.779167,,2
+,,Cryocooler,8,20833.33333,,4
+,SP,Mixing Auger,9,20833.33333,,1
+,,Feed Cone,9,20833.33333,,1
+,,Horizontal Feed Auger,9,20833.33333,,1
+,,Condensing Heat Exchanger,9,34691.66667,,1
+,,Oven Heater,9,10112.5,,1
+ISRU (Pre Deploy),AP,Zeolite and Support Structure,10,3212.5,,1
+,,Compressor,10,2777.779167,,2
+,,Cryocooler,10,20833.33333,,4
+,SP,Mixing Auger,11,20833.33333,,1
+,,Feed Cone,11,20833.33333,,1
+,,Horizontal Feed Auger,11,20833.33333,,1
+,,Condensing Heat Exchanger,11,34691.66667,,1
+,,Oven Heater,11,10112.5,,1

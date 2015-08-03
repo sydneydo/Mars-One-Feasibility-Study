@@ -1,10 +1,10 @@
 %
-% spares_required_noBPS_main.m
+% spares_required_BPS_main.m
 %
 % Creator: Andrew Owens
-% Last updated: 2014-12-23
+% Last updated: 2015-08-02
 %
-% This script executes the spares analysis for the first 5 crews of Mars
+% This script executes the spares analysis for the first n crews of Mars
 % One.
 %
 
@@ -17,16 +17,16 @@ overallProbability = 0.99;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
-cutoff = 1e-10;
+cutoff = 1e-8;
 
 % EULER parameters - parameters for EULER numerical Laplace transform
 % inversion
 EULERparams = [11; 15; 18.4];
 
-% time between resupply missions [~26 months]
+% time between resupply missions [~26 months, in days]
 duration = 19000/24;
 
-% Number of missions (including first)
+% Number of missions (including first, but not pre-deployment)
 nMissions = 10;
 
 % discretization size
@@ -46,26 +46,45 @@ dt = 1/24; % 1 hour timesteps
 %   2) MTBF [d]
 %   3) Life Limit [d]
 %   4) # of the component in primary system
-componentData = csvread('componentData_noBPS.csv',1,3);
+componentData = csvread('componentData_BPS.csv');
 
-% multiply the MTBF by 2 (increase reliability of each component)
-componentData(:,2) = 2.*componentData(:,2);
+% % multiply the MTBF by 2 (increase the reliability of each component
+% componentData(:,2) = 2.*componentData(:,2);
 
 % multiple instances of the same processor are repeated as different
 % groups. Groups are:
-%   1) OGA
-%   2) CDRA
-%   3) CCAA (x4)
+%   1) CDRA
+%   2) ORA
+%   3) CCAA (x6)
 %   4) UPA
 %   5) WPA
-%   6) CRA
-%   7) ISRU AP
-%   8) ISRU SP
-%   9) PDISRU AP
-%  10) PDISRU SP
-% Note that there are 4 copies of the CCAA, which are assumed to have
+%   6) CO2 Injector
+%   7) GLS
+%   8) ISRU AP
+%   9) ISRU SP
+%  10) PDISRU AP
+%  11) PDISRU SP
+% Note that there are 6 copies of the CCAA, which are assumed to have
 % commonality. Since the ISRU and PDISRU systems are different, they do not
 % exhibit commonality and must be considered seperately.
+
+% not all systems run all the time, and the inclusion of plants impacts
+% different system runtimes. In order to capture this impact, perform
+% spares analysis using only actual runtime of the system. This makes the
+% assumption that MTBF and lifetime values are based on runtime and not
+% calendar time in order to investigate the impact of changes to runtime on
+% spares requirements.
+subSysRuntime = [19000; % CDRA
+    9032; % ORA
+    19000; % CCAA (x6)
+    8550; % UPA
+    2109; % WPA
+    18562; % CO2 injector
+    19000; % GLS
+    19000; % ISRU AP
+    19000; % ISRU SP
+    19000; % PDISRU AP
+    19000]./24; % PDISRU SP; remember to divide 24 to get days
 
 %% Run Solver (only run this section if .mat file isn't available)
 % Goal is to generate a PMF of the number of spares required for each
@@ -91,28 +110,28 @@ repairpdf(isnan(repairpdf)) = 0; % remove any NaNs, replace with 0
 repairpdf = repairpdf(1:find(repairpdf>=cutoff,1,'last')); % trim to cutoff
 repairpdf = repairpdf./(dt*sum(repairpdf)); % normalize
 
-% the CCAA has 4 instantiations of identical hardware; convolve the demand
+% the CCAA has 6 instantiations of identical hardware; convolve the demand
 % PMFs for CCAA components with themselves 4x to get overall demand profile
-% for all 4 systems. Find indices now, do convolution in for loop below
-% ~~~~ THESE NUMBERS MUST BE UPDATED TO MATCH CSV FILE ~~~~
-CCAAstart = find(componentData(:,1)==3); 
+% for all 6 systems. Find indices now, do convolution in for loop below
+CCAAstart = find(componentData(:,1)==3);
 CCAAend = find(componentData(:,1)==4)-1;
 
-PDISRUstart = find(componentData(:,1)==9);
+% find start of pre-deployed ISRU system
+PDISRUstart = find(componentData(:,1)==10);
 
 % find threshold probability (depends on number of components). Have to
 % account for multiple instantiations of CCAA and ISRU here
 nComponents = sum(componentData(:,4)) + ...
-    sum(3.*componentData(CCAAstart:CCAAend,4));
+    sum(5.*componentData(CCAAstart:CCAAend,4));
 thresholdProbability = overallProbability^(1/nComponents);
+
+downtimes = zeros(nMissions,1);
 
 % run through each mission
 tic
 for mission = 1:nMissions
     disp(['Calculating for Mission ' num2str(mission)])
-    % find Laplace domain values corresponding to this duration
-    sVals = getLaplacePoints(duration*mission,EULERparams);
-    
+
     % run through each processor independently
     index = 1;
     for j = 1:max(componentData(:,1))
@@ -120,6 +139,12 @@ for mission = 1:nMissions
         thisGroup = componentData(componentData(:,1)==j,:);
         nComponents = size(thisGroup,1);
         
+        % find operating time for this processor
+        thisDuration = subSysRuntime(j);
+        
+        % find Laplace domain values corresponding to this duration
+        sVals = getLaplacePoints(thisDuration*mission,EULERparams);
+                
         % generate adjacency matrix for this processor. Since any single
         % failure takes the whole thing offline, this is simple to construct.
         [r,c,vals,adjMat] = getAdjMat(nComponents);
@@ -140,15 +165,26 @@ for mission = 1:nMissions
         end
         transitions{end} = [repairpdf; dt.*cumsum(repairpdf)];
         
-        % generate Q (don't need H for spares analysis)
-        [Q,~] = makeKernel(r,c,vals,adjMat,size(adjMat,1),transitions);
+        % generate Q
+        [Q,H] = makeKernel(r,c,vals,adjMat,size(adjMat,1),transitions);
         
-        % get laplace transform LQ
+        % get laplace transform LQ and LH
         LQ = getLT(Q,r,c,sVals,dt);
+        Hindex = unique(r);
+        LH = getLT(H,Hindex,ones(size(Hindex)),sVals,dt);
+        for k = 1:length(LH)
+            LH{k} = diag(LH{k});
+        end
         
+%         % get downtime
+%         % (only examine downtime for one mission)
+%         [~,E] = getPandE(LQ,LH,sVals,1,EULERparams,thisDuration*mission);
+%         if j ~= 9 % don't count GLS time
+%             downtimes(mission) = downtimes(mission) + (j*duration - E(1));
+%         end
         % get Markov renewal probabilities
-        v = getv(LQ,1,sVals,[2:nComponents+1],cutoff,EULERparams,...
-            duration*mission);
+        v = getv(LQ,1,sVals,2:(nComponents+1),cutoff,EULERparams,...
+            thisDuration*mission);
         
         % store results in componentPMFs array
         for k = 1:nComponents
@@ -157,17 +193,18 @@ for mission = 1:nMissions
         end
     end
     
-    % convolve for multiple instantiations of CCAA
+    % convolve for 6 instantiations of CCAA
     for j = CCAAstart:CCAAend
         thisPMF = componentPMFs{j,mission};
-        newPMF = conv(conv(conv(thisPMF,thisPMF),thisPMF),thisPMF);
+        newPMF = conv(conv(conv(conv(conv(thisPMF,thisPMF),thisPMF),...
+            thisPMF),thisPMF),thisPMF);
         componentPMFs{j,mission} = newPMF;
     end
     toc
 end
 
 % save the results so we don't have to do this again
-save('Acta2_noBPS_PMFs_MTBFx2.mat','componentPMFs','overallProbability',...
+save('Acta3_BPS_PMFs.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
@@ -179,7 +216,7 @@ save('Acta2_noBPS_PMFs_MTBFx2.mat','componentPMFs','overallProbability',...
 % per-mission, simply take the discrete difference.
 
 % load previous data
-load Acta2_noBPS_PMFs_MTBFx2.mat
+load Acta3_BPS_PMFs.mat
 
 % preallocate the cell array indicating the net cumulative demand for each
 % component at each mission. Some cells of this will be overwritten as
@@ -193,6 +230,7 @@ netCumulativeDemand_rand = zeros(size(componentPMFs));
 % and the 1-mission demand for 1 crew, and so on.
 % Note that this operation is not necessary for the PDISRU systems, since
 % they are refurbished by each crew; only one is operational at all times
+
 for j = 2:nMissions
     for k = 1:PDISRUstart-1
         netCumulativeDemandPMFs{k,j} = conv(...
@@ -224,8 +262,8 @@ for j = 1:nMissions
     scheduled(:,j) = componentData(:,4).*floor(thisScheduled);
 end
 
-% account for the fact that there are four instances of the CCAA
-scheduled(CCAAstart:CCAAend,:) = 4.*scheduled(CCAAstart:CCAAend,:);
+% account for the fact that there are 6 instances of the CCAA
+scheduled(CCAAstart:CCAAend,:) = 6.*scheduled(CCAAstart:CCAAend,:);
 
 % using scheduled, generate the matrix of scheduled spares required given
 % that a new crew arrives every 26 months.
@@ -261,11 +299,11 @@ end
 sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
 
 % save outputs
-save('Acta2_noBPS_CumulativeDemandData_MTBFx2.mat','sparesDemand',...
+save('Acta3_BPS_CumulativeDemandData.mat','sparesDemand',...
     'sparesDemand_EVAbatt','netCumulativeDemand',...
     'netCumulativeDemand_rand','netCumulativeDemand_sched')
 
 % write the results to a .csv file
-csvwrite('Acta2_noBPS_netCumulativeDemand_MTBFx2.csv',netCumulativeDemand);
-csvwrite('Acta2_noBPS_SparesDemand_MTBFx2.csv',sparesDemand);
-csvwrite('Acta2_noBPS_SparesDemand_EVAbatt_MTBFx2.csv',sparesDemand_EVAbatt);
+csvwrite('Acta3_BPS_netCumulativeDemand.csv',netCumulativeDemand);
+csvwrite('Acta3_BPS_SparesDemand.csv',sparesDemand);
+csvwrite('Acta3_BPS_SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
