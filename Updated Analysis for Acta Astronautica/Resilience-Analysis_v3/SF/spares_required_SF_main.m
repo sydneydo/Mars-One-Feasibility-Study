@@ -73,12 +73,12 @@ componentData = csvread('componentData_SF.csv');
 % assumption that MTBF and lifetime values are based on runtime and not
 % calendar time in order to investigate the impact of changes to runtime on
 % spares requirements.
-subSysRuntime = [19000; % OGA
+subSysRuntime = [7122; % OGA
     19000; % CDRA
     19000; % CCAA (x6)
-    8550; % UPA
-    2109; % WPA
-    19000; % CRA
+    8699; % UPA
+    2262; % WPA
+    7119; % CRA
     19000; % ISRU AP
     19000; % ISRU SP
     19000; % PDISRU AP

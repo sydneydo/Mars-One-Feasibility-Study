@@ -77,8 +77,8 @@ componentData = csvread('componentData_BPS.csv');
 subSysRuntime = [19000; % CDRA
     9032; % ORA
     19000; % CCAA (x6)
-    8550; % UPA
-    2109; % WPA
+    8577; % UPA
+    2172; % WPA
     18562; % CO2 injector
     19000; % GLS
     19000; % ISRU AP
