@@ -13,7 +13,7 @@ addpath SMP-Modules
 
 %% Set solution parameters
 % Required probability for the entire system
-overallProbability = 0.5;
+overallProbability = 0.99;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
@@ -58,12 +58,12 @@ componentData = csvread('componentData_BPS.csv');
 %   3) CCAA (x6)
 %   4) UPA
 %   5) WPA
-%   6) CO2 Injector
-%   7) GLS
-%   8) ISRU AP
-%   9) ISRU SP
-%  10) PDISRU AP
-%  11) PDISRU SP
+%   6) GLS
+%   7) ISRU AP
+%   8) ISRU SP
+%   9) PDISRU AP
+%  10) PDISRU SP
+%  11) PDISRU OGA (required since there is none in ECLS
 % Note that there are 6 copies of the CCAA, which are assumed to have
 % commonality. Since the ISRU and PDISRU systems are different, they do not
 % exhibit commonality and must be considered seperately.
@@ -79,12 +79,12 @@ subSysRuntime = [19000; % CDRA
     19000; % CCAA (x6)
     8577; % UPA
     2172; % WPA
-    18562; % CO2 injector
     19000; % GLS
     19000; % ISRU AP
     19000; % ISRU SP
     19000; % PDISRU AP
-    19000]./24; % PDISRU SP; remember to divide 24 to get days
+    19000; % PDISRU SP
+    19000]./24; % PDISRU OGA; remember to divide 24 to get days
 
 %% Run Solver (only run this section if .mat file isn't available)
 % Goal is to generate a PMF of the number of spares required for each
@@ -117,7 +117,7 @@ CCAAstart = find(componentData(:,1)==3);
 CCAAend = find(componentData(:,1)==4)-1;
 
 % find start of pre-deployed ISRU system
-PDISRUstart = find(componentData(:,1)==10);
+PDISRUstart = find(componentData(:,1)==9,1,'first');
 
 % find threshold probability (depends on number of components). Have to
 % account for multiple instantiations of CCAA and ISRU here
@@ -204,7 +204,7 @@ for mission = 1:nMissions
 end
 
 % save the results so we don't have to do this again
-save('Acta3_BPS_PMFs_P50.mat','componentPMFs','overallProbability',...
+save('Acta3_BPS_PMFs.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
@@ -216,7 +216,7 @@ save('Acta3_BPS_PMFs_P50.mat','componentPMFs','overallProbability',...
 % per-mission, simply take the discrete difference.
 
 % load previous data
-load Acta3_BPS_PMFs_P50.mat
+load Acta3_BPS_PMFs.mat
 
 % preallocate the cell array indicating the net cumulative demand for each
 % component at each mission. Some cells of this will be overwritten as
@@ -262,6 +262,9 @@ for j = 1:nMissions
     scheduled(:,j) = componentData(:,4).*floor(thisScheduled);
 end
 
+% adjust PDISRU scheduled demand; since there's only one system, there's
+% only the scheduled demand present in the first row
+
 % account for the fact that there are 6 instances of the CCAA
 scheduled(CCAAstart:CCAAend,:) = 6.*scheduled(CCAAstart:CCAAend,:);
 
@@ -272,6 +275,10 @@ for j = 1:nMissions-1
     netCumulativeDemand_sched = netCumulativeDemand_sched + ...
         [zeros(size(scheduled,1),j), scheduled(:,1:size(scheduled,2)-j)];
 end
+
+% PDISRU system is only one system, so replace netCumulativeDemand with
+% overall scheduled demand
+netCumulativeDemand_sched(PDISRUstart:end,:) = scheduled(PDISRUstart:end,:);
 
 % For demand prediction, take the maximum from either random failures or
 % scheduled repair
@@ -299,11 +306,11 @@ end
 sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
 
 % save outputs
-save('Acta3_BPS_CumulativeDemandData_P50.mat','sparesDemand',...
+save('Acta3_BPS_CumulativeDemandData.mat','sparesDemand',...
     'sparesDemand_EVAbatt','netCumulativeDemand',...
     'netCumulativeDemand_rand','netCumulativeDemand_sched')
 
 % write the results to a .csv file
-csvwrite('Acta3_BPS_netCumulativeDemand_P50.csv',netCumulativeDemand);
-csvwrite('Acta3_BPS_SparesDemand_P50.csv',sparesDemand);
-csvwrite('Acta3_BPS_SparesDemand_EVAbatt_P50.csv',sparesDemand_EVAbatt);
+csvwrite('Acta3_BPS_netCumulativeDemand.csv',netCumulativeDemand);
+csvwrite('Acta3_BPS_SparesDemand.csv',sparesDemand);
+csvwrite('Acta3_BPS_SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);

@@ -4,4 +4,8 @@ This document lists all changes made to the analysis for this revision
 
  - SUBSYSTEM RUNTIMES (row 24): Reviewer commented that the use of plants to cover some ECLS functions (atmosphere processing) could reduce the required runtime on some physicochemical systems, thus reducing wear and reducing spares requirements. Analysis was redone using simulation results that indicate the actual runtime for each subsystem and that runtime was used as the time horizon for the spares analysis. DONE
 
- - (could not find data to implement, don't know mass of ARFTA or life limited components within it) ARFTA: switch the lifetime of the RFTA to be the lifetime of ARFTA to account for longer duration operations
+ - (could not find data to implement, don't know mass of ARFTA or life limited components within it) ARFTA: switch the lifetime of the RFTA to be the lifetime of ARFTA to account for longer duration operations. DONE [NOT IMPLEMENTED]
+
+ - CO2 INJECTOR: further analysis resulted in decision to remove CO2 injector from BPS system and assume that function is accomplished by the ISRU AP system. DONE
+
+ - ISRU OGA: further analysis determined that BPS PDISRU requires an electrolyzer, since this system is not included in ECLS anymore for that case. OGA to be added to PDISRU system in this case. DONE
