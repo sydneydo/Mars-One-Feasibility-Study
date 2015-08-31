@@ -13,7 +13,7 @@ addpath SMP-Modules
 
 %% Set solution parameters
 % Required probability for the entire system
-overallProbability = 0.99;
+overallProbability = 0.5;
 
 % cutoff probability; probabilities less than this will be considered to be
 % effectively 0
@@ -204,7 +204,7 @@ for mission = 1:nMissions
 end
 
 % save the results so we don't have to do this again
-save('Acta3_BPS_PMFs.mat','componentPMFs','overallProbability',...
+save('Acta3_BPS_PMFs_P50.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
@@ -216,7 +216,7 @@ save('Acta3_BPS_PMFs.mat','componentPMFs','overallProbability',...
 % per-mission, simply take the discrete difference.
 
 % load previous data
-load Acta3_BPS_PMFs.mat
+load Acta3_BPS_PMFs_P50.mat
 
 % preallocate the cell array indicating the net cumulative demand for each
 % component at each mission. Some cells of this will be overwritten as
@@ -299,11 +299,11 @@ end
 sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
 
 % save outputs
-save('Acta3_BPS_CumulativeDemandData.mat','sparesDemand',...
+save('Acta3_BPS_CumulativeDemandData_P50.mat','sparesDemand',...
     'sparesDemand_EVAbatt','netCumulativeDemand',...
     'netCumulativeDemand_rand','netCumulativeDemand_sched')
 
 % write the results to a .csv file
-csvwrite('Acta3_BPS_netCumulativeDemand.csv',netCumulativeDemand);
-csvwrite('Acta3_BPS_SparesDemand.csv',sparesDemand);
-csvwrite('Acta3_BPS_SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
+csvwrite('Acta3_BPS_netCumulativeDemand_P50.csv',netCumulativeDemand);
+csvwrite('Acta3_BPS_SparesDemand_P50.csv',sparesDemand);
+csvwrite('Acta3_BPS_SparesDemand_EVAbatt_P50.csv',sparesDemand_EVAbatt);
