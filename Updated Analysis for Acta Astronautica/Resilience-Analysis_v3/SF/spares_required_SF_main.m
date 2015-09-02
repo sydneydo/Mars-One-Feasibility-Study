@@ -119,9 +119,9 @@ PDISRUstart = find(componentData(:,1)==10);
 
 % find threshold probability (depends on number of components). Have to
 % account for multiple instantiations of CCAA and ISRU here
-nComponents = sum(componentData(:,4)) + ...
+nComponents_total = sum(componentData(:,4)) + ...
     sum(5.*componentData(CCAAstart:CCAAend,4));
-thresholdProbability = overallProbability^(1/nComponents);
+thresholdProbability = overallProbability^(1/nComponents_total);
 
 downtimes = zeros(nMissions,1);
 

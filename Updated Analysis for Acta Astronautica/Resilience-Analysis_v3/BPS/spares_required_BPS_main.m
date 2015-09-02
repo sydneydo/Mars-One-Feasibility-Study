@@ -53,7 +53,7 @@ componentData = csvread('componentData_BPS.csv');
 
 % multiple instances of the same processor are repeated as different
 % groups. Groups are:
-%   1) CDRA
+%   1) CDRRA
 %   2) ORA
 %   3) CCAA (x6)
 %   4) UPA
@@ -61,9 +61,10 @@ componentData = csvread('componentData_BPS.csv');
 %   6) GLS
 %   7) ISRU AP
 %   8) ISRU SP
-%   9) PDISRU AP
-%  10) PDISRU SP
-%  11) PDISRU OGA (required since there is none in ECLS
+%   9) CO2 Injection System
+%  10) PDISRU AP
+%  11) PDISRU SP
+%  12) PDISRU OGA
 % Note that there are 6 copies of the CCAA, which are assumed to have
 % commonality. Since the ISRU and PDISRU systems are different, they do not
 % exhibit commonality and must be considered seperately.
@@ -82,6 +83,7 @@ subSysRuntime = [19000; % CDRA
     19000; % GLS
     19000; % ISRU AP
     19000; % ISRU SP
+    19000; % CO2 Injection System
     19000; % PDISRU AP
     19000; % PDISRU SP
     19000]./24; % PDISRU OGA; remember to divide 24 to get days
@@ -92,7 +94,7 @@ subSysRuntime = [19000; % CDRA
 % opportunity for a single crew. Once those are determined, appropriate
 % convolution can be carried out to determine the overall demand.
 
-% store results as a [# of components]x[# of resupply missions cell array,
+% store results as a [# of components]x[# of resupply missions] cell array,
 % with each entry containing the PMF of the number of spares required for
 % that component at that resupply opportunity
 componentPMFs = cell(size(componentData,1),nMissions);
@@ -117,13 +119,13 @@ CCAAstart = find(componentData(:,1)==3);
 CCAAend = find(componentData(:,1)==4)-1;
 
 % find start of pre-deployed ISRU system
-PDISRUstart = find(componentData(:,1)==9,1,'first');
+PDISRUstart = find(componentData(:,1)==10,1,'first');
 
 % find threshold probability (depends on number of components). Have to
 % account for multiple instantiations of CCAA and ISRU here
-nComponents = sum(componentData(:,4)) + ...
+nComponents_total = sum(componentData(:,4)) + ...
     sum(5.*componentData(CCAAstart:CCAAend,4));
-thresholdProbability = overallProbability^(1/nComponents);
+thresholdProbability = overallProbability^(1/nComponents_total);
 
 downtimes = zeros(nMissions,1);
 
