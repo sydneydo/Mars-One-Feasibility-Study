@@ -48,8 +48,8 @@ dt = 1/24; % 1 hour timesteps
 %   4) # of the component in primary system
 componentData = csvread('componentData_SF.csv');
 
-% % multiply the MTBF by 2 (increase the reliability of each component
-% componentData(:,2) = 2.*componentData(:,2);
+% multiply the MTBF by 2 (increase the reliability of each component
+componentData(:,2) = 2.*componentData(:,2);
 
 % multiple instances of the same processor are repeated as different
 % groups. Groups are:
@@ -202,7 +202,7 @@ for mission = 1:nMissions
 end
 
 % save the results so we don't have to do this again
-save('Acta3_SF_PMFs.mat','componentPMFs','overallProbability',...
+save('Acta3_SF_PMFs_MTBFx2.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
     'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
 
@@ -214,7 +214,7 @@ save('Acta3_SF_PMFs.mat','componentPMFs','overallProbability',...
 % per-mission, simply take the discrete difference.
 
 % load previous data
-load Acta3_SF_PMFs.mat
+load Acta3_SF_PMFs_MTBFx2.mat
 
 % preallocate the cell array indicating the net cumulative demand for each
 % component at each mission. Some cells of this will be overwritten as
@@ -297,11 +297,11 @@ end
 sparesDemand_EVAbatt = diff([0 netCumulativeEVAbatt]);
 
 % save outputs
-save('Acta3_SF_CumulativeDemandData.mat','sparesDemand',...
+save('Acta3_SF_CumulativeDemandData_MTBFx2.mat','sparesDemand',...
     'sparesDemand_EVAbatt','netCumulativeDemand',...
     'netCumulativeDemand_rand','netCumulativeDemand_sched')
 
 % write the results to a .csv file
-csvwrite('Acta3_SF_netCumulativeDemand.csv',netCumulativeDemand);
-csvwrite('Acta3_SF_SparesDemand.csv',sparesDemand);
-csvwrite('Acta3_SF_SparesDemand_EVAbatt.csv',sparesDemand_EVAbatt);
+csvwrite('Acta3_SF_netCumulativeDemand_MTBFx2.csv',netCumulativeDemand);
+csvwrite('Acta3_SF_SparesDemand_MTBFx2.csv',sparesDemand);
+csvwrite('Acta3_SF_SparesDemand_EVAbatt_MTBFx2.csv',sparesDemand_EVAbatt);

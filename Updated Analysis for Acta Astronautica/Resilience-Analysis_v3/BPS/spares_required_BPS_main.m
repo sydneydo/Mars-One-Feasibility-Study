@@ -127,7 +127,7 @@ nComponents_total = sum(componentData(:,4)) + ...
     sum(5.*componentData(CCAAstart:CCAAend,4));
 thresholdProbability = overallProbability^(1/nComponents_total);
 
-downtimes = zeros(nMissions,1);
+% downtimes = zeros(nMissions,1);
 
 % run through each mission
 tic
@@ -136,6 +136,9 @@ for mission = 1:nMissions
 
     % run through each processor independently
     index = 1;
+    
+    % store downtime
+    downtimes = zeros(max(componentData(:,1)),1);
     for j = 1:max(componentData(:,1))
         % split out the data corresponding to this processor
         thisGroup = componentData(componentData(:,1)==j,:);
@@ -178,12 +181,14 @@ for mission = 1:nMissions
             LH{k} = diag(LH{k});
         end
         
-%         % get downtime
-%         % (only examine downtime for one mission)
-%         [~,E] = getPandE(LQ,LH,sVals,1,EULERparams,thisDuration*mission);
-%         if j ~= 9 % don't count GLS time
-%             downtimes(mission) = downtimes(mission) + (j*duration - E(1));
-%         end
+        % get downtime
+        % (only examine downtime for one mission)
+        [~,E] = getPandE(LQ,LH,sVals,1,EULERparams,thisDuration*mission);
+        if j ~= 9 % don't count GLS time
+            downtimes(j) = E(1);
+        end
+        
+        
         % get Markov renewal probabilities
         v = getv(LQ,1,sVals,2:(nComponents+1),cutoff,EULERparams,...
             thisDuration*mission);
@@ -203,12 +208,14 @@ for mission = 1:nMissions
         componentPMFs{j,mission} = newPMF;
     end
     toc
+    keyboard
 end
 
 % save the results so we don't have to do this again
 save('Acta3_BPS_PMFs.mat','componentPMFs','overallProbability',...
     'thresholdProbability','nComponents','cutoff','dt','duration',...
-    'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart');
+    'nMissions','componentData','CCAAstart','CCAAend','PDISRUstart',...
+    'downtimes');
 
 %% Convolve results
 % The PMFs generated above give the cumulative probabilistic demand for a
